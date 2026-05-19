@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: edubattle-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: CLIENT_ORIGIN
+        sync: false
