@@ -4,11 +4,29 @@ const { Server } = require('socket.io');
 const cors = require('cors');
 
 const app = express();
+
+function normalizeOrigin(origin) {
+  return origin ? origin.replace(/\/+$/, '') : origin;
+}
+
 const allowedOrigins = process.env.CLIENT_ORIGIN
-  ? process.env.CLIENT_ORIGIN.split(',').map(origin => origin.trim())
-  : '*';
+  ? process.env.CLIENT_ORIGIN
+      .split(',')
+      .map(origin => normalizeOrigin(origin.trim()))
+      .filter(Boolean)
+  : ['*'];
+
+const allowAllOrigins = allowedOrigins.includes('*');
+
 const corsOptions = {
-  origin: allowedOrigins,
+  origin(origin, callback) {
+    if (allowAllOrigins || !origin || allowedOrigins.includes(normalizeOrigin(origin))) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error(`Origin ${origin} is not allowed by CORS`));
+  },
   methods: ['GET', 'POST']
 };
 
