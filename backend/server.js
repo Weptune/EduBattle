@@ -56,10 +56,33 @@ const INITIAL_DISCARD_MS = 10000;
 const DRAFT_PICK_MS = 15000;
 const BASE_MATCHMAKING_GAP = 250;
 const MATCHMAKING_EXPANSION_PER_5S = 75;
+const PVP_SPEED_DIVISOR = 250;
+const BOT_SPEED_HUMAN_ADVANTAGE_DIVISOR = 175;
+const BOT_SPEED_BOT_ADVANTAGE_DIVISOR = 400;
 // Basic Game State
 let players = {};
 let queue = [];
 let matches = {};
+const userSockets = new Map();
+const activeChallenges = new Map();
+
+async function notifyFriendsStatusChange(userId, isOnline) {
+  try {
+    const friendships = await storage.getFriendships(userId);
+    const acceptedFriends = friendships.filter(f => f.status === 'accepted').map(f => f.friend.id);
+    for (const friendId of acceptedFriends) {
+      const friendSocketId = userSockets.get(friendId);
+      if (friendSocketId) {
+        io.to(friendSocketId).emit('friend_status_change', {
+          friendId: userId,
+          isOnline: isOnline
+        });
+      }
+    }
+  } catch (err) {
+    console.error('Failed to notify friends status change:', err);
+  }
+}
 
 function publicUser(user) {
   return {
@@ -76,6 +99,8 @@ function publicUser(user) {
     bestElo: user.bestElo || user.elo,
     fieldElos: user.fieldElos || {},
     fieldStats: user.fieldStats || {},
+    xp: user.xp || 0,
+    level: user.level || 1,
     createdAt: user.createdAt
   };
 }
@@ -325,6 +350,106 @@ app.get('/me/matches', requireAuth, async (req, res) => {
   res.json({ matches });
 });
 
+app.get('/friends', requireAuth, async (req, res) => {
+  try {
+    const list = await storage.getFriendships(req.user.id);
+    const friends = list.filter(f => f.status === 'accepted');
+    const incomingRequests = list.filter(f => f.status === 'pending' && f.isIncomingRequest);
+    const outgoingRequests = list.filter(f => f.status === 'pending' && f.isOutgoingRequest);
+    res.json({ friends, incomingRequests, outgoingRequests });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/chat/messages', requireAuth, async (req, res) => {
+  try {
+    const messages = await storage.listArenaChatMessages(100);
+    res.json({ messages });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/friends/request', requireAuth, async (req, res) => {
+  try {
+    const friendUsername = String(req.body.friendUsername || '').trim();
+    if (!friendUsername) return res.status(400).json({ error: 'Username is required.' });
+    
+    const targetUser = await storage.getUserByUsername(friendUsername);
+    if (!targetUser) return res.status(404).json({ error: 'User not found.' });
+    
+    await storage.createFriendRequest(req.user.id, targetUser.id);
+    
+    const targetSocketId = userSockets.get(targetUser.id);
+    if (targetSocketId) {
+      io.to(targetSocketId).emit('friend_request_received', { requester: publicUser(req.user) });
+    }
+    
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.post('/friends/accept', requireAuth, async (req, res) => {
+  try {
+    const { friendId } = req.body;
+    if (!friendId) return res.status(400).json({ error: 'Friend ID is required.' });
+    
+    await storage.acceptFriendRequest(req.user.id, friendId);
+    
+    const friendSocketId = userSockets.get(friendId);
+    if (friendSocketId) {
+      io.to(friendSocketId).emit('friend_request_accepted', { friendId: req.user.id });
+    }
+    
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.post('/friends/remove', requireAuth, async (req, res) => {
+  try {
+    const { friendId } = req.body;
+    if (!friendId) return res.status(400).json({ error: 'Friend ID is required.' });
+    
+    await storage.removeFriendship(req.user.id, friendId);
+    
+    const friendSocketId = userSockets.get(friendId);
+    if (friendSocketId) {
+      io.to(friendSocketId).emit('friend_request_received'); 
+    }
+    
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get('/users/by-username/:username', requireAuth, async (req, res) => {
+  try {
+    const user = await storage.getUserByUsername(req.params.username);
+    if (!user) return res.status(404).json({ error: 'User not found.' });
+    const matches = await storage.listRecentMatches(user.id, 10);
+    res.json({ user: publicUser(user), matches });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/users/:id', requireAuth, async (req, res) => {
+  try {
+    const user = await storage.getUserById(req.params.id);
+    if (!user) return res.status(404).json({ error: 'User not found.' });
+    const matches = await storage.listRecentMatches(user.id, 10);
+    res.json({ user: publicUser(user), matches });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const SUBJECT_CATEGORIES = require('./subjects');
 const QUESTIONS = require('./questions');
 const ALL_SUBJECTS = Object.values(SUBJECT_CATEGORIES).flat();
@@ -391,7 +516,8 @@ async function createPlayer(socket, data = {}) {
     hp: 100,
     socketId: socket.id,
     domain: domain,
-    queuedAt: Date.now()
+    queuedAt: Date.now(),
+    level: user.level || 1
   };
 }
 
@@ -404,6 +530,7 @@ function publicPlayer(player) {
     avatarUrl: player.avatarUrl,
     bannerUrl: player.bannerUrl,
     hp: player.hp,
+    level: player.level || 1,
     isBot: Boolean(player.isBot)
   };
 }
@@ -503,6 +630,186 @@ function emitMatchFound(match) {
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
 
+  socket.on('register_socket', async (data) => {
+    if (!data || !data.authToken) return;
+    const user = await storage.getUserByToken(data.authToken);
+    if (user) {
+      userSockets.set(user.id, socket.id);
+      socket.userId = user.id;
+      console.log(`Registered socket ${socket.id} to user ${user.username}`);
+      await notifyFriendsStatusChange(user.id, true);
+      
+      const friendships = await storage.getFriendships(user.id);
+      const friends = friendships.filter(f => f.status === 'accepted');
+      for (const f of friends) {
+        const friendId = f.friend.id;
+        if (userSockets.has(friendId)) {
+          socket.emit('friend_status_change', { friendId, isOnline: true });
+        }
+      }
+    }
+  });
+
+  socket.on('send_chat_message', async (data) => {
+    if (!socket.userId || !data || !data.message) return;
+    const user = await storage.getUserById(socket.userId);
+    if (!user) return;
+
+    const text = String(data.message).trim().slice(0, 300);
+    if (!text) return;
+
+    const chatMsg = {
+      id: 'msg_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+      userId: user.id,
+      username: user.username,
+      avatarUrl: user.avatarUrl,
+      bannerUrl: user.bannerUrl,
+      elo: user.elo,
+      level: user.level || 1,
+      message: text,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      await storage.saveArenaChatMessage(chatMsg);
+      io.emit('chat_message', chatMsg);
+    } catch (err) {
+      console.error('Failed to save chat message:', err);
+      socket.emit('chat_error', { error: 'Message could not be saved.' });
+    }
+  });
+
+  socket.on('challenge_friend', async (data) => {
+    if (!socket.userId || !data || !data.friendId) return;
+    const Alice = await storage.getUserById(socket.userId);
+    const BobId = data.friendId;
+    const domain = normalizeDomain(data.domain);
+
+    if (!Alice) return;
+
+    const friendships = await storage.getFriendships(Alice.id);
+    const isAcceptedFriend = friendships.some(
+      f => f.status === 'accepted' && f.friend.id === BobId
+    );
+    if (!isAcceptedFriend) {
+      socket.emit('challenge_error', { error: 'You can only challenge accepted friends.' });
+      return;
+    }
+
+    const friendSocketId = userSockets.get(BobId);
+    if (!friendSocketId) {
+      socket.emit('challenge_error', { error: 'Friend is currently offline.' });
+      return;
+    }
+
+    const isFriendInMatch = Object.values(players).some(p => p.userId === BobId && p.matchId);
+    if (isFriendInMatch) {
+      socket.emit('challenge_error', { error: 'Friend is currently in a match.' });
+      return;
+    }
+
+    const challengeId = 'challenge_' + Date.now();
+    activeChallenges.set(challengeId, {
+      id: challengeId,
+      challengerId: Alice.id,
+      receiverId: BobId,
+      domain,
+      createdAt: Date.now()
+    });
+
+    io.to(friendSocketId).emit('friend_challenge', {
+      challengeId,
+      challenger: publicUser(Alice),
+      domain
+    });
+  });
+
+  socket.on('decline_challenge', (data) => {
+    if (!data || !data.challengeId) return;
+    const challenge = activeChallenges.get(data.challengeId);
+    if (challenge) {
+      const challengerSocketId = userSockets.get(challenge.challengerId);
+      if (challengerSocketId) {
+        io.to(challengerSocketId).emit('challenge_declined');
+      }
+      activeChallenges.delete(data.challengeId);
+    }
+  });
+
+  socket.on('accept_challenge', async (data) => {
+    if (!data || !data.challengeId) return;
+    const challenge = activeChallenges.get(data.challengeId);
+    if (!challenge) {
+      socket.emit('challenge_error', { error: 'Challenge has expired or was cancelled.' });
+      return;
+    }
+
+    const AliceId = challenge.challengerId;
+    const BobId = challenge.receiverId;
+    const domain = challenge.domain;
+
+    const p1User = await storage.getUserById(AliceId);
+    const p2User = await storage.getUserById(BobId);
+
+    const p1SocketId = userSockets.get(AliceId);
+    const p2SocketId = userSockets.get(BobId);
+
+    if (!p1User || !p2User || !p1SocketId || !p2SocketId) {
+      socket.emit('challenge_error', { error: 'One of the players went offline.' });
+      activeChallenges.delete(data.challengeId);
+      return;
+    }
+
+    const p1FieldElos = p1User.fieldElos || {};
+    let p1Elo = p1User.elo || 1200;
+    if (domain && domain !== 'all') {
+      p1Elo = p1FieldElos[domain] || 1200;
+    }
+
+    const p2FieldElos = p2User.fieldElos || {};
+    let p2Elo = p2User.elo || 1200;
+    if (domain && domain !== 'all') {
+      p2Elo = p2FieldElos[domain] || 1200;
+    }
+
+    const p1 = {
+      id: p1SocketId,
+      userId: p1User.id,
+      name: p1User.username,
+      username: p1User.username,
+      elo: p1Elo,
+      avatarUrl: p1User.avatarUrl,
+      bannerUrl: p1User.bannerUrl,
+      hp: 100,
+      socketId: p1SocketId,
+      domain: domain,
+      queuedAt: Date.now()
+    };
+
+    const p2 = {
+      id: p2SocketId,
+      userId: p2User.id,
+      name: p2User.username,
+      username: p2User.username,
+      elo: p2Elo,
+      avatarUrl: p2User.avatarUrl,
+      bannerUrl: p2User.bannerUrl,
+      hp: 100,
+      socketId: p2SocketId,
+      domain: domain,
+      queuedAt: Date.now()
+    };
+
+    players[p1SocketId] = p1;
+    players[p2SocketId] = p2;
+
+    activeChallenges.delete(data.challengeId);
+
+    const match = createMatch(p1, p2, domain);
+    emitMatchFound(match);
+    startDiscardTimer(match.id);
+  });
+
   socket.on('join_queue', async (data) => {
     removeFromQueue(socket.id);
     const player = await createPlayer(socket, data);
@@ -532,10 +839,13 @@ io.on('connection', (socket) => {
 
     const roundData = match.roundState;
     if (!roundData || roundData.answers[playerId]) return;
-    
+
+    const idx = Number(answerIndex);
+    if (!Number.isInteger(idx) || idx < 0 || idx > 3) return;
+
     const timeTaken = Date.now() - roundData.startTime;
     roundData.answers[playerId] = {
-      answer: answerIndex,
+      answer: idx,
       timeTaken
     };
 
@@ -563,7 +873,8 @@ io.on('connection', (socket) => {
       hp: 100,
       socketId: 'bot_socket',
       isBot: true,
-      domain: player.domain
+      domain: player.domain,
+      level: 99
     };
     players[bot.id] = bot;
 
@@ -622,6 +933,10 @@ io.on('connection', (socket) => {
         delete matches[player.matchId];
       }
       delete players[socket.id];
+    }
+    if (socket.userId) {
+      userSockets.delete(socket.userId);
+      notifyFriendsStatusChange(socket.userId, false);
     }
   });
 });
@@ -715,28 +1030,36 @@ function startNextRound(match) {
 
   if (match.p1.isBot || match.p2.isBot) {
     const botId = match.p1.isBot ? match.p1.id : match.p2.id;
-    const delay = 1500 + Math.random() * 3000;
+    const delay = 1800 + Math.random() * 3200;
     setTimeout(() => {
-      if (matches[match.id] && match.roundState && Object.keys(match.roundState.answers).length < 2) {
-         const isCorrect = Math.random() > 0.48;
-         const ansIndex = isCorrect ? question.answer : Math.floor(Math.random() * question.options.length);
-         // Find handleAnswer equivalent here, wait, I defined handleAnswer inside io.on('connection') closure
-         // This is a bug if I call it from startNextRound.
-         // Let's inline bot answering logic.
-         match.roundState.answers[botId] = { answer: ansIndex, timeTaken: delay };
-         if (Object.keys(match.roundState.answers).length === 2) {
-           resolveRound(match);
-         }
+      const liveMatch = matches[match.id];
+      if (!liveMatch || liveMatch.state !== 'battle' || !liveMatch.roundState) return;
+      if (liveMatch.roundState.answers[botId]) return;
+
+      const isCorrect = Math.random() > 0.58;
+      const ansIndex = isCorrect ? question.answer : Math.floor(Math.random() * question.options.length);
+      liveMatch.roundState.answers[botId] = { answer: ansIndex, timeTaken: delay };
+
+      if (Object.keys(liveMatch.roundState.answers).length === 2) {
+        resolveRound(liveMatch);
       }
     }, delay);
   }
 }
 
 function resolveRound(match) {
-  if (match.roundTimer) clearTimeout(match.roundTimer);
-  
-  const question = match.roundState.question;
-  const answers = match.roundState.answers;
+  if (!match || !match.roundState) return;
+
+  const roundState = match.roundState;
+  match.roundState = null;
+
+  if (match.roundTimer) {
+    clearTimeout(match.roundTimer);
+    match.roundTimer = null;
+  }
+
+  const question = roundState.question;
+  const answers = roundState.answers;
   
   let p1Damage = 0;
   let p2Damage = 0;
@@ -750,13 +1073,37 @@ function resolveRound(match) {
   } else if (!p1Correct && p2Correct) {
     p1Damage = 25;
   } else if (p1Correct && p2Correct) {
-    // Both correct: Speed battle
     const diff = Math.abs(ans1.timeTaken - ans2.timeTaken);
-    const speedDamage = Math.min(20, Math.max(1, Math.ceil(diff / 250)));
-    if (ans1.timeTaken < ans2.timeTaken) {
-      p2Damage = speedDamage;
-    } else if (ans2.timeTaken < ans1.timeTaken) {
-      p1Damage = speedDamage;
+    const isBotMatch = match.p1.isBot || match.p2.isBot;
+
+    if (isBotMatch) {
+      const humanPlayer = match.p1.isBot ? match.p2 : match.p1;
+      const humanAns = answers[humanPlayer.id];
+      const botAns = answers[humanPlayer.id === match.p1.id ? match.p2.id : match.p1.id];
+      const calcSpeedDamage = (divisor) => Math.min(20, Math.max(1, Math.ceil(diff / divisor)));
+
+      if (humanAns && botAns && humanAns.timeTaken < botAns.timeTaken) {
+        const speedDamage = calcSpeedDamage(BOT_SPEED_HUMAN_ADVANTAGE_DIVISOR);
+        if (humanPlayer.id === match.p1.id) {
+          p2Damage = speedDamage;
+        } else {
+          p1Damage = speedDamage;
+        }
+      } else if (humanAns && botAns && botAns.timeTaken < humanAns.timeTaken) {
+        const speedDamage = calcSpeedDamage(BOT_SPEED_BOT_ADVANTAGE_DIVISOR);
+        if (humanPlayer.id === match.p1.id) {
+          p1Damage = speedDamage;
+        } else {
+          p2Damage = speedDamage;
+        }
+      }
+    } else {
+      const speedDamage = Math.min(20, Math.max(1, Math.ceil(diff / PVP_SPEED_DIVISOR)));
+      if (ans1.timeTaken < ans2.timeTaken) {
+        p2Damage = speedDamage;
+      } else if (ans2.timeTaken < ans1.timeTaken) {
+        p1Damage = speedDamage;
+      }
     }
   } else if (!p1Correct && !p2Correct) {
     p1Damage = 25;
@@ -851,10 +1198,15 @@ async function endMatch(match) {
 
     if (!winner.isBot && winner.userId) {
       await storage.updateUserWith(winner.userId, user => {
+        const xpDelta = isBotMatch ? 0 : 100;
+        const nextXp = (user.xp || 0) + xpDelta;
+        const nextLevel = Math.floor(nextXp / 500) + 1;
         const nextUser = {
           ...user,
           wins: (user.wins || 0) + 1,
-          gamesPlayed: (user.gamesPlayed || 0) + 1
+          gamesPlayed: (user.gamesPlayed || 0) + 1,
+          xp: nextXp,
+          level: nextLevel
         };
         if (!isBotMatch) {
           const domain = match.domain;
@@ -878,10 +1230,15 @@ async function endMatch(match) {
 
     if (!loser.isBot && loser.userId) {
       await storage.updateUserWith(loser.userId, user => {
+        const xpDelta = isBotMatch ? 0 : 50;
+        const nextXp = (user.xp || 0) + xpDelta;
+        const nextLevel = Math.floor(nextXp / 500) + 1;
         const nextUser = {
           ...user,
           losses: (user.losses || 0) + 1,
-          gamesPlayed: (user.gamesPlayed || 0) + 1
+          gamesPlayed: (user.gamesPlayed || 0) + 1,
+          xp: nextXp,
+          level: nextLevel
         };
         if (!isBotMatch) {
           const domain = match.domain;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -15,10 +15,18 @@ import {
   Swords,
   Trophy,
   Zap,
+  Search,
+  UserPlus,
+  UserMinus,
+  Check,
+  X,
+  MessageSquare,
+  Users,
+  Send
 } from "lucide-react";
 
 type GameState = "menu" | "queue" | "versus_intro" | "initial_discard" | "drafting" | "battle" | "results";
-type Screen = "auth" | "play" | "profile" | "leaderboard";
+type Screen = "auth" | "play" | "profile" | "leaderboard" | "social";
 
 type Account = {
   id: string;
@@ -34,6 +42,47 @@ type Account = {
   fieldElos?: Record<string, number>;
   fieldStats?: Record<string, { wins: number; losses: number }>;
   createdAt: string;
+  level?: number;
+  xp?: number;
+};
+
+type Friendship = {
+  userId: string;
+  friendId: string;
+  status: 'pending' | 'accepted';
+  createdAt: string;
+  isOutgoingRequest: boolean;
+  isIncomingRequest: boolean;
+  friend: {
+    id: string;
+    username: string;
+    avatarUrl: string;
+    bannerUrl: string;
+    elo: number;
+    wins: number;
+    losses: number;
+    bio: string;
+    xp: number;
+    level: number;
+  };
+};
+
+type ChatMessage = {
+  id: string;
+  userId: string;
+  username: string;
+  avatarUrl: string;
+  bannerUrl: string;
+  elo: number;
+  level: number;
+  message: string;
+  timestamp: string;
+};
+
+type IncomingChallenge = {
+  challengeId: string;
+  challenger: Account;
+  domain: string;
 };
 
 type MatchData = {
@@ -72,6 +121,7 @@ type FighterProfile = {
   hp: number;
   avatarUrl?: string;
   bannerUrl?: string;
+  level?: number;
 };
 
 type LeaderboardEntry = {
@@ -85,6 +135,10 @@ type MatchRecord = {
   loser_id?: string | null;
   winnerId?: string | null;
   loserId?: string | null;
+  player_one_id?: string | null;
+  player_two_id?: string | null;
+  playerOneId?: string | null;
+  playerTwoId?: string | null;
   player_one_name?: string;
   player_two_name?: string;
   playerOneName?: string;
@@ -186,6 +240,7 @@ const FIELDS = [
 
 export default function Home() {
   const socketRef = useRef<Socket | null>(null);
+  const chatBottomRef = useRef<HTMLDivElement>(null);
   const [socketId, setSocketId] = useState<string | undefined>();
   const [selectedField, setSelectedField] = useState<string>("all");
   const [queueMode, setQueueMode] = useState<"global" | "field">("global");
@@ -207,6 +262,21 @@ export default function Home() {
   const [leaderboardField, setLeaderboardField] = useState<string>("all");
   const [showFieldElosModal, setShowFieldElosModal] = useState(false);
 
+  // Social & Friends System States
+  const [friends, setFriends] = useState<Friendship[]>([]);
+  const [incomingRequests, setIncomingRequests] = useState<Friendship[]>([]);
+  const [outgoingRequests, setOutgoingRequests] = useState<Friendship[]>([]);
+  const [onlineFriends, setOnlineFriends] = useState<Set<string>>(new Set());
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatMessageInput, setChatMessageInput] = useState("");
+  const [incomingChallenge, setIncomingChallenge] = useState<IncomingChallenge | null>(null);
+  const [challengeStatus, setChallengeStatus] = useState<string | null>(null);
+  const [viewingUser, setViewingUser] = useState<Account | null>(null);
+  const [viewingUserMatches, setViewingUserMatches] = useState<MatchRecord[]>([]);
+  const [isViewingUserLoading, setIsViewingUserLoading] = useState(false);
+  const [challengeChosenField, setChallengeChosenField] = useState<string>("all");
+  const [isChallenging, setIsChallenging] = useState(false);
+
   const [gameState, setGameState] = useState<GameState>("menu");
   const [player, setPlayer] = useState<FighterProfile>({ name: "Player", elo: 1200, hp: 100 });
   const [opponent, setOpponent] = useState<FighterProfile>({ id: "", name: "?", username: "", elo: 1200, hp: 100 });
@@ -216,11 +286,13 @@ export default function Home() {
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [roundResult, setRoundResult] = useState<RoundResult | null>(null);
   const [winnerInfo, setWinnerInfo] = useState<WinnerInfo | null>(null);
-  const [timeLeft, setTimeLeft] = useState<number>(15);
   const [myAnswer, setMyAnswer] = useState<number | null>(null);
   const [isShaking, setIsShaking] = useState(false);
   const [lockedSubject, setLockedSubject] = useState<string | null>(null);
   const versusTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const answerLockedRef = useRef(false);
+  const refreshPlayerMetaRef = useRef<(token?: string | null) => Promise<void>>(async () => {});
+  const refreshFriendsListRef = useRef<(token?: string | null) => Promise<void>>(async () => {});
 
   const winRate = useMemo(() => {
     if (!account?.gamesPlayed) return 0;
@@ -242,23 +314,174 @@ export default function Home() {
     }));
   }, [leaderboard, leaderboardField]);
 
+  const refreshFriendsList = useCallback(async (activeToken = token) => {
+    if (!activeToken) return;
+    try {
+      const data = await apiRequest<{
+        friends: Friendship[];
+        incomingRequests: Friendship[];
+        outgoingRequests: Friendship[];
+      }>("/friends", { headers: { Authorization: `Bearer ${activeToken}` } });
+      setFriends(data.friends);
+      setIncomingRequests(data.incomingRequests);
+      setOutgoingRequests(data.outgoingRequests);
+    } catch (err) {
+      console.error("Failed to load friends:", err);
+    }
+  }, [token]);
+
+  const loadChatHistory = useCallback(async (activeToken = token) => {
+    if (!activeToken) return;
+    try {
+      const data = await apiRequest<{ messages: ChatMessage[] }>("/chat/messages", {
+        headers: { Authorization: `Bearer ${activeToken}` },
+      });
+      setChatMessages(data.messages);
+    } catch (err) {
+      console.error("Failed to load chat history:", err);
+    }
+  }, [token]);
+
   const refreshPlayerMeta = useCallback(async (activeToken = token) => {
     if (!activeToken) return;
 
     setIsMetaLoading(true);
     try {
-      const [leaderboardData, matchData] = await Promise.all([
+      const [leaderboardData, matchData, meData] = await Promise.all([
         apiRequest<{ leaderboard: LeaderboardEntry[] }>("/leaderboard"),
         apiRequest<{ matches: MatchRecord[] }>("/me/matches", { headers: { Authorization: `Bearer ${activeToken}` } }),
+        apiRequest<{ user: Account }>("/me", { headers: { Authorization: `Bearer ${activeToken}` } }),
       ]);
       setLeaderboard(leaderboardData.leaderboard);
       setRecentMatches(matchData.matches);
+      setAccount(meData.user);
+      setPlayer({ 
+        name: meData.user.username, 
+        username: meData.user.username, 
+        elo: meData.user.elo, 
+        hp: 100, 
+        avatarUrl: meData.user.avatarUrl, 
+        bannerUrl: meData.user.bannerUrl,
+        level: meData.user.level || 1
+      });
+      
+      refreshFriendsList(activeToken);
     } catch {
       // Meta panels are non-critical; auth/profile errors are shown elsewhere.
     } finally {
       setIsMetaLoading(false);
     }
-  }, [token]);
+  }, [token, refreshFriendsList]);
+
+  refreshPlayerMetaRef.current = refreshPlayerMeta;
+  refreshFriendsListRef.current = refreshFriendsList;
+
+  const openUserProfile = async (userId: string) => {
+    if (!token) {
+      setStatus("Sign in to view player profiles.");
+      setScreen("auth");
+      return;
+    }
+    playSound("select");
+    setIsViewingUserLoading(true);
+    try {
+      const data = await apiRequest<{ user: Account; matches: MatchRecord[] }>(`/users/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setViewingUser(data.user);
+      setViewingUserMatches(data.matches);
+    } catch (err) {
+      console.error("Failed to load user profile:", err);
+      setStatus(err instanceof Error ? err.message : "Failed to load profile.");
+      setTimeout(() => setStatus(""), 4000);
+    } finally {
+      setIsViewingUserLoading(false);
+    }
+  };
+
+  const sendChatMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = chatMessageInput.trim();
+    if (!text || !socketRef.current) return;
+    socketRef.current.emit("send_chat_message", { message: text });
+    setChatMessageInput("");
+  };
+
+  const startDuelWithUser = (userId: string) => {
+    openUserProfile(userId);
+    setIsChallenging(true);
+  };
+
+  const addFriend = async (username: string) => {
+    if (!token) return;
+    const trimmed = username.trim();
+    if (!trimmed) return;
+    playSound("confirm");
+    try {
+      await apiRequest("/friends/request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ friendUsername: trimmed })
+      });
+      refreshFriendsList(token);
+      setStatus("Friend request sent!");
+      setTimeout(() => setStatus(""), 4000);
+    } catch (err: any) {
+      setStatus(err.message || "Failed to send friend request.");
+      playSound("error");
+      setTimeout(() => setStatus(""), 4000);
+    }
+  };
+
+  const acceptFriend = async (friendId: string) => {
+    if (!token) return;
+    playSound("confirm");
+    try {
+      await apiRequest("/friends/accept", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ friendId })
+      });
+      refreshFriendsList(token);
+    } catch (err: any) {
+      console.error(err);
+    }
+  };
+
+  const removeFriend = async (friendId: string) => {
+    if (!token) return;
+    playSound("select");
+    try {
+      await apiRequest("/friends/remove", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ friendId })
+      });
+      refreshFriendsList(token);
+    } catch (err: any) {
+      console.error(err);
+    }
+  };
+
+  const friendshipStatus = useMemo(() => {
+    if (!account || !viewingUser || account.id === viewingUser.id) return null;
+    const isFriend = friends.some(f => f.friend.id === viewingUser.id);
+    if (isFriend) return "friend";
+    const isIncoming = incomingRequests.some(f => f.friend.id === viewingUser.id);
+    if (isIncoming) return "incoming";
+    const isOutgoing = outgoingRequests.some(f => f.friend.id === viewingUser.id);
+    if (isOutgoing) return "outgoing";
+    return "none";
+  }, [account, viewingUser, friends, incomingRequests, outgoingRequests]);
 
   useEffect(() => {
     if (!token) return;
@@ -285,10 +508,17 @@ export default function Home() {
   }, [token, refreshPlayerMeta]);
 
   useEffect(() => {
-    const activeSocket = io(SOCKET_URL, { autoConnect: true });
+    const activeSocket = io(SOCKET_URL, { autoConnect: true, transports: ["websocket", "polling"] });
     socketRef.current = activeSocket;
 
-    activeSocket.on("connect", () => setSocketId(activeSocket.id));
+    activeSocket.on("connect", () => {
+      setSocketId(activeSocket.id);
+      const activeToken = localStorage.getItem("synapse_token");
+      if (activeToken) {
+        activeSocket.emit("register_socket", { authToken: activeToken });
+      }
+    });
+
     activeSocket.on("disconnect", () => setSocketId(undefined));
 
     activeSocket.on("auth_required", () => {
@@ -300,13 +530,21 @@ export default function Home() {
     activeSocket.on("waiting_in_queue", () => setGameState("queue"));
 
     activeSocket.on("match_found", data => {
-      setOpponent(data.opponent);
+      answerLockedRef.current = false;
+      setOpponent({
+        ...data.opponent,
+        id: data.opponent?.id ?? "",
+        hp: data.opponent?.hp ?? 100,
+      });
       setMatchData(data.match);
       setHand(data.hand || []);
       setPlayer(p => ({ ...p, hp: 100 }));
       setLockedSubject(null);
+      setRoundResult(null);
+      setMyAnswer(null);
       setGameState("versus_intro");
       playSound("intro");
+      setScreen("play");
 
       if (versusTimerRef.current) clearTimeout(versusTimerRef.current);
       versusTimerRef.current = setTimeout(() => {
@@ -325,11 +563,11 @@ export default function Home() {
     activeSocket.on("draft_complete", data => setSelectedSubject(data.subject));
 
     activeSocket.on("round_start", data => {
+      answerLockedRef.current = false;
       setRoundData(data);
       setRoundResult(null);
       setMyAnswer(null);
       setLockedSubject(null);
-      setTimeLeft(data.question.timeLimit || 15);
       setGameState("battle");
     });
 
@@ -357,7 +595,7 @@ export default function Home() {
       setWinnerInfo(data);
       setGameState("results");
       setAccount(current => current ? { ...current, elo: data.elo, bestElo: Math.max(current.bestElo, data.elo) } : current);
-      refreshPlayerMeta();
+      refreshPlayerMetaRef.current();
       if (data.winner === activeSocket.id) playSound("victory");
       else playSound("damage");
     });
@@ -373,22 +611,72 @@ export default function Home() {
       setGameState("drafting");
     });
 
+    activeSocket.on("chat_message", (msg: ChatMessage) => {
+      setChatMessages(prev => {
+        if (prev.some(m => m.id === msg.id)) return prev;
+        return [...prev.slice(-99), msg];
+      });
+    });
+
+    activeSocket.on("friend_status_change", (data: { friendId: string; isOnline: boolean }) => {
+      setOnlineFriends(prev => {
+        const next = new Set(prev);
+        if (data.isOnline) {
+          next.add(data.friendId);
+        } else {
+          next.delete(data.friendId);
+        }
+        return next;
+      });
+    });
+
+    activeSocket.on("friend_challenge", (data: IncomingChallenge) => {
+      setIncomingChallenge(data);
+      playSound("intro");
+    });
+
+    activeSocket.on("challenge_declined", () => {
+      setChallengeStatus("Challenge was declined.");
+      playSound("error");
+      setTimeout(() => setChallengeStatus(null), 4000);
+    });
+
+    activeSocket.on("challenge_error", (data: { error: string }) => {
+      setChallengeStatus(data.error);
+      playSound("error");
+      setTimeout(() => setChallengeStatus(null), 4000);
+    });
+
+    activeSocket.on("friend_request_received", () => {
+      refreshFriendsListRef.current();
+    });
+
+    activeSocket.on("friend_request_accepted", () => {
+      refreshFriendsListRef.current();
+    });
+
     return () => {
+      activeSocket.removeAllListeners();
       activeSocket.disconnect();
       socketRef.current = null;
       if (versusTimerRef.current) clearTimeout(versusTimerRef.current);
     };
-  }, [refreshPlayerMeta]);
+  }, []);
 
   useEffect(() => {
-    if (gameState !== "battle" || roundResult) return;
+    if (!token || !socketRef.current?.connected) return;
+    socketRef.current.emit("register_socket", { authToken: token });
+  }, [token, socketId]);
 
-    const timer = setInterval(() => {
-      setTimeLeft(t => Math.max(0, t - 0.1));
-    }, 100);
+  useEffect(() => {
+    chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
 
-    return () => clearInterval(timer);
-  }, [gameState, roundResult, roundData]);
+  useEffect(() => {
+    if (screen === "social" && token) {
+      loadChatHistory(token);
+    }
+  }, [screen, token, loadChatHistory]);
 
   const authenticate = async () => {
     setStatus("");
@@ -528,11 +816,13 @@ export default function Home() {
   };
 
   const submitAnswer = (answerIndex: number) => {
-    if (!roundResult && myAnswer === null) {
-      playSound("select");
-      setMyAnswer(answerIndex);
-      socketRef.current?.emit("submit_answer", { answerIndex });
-    }
+    if (roundResult || myAnswer !== null || answerLockedRef.current) return;
+    if (!socketRef.current?.connected || gameState !== "battle") return;
+
+    answerLockedRef.current = true;
+    playSound("select");
+    setMyAnswer(answerIndex);
+    socketRef.current.emit("submit_answer", { answerIndex });
   };
 
   const setProfileImage = (field: "avatarUrl" | "bannerUrl", file?: File) => {
@@ -565,36 +855,94 @@ export default function Home() {
     reader.readAsDataURL(file);
   };
 
+  const navTabs: { id: Screen; label: string; onClick: () => void }[] = account
+    ? [
+        { id: "play", label: "Play", onClick: () => { playSound("select"); setScreen("play"); } },
+        { id: "social", label: "Social", onClick: () => { playSound("select"); setScreen("social"); refreshFriendsList(); loadChatHistory(); } },
+        { id: "profile", label: "Profile", onClick: () => { playSound("select"); setScreen("profile"); } },
+        { id: "leaderboard", label: "Ranks", onClick: () => { playSound("select"); refreshPlayerMeta(); setScreen("leaderboard"); } },
+      ]
+    : [];
+
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#070912] text-slate-50">
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_20%_10%,rgba(20,184,166,0.18),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(217,119,6,0.16),transparent_30%),linear-gradient(180deg,#070912_0%,#111827_100%)]" />
+    <main className="relative min-h-screen overflow-x-hidden text-slate-50">
+      <ArenaBackdrop />
 
       <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5 gap-2">
-        <button onClick={() => setScreen(account ? "play" : "auth")} className="flex items-center gap-2 sm:gap-3 text-left min-w-0">
-          <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-teal-400 text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.35)] sm:h-10 sm:w-10">
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => setScreen(account ? "play" : "auth")}
+          className="flex items-center gap-2 sm:gap-3 text-left min-w-0"
+        >
+          <motion.div
+            animate={{ boxShadow: ["0 0 20px rgba(45,212,191,0.25)", "0 0 32px rgba(45,212,191,0.45)", "0 0 20px rgba(45,212,191,0.25)"] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-teal-400 text-slate-950 sm:h-10 sm:w-10"
+          >
             <Swords size={20} className="sm:h-[22px] sm:w-[22px]" />
-          </div>
+          </motion.div>
           <div className="truncate">
-            <p className="text-base font-black uppercase tracking-wide text-teal-400 sm:text-lg">Synapse.gg</p>
+            <p className="font-display text-base font-black uppercase tracking-wide text-teal-400 sm:text-lg text-glow-teal">Synapse.gg</p>
             <p className="hidden text-[10px] font-mono text-slate-400 sm:block">Collegiate Trivia Arena</p>
           </div>
-        </button>
+        </motion.button>
 
         {account ? (
-          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            <button onClick={() => { playSound("select"); setScreen("play"); }} className={`rounded-lg px-2.5 py-1.5 text-xs font-bold transition hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm ${screen === "play" ? "bg-white/10 text-white" : "text-slate-300"}`}>Play</button>
-            <button onClick={() => { playSound("select"); setScreen("profile"); }} className={`rounded-lg px-2.5 py-1.5 text-xs font-bold transition hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm ${screen === "profile" ? "bg-white/10 text-white" : "text-slate-300"}`}>Profile</button>
-            <button onClick={() => { playSound("select"); refreshPlayerMeta(); setScreen("leaderboard"); }} className={`rounded-lg px-2.5 py-1.5 text-xs font-bold transition hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm ${screen === "leaderboard" ? "bg-white/10 text-white" : "text-slate-300"}`}>Ranks</button>
-            <button onClick={logout} className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 transition sm:h-10 sm:w-10" title="Log out">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div className="relative hidden sm:flex items-center gap-0.5 rounded-xl border border-white/[0.06] bg-black/40 p-1 backdrop-blur-md">
+              {navTabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={tab.onClick}
+                  className={`relative z-10 rounded-lg px-3 py-2 text-xs font-bold transition-colors sm:px-4 sm:text-sm ${screen === tab.id ? "text-white" : "text-slate-400 hover:text-slate-200"}`}
+                >
+                  {screen === tab.id && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-lg nav-tab-glow bg-gradient-to-b from-white/12 to-white/[0.04] border border-white/10"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative">{tab.label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="flex sm:hidden items-center gap-0.5">
+              {navTabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={tab.onClick}
+                  className={`rounded-lg px-2 py-1.5 text-[10px] font-bold ${screen === tab.id ? "bg-white/10 text-white" : "text-slate-400"}`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={logout}
+              className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:border-red-400/30 hover:bg-red-500/10 hover:text-red-200 transition sm:h-10 sm:w-10"
+              title="Log out"
+            >
               <LogOut size={16} className="sm:h-[18px] sm:w-[18px]" />
-            </button>
+            </motion.button>
           </div>
         ) : null}
       </nav>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-10">
         <AnimatePresence mode="wait">
-          {!account || screen === "auth" ? renderAuth() : screen === "profile" ? renderProfile() : screen === "leaderboard" ? renderLeaderboard() : renderGame()}
+          {!account || screen === "auth" 
+            ? renderAuth() 
+            : screen === "profile" 
+              ? renderProfile() 
+              : screen === "leaderboard" 
+                ? renderLeaderboard() 
+                : screen === "social"
+                  ? renderSocial()
+                  : renderGame()}
         </AnimatePresence>
       </div>
 
@@ -670,8 +1018,660 @@ export default function Home() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* User Profile Detail Modal */}
+      <AnimatePresence>
+        {(viewingUser || isViewingUserLoading) && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => { setViewingUser(null); setIsChallenging(false); setIsViewingUserLoading(false); }}
+              className="absolute inset-0 bg-black/85 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-slate-950 shadow-2xl z-50"
+            >
+              {isViewingUserLoading && !viewingUser ? (
+                <div className="flex h-64 items-center justify-center">
+                  <p className="font-mono text-xs font-black uppercase tracking-widest text-teal-300 animate-pulse">Loading profile...</p>
+                </div>
+              ) : viewingUser ? (
+              <>
+              {/* Profile banner */}
+              <div 
+                className="h-36 bg-cover bg-center relative" 
+                style={{ backgroundImage: `url(${getImageUrl(viewingUser.bannerUrl)})` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+                <button 
+                  onClick={() => { setViewingUser(null); setIsChallenging(false); setIsViewingUserLoading(false); }}
+                  className="absolute top-4 right-4 h-8 w-8 grid place-items-center rounded-full bg-black/60 border border-white/10 text-slate-300 hover:text-white hover:bg-black/80 transition z-20"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* Profile details */}
+              <div className="px-6 pb-6 relative z-10 -mt-12">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end justify-between mb-6">
+                  <div className="flex flex-col sm:flex-row gap-3 items-end">
+                    <img 
+                      src={getImageUrl(viewingUser.avatarUrl)} 
+                      alt="" 
+                      className="h-24 w-24 rounded-xl border-4 border-slate-950 bg-slate-800 object-cover shadow-lg" 
+                    />
+                    <div className="pb-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-2xl font-black uppercase tracking-tight text-white">{viewingUser.username}</h3>
+                        <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-1.5 py-0.5 text-[10px] font-mono font-black text-slate-950 shadow-[0_0_10px_rgba(45,212,191,0.2)]">
+                          Lvl {viewingUser.level || 1}
+                        </span>
+                      </div>
+                      <p className="font-mono text-[10px] text-teal-400 mt-0.5">@{viewingUser.username}</p>
+                      <div className="mt-2 w-full max-w-[200px]">
+                        <div className="flex justify-between text-[9px] font-mono font-black text-slate-400 mb-0.5">
+                          <span>XP Progress</span>
+                          <span>{(viewingUser.xp || 0) % 500} / 500</span>
+                        </div>
+                        <div className="h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border border-white/5">
+                          <div
+                            className="h-full bg-gradient-to-r from-teal-400 to-emerald-400 transition-all duration-500"
+                            style={{ width: `${(((viewingUser.xp || 0) % 500) / 500) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Friendship & Duel actions */}
+                  <div className="flex flex-wrap gap-2">
+                    {account && viewingUser.id !== account.id && (
+                      <>
+                        {friendshipStatus === "none" && (
+                          <button 
+                            onClick={() => addFriend(viewingUser.username)}
+                            className="flex items-center gap-1.5 rounded-lg bg-teal-400 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-teal-350 transition duration-300"
+                          >
+                            <UserPlus size={14} />
+                            Add Friend
+                          </button>
+                        )}
+                        {friendshipStatus === "incoming" && (
+                          <div className="flex gap-1.5">
+                            <button 
+                              onClick={() => acceptFriend(viewingUser.id)}
+                              className="flex items-center gap-1 rounded-lg bg-emerald-500 px-3 py-2 text-xs font-black uppercase tracking-wider text-white hover:bg-emerald-400 transition"
+                            >
+                              <Check size={14} /> Accept
+                            </button>
+                            <button 
+                              onClick={() => removeFriend(viewingUser.id)}
+                              className="flex items-center gap-1 rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
+                            >
+                              Ignore
+                            </button>
+                          </div>
+                        )}
+                        {friendshipStatus === "outgoing" && (
+                          <button 
+                            onClick={() => removeFriend(viewingUser.id)}
+                            className="flex items-center gap-1.5 rounded-lg bg-white/5 border border-white/10 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
+                          >
+                            <X size={14} />
+                            Cancel Request
+                          </button>
+                        )}
+                        {friendshipStatus === "friend" && (
+                          <>
+                            <button 
+                              onClick={() => removeFriend(viewingUser.id)}
+                              className="flex items-center gap-1.5 rounded-lg bg-red-500/10 border border-red-500/30 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-red-400 hover:bg-red-500 hover:text-white transition duration-300"
+                            >
+                              <UserMinus size={14} />
+                              Unfriend
+                            </button>
+                            {onlineFriends.has(viewingUser.id) && !isChallenging && (
+                              <button 
+                                onClick={() => { playSound("select"); setIsChallenging(true); }}
+                                className="flex items-center gap-1.5 rounded-lg bg-teal-400/10 border border-teal-400/30 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-teal-300 hover:bg-teal-400 hover:text-slate-950 transition duration-300"
+                              >
+                                <Swords size={14} />
+                                Duel Challenge
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Duel Challenge Selection Menu */}
+                {isChallenging && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }} 
+                    animate={{ height: "auto", opacity: 1 }} 
+                    className="mb-6 rounded-xl border border-teal-400/30 bg-teal-400/5 p-4"
+                  >
+                    <p className="text-[10px] font-black uppercase tracking-widest text-teal-300 mb-3">Select Duel Academic Subject:</p>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 mb-4">
+                      <button 
+                        onClick={() => { playSound("select"); setChallengeChosenField("all"); }}
+                        className={`rounded-lg px-2.5 py-2 text-xs font-black uppercase tracking-wider border transition ${challengeChosenField === "all" ? "bg-teal-400 text-slate-950 border-teal-400" : "bg-black/40 text-slate-300 border-white/10 hover:border-white/20"}`}
+                      >
+                        All Subjects
+                      </button>
+                      {FIELDS.map(f => (
+                        <button 
+                          key={f.id}
+                          onClick={() => { playSound("select"); setChallengeChosenField(f.id); }}
+                          className={`rounded-lg px-2.5 py-2 text-xs font-black uppercase tracking-wider border transition truncate ${challengeChosenField === f.id ? "bg-teal-400 text-slate-950 border-teal-400" : "bg-black/40 text-slate-300 border-white/10 hover:border-white/20"}`}
+                        >
+                          {f.name}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex gap-2 justify-end">
+                      <button 
+                        onClick={() => { playSound("select"); setIsChallenging(false); }}
+                        className="rounded-lg border border-white/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-300 hover:bg-white/5 transition"
+                      >
+                        Cancel
+                      </button>
+                      <button 
+                        onClick={() => {
+                          if (!socketRef.current) return;
+                          playSound("confirm");
+                          socketRef.current.emit("challenge_friend", { friendId: viewingUser.id, domain: challengeChosenField });
+                          setChallengeStatus(`Duel request sent to ${viewingUser.username}!`);
+                          setViewingUser(null);
+                          setIsChallenging(false);
+                          setTimeout(() => setChallengeStatus(null), 4000);
+                        }}
+                        className="rounded-lg bg-teal-400 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-950 hover:bg-teal-300 transition"
+                      >
+                        Send Duel Invitation
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Bio text */}
+                <p className="text-slate-300 text-sm mb-6 leading-relaxed bg-black/20 p-3 rounded-lg border border-white/5">{viewingUser.bio || "hi"}</p>
+
+                {/* Grid stats */}
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-6">
+                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Overall Elo</p>
+                    <p className="mt-1 font-mono text-xl font-black text-teal-300">{viewingUser.elo}</p>
+                  </div>
+                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Wins</p>
+                    <p className="mt-1 font-mono text-xl font-black text-white">{viewingUser.wins}</p>
+                  </div>
+                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Losses</p>
+                    <p className="mt-1 font-mono text-xl font-black text-white">{viewingUser.losses}</p>
+                  </div>
+                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Win Rate</p>
+                    <p className="mt-1 font-mono text-xl font-black text-teal-300">
+                      {viewingUser.wins + viewingUser.losses > 0 
+                        ? `${Math.round((viewingUser.wins / (viewingUser.wins + viewingUser.losses)) * 100)}%` 
+                        : "0%"}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Discipline Ratings & Matches */}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4">
+                    <h4 className="text-xs font-black uppercase tracking-widest text-slate-300 mb-3">Field Ratings</h4>
+                    <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                      {FIELDS.map(f => {
+                        const elo = viewingUser.fieldElos?.[f.id] || 1200;
+                        const stats = viewingUser.fieldStats?.[f.id];
+                        const w = stats?.wins || 0;
+                        const l = stats?.losses || 0;
+                        const wr = w + l > 0 ? Math.round((w / (w + l)) * 100) : 0;
+                        return (
+                          <div key={f.id} className="flex items-center justify-between text-xs border-b border-white/5 pb-1.5 last:border-b-0 last:pb-0">
+                            <span className="font-bold text-slate-400">{f.name}</span>
+                            <div className="text-right">
+                              <span className="font-mono font-bold text-teal-300">{elo} Elo</span>
+                              <span className="block text-[8px] font-mono text-slate-500">{w}W-{l}L ({wr}% WR)</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4">
+                    <h4 className="text-xs font-black uppercase tracking-widest text-slate-300 mb-3">Match History</h4>
+                    <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                      {viewingUserMatches.length ? (
+                        viewingUserMatches.map(m => {
+                          const isWin = m.winnerId === viewingUser.id || m.winner_id === viewingUser.id;
+                          const oppName = (m.playerOneName || m.player_one_name) === viewingUser.username
+                            ? (m.playerTwoName || m.player_two_name)
+                            : (m.playerOneName || m.player_one_name);
+                          const delta = (m.playerOneName || m.player_one_name) === viewingUser.username
+                            ? (m.playerOneDelta ?? m.player_one_delta)
+                            : (m.playerTwoDelta ?? m.player_two_delta);
+                          const formattedDelta = delta && delta >= 0 ? `+${delta}` : delta;
+                          return (
+                            <div key={m.id} className="flex items-center justify-between text-[10px] border-b border-white/5 pb-1.5 last:border-b-0 last:pb-0">
+                              <div className="min-w-0">
+                                <span className={`font-black uppercase ${isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                  {isWin ? "Victory" : "Defeat"}
+                                </span>
+                                <span className="text-slate-500 font-bold block truncate">vs {oppName || "AI Bot"}</span>
+                              </div>
+                              <span className={`font-mono font-bold ${isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                {formattedDelta || ""} Elo
+                              </span>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <p className="text-[10px] text-slate-500 text-center py-4">No recent matches played.</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              </>
+              ) : null}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Incoming Challenge Modal */}
+      <AnimatePresence>
+        {incomingChallenge && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/90 backdrop-blur-md animate-fade-in" />
+            <motion.div
+              initial={{ scale: 0.9, rotate: -2, opacity: 0 }}
+              animate={{ scale: 1, rotate: 0, opacity: 1 }}
+              exit={{ scale: 0.9, rotate: 2, opacity: 0 }}
+              className="relative w-full max-w-md overflow-hidden rounded-2xl border-2 border-teal-400/40 bg-slate-950 p-6 text-center shadow-[0_0_60px_rgba(45,212,191,0.15)] z-50"
+            >
+              <motion.div
+                animate={{ boxShadow: ["0 0 0 rgba(45,212,191,0)", "0 0 30px rgba(45,212,191,0.35)", "0 0 0 rgba(45,212,191,0)"] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="mx-auto mb-4 h-16 w-16 rounded-full bg-teal-400/10 border border-teal-300 grid place-items-center text-teal-400"
+              >
+                <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
+                  <Swords size={28} />
+                </motion.div>
+              </motion.div>
+              <h2 className="text-2xl font-black uppercase tracking-wider text-teal-300">Duel Challenge!</h2>
+              <p className="mt-2 text-slate-300 font-bold">
+                <span className="text-teal-200">@{incomingChallenge.challenger.username}</span> has challenged you to a direct duel!
+              </p>
+              <div className="mt-4 inline-block rounded-full bg-slate-900 border border-white/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-slate-300">
+                 Arena: {incomingChallenge.domain === 'all' || incomingChallenge.domain === 'Common / First Year' ? 'All Subjects' : incomingChallenge.domain}
+              </div>
+
+              <div className="mt-8 grid grid-cols-2 gap-3">
+                <button 
+                  onClick={() => {
+                    if (!socketRef.current) return;
+                    playSound("select");
+                    socketRef.current.emit("decline_challenge", { challengeId: incomingChallenge.challengeId });
+                    setIncomingChallenge(null);
+                  }}
+                  className="rounded-xl border border-white/10 bg-white/5 py-3.5 text-sm font-black uppercase tracking-widest text-slate-300 hover:bg-white/10 transition"
+                >
+                  Decline
+                </button>
+                <button 
+                  onClick={() => {
+                    if (!socketRef.current) return;
+                    playSound("confirm");
+                    socketRef.current.emit("accept_challenge", { challengeId: incomingChallenge.challengeId });
+                    setIncomingChallenge(null);
+                  }}
+                  className="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 py-3.5 text-sm font-black uppercase tracking-widest text-slate-950 shadow-[0_0_20px_rgba(45,212,191,0.25)] hover:from-teal-350 hover:to-emerald-350 transition duration-300"
+                >
+                  Accept Match
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Toast notifications */}
+      <AnimatePresence>
+        {challengeStatus && (
+          <motion.div 
+            initial={{ opacity: 0, y: -24, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -24, scale: 0.9 }}
+            className="fixed top-6 right-6 z-50 rounded-xl border border-teal-400/40 bg-slate-900/90 px-5 py-4 shadow-2xl backdrop-blur-md"
+          >
+            <div className="flex items-center gap-3">
+              <div className="rounded-full bg-teal-500/10 p-1.5 text-teal-400">
+                <Sparkles size={16} />
+              </div>
+              <p className="font-mono text-xs font-black uppercase tracking-wide text-teal-200">{challengeStatus}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
+
+  function renderSocial() {
+    if (!account) return null;
+
+    return (
+      <motion.section 
+        key="social" 
+        initial={{ opacity: 0, y: 16 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        exit={{ opacity: 0, y: -16 }} 
+        className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] h-[calc(100vh-140px)] max-h-[850px]"
+      >
+        {/* Left Column: Global Arena Chat */}
+        <div className="glass-panel flex flex-col overflow-hidden scanline-overlay relative">
+          {/* Chat Header */}
+          <div className="flex items-center justify-between border-b border-white/[0.08] bg-slate-950/20 px-6 py-4">
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-teal-500/10 p-2 text-teal-400">
+                <MessageSquare size={20} />
+              </div>
+              <div>
+                <h2 className="text-lg font-black uppercase tracking-wider text-slate-100">Global Arena Chat</h2>
+                <p className="text-[10px] font-mono text-slate-400">Interact with online challengers</p>
+              </div>
+            </div>
+            {socketId ? (
+              <span className="flex items-center gap-1.5 rounded-full bg-teal-500/10 px-3 py-1 text-[10px] font-mono font-black text-teal-300">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal-400" />
+                Live Connection
+              </span>
+            ) : (
+              <span className="flex items-center gap-1.5 rounded-full bg-red-500/10 px-3 py-1 text-[10px] font-mono font-black text-red-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
+                Connecting...
+              </span>
+            )}
+          </div>
+
+          {/* Chat Messages */}
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            {chatMessages.length ? (
+              chatMessages.map(msg => {
+                const isSelf = account?.id === msg.userId;
+                const isFriend = friends.some(f => f.friend.id === msg.userId);
+                const isOnline = onlineFriends.has(msg.userId);
+                const canInvite = !isSelf && isFriend && isOnline;
+
+                return (
+                <motion.div
+                  key={msg.id}
+                  initial={{ opacity: 0, y: 10, x: isSelf ? 8 : -8 }}
+                  animate={{ opacity: 1, y: 0, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`flex items-start gap-3 group chat-msg-in ${isSelf ? "flex-row-reverse" : ""}`}
+                >
+                  <img 
+                    src={getImageUrl(msg.avatarUrl)} 
+                    alt="" 
+                    onClick={() => openUserProfile(msg.userId)}
+                    className="h-9 w-9 cursor-pointer rounded-lg object-cover border border-white/10 hover:border-teal-400 transition-colors shadow bg-slate-800" 
+                  />
+                  <div className={`min-w-0 flex-1 rounded-xl border px-4 py-3 transition-all ${isSelf ? "border-teal-400/15 bg-teal-400/[0.06] group-hover:border-teal-400/25" : "border-white/[0.04] bg-white/[0.02] group-hover:border-white/[0.08]"}`}>
+                    <div className="flex items-baseline justify-between gap-2 flex-wrap mb-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span 
+                          onClick={() => openUserProfile(msg.userId)}
+                          className="cursor-pointer font-black text-xs uppercase text-teal-200 hover:text-teal-350 transition-colors"
+                        >
+                          {msg.username}
+                        </span>
+                        <span className="rounded bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-[8px] font-mono font-black text-amber-300">
+                          Lvl {msg.level || 1}
+                        </span>
+                        <span className="font-mono text-[9px] text-slate-400">
+                          ({msg.elo} Elo)
+                        </span>
+                      </div>
+                      <span className="font-mono text-[9px] text-slate-500">
+                        {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    </div>
+                    <p className="text-slate-200 text-sm break-words selection:bg-teal-400/20">{msg.message}</p>
+                    {canInvite && (
+                      <button
+                        type="button"
+                        onClick={() => startDuelWithUser(msg.userId)}
+                        className="mt-2 flex items-center gap-1 rounded-lg border border-teal-400/30 bg-teal-400/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-teal-300 hover:bg-teal-400 hover:text-slate-950 transition"
+                      >
+                        <Swords size={10} />
+                        Invite to Duel
+                      </button>
+                    )}
+                  </div>
+                </motion.div>
+              );
+              })
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center text-center opacity-40">
+                <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3, repeat: Infinity }}>
+                  <MessageSquare size={48} className="text-slate-400 mb-3" />
+                </motion.div>
+                <p className="font-black uppercase tracking-wider text-sm">No messages yet</p>
+                <p className="text-xs text-slate-400 max-w-xs mt-1">Be the first to start a conversation in the global lounge!</p>
+              </div>
+            )}
+            <div ref={chatBottomRef} />
+          </div>
+
+          {/* Chat Input Form */}
+          <form onSubmit={sendChatMessage} className="border-t border-white/[0.08] bg-slate-950/25 p-4 flex gap-2">
+            <input 
+              value={chatMessageInput}
+              onChange={e => setChatMessageInput(e.target.value)}
+              placeholder="Type a message to the arena..." 
+              maxLength={300}
+              className="flex-1 rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none focus:border-teal-400/80 transition"
+            />
+            <button 
+              type="submit" 
+              className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_15px_rgba(45,212,191,0.2)] transition duration-300"
+            >
+              <Send size={18} />
+            </button>
+          </form>
+        </div>
+
+        {/* Right Column: Campus Friends & Actions */}
+        <div className="flex flex-col gap-6 overflow-y-auto">
+          {/* Add Friend Card */}
+          <div className="rounded-2xl border border-white/[0.08] bg-slate-900/40 p-5 backdrop-blur-md">
+            <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-200">
+              <UserPlus size={16} className="text-teal-300" /> Add Challenger
+            </h3>
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <input 
+                  id="friend-username-input"
+                  placeholder="Enter username..." 
+                  className="w-full rounded-xl border border-white/10 bg-black/40 pl-9 pr-3 py-2.5 text-xs text-white outline-none focus:border-teal-400/80 transition"
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      const input = document.getElementById("friend-username-input") as HTMLInputElement;
+                      if (input?.value.trim()) {
+                        addFriend(input.value.trim());
+                        input.value = "";
+                      }
+                    }
+                  }}
+                />
+                <Search size={14} className="absolute left-3 top-3.5 text-slate-400" />
+              </div>
+              <button 
+                onClick={() => {
+                  const input = document.getElementById("friend-username-input") as HTMLInputElement;
+                  if (input?.value.trim()) {
+                    addFriend(input.value.trim());
+                    input.value = "";
+                  }
+                }}
+                className="rounded-xl border border-white/10 bg-white/5 px-4 text-xs font-black uppercase tracking-wider text-white hover:bg-white/10 transition"
+              >
+                Send
+              </button>
+            </div>
+            {status && (
+              <p className="mt-2 text-[10px] font-bold text-teal-300 animate-pulse">{status}</p>
+            )}
+          </div>
+
+          {/* Incoming Friend Requests */}
+          {incomingRequests.length > 0 && (
+            <div className="rounded-2xl border border-white/[0.08] bg-slate-900/40 p-5 backdrop-blur-md">
+              <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-amber-200">
+                <Users size={16} className="text-amber-300" /> Pending Invites ({incomingRequests.length})
+              </h3>
+              <div className="space-y-2">
+                {incomingRequests.map(req => (
+                  <div key={req.friend.id} className="flex items-center justify-between rounded-xl bg-black/20 p-3 border border-white/[0.04]">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <img 
+                        src={getImageUrl(req.friend.avatarUrl)} 
+                        alt="" 
+                        onClick={() => openUserProfile(req.friend.id)}
+                        className="h-8 w-8 cursor-pointer rounded object-cover border border-white/10 bg-slate-800" 
+                      />
+                      <div className="min-w-0">
+                        <p 
+                          onClick={() => openUserProfile(req.friend.id)}
+                          className="cursor-pointer font-black text-xs uppercase text-white truncate hover:text-teal-200"
+                        >
+                          {req.friend.username}
+                        </p>
+                        <p className="font-mono text-[9px] text-slate-400">{req.friend.elo} Elo</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1.5 shrink-0">
+                      <button 
+                        onClick={() => acceptFriend(req.friend.id)}
+                        className="grid h-7 w-7 place-items-center rounded bg-teal-400 text-slate-950 hover:bg-teal-300 transition"
+                      >
+                        <Check size={14} />
+                      </button>
+                      <button 
+                        onClick={() => removeFriend(req.friend.id)}
+                        className="grid h-7 w-7 place-items-center rounded bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10 hover:text-white transition"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Friends List */}
+          <div className="flex-1 rounded-2xl border border-white/[0.08] bg-slate-900/40 p-5 backdrop-blur-md flex flex-col min-h-[300px]">
+            <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-200">
+              <Users size={16} className="text-teal-300" /> Friends List
+            </h3>
+            
+            <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
+              {friends.length ? (
+                // Sort friends so online ones are at the top
+                [...friends].sort((a, b) => {
+                  const aOnline = onlineFriends.has(a.friend.id) ? 1 : 0;
+                  const bOnline = onlineFriends.has(b.friend.id) ? 1 : 0;
+                  return bOnline - aOnline;
+                }).map(f => {
+                  const isOnline = onlineFriends.has(f.friend.id);
+                  return (
+                    <div 
+                      key={f.friend.id} 
+                      className="group/friend flex items-center justify-between rounded-xl bg-black/20 p-3.5 border border-white/[0.04] hover:border-teal-500/10 hover:bg-white/[0.01] transition-all"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="relative">
+                          <img 
+                            src={getImageUrl(f.friend.avatarUrl)} 
+                            alt="" 
+                            onClick={() => openUserProfile(f.friend.id)}
+                            className="h-10 w-10 cursor-pointer rounded-lg object-cover border border-white/10 bg-slate-800" 
+                          />
+                          <span className={`absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-slate-900 ${isOnline ? "bg-emerald-400" : "bg-slate-500"}`} />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span 
+                              onClick={() => openUserProfile(f.friend.id)}
+                              className="cursor-pointer font-black text-xs uppercase text-slate-100 hover:text-teal-300 truncate"
+                            >
+                              {f.friend.username}
+                            </span>
+                            <span className="rounded bg-slate-800/80 border border-slate-700 px-1 py-0.5 text-[8px] font-mono font-black text-amber-300">
+                              Lvl {f.friend.level || 1}
+                            </span>
+                          </div>
+                          <p className="font-mono text-[9px] text-slate-400 mt-0.5">
+                            {f.friend.elo} Elo • {isOnline ? "Online" : "Offline"}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        {isOnline && (
+                          <button 
+                            onClick={() => {
+                              playSound("select");
+                              startDuelWithUser(f.friend.id);
+                            }}
+                            className="flex items-center gap-1 rounded bg-teal-400/10 border border-teal-400/30 px-2 py-1.5 text-[10px] font-black uppercase tracking-wider text-teal-300 hover:bg-teal-400 hover:text-slate-950 transition duration-300"
+                            title="Challenge to Duel"
+                          >
+                            <Swords size={12} />
+                            Duel
+                          </button>
+                        )}
+                        <button 
+                          onClick={() => openUserProfile(f.friend.id)}
+                          className="rounded border border-white/10 bg-white/5 p-1.5 text-slate-400 hover:bg-white/10 hover:text-white transition"
+                          title="View Profile"
+                        >
+                          <Users size={12} />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="flex h-full flex-col items-center justify-center text-center opacity-30 py-8">
+                  <Users size={36} className="text-slate-400 mb-2" />
+                  <p className="font-black uppercase tracking-wider text-xs">No Friends Yet</p>
+                  <p className="text-[10px] text-slate-400 max-w-xs mt-1">Search for rival campus students above and recruit them!</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </motion.section>
+    );
+  }
 
   function renderAuth() {
     return (
@@ -683,24 +1683,49 @@ export default function Home() {
         className="grid min-h-[calc(100vh-96px)] items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]"
       >
         <div className="max-w-2xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-300/20 bg-teal-300/10 px-4 py-2 text-sm font-bold text-teal-200">
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-300/20 bg-teal-300/10 px-4 py-2 text-sm font-bold text-teal-200"
+          >
             <Shield size={16} /> Account required
-          </div>
-          <h1 className="text-5xl font-black uppercase leading-none tracking-normal md:text-7xl">
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08 }}
+            className="font-display text-5xl font-black uppercase leading-none tracking-normal md:text-7xl text-glow-teal"
+          >
             Build your ranked identity.
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+            className="mt-6 max-w-xl text-lg leading-8 text-slate-300"
+          >
             Your Elo, wins, losses, profile banner, and battle record now live on your account. No account, no queue.
-          </p>
+          </motion.p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <Stat icon={<Medal size={20} />} label="Starting Elo" value="1200" />
-            <Stat icon={<Flame size={20} />} label="Tracked" value="W/L" />
-            <Stat icon={<Crown size={20} />} label="Profile" value="Live" />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            className="mt-8 grid gap-4 sm:grid-cols-3"
+          >
+            <Stat icon={<Medal size={20} />} label="Starting Elo" value="1200" delay={0} />
+            <Stat icon={<Flame size={20} />} label="Tracked" value="W/L" delay={0.06} />
+            <Stat icon={<Crown size={20} />} label="Profile" value="Live" delay={0.12} />
+          </motion.div>
         </div>
 
-        <div className="rounded-2xl border border-white/[0.08] bg-slate-900/40 p-6 shadow-2xl backdrop-blur-md">
+        <motion.div
+          initial={{ opacity: 0, y: 24, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.55, delay: 0.15 }}
+          className="glass-panel-strong scanline-overlay relative rounded-2xl p-6"
+        >
           <div className="mb-6 grid grid-cols-2 rounded-xl bg-black/40 p-1 border border-white/5">
             {(["signup", "login"] as const).map(mode => (
               <button
@@ -727,11 +1752,17 @@ export default function Home() {
               <input type="password" value={authForm.password} onChange={event => setAuthForm({ ...authForm, password: event.target.value })} className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 outline-none transition focus:border-teal-400/80 focus:ring-1 focus:ring-teal-400/30" />
             </label>
             {status ? <p className="rounded-xl border border-amber-300/20 bg-amber-300/10 p-3.5 text-sm text-amber-100">{status}</p> : null}
-            <button onClick={authenticate} disabled={isAuthBusy} className="relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 py-4 font-black uppercase tracking-widest text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.15)] hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_32px_rgba(45,212,191,0.3)] transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60">
-              {isAuthBusy ? "Working..." : authMode === "signup" ? "Create Account" : "Enter Arena"}
-            </button>
+            <motion.button
+              whileHover={{ scale: isAuthBusy ? 1 : 1.02 }}
+              whileTap={{ scale: isAuthBusy ? 1 : 0.98 }}
+              onClick={authenticate}
+              disabled={isAuthBusy}
+              className="btn-arena-primary relative z-10 w-full py-4 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <span className="relative z-10">{isAuthBusy ? "Working..." : authMode === "signup" ? "Create Account" : "Enter Arena"}</span>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
       </motion.section>
     );
   }
@@ -741,7 +1772,7 @@ export default function Home() {
 
     return (
       <motion.section key="profile" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="space-y-6">
-        <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/40 backdrop-blur-md">
+        <div className="glass-panel overflow-hidden rounded-2xl scanline-overlay relative">
           <div className="h-56 bg-cover bg-center relative" style={{ backgroundImage: `url(${getImageUrl(account.bannerUrl)})` }}>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
           </div>
@@ -750,8 +1781,23 @@ export default function Home() {
               <img src={getImageUrl(account.avatarUrl)} alt={`${account.username} avatar`} className="h-32 w-32 rounded-2xl border-4 border-slate-900/80 bg-slate-800 object-cover shadow-2xl" />
               <div className="pb-1">
                 <p className="font-mono text-sm text-teal-300">@{account.username}</p>
-                <h1 className="text-4xl font-black uppercase tracking-normal text-white">{account.username}</h1>
-                <p className="mt-2 max-w-xl text-slate-300">{account.bio}</p>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-4xl font-black uppercase tracking-normal text-white">{account.username}</h1>
+                  <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-2 py-0.5 text-xs font-mono font-black text-slate-950 shadow-[0_0_12px_rgba(45,212,191,0.25)]">Lvl {account.level || 1}</span>
+                </div>
+                
+                {/* XP Progress Bar */}
+                <div className="mt-3 max-w-sm">
+                  <div className="flex justify-between text-[9px] font-mono font-black uppercase text-slate-400 mb-1">
+                    <span>Progression XP</span>
+                    <span>{(account.xp || 0) % 500} / 500 XP</span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-950/60 border border-white/5">
+                    <div className="h-full bg-gradient-to-r from-teal-400 to-emerald-400 shadow-[0_0_8px_rgba(45,212,191,0.3)] transition-all duration-500" style={{ width: `${(((account.xp || 0) % 500) / 500) * 100}%` }} />
+                  </div>
+                </div>
+
+                <p className="mt-4 max-w-xl text-slate-300">{account.bio}</p>
                 <button
                   onClick={() => { playSound("select"); setShowFieldElosModal(true); }}
                   className="mt-4 flex items-center gap-2 rounded-lg border border-teal-400/30 bg-teal-400/5 px-3.5 py-2 text-xs font-black uppercase tracking-widest text-teal-300 hover:bg-teal-400/10 hover:text-white transition duration-300 shadow-[0_0_12px_rgba(45,212,191,0.05)]"
@@ -814,11 +1860,11 @@ export default function Home() {
   function renderLeaderboard() {
     return (
       <motion.section key="leaderboard" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
-        <div className="rounded-lg border border-white/10 bg-white/[0.06] p-5">
+        <div className="glass-panel rounded-2xl p-5">
           <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-teal-300">Global Ladder</p>
-              <h1 className="text-3xl font-black uppercase tracking-normal">Leaderboard</h1>
+              <h1 className="font-display text-3xl font-black uppercase tracking-normal text-glow-teal">Leaderboard</h1>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button
@@ -863,12 +1909,23 @@ export default function Home() {
               const totalGames = wins + losses;
               const wrPercent = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
               return (
-                <div key={entry.user.id} className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-xl border p-3.5 transition-all duration-300 hover:border-teal-500/20 ${isSelf ? "border-teal-400/40 bg-teal-400/[0.06] shadow-[0_0_15px_rgba(45,212,191,0.05)]" : "border-white/[0.06] bg-slate-950/20"}`}>
+                <motion.div
+                  key={entry.user.id}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.35, delay: Math.min(rank * 0.04, 0.4) }}
+                  whileHover={{ scale: 1.01, x: 4 }}
+                  onClick={() => openUserProfile(entry.user.id)}
+                  className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-xl border p-3.5 cursor-pointer card-hover-lift ${isSelf ? "border-teal-400/40 bg-teal-400/[0.06] shadow-[0_0_15px_rgba(45,212,191,0.08)]" : "border-white/[0.06] bg-slate-950/20"} ${rank <= 3 ? "ring-1 ring-amber-400/10" : ""}`}
+                >
                   <div className={`w-10 text-center font-mono text-lg font-black ${rankColor}`}>{rankIcon}</div>
                   <div className="flex min-w-0 items-center gap-3">
                     <img src={getImageUrl(entry.user.avatarUrl)} alt="" className="h-11 w-11 rounded-lg object-cover border border-white/10" />
                     <div className="min-w-0">
-                      <p className="truncate font-black uppercase text-sm tracking-wide text-slate-100">{entry.user.username}</p>
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <p className="truncate font-black uppercase text-sm tracking-wide text-slate-100">{entry.user.username}</p>
+                        <span className="shrink-0 rounded bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-[9px] font-mono font-black text-amber-300">Lvl {entry.user.level || 1}</span>
+                      </div>
                       <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">{wins} Wins / {losses} Losses • {wrPercent}% WR</p>
                     </div>
                   </div>
@@ -876,7 +1933,7 @@ export default function Home() {
                     <p className="font-mono text-lg font-black text-teal-300">{entry.displayElo}</p>
                     <p className="text-[9px] uppercase tracking-widest text-slate-500">{leaderboardField === "all" ? "Global Elo" : "Field Elo"}</p>
                   </div>
-                </div>
+                </motion.div>
               );
             }) : (
               <div className="rounded-xl border border-white/[0.06] bg-slate-950/20 p-8 text-center text-slate-400">No ranked players yet.</div>
@@ -884,32 +1941,57 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-white/10 bg-white/[0.06] p-5">
+        <div className="glass-panel rounded-2xl p-5">
           <p className="text-xs font-black uppercase tracking-widest text-amber-300">Your Timeline</p>
-          <h2 className="mb-5 text-2xl font-black uppercase tracking-normal">Recent Matches</h2>
+          <h2 className="font-display mb-5 text-2xl font-black uppercase tracking-normal">Recent Matches</h2>
           <div className="space-y-3">
             {recentMatches.length ? recentMatches.map(match => {
               const p1Name = match.player_one_name || match.playerOneName || "Player 1";
               const p2Name = match.player_two_name || match.playerTwoName || "Player 2";
-              const p1Delta = match.player_one_delta ?? match.playerOneDelta ?? 0;
-              const p2Delta = match.player_two_delta ?? match.playerTwoDelta ?? 0;
+              const p1Id = match.player_one_id ?? match.playerOneId;
+              const p2Id = match.player_two_id ?? match.playerTwoId;
+              const winnerId = match.winner_id ?? match.winnerId;
+              const loserId = match.loser_id ?? match.loserId;
+              const myId = account?.id;
+              const iAmP1 = myId && p1Id === myId;
+              const myDelta = iAmP1
+                ? (match.player_one_delta ?? match.playerOneDelta ?? 0)
+                : (match.player_two_delta ?? match.playerTwoDelta ?? 0);
+              const isWin = Boolean(myId && winnerId === myId);
+              const isLoss = Boolean(myId && loserId === myId);
+              const oppName = iAmP1 ? p2Name : p1Name;
               const finished = match.finished_at || match.finishedAt;
+              const isBotMatch = !winnerId || !loserId || p1Name.toLowerCase().includes("bot") || p2Name.toLowerCase().includes("bot");
 
               return (
-                <div key={match.id} className="rounded-lg border border-white/10 bg-black/25 p-4">
+                <div
+                  key={match.id}
+                  className={`rounded-lg border p-4 ${isWin ? "border-emerald-500/30 bg-emerald-500/[0.06]" : isLoss ? "border-red-500/25 bg-red-500/[0.05]" : "border-white/10 bg-black/25"}`}
+                >
                   <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="truncate font-black">{p1Name} <span className="text-slate-500">vs</span> {p2Name}</p>
-                      <p className="text-[10px] font-bold text-teal-300 mt-1 uppercase tracking-widest">
-                        🏟️ {match.domain && match.domain !== 'all' ? match.domain : 'All Subjects'}
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <span className={`rounded px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${isWin ? "bg-emerald-500/20 text-emerald-300" : isLoss ? "bg-red-500/20 text-red-300" : "bg-slate-700 text-slate-300"}`}>
+                          {isWin ? "Victory" : isLoss ? "Defeat" : "Match"}
+                        </span>
+                        {isBotMatch && (
+                          <span className="rounded bg-slate-800 px-2 py-0.5 text-[9px] font-mono text-slate-400">Practice</span>
+                        )}
+                      </div>
+                      <p className="truncate font-black text-slate-100">
+                        vs <span className="text-teal-200">{oppName}</span>
+                      </p>
+                      <p className="text-[10px] font-bold text-teal-300/80 mt-1 uppercase tracking-widest">
+                        🏟️ {match.domain && match.domain !== "all" ? match.domain : "All Subjects"}
                       </p>
                     </div>
-                    <p className="font-mono text-xs text-slate-500">{finished ? new Date(finished).toLocaleDateString() : ""}</p>
+                    <p className="shrink-0 font-mono text-xs text-slate-500">{finished ? new Date(finished).toLocaleDateString() : ""}</p>
                   </div>
-                  <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
-                    <p className="rounded bg-white/5 p-2 text-center font-mono">{match.rounds} rounds</p>
-                    <p className={`rounded p-2 text-center font-mono ${p1Delta >= 0 ? "bg-green-400/10 text-green-300" : "bg-red-400/10 text-red-300"}`}>{p1Delta >= 0 ? "+" : ""}{p1Delta}</p>
-                    <p className={`rounded p-2 text-center font-mono ${p2Delta >= 0 ? "bg-green-400/10 text-green-300" : "bg-red-400/10 text-red-300"}`}>{p2Delta >= 0 ? "+" : ""}{p2Delta}</p>
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                    <p className="rounded bg-white/5 p-2 text-center font-mono text-slate-300">{match.rounds} rounds</p>
+                    <p className={`rounded p-2 text-center font-mono font-bold ${myDelta >= 0 ? "bg-emerald-500/10 text-emerald-300" : "bg-red-500/10 text-red-300"}`}>
+                      {isBotMatch ? "No Elo change" : `${myDelta >= 0 ? "+" : ""}${myDelta} Elo`}
+                    </p>
                   </div>
                 </div>
               );
@@ -929,7 +2011,7 @@ export default function Home() {
           {gameState === "menu" && (
             <motion.div key="menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
               <div className="space-y-5">
-                <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/40 backdrop-blur-md">
+                <div className="glass-panel overflow-hidden rounded-2xl scanline-overlay relative">
                   <div className="h-32 bg-cover bg-center relative opacity-80" style={{ backgroundImage: `url(${getImageUrl(account?.bannerUrl)})` }}>
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
                   </div>
@@ -945,16 +2027,16 @@ export default function Home() {
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-4">
-                  <Stat icon={<Zap size={20} />} label="Elo" value={String(account?.elo || player.elo)} />
-                  <Stat icon={<Trophy size={20} />} label="Best" value={String(account?.bestElo || player.elo)} />
-                  <Stat icon={<Swords size={20} />} label="Games" value={String(account?.gamesPlayed || 0)} />
-                  <Stat icon={<Flame size={20} />} label="Win Rate" value={`${winRate}%`} />
+                  <Stat icon={<Zap size={20} />} label="Elo" value={String(account?.elo || player.elo)} delay={0} />
+                  <Stat icon={<Trophy size={20} />} label="Best" value={String(account?.bestElo || player.elo)} delay={0.05} />
+                  <Stat icon={<Swords size={20} />} label="Games" value={String(account?.gamesPlayed || 0)} delay={0.1} />
+                  <Stat icon={<Flame size={20} />} label="Win Rate" value={`${winRate}%`} delay={0.15} />
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="rounded-2xl border border-teal-500/20 bg-teal-950/25 p-5 shadow-[0_0_40px_rgba(45,212,191,0.04)] backdrop-blur-md">
-                  <h2 className="text-3xl font-black uppercase tracking-normal">Choose your queue</h2>
+                <div className="glass-panel rounded-2xl border-teal-500/20 bg-teal-950/25 p-5 shadow-[0_0_40px_rgba(45,212,191,0.06)]">
+                  <h2 className="font-display text-3xl font-black uppercase tracking-normal text-teal-100">Choose your queue</h2>
                   <p className="mt-2 text-sm text-slate-300 leading-relaxed">Ranked uses your account Elo. Bot matches are safe practice, they do not affect your elo.</p>
 
                   <div className="mt-5 border-t border-white/[0.08] pt-4">
@@ -1007,8 +2089,12 @@ export default function Home() {
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <button onClick={() => joinQueue(false)} className="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 px-6 py-5 font-black uppercase tracking-widest text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.15)] hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_32px_rgba(45,212,191,0.3)] transition-all duration-300">Find Ranked Match</button>
-                    <button onClick={() => joinQueue(true)} className="rounded-xl border border-white/10 bg-white/[0.04] px-6 py-5 font-black uppercase tracking-widest text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300">Play vs AI Bot</button>
+                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => joinQueue(false)} className="btn-arena-primary px-6 py-5">
+                      <span className="relative z-10">Find Ranked Match</span>
+                    </motion.button>
+                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => joinQueue(true)} className="btn-arena-ghost px-6 py-5">
+                      Play vs AI Bot
+                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -1018,9 +2104,22 @@ export default function Home() {
           {gameState === "queue" && (
             <motion.div key="queue" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] place-items-center text-center">
               <div>
-                <div className="mx-auto mb-8 h-32 w-32 animate-spin rounded-full border-4 border-teal-300/20 border-t-teal-300" />
-                <h2 className="text-4xl font-black uppercase tracking-widest text-teal-200">Searching</h2>
-                <p className="mt-2 font-mono text-slate-400">Looking for a ranked opponent</p>
+                <div className="relative mx-auto mb-8 h-32 w-32">
+                  <span className="queue-ring" />
+                  <span className="queue-ring queue-ring-delay" />
+                  <div className="absolute inset-2 animate-spin rounded-full border-4 border-teal-300/15 border-t-teal-300 border-r-emerald-400/60" />
+                  <div className="absolute inset-0 grid place-items-center">
+                    <Swords size={36} className="text-teal-300" />
+                  </div>
+                </div>
+                <motion.h2
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="font-display text-4xl font-black uppercase tracking-widest text-teal-200 text-glow-teal"
+                >
+                  Searching
+                </motion.h2>
+                <p className="mt-2 font-mono text-slate-400">Scanning the global arena for opponents...</p>
               </div>
             </motion.div>
           )}
@@ -1043,7 +2142,12 @@ export default function Home() {
                 🏟️ {matchData?.domain && matchData.domain !== 'all' ? `${matchData.domain} Arena` : 'All Subjects Arena'}
               </div>
 
-              <motion.div initial={{ scale: 0.5, opacity: 0, rotate: -8 }} animate={{ scale: 1, opacity: 1, rotate: 0 }} transition={{ delay: 0.45, type: "spring", stiffness: 180, damping: 12 }} className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full border-4 border-slate-950 bg-gradient-to-br from-amber-400 to-orange-500 text-4xl font-black italic text-slate-950 shadow-[0_0_40px_rgba(245,158,11,0.4)] md:h-28 md:w-28 md:text-5xl">
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0, rotate: -8 }}
+                animate={{ scale: [1, 1.06, 1], opacity: 1, rotate: 0 }}
+                transition={{ delay: 0.45, scale: { duration: 1.8, repeat: Infinity, ease: "easeInOut" }, type: "spring", stiffness: 180, damping: 12 }}
+                className="vs-badge-glow relative z-20 flex h-24 w-24 items-center justify-center rounded-full border-4 border-slate-950 bg-gradient-to-br from-amber-400 to-orange-500 font-display text-4xl font-black italic text-slate-950 md:h-28 md:w-28 md:text-5xl"
+              >
                 VS
               </motion.div>
             </motion.div>
@@ -1054,10 +2158,19 @@ export default function Home() {
               <h2 className="text-center text-4xl font-black uppercase md:text-5xl">Initial Discard Phase</h2>
               <p className="text-center text-slate-300">{lockedSubject === "WAITING" ? "Waiting for opponent to decide..." : "Select up to 1 card to discard from your hand"}</p>
               <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-5">
-                {hand.map(sub => (
-                  <button key={sub} onClick={() => { if (lockedSubject !== "WAITING") { playSound("select"); setLockedSubject(lockedSubject === sub ? null : sub); } }} disabled={lockedSubject === "WAITING"} className={`flex min-h-36 items-center justify-center rounded-lg border p-4 text-center font-bold transition ${lockedSubject === sub ? "border-red-300 bg-red-500/30 text-white" : "border-white/15 bg-white/[0.06] hover:bg-white/10"}`}>
+                {hand.map((sub, i) => (
+                  <motion.button
+                    key={sub}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.05 }}
+                    whileHover={lockedSubject !== "WAITING" ? { scale: 1.03, y: -2 } : undefined}
+                    onClick={() => { if (lockedSubject !== "WAITING") { playSound("select"); setLockedSubject(lockedSubject === sub ? null : sub); } }}
+                    disabled={lockedSubject === "WAITING"}
+                    className={`flex min-h-36 items-center justify-center rounded-lg border p-4 text-center font-bold transition ${lockedSubject === sub ? "border-red-300 bg-red-500/30 text-white shadow-[0_0_20px_rgba(239,68,68,0.2)]" : "border-white/15 bg-white/[0.06] hover:bg-white/10 hover:border-red-300/40"}`}
+                  >
                     {sub}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
               {lockedSubject !== "WAITING" ? (
@@ -1071,7 +2184,7 @@ export default function Home() {
 
           {gameState === "drafting" && (
             <motion.div key="drafting" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mx-auto flex min-h-[calc(100vh-120px)] max-w-5xl flex-col justify-center gap-7">
-              <DuelHeader />
+              <DuelHeader player={player} opponent={opponent} matchData={matchData} />
               <div className="flex items-end justify-between gap-4">
                 <div>
                   <h2 className="text-4xl font-black uppercase">Play a Card</h2>
@@ -1080,23 +2193,51 @@ export default function Home() {
               </div>
               <div className="grid max-h-[54vh] grid-cols-2 gap-4 overflow-y-auto p-1 md:grid-cols-5">
                 {matchData?.draftTurn === socketId ? hand.map((sub, index) => (
-                  <button key={index + sub} onClick={() => pickSubject(sub)} disabled={lockedSubject !== null} className={`flex min-h-36 flex-col justify-center rounded-lg border p-4 text-center font-bold transition ${lockedSubject === sub ? "border-teal-200 bg-teal-300 text-slate-950" : "border-white/15 bg-white/[0.06] hover:border-teal-300/60 hover:bg-teal-300/10"}`}>
+                  <motion.button
+                    key={index + sub}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.04 }}
+                    whileHover={lockedSubject === null ? { scale: 1.04, y: -3 } : undefined}
+                    onClick={() => pickSubject(sub)}
+                    disabled={lockedSubject !== null}
+                    className={`flex min-h-36 flex-col justify-center rounded-lg border p-4 text-center font-bold transition ${lockedSubject === sub ? "border-teal-200 bg-teal-300 text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.25)]" : "border-white/15 bg-white/[0.06] hover:border-teal-300/60 hover:bg-teal-300/10"}`}
+                  >
                     {sub}
-                  </button>
-                )) : [1, 2, 3, 4, 5].map(i => <div key={i} className="grid min-h-36 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-4xl font-black text-slate-600">?</div>)}
+                  </motion.button>
+                )) : [1, 2, 3, 4, 5].map(i => (
+                  <motion.div
+                    key={i}
+                    animate={{ opacity: [0.3, 0.7, 0.3] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
+                    className="grid min-h-36 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-4xl font-black text-slate-600"
+                  >
+                    ?
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           )}
 
           {gameState === "battle" && (
-            <motion.div key="battle" initial={{ opacity: 0, scale: 1.02 }} animate={isShaking ? { x: [-10, 10, -10, 10, 0] } : { opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="mx-auto flex min-h-[calc(100vh-120px)] max-w-5xl flex-col justify-center gap-8">
-              <DuelHeader />
-              <div className="h-2 overflow-hidden rounded-full bg-black/50">
-                <motion.div initial={{ width: "100%" }} animate={{ width: `${(timeLeft / (roundData?.question?.timeLimit || 15)) * 100}%` }} transition={{ duration: 0.1, ease: "linear" }} className={`h-full ${timeLeft < 5 ? "bg-red-400" : "bg-teal-300"}`} />
-              </div>
+            <motion.div
+              key={`battle-${roundData?.round ?? 0}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={`mx-auto flex min-h-[calc(100vh-120px)] max-w-5xl flex-col justify-center gap-8 ${isShaking ? "animate-[shake_0.4s_ease-in-out]" : ""}`}
+            >
+              <DuelHeader player={player} opponent={opponent} matchData={matchData} />
+              <BattleTimerBar
+                roundKey={`${matchData?.currentRound ?? 0}-${roundData?.round ?? 0}`}
+                timeLimit={roundData?.question?.timeLimit || 15}
+                paused={!!roundResult}
+              />
               <div className="text-center">
                 <p className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-amber-100">{selectedSubject}</p>
-                <h2 className="mx-auto max-w-3xl text-3xl font-black leading-tight md:text-5xl">{roundData?.question.prompt}</h2>
+                <h2 className="mx-auto max-w-3xl font-sans text-2xl font-semibold normal-case leading-snug tracking-normal text-slate-100 md:text-4xl">
+                  {roundData?.question.prompt}
+                </h2>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 {roundData?.question.options.map((opt: string, i: number) => {
@@ -1110,7 +2251,13 @@ export default function Home() {
                   else if (myAnswer === i) buttonClass = "border-teal-400 bg-teal-400/15 text-teal-200 shadow-[0_0_20px_rgba(45,212,191,0.08)]";
 
                   return (
-                    <button key={i} onClick={() => submitAnswer(i)} disabled={!!roundResult || myAnswer !== null} className={`group relative overflow-hidden rounded-2xl border-2 p-6 text-left text-lg font-bold transition-all duration-300 ${buttonClass}`}>
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => submitAnswer(i)}
+                      disabled={!!roundResult || myAnswer !== null}
+                      className={`group relative overflow-hidden rounded-2xl border-2 p-6 text-left text-lg font-bold transition-colors duration-200 ${buttonClass}`}
+                    >
                       <span className="mb-2 block text-[10px] font-black uppercase tracking-widest opacity-50 group-hover:opacity-85 transition-opacity">Option {i + 1}</span>
                       {opt}
                     </button>
@@ -1158,14 +2305,35 @@ export default function Home() {
           {gameState === "results" && (
             <motion.div key="results" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] place-items-center text-center">
               <div>
-                {winnerInfo?.winner === socketId ? <Trophy size={96} className="mx-auto mb-6 text-amber-300" /> : <Skull size={96} className="mx-auto mb-6 text-red-400" />}
-                <h2 className="text-6xl font-black uppercase">{winnerInfo?.winner === socketId ? "Victory" : "Defeat"}</h2>
+                <motion.div
+                  initial={{ scale: 0, rotate: -20 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 14 }}
+                >
+                  {winnerInfo?.winner === socketId ? (
+                    <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
+                      <Trophy size={96} className="mx-auto mb-6 text-amber-300 drop-shadow-[0_0_24px_rgba(251,191,36,0.4)]" />
+                    </motion.div>
+                  ) : (
+                    <Skull size={96} className="mx-auto mb-6 text-red-400 drop-shadow-[0_0_24px_rgba(248,113,113,0.35)]" />
+                  )}
+                </motion.div>
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className={`font-display text-6xl font-black uppercase ${winnerInfo?.winner === socketId ? "text-glow-teal text-teal-200" : "text-red-300"}`}
+                >
+                  {winnerInfo?.winner === socketId ? "Victory" : "Defeat"}
+                </motion.h2>
                 <div className="mx-auto my-8 w-80 rounded-2xl border border-white/[0.08] bg-slate-900/40 p-6 shadow-xl backdrop-blur-md">
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">New Rating</p>
                   <p className="mt-2 font-mono text-5xl font-black text-teal-300">{winnerInfo?.elo}</p>
                   <p className={`mt-2 font-bold ${(winnerInfo?.eloDelta ?? 0) >= 0 ? "text-emerald-300" : "text-rose-300"}`}>{(winnerInfo?.eloDelta ?? 0) >= 0 ? "+" : ""}{winnerInfo?.eloDelta ?? 0} Elo</p>
                 </div>
-                <button onClick={() => { playSound("select"); setGameState("menu"); }} className="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 px-8 py-4 font-black uppercase tracking-widest text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.15)] hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_32px_rgba(45,212,191,0.3)] transition-all duration-300">Return to Menu</button>
+                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => { playSound("select"); setGameState("menu"); }} className="btn-arena-primary mt-2 px-8 py-4">
+                  <span className="relative z-10">Return to Menu</span>
+                </motion.button>
               </div>
             </motion.div>
           )}
@@ -1174,30 +2342,88 @@ export default function Home() {
     );
   }
 
-  function DuelHeader() {
+  function DuelHeader({
+    player: playerProfile,
+    opponent: opponentProfile,
+    matchData: matchInfo,
+  }: {
+    player: FighterProfile;
+    opponent: FighterProfile;
+    matchData: MatchData | null;
+  }) {
     return (
       <div className="flex flex-col gap-3">
         <div className="flex justify-center">
           <span className="text-[10px] font-black uppercase tracking-widest text-teal-200 bg-teal-950/80 px-3 py-1 rounded-full border border-teal-500/20 shadow-[0_0_15px_rgba(45,212,191,0.1)]">
-            🏟️ {matchData?.domain && matchData.domain !== 'all' ? `${matchData.domain} Arena` : 'All Subjects Arena'}
+            🏟️ {matchInfo?.domain && matchInfo.domain !== "all" ? `${matchInfo.domain} Arena` : "All Subjects Arena"}
           </span>
         </div>
         <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <Fighter profile={player} tone="teal" />
+          <Fighter profile={playerProfile} tone="teal" />
           <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-slate-900 text-xs font-black italic text-slate-400 mx-auto shadow-md">
             VS
           </div>
-          <Fighter profile={opponent} tone="red" alignRight />
+          <Fighter profile={opponentProfile} tone="red" alignRight />
         </div>
       </div>
     );
   }
 }
 
-function Fighter({ profile, tone, alignRight = false }: { profile: FighterProfile; tone: "teal" | "red"; alignRight?: boolean }) {
+function ArenaBackdrop() {
+  return (
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
+      <div className="absolute inset-0 bg-[#070912]" />
+      <div className="arena-orb arena-orb-1" />
+      <div className="arena-orb arena-orb-2" />
+      <div className="arena-orb arena-orb-3" />
+      <div className="arena-grid" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(7,9,18,0.4)_50%,rgba(7,9,18,0.85)_100%)]" />
+    </div>
+  );
+}
+
+const BattleTimerBar = memo(function BattleTimerBar({
+  timeLimit,
+  roundKey,
+  paused,
+}: {
+  timeLimit: number;
+  roundKey: string;
+  paused: boolean;
+}) {
+  const [timeLeft, setTimeLeft] = useState(timeLimit);
+
+  useEffect(() => {
+    setTimeLeft(timeLimit);
+    if (paused) return;
+
+    const tickMs = 250;
+    const timer = setInterval(() => {
+      setTimeLeft(t => Math.max(0, t - tickMs / 1000));
+    }, tickMs);
+
+    return () => clearInterval(timer);
+  }, [timeLimit, roundKey, paused]);
+
+  const pct = Math.max(0, Math.min(100, (timeLeft / timeLimit) * 100));
+  const urgent = timeLeft < 5 && !paused;
+
+  return (
+    <div className="h-2.5 overflow-hidden rounded-full bg-black/50 border border-white/5 shadow-inner">
+      <div
+        className={`h-full rounded-full transition-[width] duration-200 ease-linear ${urgent ? "bg-gradient-to-r from-red-500 to-orange-400 hp-bar-low" : "bg-gradient-to-r from-teal-400 to-emerald-400"}`}
+        style={{ width: `${pct}%` }}
+      />
+    </div>
+  );
+});
+
+const Fighter = memo(function Fighter({ profile, tone, alignRight = false }: { profile: FighterProfile; tone: "teal" | "red"; alignRight?: boolean }) {
   const color = tone === "teal" ? "from-teal-300 to-blue-400" : "from-red-400 to-amber-300";
   const avatar = profile.avatarUrl ? getImageUrl(profile.avatarUrl) : "";
   const banner = profile.bannerUrl ? getImageUrl(profile.bannerUrl) : "";
+  const hp = Math.max(0, Math.min(100, profile.hp));
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-4 shadow-lg backdrop-blur-md">
@@ -1219,23 +2445,29 @@ function Fighter({ profile, tone, alignRight = false }: { profile: FighterProfil
         )}
         <div className="min-w-0 flex-1">
           <div className={`flex ${alignRight ? "flex-row-reverse" : "flex-row"} items-center justify-between gap-2`}>
-            <span className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{profile.name}</span>
+            <div className={`flex ${alignRight ? "flex-row-reverse" : "flex-row"} items-center gap-1.5 min-w-0`}>
+              <span className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{profile.name}</span>
+              <span className="shrink-0 rounded bg-slate-800 border border-slate-700 px-1 py-0.5 text-[8px] font-mono font-black text-amber-300">Lvl {profile.level || 1}</span>
+            </div>
             <span className="font-mono text-[10px] font-black text-teal-300 shrink-0">{profile.elo} Elo</span>
           </div>
           <div className="mt-2.5">
             <div className="h-2.5 overflow-hidden rounded-full bg-black/60 border border-white/5">
-              <div className={`h-full bg-gradient-to-r ${color}`} style={{ width: `${Math.max(0, profile.hp)}%` }} />
+              <div
+                className={`h-full bg-gradient-to-r ${color} transition-[width] duration-300 ease-out ${hp < 30 ? "hp-bar-low" : ""}`}
+                style={{ width: `${hp}%` }}
+              />
             </div>
             <div className={`mt-1 flex ${alignRight ? "flex-row-reverse" : "flex-row"} items-center justify-between text-[9px] font-mono text-slate-400`}>
-              <span>{Math.max(0, profile.hp)} HP</span>
-              <span>{profile.hp} / 100</span>
+              <span>{hp} HP</span>
+              <span>{hp} / 100</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+});
 
 function VersusPlayer({ profile, side }: { profile: FighterProfile; side: "left" | "right" }) {
   const align = side === "left" ? "items-start text-left md:pl-16 md:pr-28" : "items-end text-right md:pl-28 md:pr-16";
@@ -1251,24 +2483,34 @@ function VersusPlayer({ profile, side }: { profile: FighterProfile; side: "left"
         className="h-20 w-20 rounded-full border-4 border-white/80 bg-slate-900 object-cover shadow-2xl md:h-24 md:w-24"
       />
       <motion.div initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="max-w-[min(28rem,78vw)] md:max-w-[22rem]">
-        <p className="break-words text-3xl font-black uppercase leading-none tracking-normal text-white drop-shadow-lg md:text-4xl">{profile.name}</p>
-        <p className="mt-1 font-mono text-lg text-white/80">Rating: {profile.elo.toLocaleString()}</p>
+        <div className="flex items-center gap-2 flex-wrap">
+          <p className="break-words text-3xl font-black uppercase leading-none tracking-normal text-white drop-shadow-lg md:text-4xl">{profile.name}</p>
+          <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-2 py-0.5 text-xs font-mono font-black text-slate-950 shadow-[0_0_12px_rgba(45,212,191,0.25)]">Lvl {profile.level || 1}</span>
+        </div>
+        <p className="mt-2 font-mono text-lg text-white/80">Rating: {profile.elo.toLocaleString()}</p>
       </motion.div>
     </div>
   );
 }
 
-function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+function Stat({ icon, label, value, delay = 0 }: { icon: React.ReactNode; label: string; value: string; delay?: number }) {
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-4 transition-all duration-300 hover:border-teal-500/30 hover:shadow-[0_0_20px_rgba(45,212,191,0.04)]">
-      <div className="absolute -right-2 -bottom-2 opacity-5 text-teal-400 group-hover:scale-110 transition-transform duration-300">
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay }}
+      whileHover={{ y: -3, transition: { duration: 0.2 } }}
+      className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-4 card-hover-lift"
+    >
+      <div className="absolute -right-2 -bottom-2 opacity-[0.07] text-teal-400 group-hover:scale-125 transition-transform duration-500">
         {icon}
       </div>
-      <div className="mb-3 flex items-center justify-between">
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-400/0 via-teal-400/0 to-teal-400/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="relative mb-3 flex items-center justify-between">
         <span className="text-teal-400/90 group-hover:text-teal-300 transition-colors">{icon}</span>
       </div>
-      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</p>
-      <p className="mt-1.5 font-mono text-2xl font-black text-white group-hover:text-teal-200 transition-colors">{value}</p>
-    </div>
+      <p className="relative text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</p>
+      <p className="relative mt-1.5 font-mono text-2xl font-black text-white group-hover:text-teal-200 transition-colors">{value}</p>
+    </motion.div>
   );
 }

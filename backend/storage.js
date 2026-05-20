@@ -43,6 +43,8 @@ async function init() {
       bio TEXT,
       field_elos TEXT,
       field_stats TEXT,
+      xp INTEGER NOT NULL DEFAULT 0,
+      level INTEGER NOT NULL DEFAULT 1,
       created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
     );
@@ -72,8 +74,25 @@ async function init() {
       domain TEXT DEFAULT 'all'
     );
 
+    CREATE TABLE IF NOT EXISTS friendships (
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      friend_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      status TEXT NOT NULL DEFAULT 'pending',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      PRIMARY KEY (user_id, friend_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS arena_chat_messages (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      message TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+
     ALTER TABLE users ADD COLUMN IF NOT EXISTS field_elos TEXT;
     ALTER TABLE users ADD COLUMN IF NOT EXISTS field_stats TEXT;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS xp INTEGER DEFAULT 0;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS level INTEGER DEFAULT 1;
     ALTER TABLE match_history ADD COLUMN IF NOT EXISTS domain TEXT DEFAULT 'all';
   `);
 
@@ -107,9 +126,11 @@ function rowToUser(row) {
     gamesPlayed: row.games_played,
     avatarUrl: row.avatar_url,
     bannerUrl: row.banner_url,
-    bio: row.bio,
+    bio: row.bio === 'New challenger in the MIT arena.' ? 'hi' : (row.bio || 'hi'),
     fieldElos: fieldElos,
     fieldStats: fieldStats,
+    xp: row.xp || 0,
+    level: row.level || 1,
     createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
     updatedAt: row.updated_at instanceof Date ? row.updated_at.toISOString() : row.updated_at
   };
@@ -128,9 +149,11 @@ function userToRow(user) {
     games_played: user.gamesPlayed,
     avatar_url: user.avatarUrl,
     banner_url: user.bannerUrl,
-    bio: user.bio,
+    bio: user.bio === 'New challenger in the MIT arena.' ? 'hi' : (user.bio || 'hi'),
     field_elos: user.fieldElos ? JSON.stringify(user.fieldElos) : '{}',
     field_stats: user.fieldStats ? JSON.stringify(user.fieldStats) : '{}',
+    xp: user.xp || 0,
+    level: user.level || 1,
     created_at: user.createdAt,
     updated_at: user.updatedAt || new Date().toISOString()
   };
@@ -151,18 +174,18 @@ async function getUserById(id) {
 async function createUser(user) {
   await init();
   const now = new Date().toISOString();
-  const stored = { ...user, createdAt: now, updatedAt: now };
+  const stored = { ...user, createdAt: now, updatedAt: now, xp: 0, level: 1 };
 
   const row = userToRow(stored);
   await pool.query(
     `INSERT INTO users (
       id, username, password_salt, password_hash, elo, best_elo, wins, losses,
-      games_played, avatar_url, banner_url, bio, field_elos, field_stats, created_at, updated_at
-    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)`,
+      games_played, avatar_url, banner_url, bio, field_elos, field_stats, xp, level, created_at, updated_at
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)`,
     [
       row.id, row.username, row.password_salt, row.password_hash, row.elo, row.best_elo,
       row.wins, row.losses, row.games_played, row.avatar_url, row.banner_url, row.bio,
-      row.field_elos, row.field_stats, row.created_at, row.updated_at
+      row.field_elos, row.field_stats, row.xp, row.level, row.created_at, row.updated_at
     ]
   );
   return stored;
@@ -206,6 +229,8 @@ async function updateUser(userId, patch) {
       bio = $10,
       field_elos = $11,
       field_stats = $12,
+      xp = $13,
+      level = $14,
       updated_at = now()
     WHERE id = $1
     RETURNING *`,
@@ -213,7 +238,9 @@ async function updateUser(userId, patch) {
       userId, patch.username, patch.elo, patch.bestElo, patch.wins, patch.losses,
       patch.gamesPlayed, patch.avatarUrl, patch.bannerUrl, patch.bio,
       patch.fieldElos ? JSON.stringify(patch.fieldElos) : '{}',
-      patch.fieldStats ? JSON.stringify(patch.fieldStats) : '{}'
+      patch.fieldStats ? JSON.stringify(patch.fieldStats) : '{}',
+      patch.xp || 0,
+      patch.level || 1
     ]
   );
   return rowToUser(result.rows[0]);
@@ -260,6 +287,132 @@ async function listRecentMatches(userId, limit = 20) {
   return result.rows;
 }
 
+async function getFriendships(userId) {
+  await init();
+  const result = await pool.query(`
+    SELECT f.user_id, f.friend_id, f.status, f.created_at,
+           u1.username as requester_username, u1.avatar_url as requester_avatar, u1.banner_url as requester_banner, u1.elo as requester_elo, u1.wins as requester_wins, u1.losses as requester_losses, u1.bio as requester_bio, u1.xp as requester_xp, u1.level as requester_level,
+           u2.username as receiver_username, u2.avatar_url as receiver_avatar, u2.banner_url as receiver_banner, u2.elo as receiver_elo, u2.wins as receiver_wins, u2.losses as receiver_losses, u2.bio as receiver_bio, u2.xp as receiver_xp, u2.level as receiver_level
+    FROM friendships f
+    JOIN users u1 ON f.user_id = u1.id
+    JOIN users u2 ON f.friend_id = u2.id
+    WHERE f.user_id = $1 OR f.friend_id = $1
+  `, [userId]);
+
+  return result.rows.map(row => {
+    const isRequester = row.user_id === userId;
+    const friendInfo = isRequester ? {
+      id: row.friend_id,
+      username: row.receiver_username,
+      avatarUrl: row.receiver_avatar,
+      bannerUrl: row.receiver_banner,
+      elo: row.receiver_elo,
+      wins: row.receiver_wins,
+      losses: row.receiver_losses,
+      bio: row.receiver_bio,
+      xp: row.receiver_xp || 0,
+      level: row.receiver_level || 1
+    } : {
+      id: row.user_id,
+      username: row.requester_username,
+      avatarUrl: row.requester_avatar,
+      bannerUrl: row.requester_banner,
+      elo: row.requester_elo,
+      wins: row.requester_wins,
+      losses: row.requester_losses,
+      bio: row.requester_bio,
+      xp: row.requester_xp || 0,
+      level: row.requester_level || 1
+    };
+
+    return {
+      userId: row.user_id,
+      friendId: row.friend_id,
+      status: row.status,
+      createdAt: row.created_at,
+      isOutgoingRequest: isRequester && row.status === 'pending',
+      isIncomingRequest: !isRequester && row.status === 'pending',
+      friend: friendInfo
+    };
+  });
+}
+
+async function createFriendRequest(userId, friendId) {
+  await init();
+  if (userId === friendId) throw new Error('Cannot add yourself as a friend.');
+  
+  const existing = await pool.query(
+    `SELECT * FROM friendships 
+     WHERE (user_id = $1 AND friend_id = $2) OR (user_id = $2 AND friend_id = $1)`,
+    [userId, friendId]
+  );
+  if (existing.rows.length > 0) {
+    throw new Error('A friendship or friend request already exists between you.');
+  }
+
+  await pool.query(
+    `INSERT INTO friendships (user_id, friend_id, status) VALUES ($1, $2, 'pending')`,
+    [userId, friendId]
+  );
+}
+
+async function acceptFriendRequest(userId, friendId) {
+  await init();
+  const result = await pool.query(
+    `UPDATE friendships SET status = 'accepted'
+     WHERE user_id = $1 AND friend_id = $2 AND status = 'pending'`,
+    [friendId, userId]
+  );
+  if (result.rowCount === 0) {
+    throw new Error('No pending request from this user found.');
+  }
+}
+
+async function removeFriendship(userId, friendId) {
+  await init();
+  await pool.query(
+    `DELETE FROM friendships 
+     WHERE (user_id = $1 AND friend_id = $2) OR (user_id = $2 AND friend_id = $1)`,
+    [userId, friendId]
+  );
+}
+
+async function saveArenaChatMessage(message) {
+  await init();
+  await pool.query(
+    `INSERT INTO arena_chat_messages (id, user_id, message, created_at)
+     VALUES ($1, $2, $3, $4)`,
+    [message.id, message.userId, message.message, message.timestamp]
+  );
+}
+
+async function listArenaChatMessages(limit = 100) {
+  await init();
+  const result = await pool.query(
+    `SELECT m.id, m.user_id, m.message, m.created_at,
+            u.username, u.avatar_url, u.banner_url, u.elo, u.level
+     FROM arena_chat_messages m
+     JOIN users u ON m.user_id = u.id
+     ORDER BY m.created_at DESC
+     LIMIT $1`,
+    [limit]
+  );
+
+  return result.rows
+    .map(row => ({
+      id: row.id,
+      userId: row.user_id,
+      username: row.username,
+      avatarUrl: row.avatar_url,
+      bannerUrl: row.banner_url,
+      elo: row.elo,
+      level: row.level || 1,
+      message: row.message,
+      timestamp: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at
+    }))
+    .reverse();
+}
+
 module.exports = {
   init,
   getUserByUsername,
@@ -272,5 +425,11 @@ module.exports = {
   updateUserWith,
   listUsers,
   recordMatch,
-  listRecentMatches
+  listRecentMatches,
+  getFriendships,
+  createFriendRequest,
+  acceptFriendRequest,
+  removeFriendship,
+  saveArenaChatMessage,
+  listArenaChatMessages
 };

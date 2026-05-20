@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Syne } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const syne = Syne({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-syne" });
 
 export const metadata: Metadata = {
   title: "Synapse.gg | Collegiate Trivia Arena",
@@ -15,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${outfit.className} bg-slate-950 text-white min-h-screen selection:bg-fuchsia-500 selection:text-white`}>
+    <html lang="en" className={`dark ${syne.variable} ${outfit.variable}`}>
+      <body className={`${outfit.className} bg-slate-950 text-white min-h-screen selection:bg-teal-400/40 selection:text-white`}>
         {children}
       </body>
     </html>

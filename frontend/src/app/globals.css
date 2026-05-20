@@ -1,54 +1,245 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer base {
   :root {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 280 80% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --arena-teal: 45 212 191;
+    --arena-amber: 245 158 11;
   }
 }
 
 @layer base {
   body {
     @apply bg-[#030712] text-slate-50 antialiased overflow-x-hidden min-h-screen;
-    background-image: 
-      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
+    background-image:
+      radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 0.2) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 0.2) 0, transparent 50%);
   }
+
 }
 
-.glitch-text {
-  text-shadow: 
-    0.05em 0 0 rgba(255,0,0,0.75),
-    -0.025em -0.05em 0 rgba(0,255,0,0.75),
-    0.025em 0.05em 0 rgba(0,0,255,0.75);
+/* ── Arena atmosphere ── */
+@keyframes arena-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(12px, -18px) scale(1.04); }
+  66% { transform: translate(-8px, 10px) scale(0.97); }
 }
 
-.neon-border {
-  box-shadow: 0 0 10px #d946ef, 0 0 20px #d946ef, inset 0 0 10px #d946ef;
+@keyframes arena-grid-drift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 48px 48px, 0 0; }
+}
+
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-120%) skewX(-12deg); }
+  100% { transform: translateX(220%) skewX(-12deg); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  70% { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+@keyframes vs-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.35), 0 0 60px rgba(245, 158, 11, 0.12); }
+  50% { box-shadow: 0 0 50px rgba(245, 158, 11, 0.55), 0 0 90px rgba(245, 158, 11, 0.2); }
+}
+
+@keyframes slide-up-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-scale {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scan-sweep {
+  0% { top: -100%; }
+  100% { top: 200%; }
+}
+
+@keyframes hp-pulse-low {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.25); }
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.arena-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  animation: arena-float 14s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.arena-orb-1 {
+  width:  min(42vw, 420px);
+  height: min(42vw, 420px);
+  left: 5%;
+  top: 8%;
+  background: rgba(45, 212, 191, 0.38);
+  animation-delay: 0s;
+}
+
+.arena-orb-2 {
+  width: min(36vw, 340px);
+  height: min(36vw, 340px);
+  right: 6%;
+  top: 18%;
+  background: rgba(245, 158, 11, 0.28);
+  animation-delay: -4s;
+}
+
+.arena-orb-3 {
+  width: min(48vw, 460px);
+  height: min(48vw, 460px);
+  left: 35%;
+  bottom: 5%;
+  background: rgba(20, 184, 166, 0.22);
+  animation-delay: -7s;
+}
+
+.arena-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: arena-grid-drift 24s linear infinite;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
+}
+
+.glass-panel {
+  @apply border border-white/[0.08] bg-slate-900/45 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)];
+}
+
+.glass-panel-strong {
+  @apply border border-white/10 bg-slate-950/70 backdrop-blur-2xl shadow-[0_12px_48px_rgba(0,0,0,0.5)];
+}
+
+.btn-arena-primary {
+  @apply relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 font-black uppercase tracking-widest text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.2)] transition-all duration-300;
+}
+
+.btn-arena-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: shimmer-sweep 2.8s ease-in-out infinite;
+}
+
+.btn-arena-primary:hover {
+  @apply shadow-[0_0_36px_rgba(45,212,191,0.4)] scale-[1.02];
+}
+
+.btn-arena-primary:active {
+  @apply scale-[0.98];
+}
+
+.btn-arena-ghost {
+  @apply rounded-xl border border-white/10 bg-white/[0.04] font-black uppercase tracking-widest text-white transition-all duration-300;
+}
+
+.btn-arena-ghost:hover {
+  @apply border-white/25 bg-white/[0.1] shadow-[0_0_20px_rgba(255,255,255,0.04)];
+}
+
+.nav-tab-glow {
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.queue-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid rgba(45, 212, 191, 0.35);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.queue-ring-delay {
+  animation-delay: 0.65s;
+}
+
+.vs-badge-glow {
+  animation: vs-glow 2s ease-in-out infinite;
+}
+
+.chat-msg-in {
+  animation: slide-up-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.card-hover-lift {
+  @apply transition-all duration-300;
+}
+
+.card-hover-lift:hover {
+  @apply -translate-y-0.5 border-teal-500/25 shadow-[0_8px_28px_rgba(45,212,191,0.08)];
+}
+
+.text-glow-teal {
+  text-shadow: 0 0 24px rgba(45, 212, 191, 0.45);
+}
+
+.scanline-overlay::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(45, 212, 191, 0.03), transparent);
+  animation: scan-sweep 6s linear infinite;
+  pointer-events: none;
+}
+
+.hp-bar-low {
+  animation: hp-pulse-low 1.2s ease-in-out infinite;
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-orb,
+  .arena-grid,
+  .btn-arena-primary::after,
+  .queue-ring,
+  .vs-badge-glow,
+  .chat-msg-in,
+  .scanline-overlay::after,
+  .hp-bar-low {
+    animation: none !important;
+  }
+
+  .btn-arena-primary:hover,
+  .card-hover-lift:hover {
+    transform: none;
+  }
 }
