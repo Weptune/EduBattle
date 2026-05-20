@@ -2,8 +2,18 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const crypto = require('crypto');
+const storage = require('./storage');
 
 const app = express();
+
+const path = require('path');
+const fs = require('fs');
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
+app.use('/uploads', express.static(UPLOADS_DIR));
 
 function normalizeOrigin(origin) {
   return origin ? origin.replace(/\/+$/, '') : origin;
@@ -27,10 +37,12 @@ const corsOptions = {
 
     callback(new Error(`Origin ${origin} is not allowed by CORS`));
   },
-  methods: ['GET', 'POST']
+  methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
+app.use(express.json({ limit: '6mb' }));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: corsOptions
@@ -43,11 +55,58 @@ const INITIAL_DISCARD_MS = 10000;
 const DRAFT_PICK_MS = 15000;
 const BASE_MATCHMAKING_GAP = 250;
 const MATCHMAKING_EXPANSION_PER_5S = 75;
-
 // Basic Game State
 let players = {};
 let queue = [];
 let matches = {};
+
+function publicUser(user) {
+  return {
+    id: user.id,
+    username: user.username,
+    displayName: user.username,
+    elo: user.elo,
+    avatarUrl: user.avatarUrl,
+    bannerUrl: user.bannerUrl,
+    bio: user.bio || '',
+    wins: user.wins || 0,
+    losses: user.losses || 0,
+    gamesPlayed: user.gamesPlayed || 0,
+    bestElo: user.bestElo || user.elo,
+    createdAt: user.createdAt
+  };
+}
+
+function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
+  const hash = crypto.scryptSync(password, salt, 64).toString('hex');
+  return { salt, hash };
+}
+
+function verifyPassword(password, user) {
+  const { hash } = hashPassword(password, user.passwordSalt);
+  return crypto.timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(user.passwordHash, 'hex'));
+}
+
+async function createSession(userId) {
+  const token = crypto.randomBytes(32).toString('hex');
+  await storage.createSession(token, userId);
+  return token;
+}
+
+async function requireAuth(req, res, next) {
+  const header = req.headers.authorization || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7) : '';
+  const user = await storage.getUserByToken(token);
+
+  if (!user) {
+    res.status(401).json({ error: 'You need to be signed in.' });
+    return;
+  }
+
+  req.user = user;
+  req.authToken = token;
+  next();
+}
 
 app.get('/health', (req, res) => {
   res.json({
@@ -56,6 +115,211 @@ app.get('/health', (req, res) => {
     queued: queue.length,
     matches: Object.keys(matches).length
   });
+});
+
+app.post('/auth/signup', async (req, res) => {
+  const username = String(req.body.username || '').trim();
+  const password = String(req.body.password || '');
+
+  if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
+    res.status(400).json({ error: 'Username must be 3-20 characters: letters, numbers, or underscore.' });
+    return;
+  }
+
+  if (password.length < 6) {
+    res.status(400).json({ error: 'Password must be at least 6 characters.' });
+    return;
+  }
+
+  const existingUser = await storage.getUserByUsername(username);
+  if (existingUser) {
+    res.status(409).json({ error: 'That username is already taken.' });
+    return;
+  }
+
+  const { salt, hash } = hashPassword(password);
+  const user = {
+    id: crypto.randomUUID(),
+    username,
+    displayName: username,
+    passwordSalt: salt,
+    passwordHash: hash,
+    elo: 1200,
+    bestElo: 1200,
+    wins: 0,
+    losses: 0,
+    gamesPlayed: 0,
+    avatarUrl: `https://api.dicebear.com/9.x/shapes/svg?seed=${encodeURIComponent(username)}`,
+    bannerUrl: `https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=80`,
+    bio: 'New challenger in the MIT arena.',
+  };
+
+  const createdUser = await storage.createUser(user);
+
+  res.status(201).json({ token: await createSession(createdUser.id), user: publicUser(createdUser) });
+});
+
+app.post('/auth/login', async (req, res) => {
+  const username = String(req.body.username || '').trim();
+  const password = String(req.body.password || '');
+  const user = await storage.getUserByUsername(username);
+
+  if (!user || !verifyPassword(password, user)) {
+    res.status(401).json({ error: 'Invalid username or password.' });
+    return;
+  }
+
+  res.json({ token: await createSession(user.id), user: publicUser(user) });
+});
+
+app.get('/me', requireAuth, (req, res) => {
+  res.json({ user: publicUser(req.user) });
+});
+
+app.patch('/me', requireAuth, async (req, res) => {
+  const requestedUsername = String(req.body.username || req.user.username).trim();
+
+  if (!/^[a-zA-Z0-9_]{3,20}$/.test(requestedUsername)) {
+    res.status(400).json({ error: 'Username must be 3-20 characters: letters, numbers, or underscore.' });
+    return;
+  }
+
+  const existingUser = await storage.getUserByUsername(requestedUsername);
+  if (existingUser && existingUser.id !== req.user.id) {
+    res.status(409).json({ error: 'That username is already taken.' });
+    return;
+  }
+
+  const updated = await storage.updateUserWith(req.user.id, user => ({
+    ...user,
+    username: requestedUsername,
+    displayName: requestedUsername,
+    bio: String(req.body.bio || user.bio || '').trim().slice(0, 140),
+    avatarUrl: String(req.body.avatarUrl || user.avatarUrl).trim(),
+    bannerUrl: String(req.body.bannerUrl || user.bannerUrl).trim()
+  }));
+
+  res.json({ user: publicUser(updated) });
+});
+
+function uploadToCloudinary(base64Image) {
+  return new Promise((resolve, reject) => {
+    const https = require('https');
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    const apiKey = process.env.CLOUDINARY_API_KEY;
+    const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+    if (!cloudName || !apiKey || !apiSecret) {
+      return reject(new Error('Cloudinary credentials missing.'));
+    }
+
+    const timestamp = Math.round(new Date().getTime() / 1000);
+    const folder = 'synapse';
+    const signatureStr = `folder=${folder}&timestamp=${timestamp}${apiSecret}`;
+    const signature = crypto.createHash('sha1').update(signatureStr).digest('hex');
+
+    const postData = JSON.stringify({
+      file: base64Image,
+      api_key: apiKey,
+      timestamp: timestamp,
+      signature: signature,
+      folder: folder
+    });
+
+    const options = {
+      hostname: 'api.cloudinary.com',
+      port: 443,
+      path: `/v1_1/${cloudName}/image/upload`,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let body = '';
+      res.on('data', (chunk) => body += chunk);
+      res.on('end', () => {
+        try {
+          const parsed = JSON.parse(body);
+          if (res.statusCode >= 200 && res.statusCode < 300 && parsed.secure_url) {
+            resolve(parsed.secure_url);
+          } else {
+            reject(new Error(parsed.error ? parsed.error.message : 'Unknown Cloudinary error'));
+          }
+        } catch (e) {
+          reject(e);
+        }
+      });
+    });
+
+    req.on('error', (e) => reject(e));
+    req.write(postData);
+    req.end();
+  });
+}
+
+app.post('/upload', requireAuth, async (req, res) => {
+  const { image } = req.body;
+  if (!image) {
+    res.status(400).json({ error: 'No image data provided.' });
+    return;
+  }
+
+  // If Cloudinary keys are configured, use Cloudinary
+  if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+    try {
+      const url = await uploadToCloudinary(image);
+      res.json({ url });
+      return;
+    } catch (error) {
+      console.error('Cloudinary upload failed, trying local fallback:', error);
+    }
+  }
+
+  try {
+    const matches = image.match(/^data:image\/([A-Za-z+]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      res.status(400).json({ error: 'Invalid base64 image data format.' });
+      return;
+    }
+
+    const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1].replace('xml+svg', 'svg');
+    const data = matches[2];
+    const buffer = Buffer.from(data, 'base64');
+    
+    const filename = `${crypto.randomUUID()}.${ext}`;
+    const filepath = path.join(UPLOADS_DIR, filename);
+    
+    fs.writeFileSync(filepath, buffer);
+    
+    const imageUrl = `/uploads/${filename}`;
+    res.json({ url: imageUrl });
+  } catch (error) {
+    console.error('Local upload failed:', error);
+    res.status(500).json({ error: 'Failed to save upload.' });
+  }
+});
+
+app.post('/auth/logout', requireAuth, async (req, res) => {
+  await storage.deleteSession(req.authToken);
+  res.json({ ok: true });
+});
+
+app.get('/leaderboard', async (req, res) => {
+  const users = await storage.listUsers();
+  res.json({
+    leaderboard: users.slice(0, 50).map((user, index) => ({
+      rank: index + 1,
+      user: publicUser(user)
+    }))
+  });
+});
+
+app.get('/me/matches', requireAuth, async (req, res) => {
+  const matches = await storage.listRecentMatches(req.user.id, 20);
+  res.json({ matches });
 });
 
 const SUBJECT_CATEGORIES = require('./subjects');
@@ -75,6 +339,20 @@ function getSubjectPool(domain = 'all') {
   return rankedPool.length > 0 ? rankedPool : source;
 }
 
+function shuffleQuestionOptions(question) {
+  const correctText = question.options[question.answer];
+  const options = [...question.options];
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return {
+    ...question,
+    options,
+    answer: options.indexOf(correctText)
+  };
+}
+
 function getRandomSubjects(count, pool = RANKED_SUBJECTS, exclude = []) {
   let available = pool.filter(s => !exclude.includes(s));
   let result = [];
@@ -88,11 +366,18 @@ function getRandomSubjects(count, pool = RANKED_SUBJECTS, exclude = []) {
   return result;
 }
 
-function createPlayer(socket, data = {}) {
+async function createPlayer(socket, data = {}) {
+  const user = await storage.getUserByToken(data.authToken);
+  if (!user) return null;
+
   return {
     id: socket.id,
-    name: data.name || 'Player ' + Math.floor(Math.random() * 1000),
-    elo: data.elo || 1200,
+    userId: user.id,
+    name: user.username,
+    username: user.username,
+    elo: user.elo || 1200,
+    avatarUrl: user.avatarUrl,
+    bannerUrl: user.bannerUrl,
     hp: 100,
     socketId: socket.id,
     domain: normalizeDomain(data.domain),
@@ -104,7 +389,10 @@ function publicPlayer(player) {
   return {
     id: player.id,
     name: player.name,
+    username: player.username,
     elo: player.elo,
+    avatarUrl: player.avatarUrl,
+    bannerUrl: player.bannerUrl,
     hp: player.hp,
     isBot: Boolean(player.isBot)
   };
@@ -179,6 +467,8 @@ function createMatch(p1, p2, domain = 'all') {
   matches[matchId] = match;
   p1.matchId = matchId;
   p2.matchId = matchId;
+  p1.eloBeforeMatch = p1.elo;
+  p2.eloBeforeMatch = p2.elo;
   p1.hand = getRandomSubjects(INITIAL_HAND_SIZE, subjectPool);
   p2.hand = getRandomSubjects(INITIAL_HAND_SIZE, subjectPool);
   p1.hasDiscarded = Boolean(p1.isBot);
@@ -203,9 +493,13 @@ function emitMatchFound(match) {
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
 
-  socket.on('join_queue', (data) => {
+  socket.on('join_queue', async (data) => {
     removeFromQueue(socket.id);
-    const player = createPlayer(socket, data);
+    const player = await createPlayer(socket, data);
+    if (!player) {
+      socket.emit('auth_required');
+      return;
+    }
     players[socket.id] = player;
     
     const opponentIndex = findRankedOpponent(player);
@@ -240,15 +534,22 @@ io.on('connection', (socket) => {
     }
   }
 
-  socket.on('join_bot_queue', (data) => {
+  socket.on('join_bot_queue', async (data) => {
     removeFromQueue(socket.id);
-    const player = createPlayer(socket, data);
+    const player = await createPlayer(socket, data);
+    if (!player) {
+      socket.emit('auth_required');
+      return;
+    }
     players[socket.id] = player;
     
     const bot = {
       id: 'bot_' + Date.now(),
       name: 'AlphaZero (Bot)',
+      username: 'bot',
       elo: 3000,
+      avatarUrl: 'https://api.dicebear.com/9.x/bottts/svg?seed=AlphaZero',
+      bannerUrl: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1400&q=80',
       hp: 100,
       socketId: 'bot_socket',
       isBot: true,
@@ -360,8 +661,10 @@ function processDraft(match, playerId, subject) {
   
   const sortedPool = [...pool].sort((a, b) => Math.abs(a.difficulty - avgElo) - Math.abs(b.difficulty - avgElo));
   const candidates = sortedPool.slice(0, 3); // pick from the top 3 closest difficulty questions
-  const randomQuestion = candidates[Math.floor(Math.random() * candidates.length)];
-  
+  const randomQuestion = shuffleQuestionOptions(
+    candidates[Math.floor(Math.random() * candidates.length)]
+  );
+
   match.questions[match.currentRound] = randomQuestion;
 
   emitToPlayer(match.p1, 'draft_complete', { subject: match.selectedSubject });
@@ -405,7 +708,7 @@ function startNextRound(match) {
     const delay = 1500 + Math.random() * 3000;
     setTimeout(() => {
       if (matches[match.id] && match.roundState && Object.keys(match.roundState.answers).length < 2) {
-         const isCorrect = Math.random() > 0.4;
+         const isCorrect = Math.random() > 0.48;
          const ansIndex = isCorrect ? question.answer : Math.floor(Math.random() * question.options.length);
          // Find handleAnswer equivalent here, wait, I defined handleAnswer inside io.on('connection') closure
          // This is a bug if I call it from startNextRound.
@@ -429,8 +732,8 @@ function resolveRound(match) {
   let p2Damage = 0;
   const ans1 = answers[match.p1.id];
   const ans2 = answers[match.p2.id];
-  const p1Correct = ans1 && ans1.answer === question.answer;
-  const p2Correct = ans2 && ans2.answer === question.answer;
+  const p1Correct = Boolean(ans1 && ans1.answer === question.answer);
+  const p2Correct = Boolean(ans2 && ans2.answer === question.answer);
   
   if (p1Correct && !p2Correct) {
     p2Damage = 25;
@@ -439,21 +742,19 @@ function resolveRound(match) {
   } else if (p1Correct && p2Correct) {
     // Both correct: Speed battle
     const diff = Math.abs(ans1.timeTaken - ans2.timeTaken);
-    const speedDamage = Math.min(20, Math.max(5, Math.floor(diff / 400))); // 5 base + 1 per 400ms, capped at 20 max
+    const speedDamage = Math.min(20, Math.max(1, Math.ceil(diff / 250)));
     if (ans1.timeTaken < ans2.timeTaken) {
       p2Damage = speedDamage;
     } else if (ans2.timeTaken < ans1.timeTaken) {
       p1Damage = speedDamage;
     }
   } else if (!p1Correct && !p2Correct) {
-    // Both wrong
-    p1Damage = 15;
-    p2Damage = 15;
+    p1Damage = 25;
+    p2Damage = 25;
   }
 
-  // Heavy penalty for timeouts
-  if (!ans1) p1Damage = 35;
-  if (!ans2) p2Damage = 35;
+  p1Damage = Math.min(25, p1Damage);
+  p2Damage = Math.min(25, p2Damage);
 
   match.p1.hp = Math.max(0, match.p1.hp - p1Damage);
   match.p2.hp = Math.max(0, match.p2.hp - p2Damage);
@@ -498,7 +799,7 @@ function resolveRound(match) {
   }
 }
 
-function endMatch(match) {
+async function endMatch(match) {
   match.state = 'finished';
   let winner = null;
   let loser = null;
@@ -530,6 +831,44 @@ function endMatch(match) {
     
     winner.eloDelta = winnerDelta;
     loser.eloDelta = loserDelta;
+
+    if (!winner.isBot && winner.userId) {
+      await storage.updateUserWith(winner.userId, user => ({
+        ...user,
+        elo: winner.elo,
+        bestElo: Math.max(user.bestElo || user.elo || 1200, winner.elo),
+        wins: (user.wins || 0) + 1,
+        gamesPlayed: (user.gamesPlayed || 0) + 1
+      }));
+    }
+
+    if (!loser.isBot && loser.userId) {
+      await storage.updateUserWith(loser.userId, user => ({
+        ...user,
+        elo: loser.elo,
+        losses: (user.losses || 0) + 1,
+        gamesPlayed: (user.gamesPlayed || 0) + 1
+      }));
+    }
+
+    await storage.recordMatch({
+      id: match.id,
+      winnerId: winner.isBot ? null : winner.userId,
+      loserId: loser.isBot ? null : loser.userId,
+      playerOneId: match.p1.isBot ? null : match.p1.userId,
+      playerTwoId: match.p2.isBot ? null : match.p2.userId,
+      playerOneName: match.p1.name,
+      playerTwoName: match.p2.name,
+      playerOneEloBefore: match.p1.eloBeforeMatch || match.p1.elo,
+      playerTwoEloBefore: match.p2.eloBeforeMatch || match.p2.elo,
+      playerOneEloAfter: match.p1.elo,
+      playerTwoEloAfter: match.p2.elo,
+      playerOneDelta: match.p1.eloDelta || 0,
+      playerTwoDelta: match.p2.eloDelta || 0,
+      rounds: match.currentRound + 1,
+      finishedAt: new Date().toISOString(),
+      domain: match.domain || 'all'
+    });
   }
 
   emitToPlayer(match.p1, 'match_end', { winner: winner ? winner.id : 'draw', elo: match.p1.elo, eloDelta: match.p1.eloDelta || 0 });
@@ -587,6 +926,13 @@ function checkDiscardPhase(match) {
   }
 }
 
-server.listen(PORT, HOST, () => {
-  console.log(`Server listening on ${HOST}:${PORT}`);
-});
+storage.init()
+  .then(() => {
+    server.listen(PORT, HOST, () => {
+      console.log(`Server listening on ${HOST}:${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error('Failed to initialize storage:', error);
+    process.exit(1);
+  });

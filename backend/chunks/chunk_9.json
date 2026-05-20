@@ -1,0 +1,562 @@
+[
+  {
+    "cat": "Unit Operations",
+    "i": 3,
+    "prompt": "Filtration is a unit operation based on what physical property?",
+    "options": [
+      "Melting point",
+      "Particle Size (using a porous medium to separate solid particles from a fluid)",
+      "Magnetic charge",
+      "Smell"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Unit Operations",
+    "i": 4,
+    "prompt": "Liquid-Liquid Extraction relies on differences in what?",
+    "options": [
+      "Weight",
+      "Solubility (how much a solute prefers to dissolve in one solvent versus another immiscible solvent)",
+      "Boiling point",
+      "Freezing point"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Unit Operations",
+    "i": 5,
+    "prompt": "What is the primary purpose of the 'Evaporation' unit operation?",
+    "options": [
+      "To make rain",
+      "To concentrate a solution containing a non-volatile solute (like salt or sugar) and a volatile solvent (like water) by boiling off the solvent",
+      "To freeze a liquid",
+      "To mix two liquids"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Unit Operations",
+    "i": 6,
+    "prompt": "What is 'Crystallization'?",
+    "options": [
+      "Breaking glass",
+      "A solid-liquid separation unit operation where a solid solute forms highly pure crystals from a saturated solution",
+      "Melting a metal",
+      "Dissolving a powder"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Unit Operations",
+    "i": 7,
+    "prompt": "What is 'Absorption' (Gas Absorption)?",
+    "options": [
+      "Drying a spill",
+      "A mass transfer unit operation where a gas mixture is contacted with a liquid, and a specific component of the gas dissolves into the liquid (e.g., removing pollutants)",
+      "Turning a liquid into gas",
+      "Mixing two powders"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 0,
+    "prompt": "What is the primary goal of Wastewater Management?",
+    "options": [
+      "To make more wastewater",
+      "To collect, treat, and safely discharge or reuse water that has been contaminated by human, industrial, or agricultural use, protecting public health and the environment",
+      "To bottle it and sell it",
+      "To dump it in the ocean"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 1,
+    "prompt": "What does BOD (Biochemical Oxygen Demand) measure in wastewater?",
+    "options": [
+      "The temperature of the water",
+      "The amount of dissolved oxygen needed by aerobic biological organisms to break down the organic material present in a water sample; it is a key indicator of organic pollution",
+      "The amount of salt",
+      "The speed of the water"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 2,
+    "prompt": "What happens during 'Primary Treatment' of wastewater?",
+    "options": [
+      "Chemicals are added",
+      "It is a physical process where the water flows slowly through large basins, allowing heavy solids to settle to the bottom (sludge) and oil/grease to float to the top (scum) to be scraped off",
+      "Bacteria eat the waste",
+      "The water is boiled"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 3,
+    "prompt": "What is 'Secondary Treatment'?",
+    "options": [
+      "Adding color to the water",
+      "A biological process that relies on a heavily aerated culture of microorganisms (bacteria and protozoa) to consume the dissolved and suspended organic matter remaining after primary treatment",
+      "Filtering through charcoal",
+      "Adding chlorine"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 6,
+    "prompt": "What is the purpose of 'Tertiary Treatment' (Advanced Treatment)?",
+    "options": [
+      "To make the water taste good",
+      "An additional treatment step beyond secondary, specifically designed to remove specific pollutants like excessive nutrients (Nitrogen and Phosphorus), toxic chemicals, or remaining suspended solids",
+      "To heat the water",
+      "To remove large sticks"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 7,
+    "prompt": "Why is removing excess Nitrogen and Phosphorus from wastewater critical before discharging it into a lake?",
+    "options": [
+      "They make the water heavy",
+      "Because they act as fertilizers and cause 'Eutrophication'—massive, uncontrolled algae blooms that deplete oxygen in the water and kill fish",
+      "They evaporate",
+      "They make the water flammable"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 8,
+    "prompt": "What is 'Disinfection' in wastewater treatment?",
+    "options": [
+      "Cleaning the equipment",
+      "The final step before discharge, usually involving Chlorine, UV light, or Ozone, to kill or inactivate pathogenic (disease-causing) microorganisms",
+      "Removing salt",
+      "Adding vitamins"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Wastewater Management",
+    "i": 9,
+    "prompt": "What is 'Anaerobic Digestion'?",
+    "options": [
+      "Digesting food in the dark",
+      "A process where microorganisms break down the concentrated solid waste ('sludge') collected during treatment in the *absence* of oxygen, producing a stabilized biosolid and Methane gas (biogas) which can be burned for energy",
+      "Filtering water with air",
+      "Drying sludge in the sun"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Resource Engineering",
+    "i": 0,
+    "prompt": "What is the continuous movement of water on, above, and below the surface of the Earth called?",
+    "options": [
+      "Water cycle (Hydrologic cycle)",
+      "Carbon cycle",
+      "Nitrogen cycle",
+      "Tidal cycle"
+    ],
+    "answer": 0,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Resource Engineering",
+    "i": 1,
+    "prompt": "What is an aquifer?",
+    "options": [
+      "A man-made lake",
+      "An underground layer of water-bearing permeable rock",
+      "A water purification plant",
+      "A type of dam"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Resource Engineering",
+    "i": 4,
+    "prompt": "What does the term 'catchment area' or 'watershed' refer to?",
+    "options": [
+      "Area where rainwater is stored artificially",
+      "An area of land where all surface water converges to a single point",
+      "The surface area of a dam",
+      "Area prone to flooding"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Resource Engineering",
+    "i": 5,
+    "prompt": "What is 'evapotranspiration'?",
+    "options": [
+      "Water boiling",
+      "Water turning to ice",
+      "Sum of evaporation from land and transpiration from plants",
+      "Condensation of clouds"
+    ],
+    "answer": 2,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Resource Engineering",
+    "i": 7,
+    "prompt": "What is the purpose of a spillway in a dam?",
+    "options": [
+      "To generate electricity",
+      "To allow boats to pass",
+      "To safely release floodwater and prevent overtopping",
+      "To store drinking water"
+    ],
+    "answer": 2,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Resource Engineering",
+    "i": 9,
+    "prompt": "What is 'specific yield' of an aquifer?",
+    "options": [
+      "Total volume of water it can hold",
+      "Ratio of volume of water it yields by gravity to its total volume",
+      "The pressure of the groundwater",
+      "The speed of water flow"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Supply Engineering",
+    "i": 0,
+    "prompt": "What is the primary objective of Water Supply Engineering?",
+    "options": [
+      "Building boats",
+      "To source, treat, store, and safely distribute adequate quantities of clean, potable (drinkable) water to a community",
+      "To cause floods",
+      "To bottle water"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Supply Engineering",
+    "i": 1,
+    "prompt": "What is 'Potable' water?",
+    "options": [
+      "Water carried in a pot",
+      "Water that is safe to drink or use for food preparation, free from harmful microorganisms and dangerous chemicals",
+      "Hot water",
+      "Salt water"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Supply Engineering",
+    "i": 2,
+    "prompt": "What are the two main sources of municipal water?",
+    "options": [
+      "Rain and snow",
+      "Surface water (rivers, lakes, reservoirs) and Groundwater (aquifers accessed via wells)",
+      "Oceans and glaciers",
+      "Bottled water and tap water"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Water Supply Engineering",
+    "i": 4,
+    "prompt": "What is 'Sedimentation' (Clarification)?",
+    "options": [
+      "Stirring the water",
+      "Allowing the water to flow very slowly through a large basin so that the heavy 'flocs' (created during coagulation) settle to the bottom by gravity, leaving clearer water at the top",
+      "Pumping water up a hill",
+      "Adding bubbles"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 0,
+    "prompt": "What is the primary goal of Data Analytics?",
+    "options": [
+      "Deleting data",
+      "Examining raw data sets to find trends, draw conclusions, and extract actionable insights to help organizations make better decisions",
+      "Creating raw data",
+      "Hiding data"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 1,
+    "prompt": "What is the difference between 'Descriptive' and 'Predictive' analytics?",
+    "options": [
+      "They are the same",
+      "Descriptive analytics tells you what happened in the past (e.g., sales reports); Predictive analytics uses statistical models and machine learning to forecast what might happen in the future",
+      "Predictive is for past, Descriptive is for future",
+      "Descriptive uses math, Predictive uses magic"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 2,
+    "prompt": "What is 'Data Cleaning' (or Data Cleansing)?",
+    "options": [
+      "Wiping off a hard drive",
+      "The critical process of detecting and correcting (or removing) corrupt, inaccurate, incomplete, or irrelevant records from a dataset before analysis",
+      "Making data look pretty",
+      "Organizing files"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 3,
+    "prompt": "What is 'Data Visualization'?",
+    "options": [
+      "Imagining data",
+      "The graphical or visual representation of information and data (using charts, graphs, and maps) to make complex trends and patterns easier to understand at a glance",
+      "Writing numbers on a board",
+      "Taking photos of data"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 4,
+    "prompt": "When is a 'Scatter Plot' most useful?",
+    "options": [
+      "Showing percentages of a whole",
+      "Showing the relationship or correlation between two different continuous numeric variables (e.g., height vs. weight)",
+      "Showing data over time",
+      "Showing geographic data"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 5,
+    "prompt": "When is a 'Line Chart' most appropriate?",
+    "options": [
+      "Comparing categories",
+      "Visualizing trends in data over a continuous interval or time period (e.g., stock price over a year)",
+      "Showing parts of a whole",
+      "Showing correlations"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 6,
+    "prompt": "Why are 'Pie Charts' often criticized by data visualization experts?",
+    "options": [
+      "They are too tasty",
+      "Humans are notoriously bad at visually estimating the relative areas or angles of pie slices, making it hard to compare values accurately; bar charts are usually clearer",
+      "They take too long to draw",
+      "They use too many colors"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Data Analytics and Visualisation",
+    "i": 8,
+    "prompt": "What is 'Outlier Detection'?",
+    "options": [
+      "Finding people who lie",
+      "Identifying data points that differ significantly from the majority of the data; these could represent errors, fraud, or important anomalies worth investigating",
+      "Finding the average",
+      "Sorting data"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 0,
+    "prompt": "What is the purpose of 'Management Research Methods'?",
+    "options": [
+      "Telling managers what to do",
+      "Providing a systematic, rigorous, and scientific framework for investigating business problems, gathering evidence, and making informed, data-driven managerial decisions",
+      "Writing company policies",
+      "Hiring employees"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 1,
+    "prompt": "What is the difference between 'Quantitative' and 'Qualitative' research?",
+    "options": [
+      "They are the same",
+      "Quantitative deals with numbers, statistics, and objective measurements (e.g., surveys); Qualitative deals with words, meanings, and deep understanding of human behavior (e.g., interviews, focus groups)",
+      "Qualitative uses math, Quantitative uses words",
+      "Quantitative is better"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 2,
+    "prompt": "What is a 'Hypothesis'?",
+    "options": [
+      "A proven fact",
+      "A specific, testable, and falsifiable prediction about the relationship between two or more variables, formulated before data collection begins",
+      "A wild guess",
+      "A summary of results"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 3,
+    "prompt": "What is the difference between 'Primary Data' and 'Secondary Data'?",
+    "options": [
+      "Primary is better",
+      "Primary data is original data collected specifically for the current research problem (e.g., conducting a new survey); Secondary data is existing data previously collected by someone else (e.g., census data, past reports)",
+      "Primary is numbers, Secondary is words",
+      "Secondary data is fake"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 4,
+    "prompt": "In sampling, what is a 'Population' versus a 'Sample'?",
+    "options": [
+      "They mean the same thing",
+      "The Population is the entire group you want to draw conclusions about; a Sample is the specific, smaller subset of individuals you actually collect data from",
+      "A sample is bigger",
+      "A population is only for biology"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 5,
+    "prompt": "What is 'Random Sampling' and why is it important?",
+    "options": [
+      "Picking whoever is closest",
+      "A technique where every member of the population has an equal chance of being selected; it is crucial for ensuring the sample is representative and avoiding bias",
+      "Picking a specific group",
+      "Guessing names"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 7,
+    "prompt": "What is the concept of 'Reliability' in research?",
+    "options": [
+      "If the researcher is a good person",
+      "The consistency and repeatability of a measure; if you repeat the same measurement under the same conditions, you should get the same result",
+      "If the measure is actually measuring the right thing",
+      "If the data is expensive"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 8,
+    "prompt": "What is the concept of 'Validity' in research?",
+    "options": [
+      "If the results are published",
+      "The accuracy of a measure; whether the instrument or test is actually measuring the specific concept or variable it claims to be measuring (it hits the bullseye)",
+      "If the test is consistent",
+      "If the test is long enough"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Management Research Methods",
+    "i": 9,
+    "prompt": "What is a 'Case Study' methodology?",
+    "options": [
+      "Studying briefcases",
+      "An in-depth, detailed, and multifaceted qualitative investigation of a single specific phenomenon, organization, or event within its real-world context",
+      "A massive statistical survey",
+      "A laboratory experiment"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  }
+]

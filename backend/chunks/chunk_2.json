@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Biomedical Instrumentation",
+    "i": 0,
+    "prompt": "What instrument is used to record the electrical activity of the heart?",
+    "options": [
+      "EEG",
+      "EMG",
+      "ECG/EKG",
+      "MRI"
+    ],
+    "answer": 2,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomedical Instrumentation",
+    "i": 8,
+    "prompt": "What is the purpose of an instrumentation amplifier in bio-potential measurements?",
+    "options": [
+      "To generate signals",
+      "To provide high input impedance and high common-mode rejection ratio (CMRR)",
+      "To filter out all high frequencies",
+      "To convert analog signals to digital"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomedical Instrumentation",
+    "i": 9,
+    "prompt": "A sphygmomanometer measures blood pressure using which method?",
+    "options": [
+      "Oscillometric or Korotkoff sounds method",
+      "Doppler shift",
+      "Optical absorption",
+      "Electro-chemical reaction"
+    ],
+    "answer": 0,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 0,
+    "prompt": "What is a Biomaterial?",
+    "options": [
+      "A natural material like wood",
+      "Any substance (natural or synthetic) engineered to interact with biological systems for a medical purpose (therapeutic or diagnostic)",
+      "A material that is biodegradable",
+      "A material that kills bacteria"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 2,
+    "prompt": "Why are Titanium and its alloys heavily used in orthopedic implants (like hip replacements)?",
+    "options": [
+      "They are very cheap",
+      "They have an excellent strength-to-weight ratio, extreme corrosion resistance, and exceptional biocompatibility (they can integrate directly with bone)",
+      "They are soft and flexible",
+      "They are magnetic"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 4,
+    "prompt": "Which type of polymer is commonly used for bioresorbable sutures (stitches that dissolve)?",
+    "options": [
+      "Teflon (PTFE)",
+      "Polylactic acid (PLA) or Polyglycolic acid (PGA)",
+      "Polyethylene (PE)",
+      "Polyvinyl chloride (PVC)"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 5,
+    "prompt": "What is a common use for 'Bioceramics' like Alumina or Zirconia?",
+    "options": [
+      "Making soft contact lenses",
+      "The articulating surfaces of artificial hip joints, because they are incredibly hard, wear-resistant, and have very low friction",
+      "Making artificial hearts",
+      "Making flexible catheters"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 6,
+    "prompt": "What is 'Hydroxyapatite'?",
+    "options": [
+      "A toxic chemical",
+      "A naturally occurring mineral form of calcium apatite that makes up the bulk of human bone; often used as a coating on implants to promote bone growth",
+      "A type of plastic",
+      "A strong acid"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 7,
+    "prompt": "What is a 'Hydrogel'?",
+    "options": [
+      "A solid block of ice",
+      "A highly water-absorbent, cross-linked polymer network that mimics soft tissue; often used for contact lenses, wound dressings, and tissue engineering scaffolds",
+      "A waterproof coating",
+      "A heavy metal"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 8,
+    "prompt": "What is the 'Foreign Body Response'?",
+    "options": [
+      "A political reaction",
+      "The body's natural immune reaction to an implanted biomaterial, resulting in acute inflammation followed by the encapsulation of the implant in a fibrous tissue capsule",
+      "A reflex",
+      "An allergic reaction to food"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomaterials",
+    "i": 9,
+    "prompt": "What is the goal of 'Tissue Engineering'?",
+    "options": [
+      "To build robots",
+      "To create functional, living replacement tissues or organs in the lab using a combination of cells, biochemical factors, and porous biomaterial scaffolds",
+      "To test cosmetics",
+      "To preserve dead tissue"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 0,
+    "prompt": "What is Bioethics?",
+    "options": [
+      "The study of artificial intelligence",
+      "The study of the typically controversial ethical issues emerging from new situations and possibilities brought about by advances in biology and medicine",
+      "The biology of ethics",
+      "The law of physics"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 1,
+    "prompt": "What does 'Informed Consent' mean in medical research?",
+    "options": [
+      "Agreeing to a test without knowing what it is",
+      "A process where a subject voluntarily confirms their willingness to participate in a particular trial, after having been informed of all aspects of the trial that are relevant to their decision",
+      "A doctor making a decision for a patient",
+      "Signing a waiver for a discount"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 2,
+    "prompt": "What is the principle of 'Beneficence' in bioethics?",
+    "options": [
+      "Doing no harm",
+      "The moral obligation to act for the benefit of others, helping them to further their important and legitimate interests, often by preventing or removing harms",
+      "Treating everyone equally",
+      "Respecting patient wishes"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 3,
+    "prompt": "What is 'Non-maleficence'?",
+    "options": [
+      "Doing good",
+      "The ethical principle of 'first, do no harm', obligating professionals to avoid intentionally inflicting harm on patients",
+      "Telling the truth",
+      "Keeping secrets"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 4,
+    "prompt": "What is Intellectual Property (IP)?",
+    "options": [
+      "Physical land owned by a university",
+      "Creations of the mind, such as inventions; literary and artistic works; designs; and symbols, names and images used in commerce, which are protected by law",
+      "Smart computers",
+      "Books in a library"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 5,
+    "prompt": "What does a 'Patent' grant the inventor?",
+    "options": [
+      "Money from the government",
+      "An exclusive right granted for an invention, allowing the owner to exclude others from making, using, offering for sale, or selling the invention for a limited time",
+      "A medal of honor",
+      "The right to keep an invention secret forever"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 6,
+    "prompt": "Can you typically patent a naturally occurring DNA sequence exactly as it exists in nature?",
+    "options": [
+      "Yes, if you discover it first",
+      "No, naturally occurring DNA sequences are generally considered 'products of nature' and are not patentable (though isolated/modified genes sometimes can be)",
+      "Yes, if you are a doctor",
+      "Yes, but only in the US"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 7,
+    "prompt": "What is a 'Copyright'?",
+    "options": [
+      "Protection for an invention",
+      "A legal right that grants the creator of an original work (like software code, a book, or art) exclusive rights for its use and distribution",
+      "Protection for a brand name",
+      "A secret recipe"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 8,
+    "prompt": "What is a 'Trademark'?",
+    "options": [
+      "A mark made by a trade union",
+      "A recognizable sign, design, or expression which identifies products or services of a particular source from those of others (e.g., a company logo)",
+      "A type of patent",
+      "A copyright for music"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioethics and Intellectual Property Rights",
+    "i": 9,
+    "prompt": "What is the primary purpose of an 'Institutional Review Board' (IRB)?",
+    "options": [
+      "To manage hospital finances",
+      "To review and monitor biomedical research involving human subjects, ensuring the rights and welfare of the subjects are protected",
+      "To approve new drugs for the market",
+      "To give out patents"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioinformatics",
+    "i": 5,
+    "prompt": "What is 'sequence alignment' used for?",
+    "options": [
+      "Aligning text in a document",
+      "Identifying similarities that may indicate functional, structural, or evolutionary relationships",
+      "Folding proteins",
+      "Sequencing a genome from scratch"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioinformatics",
+    "i": 7,
+    "prompt": "What is an SNP (Single Nucleotide Polymorphism)?",
+    "options": [
+      "A type of RNA",
+      "A variation at a single position in a DNA sequence among individuals",
+      "A protein structure",
+      "A biological database"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioinformatics",
+    "i": 8,
+    "prompt": "What is the purpose of a Hidden Markov Model (HMM) in bioinformatics?",
+    "options": [
+      "To visualize 3D proteins",
+      "To predict gene structures and align multiple sequences",
+      "To synthesize DNA",
+      "To store clinical records"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioinformatics",
+    "i": 9,
+    "prompt": "In phylogenetic trees, what do the 'leaves' (or tips) usually represent?",
+    "options": [
+      "Common ancestors",
+      "Extinct species",
+      "The present-day taxa or sequences being compared",
+      "Time scales"
+    ],
+    "answer": 2,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 0,
+    "prompt": "What is the fundamental basis for all bioprocess material balances?",
+    "options": [
+      "Newton's Laws",
+      "The Law of Conservation of Mass (mass is neither created nor destroyed in a chemical/biological process, it only changes form)",
+      "The Ideal Gas Law",
+      "Thermodynamics"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 1,
+    "prompt": "What is a 'Steady-State' process?",
+    "options": [
+      "A process that never stops",
+      "A process where the conditions (temperature, volume, mass, etc.) inside the system do not change with time (Accumulation = 0)",
+      "A process that only uses water",
+      "A process with no chemical reactions"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 2,
+    "prompt": "What is the basic equation for a material balance?",
+    "options": [
+      "Input = Output",
+      "Input + Generation - Output - Consumption = Accumulation",
+      "Mass = Volume / Density",
+      "Energy = Mass * Speed of light squared"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 3,
+    "prompt": "What does 'Stoichiometry' deal with?",
+    "options": [
+      "The speed of reactions",
+      "The calculation of relative quantities of reactants and products in chemical and biological reactions based on balanced equations",
+      "The heat of reactions",
+      "The shape of molecules"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 4,
+    "prompt": "What is a 'Limiting Reactant'?",
+    "options": [
+      "The reactant that is most expensive",
+      "The reactant in a chemical/biological process that is totally consumed when the chemical reaction is completed; it dictates the maximum amount of product that can be formed",
+      "The reactant with the lowest density",
+      "The liquid reactant"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 5,
+    "prompt": "What is 'Yield' in a bioprocess?",
+    "options": [
+      "Giving way to traffic",
+      "A measure of the efficiency of a conversion process, often expressed as the amount of product formed per amount of substrate (reactant) consumed",
+      "The total amount of liquid",
+      "The speed of the stirrer"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 6,
+    "prompt": "In a continuous fermentation process, what does 'Dilution Rate' (D) represent?",
+    "options": [
+      "How much water is added",
+      "The ratio of the volumetric flow rate of the feed medium to the constant culture volume in the bioreactor (D = F/V)",
+      "The rate of cell death",
+      "The concentration of sugar"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 7,
+    "prompt": "What is the 'Respiratory Quotient' (RQ)?",
+    "options": [
+      "How fast you breathe",
+      "The ratio of the volume of carbon dioxide produced to the volume of oxygen consumed by a culture of cells during respiration",
+      "The amount of air in a tank",
+      "A measure of fluid viscosity"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 8,
+    "prompt": "What is 'Degree of Reduction' used for in bioprocess calculations?",
+    "options": [
+      "Lowering the temperature",
+      "A concept used to track the transfer of electrons in a metabolic pathway, useful for establishing elemental and electron balances when stoichiometry is incomplete",
+      "Making the reactor smaller",
+      "Reducing the cost"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Calculations",
+    "i": 9,
+    "prompt": "What is 'Enthalpy' (H) in an energy balance?",
+    "options": [
+      "The kinetic energy of the fluid",
+      "A thermodynamic quantity equivalent to the total heat content of a system, used to calculate heating/cooling requirements for a bioreactor",
+      "The pressure in the tank",
+      "The friction on the pipes"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 1,
+    "prompt": "What is a 'Bioreactor' (or Fermenter)?",
+    "options": [
+      "A nuclear reactor",
+      "A manufactured device or system that supports a biologically active environment, used to grow organisms (yeast, bacteria, or animal cells) under controlled conditions",
+      "A device to kill bacteria",
+      "A greenhouse"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 2,
+    "prompt": "What is a 'Batch Process' in biomanufacturing?",
+    "options": [
+      "A continuous stream of product",
+      "A process where all materials are added to the reactor at the beginning, the reaction proceeds, and the products are removed all at once at the end",
+      "A process that only runs at night",
+      "A process for baking cookies"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 3,
+    "prompt": "What is a 'Continuous Process'?",
+    "options": [
+      "A process that never breaks down",
+      "A process where feed materials are continuously pumped into the reactor while products are continuously removed, maintaining a steady state",
+      "A batch process done twice",
+      "A process that uses no water"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 5,
+    "prompt": "Why is agitation (stirring) crucial in a large bioreactor?",
+    "options": [
+      "To make it look busy",
+      "To ensure uniform mixing of nutrients, maintain uniform temperature, and disperse gas bubbles (oxygen) so all cells have access to what they need",
+      "To crush the cells",
+      "To create foam"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 6,
+    "prompt": "What does 'Scale-up' mean in bioprocessing?",
+    "options": [
+      "Weighing the product",
+      "The challenging process of taking a successful biological reaction from a small laboratory flask and replicating it in a massive industrial-scale bioreactor while maintaining the same yield and quality",
+      "Making the cells larger",
+      "Raising the price"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 7,
+    "prompt": "What is 'Aeration' and why is it often a limiting factor?",
+    "options": [
+      "Adding color; it is hard to see",
+      "Sparging air (oxygen) into the reactor; it is often limiting because oxygen is very poorly soluble in water, making it hard to deliver enough to dense, fast-growing aerobic cultures",
+      "Adding sugar; it is expensive",
+      "Cooling the tank; water is scarce"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 8,
+    "prompt": "What is 'CIP' (Clean-In-Place) technology?",
+    "options": [
+      "Hiring a cleaning crew",
+      "Automated systems designed to clean the interior surfaces of pipes, vessels, and bioprocess equipment without disassembly, using a sequence of chemical washes and rinses",
+      "Cleaning with a pressure washer",
+      "Disposable plastic reactors"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioprocess Engineering",
+    "i": 9,
+    "prompt": "In cell culture, what is 'Shear Sensitivity'?",
+    "options": [
+      "Cells that cry easily",
+      "The susceptibility of certain biological cells (especially large, fragile mammalian cells without cell walls) to physical damage or death caused by the mechanical forces of the agitator impeller",
+      "Cells reacting to light",
+      "Cells that like to be cut"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 0,
+    "prompt": "What does Bioreaction Engineering focus on?",
+    "options": [
+      "Building metal reactors",
+      "The study and mathematical modeling of the rates of biological reactions (kinetics) and the design of reactors to optimize those specific cellular or enzymatic processes",
+      "Studying animal behavior",
+      "Testing soil"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 1,
+    "prompt": "What is 'Enzyme Kinetics'?",
+    "options": [
+      "How fast enzymes run",
+      "The study of the rates of chemical reactions that are catalyzed by enzymes, and how these rates are affected by variables like concentration, temperature, and pH",
+      "The weight of an enzyme",
+      "How enzymes are built"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 2,
+    "prompt": "In Michaelis-Menten kinetics, what does Vmax represent?",
+    "options": [
+      "Maximum volume",
+      "The maximum rate (velocity) of an enzyme-catalyzed reaction, achieved when the enzyme is completely saturated with substrate",
+      "Minimum velocity",
+      "Maximum voltage"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 3,
+    "prompt": "In Michaelis-Menten kinetics, what is the Michaelis constant (Km)?",
+    "options": [
+      "A random number",
+      "The substrate concentration at which the reaction rate is exactly half of Vmax; it is an inverse measure of the enzyme's affinity for the substrate",
+      "The mass of the substrate",
+      "The temperature constant"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 4,
+    "prompt": "What is 'Competitive Inhibition' in an enzymatic reaction?",
+    "options": [
+      "Enzymes racing each other",
+      "A situation where an inhibitor molecule structurally similar to the substrate binds to the active site of the enzyme, physically blocking the actual substrate",
+      "Destroying the enzyme",
+      "Heating the reaction"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  }
+]

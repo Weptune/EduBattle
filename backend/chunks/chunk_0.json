@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 0,
+    "prompt": "What does 'Vehicle Dynamics' study?",
+    "options": [
+      "How cars are built",
+      "How vehicles react in motion to driver inputs (steering, throttle, brakes) and environmental forces (aerodynamics, road surface, gravity)",
+      "The electrical systems of a car",
+      "The fuel economy"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 1,
+    "prompt": "What are the three rotational axes of a vehicle's motion?",
+    "options": [
+      "X, Y, and Z",
+      "Roll (longitudinal axis), Pitch (lateral axis), and Yaw (vertical axis)",
+      "Up, Down, and Sideways",
+      "Forward, Reverse, and Park"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 2,
+    "prompt": "What is 'Understeer'?",
+    "options": [
+      "The steering wheel is too low",
+      "When a car turns less sharply than the driver intends during cornering because the front tires lose grip (it pushes forward)",
+      "When the car turns too much",
+      "Steering in reverse"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 3,
+    "prompt": "What is 'Oversteer'?",
+    "options": [
+      "Steering too far",
+      "When a car turns more sharply than intended because the rear tires lose grip, causing the back end to slide out (fishtailing)",
+      "A large steering wheel",
+      "Steering over a bump"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 4,
+    "prompt": "What is the 'Slip Angle' of a tire?",
+    "options": [
+      "The angle of a slippery road",
+      "The angular difference between the direction the wheel is pointing and the actual direction the tire is traveling due to cornering forces",
+      "The angle it leans",
+      "The wear on the edge"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 6,
+    "prompt": "What does ABS (Anti-lock Braking System) do?",
+    "options": [
+      "Strengthens your core",
+      "Prevents the wheels from locking up (skidding) during hard braking by rapidly pulsing brake pressure, allowing the driver to maintain steering control",
+      "Makes the brakes louder",
+      "Stops the car instantly"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 7,
+    "prompt": "What does ESC (Electronic Stability Control) do?",
+    "options": [
+      "Controls the radio",
+      "Uses sensors to detect loss of steering control (understeer/oversteer) and automatically applies individual brakes to help steer the vehicle where the driver intends",
+      "Stabilizes the suspension",
+      "Keeps the engine running"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Dynamics and Control",
+    "i": 9,
+    "prompt": "What is the 'Center of Gravity' (CG) and why is it important?",
+    "options": [
+      "The center of the earth",
+      "The theoretical point where the vehicle's entire weight is concentrated; a lower CG reduces weight transfer and body roll, vastly improving handling",
+      "The steering wheel",
+      "The heaviest part of the car"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 0,
+    "prompt": "What is the primary purpose of a Transmission in a vehicle?",
+    "options": [
+      "To store fuel",
+      "To use a system of gears to optimize the engine's power band, providing high torque for starting and high speed for cruising",
+      "To steer the car",
+      "To brake the car"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 1,
+    "prompt": "What does the 'Clutch' do in a manual transmission?",
+    "options": [
+      "Holds the steering wheel",
+      "Temporarily disconnects the engine's rotational power from the transmission, allowing the driver to change gears smoothly",
+      "Starts the engine",
+      "Brakes the wheels"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 4,
+    "prompt": "What does CVT stand for?",
+    "options": [
+      "Continuous Variable Torque",
+      "Continuously Variable Transmission (a transmission that can seamlessly change through an infinite number of effective gear ratios between maximum and minimum values)",
+      "Control Valve Timing",
+      "Central Vehicle Tracker"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 5,
+    "prompt": "How does a typical CVT work?",
+    "options": [
+      "Using hundreds of small gears",
+      "Using a system of two variable-diameter pulleys connected by a robust steel belt or chain",
+      "Using fluid only",
+      "Using electric motors"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 6,
+    "prompt": "What is a DCT (Dual-Clutch Transmission)?",
+    "options": [
+      "A transmission you shift twice",
+      "An automated manual transmission that uses two separate clutches (one for odd gears, one for even gears) to provide extremely fast, uninterrupted gear changes",
+      "A heavy-duty truck transmission",
+      "A transmission with two gear shifters"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 7,
+    "prompt": "What does the 'Differential' do?",
+    "options": [
+      "Makes the car different",
+      "A gear train that allows the outer drive wheel to rotate faster than the inner drive wheel during a turn, preventing the tires from scrubbing",
+      "Calculates speed",
+      "Connects the steering"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 8,
+    "prompt": "What is a 'Limited-Slip Differential' (LSD)?",
+    "options": [
+      "A broken differential",
+      "A differential that allows some difference in wheel speed but mechanically restricts excessive slip (e.g., if one wheel is on ice), sending power to the wheel with grip",
+      "A differential for slow speeds",
+      "A differential with no oil"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Vehicle Transmission Systems",
+    "i": 9,
+    "prompt": "What is 'Overdrive' in a transmission?",
+    "options": [
+      "Driving too fast",
+      "A gear ratio where the output shaft spins faster than the engine input shaft (ratio less than 1:1), used to improve fuel economy during highway cruising",
+      "The reverse gear",
+      "The strongest gear"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 0,
+    "prompt": "What is Work System Engineering?",
+    "options": [
+      "Building offices",
+      "The design and optimization of the interaction between human workers, technology, and the environment to improve productivity and quality",
+      "Fixing computers",
+      "Designing robots"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 1,
+    "prompt": "What is the primary goal of Ergonomics (Human Factors)?",
+    "options": [
+      "To make people work longer hours",
+      "To design tasks, tools, and environments to fit the physiological and psychological capabilities of the human body, reducing fatigue and injury",
+      "To automate all human jobs",
+      "To save money on furniture"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 2,
+    "prompt": "What is a 'Time and Motion Study'?",
+    "options": [
+      "Studying physics",
+      "A technique pioneered by Taylor and Gilbreth to analyze a specific task, break it down into fundamental motions, eliminate waste, and establish a standard time to complete it",
+      "Watching movies",
+      "Tracking employee breaks"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 3,
+    "prompt": "What are 'Therbligs'?",
+    "options": [
+      "A type of tool",
+      "A set of 18 fundamental motions (like grasp, hold, search, position) used in the study of motion economy to analyze physical tasks",
+      "Bugs in a system",
+      "Office chairs"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 4,
+    "prompt": "What is 'Anthropometry' in ergonomics?",
+    "options": [
+      "The study of ants",
+      "The scientific measurement of the human body (size, shape, reach, weight) used to design tools and workstations that fit a wide range of people",
+      "The study of human behavior",
+      "The study of vision"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 6,
+    "prompt": "In physical ergonomics, what is the 'Neutral Posture'?",
+    "options": [
+      "Standing completely still",
+      "The natural resting position of the joints where muscles and ligaments are under the least amount of stress and tension (e.g., wrists straight)",
+      "Sitting on the floor",
+      "Laying down"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 8,
+    "prompt": "What is the 'NIOSH Lifting Equation' used for?",
+    "options": [
+      "Calculating weight lifting records",
+      "A mathematical tool used by occupational health professionals to assess the risk of low back injury associated with manual lifting tasks",
+      "Calculating the strength of cranes",
+      "Calculating elevator capacity"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Work System Engineering and Ergonomics",
+    "i": 9,
+    "prompt": "What is 'Job Enlargement' vs. 'Job Enrichment'?",
+    "options": [
+      "They are the same",
+      "Enlargement adds more tasks of the same level to reduce monotony; Enrichment adds tasks with higher levels of responsibility and autonomy to increase motivation",
+      "Enlargement is a promotion",
+      "Enrichment means higher pay"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Anatomy and Physiology",
+    "i": 2,
+    "prompt": "Which body system is primarily responsible for the transport of oxygen, nutrients, and hormones to cells?",
+    "options": [
+      "Digestive System",
+      "Cardiovascular (Circulatory) System",
+      "Nervous System",
+      "Respiratory System"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Anatomy and Physiology",
+    "i": 3,
+    "prompt": "What is 'Homeostasis'?",
+    "options": [
+      "A disease of the bones",
+      "The body's ability to maintain a relatively stable internal environment despite outside changes",
+      "The process of digesting food",
+      "The study of blood"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Anatomy and Physiology",
+    "i": 5,
+    "prompt": "What is the largest organ in the human body?",
+    "options": [
+      "Liver",
+      "Skin (Integumentary System)",
+      "Brain",
+      "Heart"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Anatomy and Physiology",
+    "i": 6,
+    "prompt": "In the nervous system, what is the function of a 'Myelin Sheath'?",
+    "options": [
+      "To pump blood",
+      "To electrically insulate the axon of a neuron and increase the speed of nerve impulse transmission",
+      "To digest food",
+      "To filter toxins"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Anatomy and Physiology",
+    "i": 8,
+    "prompt": "Which part of the brain is primarily responsible for regulating basic life functions such as breathing and heart rate?",
+    "options": [
+      "Cerebral Cortex",
+      "Brainstem (specifically Medulla Oblongata)",
+      "Cerebellum",
+      "Frontal Lobe"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Anatomy and Physiology",
+    "i": 9,
+    "prompt": "What is 'Action Potential' in physiology?",
+    "options": [
+      "A type of joint movement",
+      "A rapid sequence of changes in the voltage across a membrane, essential for nerve signaling and muscle contraction",
+      "The maximum weight a person can lift",
+      "The potential energy of fat"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 0,
+    "prompt": "What is the primary goal of Agricultural Biotechnology?",
+    "options": [
+      "To build better tractors",
+      "To use living systems and organisms to develop or make products, such as genetically modified crops for higher yields or pest resistance",
+      "To study soil erosion",
+      "To forecast the weather"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 1,
+    "prompt": "What does 'Tissue Culture' refer to in plant biotechnology?",
+    "options": [
+      "Growing plants in soil",
+      "The cultivation of plant cells, tissues, or organs on specially formulated nutrient media in a controlled, sterile environment (in vitro)",
+      "Breeding animals",
+      "Fermenting wine"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 2,
+    "prompt": "What is a Transgenic Organism?",
+    "options": [
+      "An organism that travels a lot",
+      "An organism whose genome has been altered by the transfer of a gene or genes from another species or breed",
+      "An organism that is extinct",
+      "An organism that only eats plants"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 3,
+    "prompt": "What is the purpose of 'Agrobacterium tumefaciens' in plant biotech?",
+    "options": [
+      "It kills weeds",
+      "It is a soil bacterium naturally capable of transferring genetic material to plants, widely used as a tool to create genetically modified crops",
+      "It makes plants smell better",
+      "It is a fertilizer"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 4,
+    "prompt": "In animal biotechnology, what is 'Somatic Cell Nuclear Transfer' (SCNT)?",
+    "options": [
+      "A diet plan for cows",
+      "A laboratory strategy for creating a viable embryo from a body cell and an egg cell, famously used to clone Dolly the sheep",
+      "A type of vaccine",
+      "A method for shearing sheep"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 6,
+    "prompt": "What does 'CRISPR-Cas9' provide to biotechnologists?",
+    "options": [
+      "A new type of microscope",
+      "A revolutionary, highly precise, and relatively cheap tool for editing genomes (adding, removing, or altering sections of the DNA sequence)",
+      "A method for cloning whole animals",
+      "A type of plant fertilizer"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 7,
+    "prompt": "What is 'Pharming' in the context of biotechnology?",
+    "options": [
+      "Traditional agriculture",
+      "The use of genetically modified plants or animals to produce pharmaceutical substances (like vaccines or antibodies) for human use",
+      "Building greenhouses",
+      "Selling farm equipment"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 8,
+    "prompt": "What is 'Totipotency' in plant cells?",
+    "options": [
+      "The ability to survive without light",
+      "The remarkable ability of a single plant cell to divide and produce all the differentiated cells in the organism, allowing a whole plant to be regenerated from one cell",
+      "The ability to fight off viruses",
+      "The size of the cell"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Animal and Plant Biotechnology",
+    "i": 9,
+    "prompt": "What are 'Monoclonal Antibodies'?",
+    "options": [
+      "Antibodies found in plants",
+      "Laboratory-produced molecules engineered to serve as substitute antibodies that can restore, enhance, or mimic the immune system's attack on cells (often used in cancer therapy)",
+      "A type of antibiotic pill",
+      "A natural hormone"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 1,
+    "prompt": "How do engineers typically classify soils?",
+    "options": [
+      "By color and smell",
+      "By grain size (gravel, sand, silt, clay) and plasticity characteristics (using systems like USCS or AASHTO)",
+      "By how well plants grow in it",
+      "By its price"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 2,
+    "prompt": "What is 'Soil Compaction'?",
+    "options": [
+      "Adding water to soil",
+      "The mechanical process of densifying soil by reducing the volume of air voids, increasing its strength and bearing capacity",
+      "Baking soil in an oven",
+      "Removing stones from soil"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 3,
+    "prompt": "What does the 'Standard Proctor Test' determine?",
+    "options": [
+      "The age of the soil",
+      "The optimal moisture content at which a given soil type will become most dense and achieve its maximum dry density",
+      "The chemical composition of the soil",
+      "The type of insects in the soil"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 4,
+    "prompt": "What is 'Consolidation' in clay soils?",
+    "options": [
+      "Mixing clay with sand",
+      "The slow, gradual decrease in volume (settlement) of a saturated cohesive soil under long-term sustained load, due to the expulsion of water from the soil pores",
+      "Freezing clay",
+      "Drying clay in the sun"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 5,
+    "prompt": "What is the 'Shear Strength' of soil?",
+    "options": [
+      "How hard it is to dig",
+      "The internal resistance per unit area that the soil mass can offer to resist failure and sliding along any plane inside it (governed by Mohr-Coulomb failure criterion)",
+      "How much water it can hold",
+      "How fast water flows through it"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 6,
+    "prompt": "According to Terzaghi's principle, what is 'Effective Stress'?",
+    "options": [
+      "The stress of an exam",
+      "The stress transmitted through particle-to-particle contact in the soil skeleton (Total Stress minus Pore Water Pressure); it governs soil strength and volume changes",
+      "The weight of a building",
+      "The atmospheric pressure"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 8,
+    "prompt": "What is the purpose of a 'Retaining Wall'?",
+    "options": [
+      "To hold back water like a dam",
+      "To laterally support a soil mass so that it can be retained at different levels on the two sides (e.g., holding back a hillside next to a highway)",
+      "To support a roof",
+      "To divide property"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Applied Soil Engineering",
+    "i": 9,
+    "prompt": "What is a 'Deep Foundation' (like piles or drilled shafts)?",
+    "options": [
+      "A basement",
+      "A foundation used when shallow surface soils are too weak; it transfers building loads deeper into the earth to stronger rock or soil layers",
+      "A wide concrete slab",
+      "A swimming pool"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Science II",
+    "i": 0,
+    "prompt": "What is the study of Pathology?",
+    "options": [
+      "The study of paths",
+      "The medical discipline that describes conditions typically observed during a disease state, focusing on the causes, mechanisms, and effects of disease on cells and tissues",
+      "The study of medicine history",
+      "The study of healthy organs"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  }
+]

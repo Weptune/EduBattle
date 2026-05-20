@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Basic Clinical Science II",
+    "i": 1,
+    "prompt": "What is Pharmacology?",
+    "options": [
+      "Farming",
+      "The branch of medicine concerned with the uses, effects, and modes of action of drugs",
+      "The study of pharmacies",
+      "The study of plants"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Science II",
+    "i": 2,
+    "prompt": "What is the difference between Pharmacokinetics and Pharmacodynamics?",
+    "options": [
+      "They are the same",
+      "Pharmacokinetics is what the body does to the drug (absorption, distribution, metabolism, excretion); Pharmacodynamics is what the drug does to the body (receptor binding, effects)",
+      "Pharmacokinetics is for pills, Pharmacodynamics is for injections",
+      "One is for doctors, one is for nurses"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Science II",
+    "i": 5,
+    "prompt": "What is an 'Agonist' in pharmacology?",
+    "options": [
+      "A drug that causes pain",
+      "A chemical that binds to a receptor and activates it to produce a biological response",
+      "A drug that blocks a receptor",
+      "A placebo"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Science II",
+    "i": 7,
+    "prompt": "In pathology, what does 'Ischemia' refer to?",
+    "options": [
+      "A type of cancer",
+      "An inadequate blood supply to an organ or part of the body, especially the heart muscles, leading to a shortage of oxygen and nutrients",
+      "A skin rash",
+      "High blood pressure"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Science II",
+    "i": 9,
+    "prompt": "What does the 'Therapeutic Index' of a drug measure?",
+    "options": [
+      "How expensive it is",
+      "A quantitative measurement of the relative safety of a drug, representing the ratio of the toxic dose to the therapeutic (effective) dose",
+      "How fast it works",
+      "How it tastes"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Sciences I",
+    "i": 0,
+    "prompt": "What is the primary focus of Medical Microbiology?",
+    "options": [
+      "Studying large animals",
+      "The study of microorganisms (bacteria, viruses, fungi, parasites) that cause infectious diseases in humans",
+      "Studying computers",
+      "Studying plant life"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Sciences I",
+    "i": 3,
+    "prompt": "How do Viruses fundamentally differ from Bacteria?",
+    "options": [
+      "They are larger",
+      "Viruses are not true cells; they consist of genetic material (DNA or RNA) inside a protein coat and cannot reproduce without hijacking a host cell's machinery",
+      "They are easier to treat",
+      "They only affect animals, not humans"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Sciences I",
+    "i": 4,
+    "prompt": "What is the main role of the Immune System?",
+    "options": [
+      "To digest food",
+      "To protect the body from invading pathogens, identify and destroy abnormal cells (like cancer), and clear away dead tissues",
+      "To pump blood",
+      "To control breathing"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Sciences I",
+    "i": 5,
+    "prompt": "What is 'Innate Immunity'?",
+    "options": [
+      "Immunity from vaccines",
+      "The body's first, generalized, and immediate line of defense against pathogens (e.g., skin, stomach acid, phagocytic cells) that does not require prior exposure",
+      "Immunity from breast milk",
+      "Targeted antibody attacks"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Sciences I",
+    "i": 6,
+    "prompt": "What is 'Adaptive (Acquired) Immunity'?",
+    "options": [
+      "Immunity you are born with",
+      "A highly specific, slower-to-develop immune response that creates 'memory' cells, allowing for a much stronger and faster response if the same pathogen invades again",
+      "Immunity from taking vitamins",
+      "The skin's physical barrier"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Clinical Sciences I",
+    "i": 9,
+    "prompt": "What is a 'Vaccine' designed to do?",
+    "options": [
+      "Cure a disease immediately",
+      "Safely expose the adaptive immune system to a harmless form of an antigen, inducing immunological memory without causing the disease",
+      "Kill bacteria directly",
+      "Reduce fever"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 0,
+    "prompt": "Why are steel reinforcing bars (rebar) embedded in concrete?",
+    "options": [
+      "To make it heavier",
+      "Concrete is very strong in compression but very weak in tension; steel handles the tensile forces, preventing catastrophic failure",
+      "To make it look shiny",
+      "To save money on concrete"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 1,
+    "prompt": "What is the typical compressive strength of standard structural concrete (f'c)?",
+    "options": [
+      "10 - 50 psi",
+      "3,000 - 6,000 psi (20 - 40 MPa)",
+      "100,000 psi",
+      "1 - 5 psi"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 2,
+    "prompt": "Why do concrete and steel work so well together in reinforced concrete?",
+    "options": [
+      "They are both cheap",
+      "They have nearly identical coefficients of thermal expansion (they expand and contract at the same rate when temperature changes), and concrete bonds well to steel and protects it from rust",
+      "They are the same color",
+      "Steel absorbs water"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 3,
+    "prompt": "What is 'Cover' in reinforced concrete design?",
+    "options": [
+      "A tarp put over the concrete",
+      "The minimum distance between the outer surface of the concrete and the outer surface of the embedded steel reinforcement, providing fire and corrosion protection",
+      "The roof of the building",
+      "The paint on the concrete"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 4,
+    "prompt": "In a simply supported reinforced concrete beam bending downward under gravity, where is the main tensile reinforcement placed?",
+    "options": [
+      "At the top",
+      "At the bottom (where the tension occurs)",
+      "In the middle",
+      "On the sides"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 5,
+    "prompt": "What is the purpose of 'Stirrups' (transverse reinforcement) in a concrete beam?",
+    "options": [
+      "To hold the beam up",
+      "To resist shear forces (diagonal tension) and hold the main longitudinal rebar in place during pouring",
+      "To make the beam longer",
+      "To look decorative"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 6,
+    "prompt": "What does LRFD stand for in structural design?",
+    "options": [
+      "Long Rebar For Design",
+      "Load and Resistance Factor Design (a method where loads are multiplied by a safety factor > 1, and material strength is multiplied by a factor < 1)",
+      "Light Reinforced Foundation Design",
+      "Linear Resistance Failure Definition"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 7,
+    "prompt": "What is an 'Under-reinforced' beam?",
+    "options": [
+      "A poorly designed beam",
+      "A beam designed so that if it fails, the steel yields (stretches) before the concrete crushes, providing visible warning (sagging and cracking) rather than sudden, explosive failure",
+      "A beam with no steel",
+      "A beam that is too thin"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 8,
+    "prompt": "What is a 'One-Way Slab' vs. a 'Two-Way Slab'?",
+    "options": [
+      "One-way has traffic going one direction",
+      "A one-way slab bends mainly in one direction (supported on two opposite sides); a two-way slab bends in two orthogonal directions (supported on all four sides)",
+      "One-way is cheaper",
+      "Two-way is thicker"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Reinforced Concrete Design",
+    "i": 9,
+    "prompt": "What is 'Prestressed Concrete'?",
+    "options": [
+      "Concrete that is stressed out",
+      "Concrete where high-strength steel cables are tensioned before the concrete is loaded, placing the concrete in initial compression to counteract future tensile bending stresses",
+      "Concrete mixed very fast",
+      "Concrete made with extra water"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 0,
+    "prompt": "Which material property makes structural steel (like A36 or A992) so desirable for large structures?",
+    "options": [
+      "It is very lightweight",
+      "It has very high strength in both tension and compression, and high ductility (it yields rather than snapping)",
+      "It is transparent",
+      "It never rusts"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 1,
+    "prompt": "What is the most common cross-sectional shape used for structural steel beams and columns in buildings?",
+    "options": [
+      "Solid square",
+      "I-beam (or W-shape / Wide-flange shape)",
+      "Hollow circle",
+      "Solid triangle"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 2,
+    "prompt": "In an I-beam under bending, which part resists the majority of the Bending Moment?",
+    "options": [
+      "The web",
+      "The flanges (the top and bottom horizontal plates)",
+      "The bolts",
+      "The welds"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 3,
+    "prompt": "In an I-beam under bending, which part resists the majority of the Shear Force?",
+    "options": [
+      "The flanges",
+      "The web (the vertical plate connecting the flanges)",
+      "The paint",
+      "The bolts"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 4,
+    "prompt": "What is the primary mode of failure a designer must check for in a long steel column under axial compression?",
+    "options": [
+      "Tensile snapping",
+      "Buckling (Euler buckling - bending laterally out of the way of the load)",
+      "Melting",
+      "Shearing"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 5,
+    "prompt": "What does the 'Slenderness Ratio' (KL/r) of a column dictate?",
+    "options": [
+      "How good it looks",
+      "Its susceptibility to buckling; a higher ratio means a longer/thinner column that will buckle at a much lower compressive load",
+      "Its tensile strength",
+      "Its resistance to rust"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 6,
+    "prompt": "What are the two primary methods for joining structural steel members?",
+    "options": [
+      "Glue and tape",
+      "Bolting (using high-strength bolts) and Welding",
+      "Riveting and nailing",
+      "Tying and soldering"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 7,
+    "prompt": "What is a 'Slip-Critical' bolted connection?",
+    "options": [
+      "A connection that slips easily",
+      "A joint where the bolts are highly tensioned to clamp the plates together so tightly that the load is transferred entirely by friction between the plates, preventing any joint movement",
+      "A connection that uses oil",
+      "A loose connection"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 8,
+    "prompt": "What is 'Lateral-Torsional Buckling' (LTB)?",
+    "options": [
+      "A column falling over",
+      "A failure mode in long, unbraced beams where the compressive flange tries to buckle sideways, causing the whole beam to twist and fail prematurely",
+      "A bolt shearing off",
+      "A weld cracking"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Basic Structural Steel Design",
+    "i": 9,
+    "prompt": "What is the purpose of 'Fireproofing' structural steel?",
+    "options": [
+      "To prevent it from catching fire",
+      "Steel doesn't burn, but it loses a massive amount of its structural strength at high temperatures (around 500-600°C); fireproofing insulates it to delay this strength loss and prevent collapse",
+      "To make it look nicer",
+      "To stop rust"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 0,
+    "prompt": "What is Biochemistry?",
+    "options": [
+      "The chemistry of batteries",
+      "The branch of science that explores the chemical processes and substances occurring within and related to living organisms",
+      "The study of rocks",
+      "The study of stars"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 1,
+    "prompt": "What are the four major classes of biological macromolecules?",
+    "options": [
+      "Earth, Wind, Fire, Water",
+      "Proteins, Carbohydrates, Lipids (Fats), and Nucleic Acids (DNA/RNA)",
+      "Sugar, Spice, Salt, Pepper",
+      "Metals, Plastics, Ceramics, Composites"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 3,
+    "prompt": "What is an 'Enzyme'?",
+    "options": [
+      "A type of fat",
+      "A biological catalyst (usually a protein) that significantly speeds up a specific chemical reaction in the cell without being consumed",
+      "A sugar molecule",
+      "A strand of DNA"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 4,
+    "prompt": "What is ATP (Adenosine Triphosphate)?",
+    "options": [
+      "A type of vitamin",
+      "The universal 'energy currency' of the cell; it stores and transports chemical energy within cells for metabolism",
+      "A structural protein",
+      "A genetic code"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 6,
+    "prompt": "What are the building blocks of Nucleic Acids (DNA and RNA)?",
+    "options": [
+      "Amino acids",
+      "Nucleotides (consisting of a sugar, a phosphate group, and a nitrogenous base)",
+      "Glucose molecules",
+      "Lipids"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 7,
+    "prompt": "According to the 'Central Dogma of Molecular Biology', how does genetic information flow?",
+    "options": [
+      "RNA -> DNA -> Protein",
+      "DNA -> RNA -> Protein (DNA is transcribed into RNA, which is translated into Protein)",
+      "Protein -> RNA -> DNA",
+      "DNA -> Protein -> RNA"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 8,
+    "prompt": "What is 'Protein Folding'?",
+    "options": [
+      "Putting proteins in a box",
+      "The physical process by which a linear polypeptide chain folds into its unique, functional three-dimensional structure, driven by hydrophobic interactions and hydrogen bonds",
+      "Cutting proteins apart",
+      "Synthesizing proteins"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biochemistry",
+    "i": 9,
+    "prompt": "What is a 'Lipid Bilayer'?",
+    "options": [
+      "Two layers of skin",
+      "The fundamental structure of cell membranes, composed of two layers of phospholipids with hydrophobic tails pointing inward and hydrophilic heads pointing outward",
+      "A double strand of DNA",
+      "A type of carbohydrate"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 0,
+    "prompt": "What does Biomechanics study?",
+    "options": [
+      "How robots walk",
+      "The application of the laws of mechanics and physics to the structure, function, and motion of biological systems (like the human body)",
+      "How cells divide",
+      "How plants perform photosynthesis"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 2,
+    "prompt": "What is the role of Tendons in the musculoskeletal system?",
+    "options": [
+      "To connect bone to bone",
+      "To connect muscle to bone, transmitting the tensile force generated by the muscle to move the skeleton",
+      "To pump blood",
+      "To act as a cushion"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 3,
+    "prompt": "What is the role of Ligaments?",
+    "options": [
+      "To connect muscle to bone",
+      "To connect bone to bone, providing stability to joints and restricting excessive movement",
+      "To produce red blood cells",
+      "To contract and produce force"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 4,
+    "prompt": "What is 'Gait Analysis'?",
+    "options": [
+      "Analyzing gates and fences",
+      "The systematic study of animal or human locomotion (walking/running), using cameras and force plates to measure kinematics and kinetics",
+      "Analyzing blood flow",
+      "Analyzing heart rate"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 5,
+    "prompt": "Why is the structure of spongy (cancellous) bone highly optimized?",
+    "options": [
+      "To make it heavy",
+      "Its internal trabecular structure aligns exactly with the principal stress trajectories to provide maximum strength with minimum weight",
+      "To store water",
+      "To conduct electricity"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 6,
+    "prompt": "What is a characteristic biomechanical property of soft tissues like skin or tendons?",
+    "options": [
+      "They are perfectly rigid",
+      "They are 'Viscoelastic', meaning their response to stress depends on both the amount of strain and the *rate* at which the strain is applied",
+      "They are brittle",
+      "They are magnetic"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 7,
+    "prompt": "What is the primary function of articular cartilage in a synovial joint?",
+    "options": [
+      "To produce synovial fluid",
+      "To provide a smooth, incredibly low-friction surface for articulation and to help distribute compressive loads over the bone ends",
+      "To hold the bones tightly together",
+      "To generate body heat"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 8,
+    "prompt": "What does 'Wolff's Law' state about bone?",
+    "options": [
+      "Bones stop growing at age 20",
+      "Bone in a healthy person or animal will adapt to the loads under which it is placed (it remodels and becomes stronger where stressed, and weaker where not stressed)",
+      "Bones are made of calcium",
+      "Bones cannot heal if broken"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Biomechanics",
+    "i": 9,
+    "prompt": "What is 'Inverse Dynamics' used for in biomechanics?",
+    "options": [
+      "Running backwards",
+      "Calculating the internal joint forces and moments (torques) based on measured external kinematics (motion) and external forces (like ground reaction forces)",
+      "Measuring heart rate",
+      "Simulating fluid flow in arteries"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  }
+]

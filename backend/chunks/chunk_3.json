@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 5,
+    "prompt": "What is the 'Monod Equation'?",
+    "options": [
+      "An equation for gravity",
+      "A fundamental mathematical model that relates the specific growth rate of microorganisms to the concentration of a limiting nutrient (substrate) in the culture medium",
+      "An equation for heat transfer",
+      "A rule for fluid flow"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 6,
+    "prompt": "In cell growth kinetics, what is the 'Lag Phase'?",
+    "options": [
+      "When cells move slowly",
+      "The initial period after inoculation where cells are adapting to their new environment and synthesizing enzymes, but not yet dividing significantly",
+      "When cells are dying",
+      "When cells are growing fastest"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 7,
+    "prompt": "What is the 'Exponential (Log) Phase'?",
+    "options": [
+      "Cells growing in a line",
+      "The period where cells are dividing at their maximum, constant specific growth rate, leading to an exponential increase in cell mass",
+      "Cells stopping growth",
+      "Cells adapting to cold"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Bioreaction Engineering",
+    "i": 8,
+    "prompt": "What is a 'Chemostat'?",
+    "options": [
+      "A thermostat for chemicals",
+      "A type of continuous bioreactor where fresh medium is continuously added and culture liquid is continuously removed to keep the culture volume and cell growth rate constant in a steady state",
+      "A device to measure pH",
+      "A batch reactor"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Building Materials",
+    "i": 0,
+    "prompt": "What are 'Building Materials'?",
+    "options": [
+      "Tools used to build",
+      "Any material used for construction purposes, such as wood, cement, aggregates, metals, bricks, concrete, and clay",
+      "Blueprints",
+      "Construction workers"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Building Materials",
+    "i": 1,
+    "prompt": "What is the primary binder used in modern concrete?",
+    "options": [
+      "Glue",
+      "Portland Cement",
+      "Asphalt",
+      "Clay"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Building Materials",
+    "i": 2,
+    "prompt": "How is Portland Cement manufactured?",
+    "options": [
+      "By digging it up",
+      "By heating limestone (calcium carbonate) and clay/shale to extreme temperatures in a rotary kiln to form 'clinker', which is then ground into a fine powder with gypsum",
+      "By mixing sand and water",
+      "By crushing rocks"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Building Materials",
+    "i": 4,
+    "prompt": "What is the difference between Cement, Mortar, and Concrete?",
+    "options": [
+      "They are the same thing",
+      "Cement is the binder powder; Mortar is cement + sand + water (used to hold bricks); Concrete is cement + sand + gravel (coarse aggregate) + water (used for structural elements)",
+      "Concrete is softer",
+      "Mortar is only for roofs"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Building Materials",
+    "i": 5,
+    "prompt": "Why is structural steel (mild steel) used in construction?",
+    "options": [
+      "It looks nice",
+      "It provides immense tensile strength and ductility, making it ideal for the skeletal frameworks of large buildings and for reinforcing concrete",
+      "It is extremely light",
+      "It never rusts"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Building Materials",
+    "i": 6,
+    "prompt": "What is 'Timber' (or Lumber)?",
+    "options": [
+      "A type of stone",
+      "Wood prepared for use in building and carpentry; a renewable, lightweight material strong in tension and compression parallel to the grain",
+      "A plastic composite",
+      "A type of brick"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Building Materials",
+    "i": 8,
+    "prompt": "What is 'Asphalt Concrete' (commonly just called Asphalt or Tarmac)?",
+    "options": [
+      "A type of strong concrete",
+      "A composite material commonly used to surface roads, consisting of mineral aggregate bound together with asphalt (bitumen), a highly viscous, sticky black petroleum liquid",
+      "Concrete painted black",
+      "A roofing material"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Cell and Molecular Biology",
+    "i": 3,
+    "prompt": "Which part of the cell controls what enters and exits?",
+    "options": [
+      "Cell wall",
+      "Cytoplasm",
+      "Cell membrane (Plasma membrane)",
+      "Nucleolus"
+    ],
+    "answer": 2,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 0,
+    "prompt": "What is the primary focus of Chemical Engineering Thermodynamics?",
+    "options": [
+      "How heat moves through a wall",
+      "The application of thermodynamics to chemical processes, focusing on phase equilibria, chemical reaction equilibria, and energy transformations in chemical plants",
+      "The study of cold temperatures",
+      "Electrical circuits"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 1,
+    "prompt": "What does the First Law of Thermodynamics state?",
+    "options": [
+      "Heat flows from cold to hot",
+      "Energy cannot be created or destroyed, only transformed from one form to another (Conservation of Energy)",
+      "Entropy always increases",
+      "Absolute zero is unreachable"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 2,
+    "prompt": "What does the Second Law of Thermodynamics state?",
+    "options": [
+      "Energy is conserved",
+      "The total entropy (disorder/randomness) of an isolated system can never decrease over time; it dictates the direction of spontaneous processes and limits the efficiency of heat engines",
+      "Mass is conserved",
+      "Pressure equals volume"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 3,
+    "prompt": "What is 'Enthalpy' (H)?",
+    "options": [
+      "The temperature of a gas",
+      "A thermodynamic property defined as the internal energy of a system plus the product of its pressure and volume (H = U + PV); essentially, the total heat content",
+      "The speed of a reaction",
+      "The friction in a pipe"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 5,
+    "prompt": "What is 'Gibbs Free Energy' (G)?",
+    "options": [
+      "Free electricity",
+      "A thermodynamic potential that measures the maximum 'useful' or reversible work obtainable from a thermodynamic system at constant temperature and pressure (G = H - TS)",
+      "The energy of the sun",
+      "The energy in a vacuum"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 6,
+    "prompt": "How do you use Gibbs Free Energy to predict if a chemical reaction is spontaneous?",
+    "options": [
+      "If G is positive",
+      "If the change in Gibbs Free Energy (delta G) is negative, the reaction is spontaneous; if positive, it is non-spontaneous",
+      "If G is zero",
+      "It doesn't predict spontaneity"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 7,
+    "prompt": "What is 'Phase Equilibrium'?",
+    "options": [
+      "When a chemical reaction stops",
+      "The state where multiple phases (like liquid and vapor) of a substance coexist at the same temperature and pressure, and the rate of transfer of molecules between phases is equal",
+      "When a solid melts completely",
+      "When a gas expands"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 8,
+    "prompt": "What is an 'Equation of State' (EOS)?",
+    "options": [
+      "A law for politicians",
+      "A mathematical mathematical equation that relates state variables like pressure, volume, and temperature for a given substance (e.g., Ideal Gas Law, Peng-Robinson)",
+      "An equation for heat transfer",
+      "A formula for chemical kinetics"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Engineering Thermodynamics",
+    "i": 9,
+    "prompt": "What is 'Fugacity'?",
+    "options": [
+      "A measure of smell",
+      "An effective partial pressure which replaces the mechanical partial pressure in an accurate computation of chemical equilibrium, accounting for non-ideal behavior of real gases",
+      "The speed of a gas",
+      "The density of a liquid"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 0,
+    "prompt": "What is the core purpose of Chemical Process Calculations?",
+    "options": [
+      "Designing logos for chemical companies",
+      "Performing material and energy balances around chemical process units to quantify the flows, compositions, and energy transfers required to manufacture a product",
+      "Fixing broken pipes",
+      "Calculating employee salaries"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 1,
+    "prompt": "What is a 'System Boundary' in process calculations?",
+    "options": [
+      "A fence around the plant",
+      "An imaginary envelope drawn around a specific process unit or entire plant to carefully define what mass and energy is entering (input) and leaving (output)",
+      "The limit of the software",
+      "A safety protocol"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 2,
+    "prompt": "What is a 'Basis of Calculation'?",
+    "options": [
+      "The final answer",
+      "A specific quantity (e.g., 100 kg of feed, 1 hour of operation) chosen arbitrarily to start solving a material balance problem, to which all other quantities will be scaled",
+      "The software used",
+      "The cost of the materials"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 3,
+    "prompt": "What is 'Conversion' in a chemical reactor?",
+    "options": [
+      "Changing units",
+      "The fraction or percentage of the feed reactant that actually reacts to form products (Reacted / Fed)",
+      "The amount of product",
+      "The heat generated"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 4,
+    "prompt": "What is the 'Yield' of a reaction process?",
+    "options": [
+      "How much profit is made",
+      "The amount of desired product formed relative to the amount of reactant that was fed (or reacted), often less than 100% due to side reactions",
+      "The speed of the reaction",
+      "The pressure in the tank"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 6,
+    "prompt": "What is a 'Purge Stream'?",
+    "options": [
+      "A cleaning hose",
+      "A small stream bled off from a recycle loop to prevent the gradual, dangerous accumulation of inert gases or unwanted impurities in the system",
+      "A stream of pure product",
+      "A vent for steam"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 7,
+    "prompt": "What is the 'Heat of Reaction' (Enthalpy of Reaction)?",
+    "options": [
+      "The temperature of the reactor",
+      "The amount of heat energy released (exothermic) or absorbed (endothermic) when a specific amount of reactants completely convert to products at a constant temperature and pressure",
+      "The boiling point",
+      "The heat of the sun"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 8,
+    "prompt": "What does an 'Energy Balance' account for?",
+    "options": [
+      "Paying the electric bill",
+      "Applying the First Law of Thermodynamics to track all heat added, heat removed, work done, and enthalpy changes of the streams entering and leaving a unit",
+      "Weighing the chemicals",
+      "Calculating fluid friction"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Process Calculations",
+    "i": 9,
+    "prompt": "What is 'Sensible Heat' vs. 'Latent Heat'?",
+    "options": [
+      "They are the same",
+      "Sensible heat is heat added/removed that causes a change in temperature; Latent heat is heat added/removed that causes a phase change (like boiling) with NO change in temperature",
+      "Sensible heat makes sense, latent heat does not",
+      "Sensible is for liquids, Latent is for solids"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 0,
+    "prompt": "What is Chemical Reaction Engineering (CRE)?",
+    "options": [
+      "Building metal tanks",
+      "The specialty that deals with the design, optimization, and scaling of chemical reactors, combining chemical kinetics with mass and heat transfer",
+      "Mixing chemicals in a lab",
+      "Studying atomic structure"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 1,
+    "prompt": "What is 'Chemical Kinetics'?",
+    "options": [
+      "The movement of chemicals",
+      "The study of the rates at which chemical reactions occur and the mechanisms by which they proceed",
+      "The temperature of chemicals",
+      "The weight of chemicals"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 2,
+    "prompt": "What is a 'Batch Reactor'?",
+    "options": [
+      "A continuous pipe",
+      "A closed vessel where reactants are added at the start, allowed to react over time while being stirred, and products are removed at the end; nothing enters or leaves during the reaction",
+      "A reactor that bakes cookies",
+      "A tank with a continuous flow of water"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 3,
+    "prompt": "What is a CSTR (Continuous Stirred-Tank Reactor)?",
+    "options": [
+      "A tank that is never stirred",
+      "An open vessel where reactants continuously flow in and products continuously flow out, with an agitator maintaining perfect mixing so the composition inside is uniform everywhere",
+      "A batch reactor",
+      "A long thin pipe"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 4,
+    "prompt": "What is a PFR (Plug Flow Reactor)?",
+    "options": [
+      "A stirred tank",
+      "A continuous tubular reactor where fluid flows through as a series of 'plugs' with perfectly uniform velocity, with no mixing in the axial (flow) direction",
+      "A reactor shaped like a plug",
+      "A batch reactor"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 5,
+    "prompt": "In a PFR, how does the concentration of reactants change?",
+    "options": [
+      "It stays constant",
+      "It decreases continuously as the fluid travels down the length of the tube",
+      "It increases",
+      "It fluctuates randomly"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 6,
+    "prompt": "What is 'Space-Time' (Tau) in a continuous reactor?",
+    "options": [
+      "Traveling at the speed of light",
+      "The volume of the reactor divided by the volumetric flow rate (V/Q); it represents the average time a packet of fluid spends inside the reactor",
+      "The time to build the reactor",
+      "The physical space the reactor takes up"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 7,
+    "prompt": "According to the Arrhenius Equation, how does Temperature typically affect reaction rate?",
+    "options": [
+      "It slows it down",
+      "Reaction rate increases exponentially with an increase in absolute temperature",
+      "It has no effect",
+      "It makes the reaction stop"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical Reaction Engineering",
+    "i": 8,
+    "prompt": "What is 'Activation Energy' (Ea)?",
+    "options": [
+      "The energy needed to start the factory",
+      "The minimum amount of energy required by the reacting molecules to successfully collide and initiate the chemical reaction",
+      "The energy released by a bomb",
+      "Electrical energy"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical and Biochemical Engineering Thermodynamics",
+    "i": 0,
+    "prompt": "How does Biochemical Thermodynamics differ from traditional Chemical Thermodynamics?",
+    "options": [
+      "It uses different laws of physics",
+      "It applies thermodynamic principles specifically to complex biological systems, macromolecules (like proteins folding), and cellular metabolisms, which often operate far from ideal conditions",
+      "It only deals with water",
+      "It ignores heat"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical and Biochemical Engineering Thermodynamics",
+    "i": 2,
+    "prompt": "What is the 'Hydrophobic Effect'?",
+    "options": [
+      "Being afraid of water",
+      "The tendency of nonpolar substances to aggregate in aqueous solution and exclude water molecules, driven thermodynamically by the increase in entropy of the surrounding water",
+      "Water sticking to glass",
+      "Water freezing"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical and Biochemical Engineering Thermodynamics",
+    "i": 3,
+    "prompt": "In biochemistry, the Standard State (delta G^0') is defined slightly differently than in chemistry. What is the main difference?",
+    "options": [
+      "Pressure is higher",
+      "In biochemistry, the standard state assumes a pH of 7.0 (concentration of H+ is 10^-7 M) rather than a pH of 0 (1 M H+), to reflect physiological conditions",
+      "Temperature is 100 C",
+      "It assumes no gravity"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical and Biochemical Engineering Thermodynamics",
+    "i": 4,
+    "prompt": "How do biological organisms obey the Second Law of Thermodynamics (entropy increases) while building highly ordered structures like DNA?",
+    "options": [
+      "They break the law",
+      "They are 'open systems' that decrease their local entropy by taking in free energy from the environment and releasing a massive amount of heat (entropy) into their surroundings",
+      "They are magic",
+      "They use cold temperatures"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical and Biochemical Engineering Thermodynamics",
+    "i": 6,
+    "prompt": "What is 'Coupled Reaction' in metabolism?",
+    "options": [
+      "Reactions happening in pairs",
+      "A thermodynamically unfavorable reaction (positive delta G) is driven forward by physically or chemically linking it to a highly favorable reaction (like the hydrolysis of ATP)",
+      "Mixing two chemicals",
+      "Two people working together"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical and Biochemical Engineering Thermodynamics",
+    "i": 7,
+    "prompt": "What is 'Activity' versus 'Concentration' in non-ideal solutions (like cell cytoplasm)?",
+    "options": [
+      "They are the same",
+      "Concentration is the physical amount; Activity is the 'effective' concentration that actually participates in reactions, adjusted by an activity coefficient to account for molecular crowding and interactions",
+      "Activity is speed, concentration is mass",
+      "Activity is for solids"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Chemical and Biochemical Engineering Thermodynamics",
+    "i": 9,
+    "prompt": "What are 'Colligative Properties'?",
+    "options": [
+      "Properties of colleges",
+      "Properties of a solution (like boiling point elevation or osmotic pressure) that depend only on the *number* of solute particles dissolved, not their chemical identity",
+      "Properties of colors",
+      "Properties of pure water"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Compressible Aerodynamics",
+    "i": 0,
+    "prompt": "What fundamentally distinguishes 'Compressible' aerodynamics from 'Incompressible' aerodynamics?",
+    "options": [
+      "The shape of the plane",
+      "In compressible flow, the fluid density changes significantly due to changes in pressure and velocity, typical at high speeds (approaching or exceeding the speed of sound)",
+      "Compressible flow uses water",
+      "Incompressible flow only happens in space"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Compressible Aerodynamics",
+    "i": 1,
+    "prompt": "What is the 'Mach Number'?",
+    "options": [
+      "The speed of the engine",
+      "The dimensionless ratio of the local flow velocity to the local speed of sound in that medium (M = V / a)",
+      "The weight of the aircraft",
+      "A brand of razor"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  }
+]

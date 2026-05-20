@@ -39,6 +39,7 @@ Variables:
 ```text
 HOST=0.0.0.0
 CLIENT_ORIGIN=https://your-frontend-url.vercel.app
+DATABASE_URL=postgres://...
 ```
 
 Railway will provide `PORT` automatically. After deploy, copy the public backend URL.
@@ -60,9 +61,12 @@ Variables:
 ```text
 HOST=0.0.0.0
 CLIENT_ORIGIN=https://your-frontend-url.vercel.app
+DATABASE_URL=postgres://...
 ```
 
 Render will provide `PORT` automatically. After deploy, copy the public backend URL.
+
+`DATABASE_URL` should point to a managed Postgres database. If it is omitted, the backend falls back to local JSON files in `backend/data`, which is fine for local development but not for production accounts, sessions, rankings, or match history.
 
 ## Frontend On Vercel
 

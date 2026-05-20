@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 6,
+    "prompt": "What is the 'Critical Path' in project scheduling (CPM)?",
+    "options": [
+      "The most dangerous path on site",
+      "The longest sequence of dependent tasks in a project plan; a delay in any task on the critical path will directly delay the entire project's completion date",
+      "The shortest route to finish",
+      "The cheapest way to do the project"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 7,
+    "prompt": "What is 'Float' (or Slack) in a project schedule?",
+    "options": [
+      "A raft",
+      "The amount of time a task can be delayed without causing a delay to subsequent tasks or the project's final completion date",
+      "Extra money in the budget",
+      "Taking a break"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 8,
+    "prompt": "What does 'Earned Value Management' (EVM) measure?",
+    "options": [
+      "How much profit is made",
+      "A project management technique for objectively measuring project performance and progress by combining measurements of scope, schedule, and cost in a single integrated system",
+      "How happy the client is",
+      "The physical weight of the building"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 9,
+    "prompt": "What is 'Scope Creep'?",
+    "options": [
+      "A slow worker",
+      "The uncontrolled, continuous expansion or changes in a project's scope, requirements, or features without corresponding adjustments to time, cost, and resources",
+      "A type of budget cut",
+      "A structural failure"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 0,
+    "prompt": "What is a 'Fluid' in engineering terms?",
+    "options": [
+      "Only water",
+      "Any substance that continuously deforms (flows) under an applied shear stress; this includes both liquids and gases",
+      "Only gases",
+      "Any smooth solid"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 1,
+    "prompt": "What is 'Viscosity'?",
+    "options": [
+      "The color of the fluid",
+      "A measure of a fluid's internal resistance to gradual deformation by shear stress or tensile stress; essentially, its 'thickness' or internal friction",
+      "The weight of the fluid",
+      "The temperature of the fluid"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 2,
+    "prompt": "What characterizes 'Laminar Flow'?",
+    "options": [
+      "Messy, chaotic flow",
+      "Fluid particles moving in smooth, parallel layers (laminae) with no disruption between the layers; typical at low velocities or high viscosities",
+      "Flow moving in a circle",
+      "Flow moving backwards"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 3,
+    "prompt": "What characterizes 'Turbulent Flow'?",
+    "options": [
+      "Smooth, quiet flow",
+      "Fluid flow characterized by chaotic, irregular, and rapid fluctuations in velocity and pressure, featuring eddies and cross-current mixing; typical at high velocities",
+      "Flow that stops completely",
+      "Flow through a filter"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 4,
+    "prompt": "What dimensionless number is used to predict if flow in a pipe will be laminar or turbulent?",
+    "options": [
+      "Mach Number",
+      "Reynolds Number (Re = density * velocity * diameter / viscosity)",
+      "Prandtl Number",
+      "Froude Number"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 5,
+    "prompt": "What does Bernoulli's Equation state for a steady, incompressible, frictionless flow?",
+    "options": [
+      "Velocity equals pressure",
+      "The total mechanical energy of the flowing fluid (the sum of pressure energy, kinetic energy, and potential energy) remains constant along a streamline",
+      "Heat always rises",
+      "Friction increases with speed"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 6,
+    "prompt": "What is 'Head Loss' in a piping system?",
+    "options": [
+      "Losing the top of a tank",
+      "The reduction in the total head (pressure/energy) of the fluid as it flows through the system, caused by friction against the pipe walls and turbulence from fittings/valves",
+      "The water evaporating",
+      "The pump turning off"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 7,
+    "prompt": "What is a 'Centrifugal Pump'?",
+    "options": [
+      "A pump that pushes fluid like a piston",
+      "The most common type of pump; it uses a rotating impeller to impart kinetic energy to the fluid, which is then converted into pressure energy by the volute casing",
+      "A pump that uses gravity",
+      "A pump that uses a screw"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 8,
+    "prompt": "What is 'Cavitation' in a pump?",
+    "options": [
+      "A cavity in a tooth",
+      "The violent formation and subsequent rapid collapse of vapor bubbles within the liquid in the pump due to localized low pressure, causing severe noise, vibration, and pitting damage to the impeller",
+      "The pump running too hot",
+      "The pump leaking fluid"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Fluid Flow Operations",
+    "i": 9,
+    "prompt": "What does NPSH stand for, and why is it critical in pump operation?",
+    "options": [
+      "National Pump Standard Height",
+      "Net Positive Suction Head; it is the absolute pressure available at the pump inlet. It must be kept higher than the liquid's vapor pressure to prevent cavitation",
+      "Negative Pressure System Halt",
+      "Nominal Pipe Size Hanger"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 0,
+    "prompt": "What is Genetic Engineering?",
+    "options": [
+      "Building machines with genes",
+      "The direct, deliberate manipulation of an organism's genes (DNA) using biotechnology to alter its characteristics",
+      "Studying family trees",
+      "Breeding animals naturally"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 1,
+    "prompt": "What is 'Recombinant DNA' (rDNA)?",
+    "options": [
+      "DNA that is broken",
+      "DNA molecules formed by laboratory methods to carefully bring together genetic material from multiple, different sources (e.g., human insulin gene in a bacterial plasmid)",
+      "DNA found in ancient fossils",
+      "DNA that naturally mutates"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 2,
+    "prompt": "What is the function of a 'Restriction Enzyme' (Restriction Endonuclease)?",
+    "options": [
+      "To glue DNA together",
+      "It acts as molecular scissors, cutting DNA molecules at specific, highly recognizable short sequence sequences (restriction sites)",
+      "To make DNA copy itself",
+      "To turn DNA into RNA"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 4,
+    "prompt": "What is a 'Plasmid' in genetic engineering?",
+    "options": [
+      "A part of a plant cell",
+      "A small, circular, double-stranded DNA molecule that is distinct from a cell's chromosomal DNA (usually in bacteria); used as a 'vector' to carry foreign genetic material into another cell",
+      "A type of virus",
+      "A piece of lab equipment"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 5,
+    "prompt": "What does PCR (Polymerase Chain Reaction) do?",
+    "options": [
+      "Cuts DNA into pieces",
+      "A revolutionary technique used to rapidly 'amplify' (make millions to billions of copies of) a specific, targeted segment of DNA in a test tube",
+      "Translates DNA into protein",
+      "Measures the size of DNA"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 6,
+    "prompt": "What is 'Transformation' in microbiology?",
+    "options": [
+      "A bug turning into a butterfly",
+      "The genetic alteration of a cell resulting from the direct uptake, incorporation, and expression of exogenous genetic material (like a recombinant plasmid) from its surroundings",
+      "A cell dying",
+      "A cell dividing"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 7,
+    "prompt": "What is the purpose of a 'Selectable Marker' (like an antibiotic resistance gene) on a plasmid?",
+    "options": [
+      "To make the bacteria dangerous",
+      "To allow researchers to easily identify and isolate only those cells that have successfully taken up the recombinant plasmid (by growing them in an antibiotic broth where non-transformed cells die)",
+      "To make the plasmid glow",
+      "To cut the DNA"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 8,
+    "prompt": "What does the revolutionary CRISPR-Cas9 system do?",
+    "options": [
+      "It takes pictures of DNA",
+      "It acts as a highly precise, programmable pair of molecular scissors, allowing scientists to easily target and edit (cut/add) specific genes in living cells and organisms",
+      "It copies DNA rapidly",
+      "It sequences the whole genome"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Genetic Engineering",
+    "i": 9,
+    "prompt": "What is 'Gene Therapy'?",
+    "options": [
+      "Talking to a therapist about genes",
+      "An experimental technique that uses genes to treat or prevent disease by inserting a normal, healthy gene into a patient's cells to replace a mutated or missing gene",
+      "Taking vitamins",
+      "Exercise therapy"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Geotechnical Engineering",
+    "i": 4,
+    "prompt": "What is 'soil compaction'?",
+    "options": [
+      "Expulsion of water from voids",
+      "Densification of soil by removing air voids through mechanical energy",
+      "Natural settling of soil over years",
+      "Adding water to dry soil"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 0,
+    "prompt": "What is Immunology?",
+    "options": [
+      "The study of the brain",
+      "The branch of biomedical science that covers the study of immune systems in all organisms, protecting them from infection and disease",
+      "The study of muscles",
+      "The study of bones"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 1,
+    "prompt": "What are the white blood cells that are the primary operators of the immune system called?",
+    "options": [
+      "Erythrocytes",
+      "Leukocytes (including lymphocytes, macrophages, neutrophils)",
+      "Thrombocytes",
+      "Hepatocytes"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 2,
+    "prompt": "What is the difference between an Antigen and an Antibody?",
+    "options": [
+      "They are the same thing",
+      "An Antigen is a foreign substance (like a piece of a virus) that triggers an immune response; an Antibody is a protein produced by the body to bind to and neutralize that specific antigen",
+      "An Antibody is bad, an Antigen is good",
+      "Antigens cure diseases"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 4,
+    "prompt": "What is the main function of B Cells (B Lymphocytes)?",
+    "options": [
+      "To eat bacteria",
+      "To recognize foreign antigens and differentiate into plasma cells, which produce and secrete massive amounts of specific antibodies into the bloodstream",
+      "To kill infected cells directly",
+      "To provide structural support"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 5,
+    "prompt": "What is the main function of Cytotoxic T Cells (CD8+ T cells)?",
+    "options": [
+      "To produce antibodies",
+      "To directly recognize and kill host cells that are infected with viruses or have become cancerous, usually by inducing apoptosis (programmed cell death)",
+      "To eat bacteria",
+      "To heal wounds"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 6,
+    "prompt": "What is the critical role of Helper T Cells (CD4+ T cells)?",
+    "options": [
+      "They kill bacteria",
+      "They act as the 'generals' of the immune system, secreting cytokines that regulate and powerfully activate both B cells (to make antibodies) and Cytotoxic T cells",
+      "They carry oxygen",
+      "They repair bone"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 7,
+    "prompt": "What is an 'Autoimmune Disease'?",
+    "options": [
+      "A disease from cars",
+      "A condition arising from an abnormal immune response where the body's immune system mistakenly attacks its own healthy cells, tissues, and organs (e.g., Type 1 Diabetes, Rheumatoid Arthritis)",
+      "A disease you get automatically",
+      "A lack of immunity"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Immunology",
+    "i": 8,
+    "prompt": "What is 'Immunological Memory'?",
+    "options": [
+      "Remembering to take medicine",
+      "The ability of the adaptive immune system to quickly and robustly respond to a pathogen it has previously encountered, owing to the creation of long-lived Memory B and T cells (this is how vaccines work)",
+      "The brain remembering a sickness",
+      "Antibodies living forever"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 0,
+    "prompt": "What is 'Mass Transfer' in chemical engineering?",
+    "options": [
+      "Moving heavy equipment",
+      "The net movement of mass from one location, usually meaning stream, phase, fraction or component, to another, driven by a concentration difference",
+      "Calculating weight",
+      "Pumping water"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 1,
+    "prompt": "What is the fundamental driving force for Mass Transfer?",
+    "options": [
+      "A difference in height",
+      "A difference in concentration (or partial pressure/chemical potential) between two points; mass naturally moves from regions of high concentration to low concentration",
+      "A difference in temperature",
+      "A difference in speed"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 2,
+    "prompt": "What does Fick's First Law of Diffusion state?",
+    "options": [
+      "Mass cannot be destroyed",
+      "The molar flux of a species due to molecular diffusion is directly proportional to its concentration gradient (rate of diffusion = -D * dc/dx)",
+      "Heat travels up",
+      "Gas expands when heated"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 4,
+    "prompt": "What is 'Convective Mass Transfer'?",
+    "options": [
+      "Transfer by touching",
+      "Mass transfer between a boundary surface (like a solid or liquid phase) and a moving fluid, where the fluid's bulk motion significantly enhances the rate of mass transport beyond simple diffusion",
+      "Mass transfer in a vacuum",
+      "Transfer using heat"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 5,
+    "prompt": "What is the 'Mass Transfer Coefficient' (k)?",
+    "options": [
+      "A weight constant",
+      "A rate constant used in convective mass transfer equations (Flux = k * Delta C), relating the mass transfer rate, mass transfer area, and concentration difference",
+      "A measure of kinetic energy",
+      "The speed of the fluid"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 6,
+    "prompt": "What is 'Two-Film Theory' in gas-liquid mass transfer?",
+    "options": [
+      "A movie theory",
+      "A model assuming that resistance to mass transfer between two phases lies entirely within two stagnant thin 'films' (one gas, one liquid) immediately on either side of the phase interface",
+      "A theory about plastic wrap",
+      "A theory about cameras"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 8,
+    "prompt": "What is 'Relative Volatility' in distillation?",
+    "options": [
+      "How angry the chemical is",
+      "A measure comparing the vapor pressures of the components in a liquid mixture; a high relative volatility means the mixture is very easy to separate by distillation",
+      "The speed of boiling",
+      "The density of the vapor"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer I",
+    "i": 9,
+    "prompt": "What is 'Absorption' (Gas Absorption)?",
+    "options": [
+      "Drying a spill with a towel",
+      "A mass transfer operation where a gas mixture contacts a liquid solvent, and one or more components of the gas dissolve selectively into the liquid (e.g., removing CO2 from flue gas using water)",
+      "Turning a liquid into a gas",
+      "Mixing two powders"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer - II",
+    "i": 0,
+    "prompt": "While Mass Transfer I often focuses on fundamentals, diffusion, and distillation, what operations does Mass Transfer II typically cover?",
+    "options": [
+      "Pumping fluids",
+      "More advanced, specific separation unit operations like Liquid-Liquid Extraction, Leaching, Adsorption, Drying, and Crystallization",
+      "Thermodynamics",
+      "Chemical kinetics"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer - II",
+    "i": 1,
+    "prompt": "What is 'Liquid-Liquid Extraction' (Solvent Extraction)?",
+    "options": [
+      "Evaporating water",
+      "Separating a solute from a liquid solution by bringing it into contact with a second, immiscible liquid solvent in which the solute has a much higher solubility",
+      "Mixing two identical liquids",
+      "Freezing a liquid"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer - II",
+    "i": 3,
+    "prompt": "What is 'Adsorption' (not Absorption)?",
+    "options": [
+      "Soaking up water like a sponge",
+      "A surface phenomenon where molecules of a gas or liquid (adsorbate) adhere to the highly porous surface of a solid material (adsorbent, like activated carbon or silica gel)",
+      "Dissolving a gas in a liquid",
+      "Melting a solid"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer - II",
+    "i": 5,
+    "prompt": "What is the primary purpose of 'Drying' in chemical engineering?",
+    "options": [
+      "Making things warmer",
+      "The final removal of relatively small amounts of a volatile liquid (usually water) from a solid material, usually by transferring heat to vaporize the liquid into a sweep gas",
+      "Adding water to a solid",
+      "Freezing a material"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer - II",
+    "i": 6,
+    "prompt": "In drying operations, what is 'Equilibrium Moisture Content'?",
+    "options": [
+      "Zero moisture",
+      "The lowest moisture content a specific solid can reach when exposed to air of a given temperature and humidity for an infinite time (it will dry no further)",
+      "100% moisture",
+      "The moisture of the air"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mass Transfer - II",
+    "i": 8,
+    "prompt": "What is 'Supersaturation' and why is it important in crystallization?",
+    "options": [
+      "Adding too much water",
+      "A state where a solution contains more dissolved solute than it theoretically can hold at equilibrium; it is the fundamental thermodynamic driving force required for crystals to nucleate and grow",
+      "Making a solution very hot",
+      "Filtering a solution"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 0,
+    "prompt": "What defines a 'Medical Device'?",
+    "options": [
+      "Only large hospital machines",
+      "Any instrument, apparatus, implant, or machine intended for use in the diagnosis, cure, mitigation, treatment, or prevention of disease in humans or animals, which does not achieve its primary intended purposes through chemical action (like a drug)",
+      "Only things inserted into the body",
+      "Any tool used by a doctor"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 1,
+    "prompt": "How are medical devices typically classified by regulatory bodies (like the FDA)?",
+    "options": [
+      "By color and size",
+      "By Risk Class (e.g., Class I: Low risk like bandages; Class II: Moderate risk like wheelchairs; Class III: High risk/life-sustaining like pacemakers)",
+      "By how expensive they are",
+      "By the material they are made of"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  }
+]

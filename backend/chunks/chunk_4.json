@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Compressible Aerodynamics",
+    "i": 2,
+    "prompt": "What defines 'Supersonic' flow?",
+    "options": [
+      "Flow in a superhero movie",
+      "Flow where the local velocity is greater than the speed of sound (Mach number > 1)",
+      "Flow very close to the ground",
+      "Flow with high pressure"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Compressible Aerodynamics",
+    "i": 4,
+    "prompt": "What happens to the Mach number of a supersonic flow after it passes through a Normal Shock Wave?",
+    "options": [
+      "It increases",
+      "It abruptly drops to a subsonic value (Mach < 1)",
+      "It stays the same",
+      "It becomes zero"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Compressible Aerodynamics",
+    "i": 5,
+    "prompt": "What is 'Transonic' flight?",
+    "options": [
+      "Flying across the ocean",
+      "A flight regime (typically Mach 0.8 to 1.2) where both subsonic and supersonic flow regions simultaneously exist around the aircraft, causing complex drag and stability issues",
+      "Flying upside down",
+      "Flying in a vacuum"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Compressible Aerodynamics",
+    "i": 6,
+    "prompt": "What is 'Wave Drag'?",
+    "options": [
+      "Drag from ocean waves",
+      "A specific type of aerodynamic drag that appears only at transonic and supersonic speeds, caused by the formation of shock waves and the resulting loss of energy",
+      "Friction on the wings",
+      "Drag from carrying heavy cargo"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Compressible Aerodynamics",
+    "i": 7,
+    "prompt": "What is an 'Expansion Fan' (Prandtl-Meyer expansion)?",
+    "options": [
+      "A fan to cool the engine",
+      "A continuous, isentropic process where supersonic flow turns around a convex corner, causing the flow to accelerate (Mach number increases) and pressure to drop",
+      "A type of wing flap",
+      "A jet engine exhaust"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 0,
+    "prompt": "What is the primary purpose of Design of Experiments (DOE)?",
+    "options": [
+      "To make labs look nice",
+      "To systematically plan and conduct experiments to efficiently determine the relationship between factors (inputs) and the response (output) of a process",
+      "To guess the outcome of a reaction",
+      "To avoid doing math"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 1,
+    "prompt": "In DOE, what is a 'Factor'?",
+    "options": [
+      "A mathematical constant",
+      "An independent variable (like temperature or pressure) that is intentionally manipulated during the experiment to observe its effect on the response",
+      "The final result",
+      "A factory worker"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 2,
+    "prompt": "What is a 'Response' in DOE?",
+    "options": [
+      "Answering a question",
+      "The dependent variable (like yield, strength, or impurity level) that is measured as the outcome of the experiment",
+      "A chemical spill",
+      "The speed of the computer"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 3,
+    "prompt": "What does 'Full Factorial Design' mean?",
+    "options": [
+      "Designing a whole factory",
+      "An experimental design where runs are conducted for every single possible combination of all factors at all their chosen levels",
+      "Only testing one factor at a time",
+      "A design using fractions"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 4,
+    "prompt": "Why is the traditional 'One-Factor-At-A-Time' (OFAT) approach generally inferior to DOE?",
+    "options": [
+      "It takes too long to type",
+      "It is inefficient and completely fails to detect 'interactions' between factors (where the effect of one factor depends on the level of another)",
+      "It requires too much math",
+      "It uses too many chemicals"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 5,
+    "prompt": "What is an 'Interaction Effect'?",
+    "options": [
+      "Talking to other scientists",
+      "When the impact of one factor on the response variable is different depending on the level of a *different* factor (e.g., catalyst only works at high heat)",
+      "When two chemicals explode",
+      "When the experiment fails"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 6,
+    "prompt": "What is a 'Fractional Factorial Design'?",
+    "options": [
+      "A design that is broken",
+      "A highly efficient design that tests only a carefully chosen *subset* (fraction) of the full factorial combinations, used to screen many factors quickly with fewer runs",
+      "A design using fractions of a milliliter",
+      "A design done halfway"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 7,
+    "prompt": "What does 'Confounding' (or Aliasing) mean in a fractional factorial design?",
+    "options": [
+      "Being confused by the data",
+      "When the effect of one factor or interaction cannot be mathematically separated (distinguished) from the effect of another because they were varied together in the design",
+      "Making a mistake in the lab",
+      "Hiding the results"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 8,
+    "prompt": "What is the purpose of 'Blocking' in an experiment?",
+    "options": [
+      "Stopping the experiment early",
+      "A technique used to group experimental runs into 'blocks' to mathematically remove the effect of known, uncontrollable nuisance variables (like different batches of raw material or different days)",
+      "Putting wooden blocks under the equipment",
+      "Hiding data from the boss"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Design of Experiments",
+    "i": 9,
+    "prompt": "What is 'Response Surface Methodology' (RSM) used for?",
+    "options": [
+      "Studying tables and desks",
+      "A collection of mathematical and statistical techniques (using designs like Central Composite) used to model and *optimize* a process, finding the exact peak performance settings",
+      "Measuring the surface area of a powder",
+      "Making 3D charts for presentations"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 0,
+    "prompt": "What is Digital Image Processing?",
+    "options": [
+      "Taking pictures with a phone",
+      "The use of computer algorithms to perform image processing on digital images, to enhance them or extract useful information",
+      "Printing photos on paper",
+      "Painting with digital brushes"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 1,
+    "prompt": "What is a 'Pixel'?",
+    "options": [
+      "A fairy",
+      "The smallest addressable element (a single point) in a raster image, represented by numerical values denoting brightness or color",
+      "A type of camera lens",
+      "A software program"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 2,
+    "prompt": "What does a 'Histogram' of a grayscale image show?",
+    "options": [
+      "A history of the image",
+      "A graphical representation showing the frequency (count) of each pixel intensity value (from 0 to 255) present in the image",
+      "A map of where colors are",
+      "The file size of the image"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 3,
+    "prompt": "What is 'Histogram Equalization' used for?",
+    "options": [
+      "Making all pixels the same color",
+      "A technique to automatically improve the global contrast of an image by stretching out the most frequent intensity values across the entire range",
+      "Cropping the image",
+      "Removing red-eye"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 4,
+    "prompt": "What is 'Spatial Filtering' (or Convolution)?",
+    "options": [
+      "Filtering water with space age tech",
+      "A neighborhood operation where a small matrix (a mask or kernel) is passed over the image, performing mathematical operations on local pixels to blur, sharpen, or detect edges",
+      "Organizing files on a hard drive",
+      "Changing the image resolution"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 5,
+    "prompt": "What does a 'Low-pass Filter' (like a Gaussian blur) do to an image?",
+    "options": [
+      "Makes it darker",
+      "Attenuates high-frequency components (edges and noise), resulting in a smoother, blurred image",
+      "Sharpen the edges",
+      "Increases the contrast"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 6,
+    "prompt": "What does a 'High-pass Filter' (like a Sobel operator) do?",
+    "options": [
+      "Makes it brighter",
+      "Attenuates low-frequency components (smooth areas) and enhances high-frequency components, effectively performing edge detection",
+      "Blurs the image",
+      "Compresses the file size"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 7,
+    "prompt": "What is 'Image Segmentation'?",
+    "options": [
+      "Cutting a photo with scissors",
+      "The process of partitioning a digital image into multiple segments (sets of pixels, also known as super-pixels) to locate objects and boundaries",
+      "Sending an image in parts over email",
+      "Changing the color palette"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 8,
+    "prompt": "What is 'Morphological Image Processing'?",
+    "options": [
+      "Changing a cat into a dog",
+      "A broad set of non-linear operations (like erosion and dilation) related to the shape or morphology of features in an image, typically used on binary (black and white) images",
+      "Compressing a video",
+      "Adding text to an image"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Digital Image Processing",
+    "i": 9,
+    "prompt": "What is the Fourier Transform used for in image processing?",
+    "options": [
+      "Drawing circles",
+      "Transforming an image from the spatial domain (pixels) into the frequency domain, allowing for complex filtering and compression (like in JPEG encoding)",
+      "Resizing the image",
+      "Colorizing a black and white photo"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 0,
+    "prompt": "What does 'Downstream Processing' (Recovery and Purification) refer to in biomanufacturing?",
+    "options": [
+      "Selling the product",
+      "All the steps required *after* the fermentation/bioreactor stage to separate, purify, and concentrate the desired biological product from the complex cell broth",
+      "Preparing the raw materials",
+      "Cleaning the reactor"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 1,
+    "prompt": "What is typically the first step in downstream processing?",
+    "options": [
+      "Drying to a powder",
+      "Solid-Liquid Separation (removing the cells or cell debris from the liquid broth, usually via centrifugation or filtration)",
+      "Chromatography",
+      "Adding flavor"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 2,
+    "prompt": "If the desired product is 'intracellular' (produced inside the cell), what must be done before separation?",
+    "options": [
+      "The cells must be frozen",
+      "Cell Disruption (breaking open the cell walls/membranes using mechanical force like homogenization, or chemical/enzymatic lysis) to release the product",
+      "The cells must be fed more sugar",
+      "The broth must be boiled"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 3,
+    "prompt": "How does a Centrifuge separate materials?",
+    "options": [
+      "By boiling them",
+      "By spinning at very high speeds, using tremendous centrifugal force to rapidly separate particles (like cells) based on their density differences from the liquid",
+      "By passing them through a sieve",
+      "By using magnets"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 4,
+    "prompt": "What is 'Microfiltration'?",
+    "options": [
+      "Filtering very slowly",
+      "A membrane filtration process that removes intact cells and large cellular debris based on size (pores typically 0.1 to 10 micrometers)",
+      "Filtering out salt",
+      "Filtering light"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 5,
+    "prompt": "What is 'Ultrafiltration' commonly used for?",
+    "options": [
+      "Removing huge rocks",
+      "A membrane process with much smaller pores (1 to 100 nm) used to concentrate the protein product and remove smaller molecules like salts and sugars (diafiltration)",
+      "Drying the product",
+      "Killing viruses"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 6,
+    "prompt": "What is the difference between Dead-End Filtration and Cross-Flow (Tangential Flow) Filtration?",
+    "options": [
+      "They are the same",
+      "In dead-end, fluid flows straight into the filter (clogs quickly); in cross-flow, fluid flows *parallel* to the membrane surface, continuously sweeping away particles to prevent clogging",
+      "Dead-end is faster",
+      "Cross-flow uses no pressure"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 8,
+    "prompt": "What is Liquid-Liquid Extraction (Solvent Extraction)?",
+    "options": [
+      "Mixing two identical liquids",
+      "A method to separate compounds based on their different solubilities in two immiscible (unmixable) liquids, usually an aqueous broth and an organic solvent",
+      "Evaporating a liquid",
+      "Freezing a liquid"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - I",
+    "i": 9,
+    "prompt": "What is 'Precipitation' in downstream processing?",
+    "options": [
+      "Rain falling on the plant",
+      "Adding salts (like ammonium sulfate) or altering pH/temperature to drastically lower the solubility of a target protein, causing it to fall out of solution as a solid",
+      "Dissolving a powder",
+      "Turning a liquid into a gas"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 0,
+    "prompt": "While Downstream Processes I focuses on initial recovery and bulk separation, what does Downstream Processes II generally focus on?",
+    "options": [
+      "Packaging the product",
+      "High-resolution purification (polishing) to achieve extreme purity levels required for pharmaceuticals, usually via chromatography, and final product formulation",
+      "Growing the cells",
+      "Disposing of waste"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 2,
+    "prompt": "In Size Exclusion Chromatography (Gel Filtration), which molecules elute (come out) first?",
+    "options": [
+      "The smallest ones",
+      "The largest ones (they cannot enter the tiny pores in the beads, so they bypass them and travel straight through the column faster)",
+      "The most positively charged ones",
+      "The most hydrophobic ones"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 4,
+    "prompt": "How are proteins 'eluted' (released) from an Ion Exchange column?",
+    "options": [
+      "By shaking it",
+      "By gradually increasing the salt concentration (ionic strength) or changing the pH of the buffer flowing through the column to disrupt the electrical bonds",
+      "By heating it to boiling",
+      "By adding pure water"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 5,
+    "prompt": "What is Affinity Chromatography?",
+    "options": [
+      "A cheap method",
+      "The most highly specific and powerful purification method, relying on highly specific biological interactions (like an antibody-antigen or enzyme-substrate lock-and-key fit) attached to the matrix",
+      "Separation by size",
+      "Separation by boiling point"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 6,
+    "prompt": "What is Hydrophobic Interaction Chromatography (HIC)?",
+    "options": [
+      "Separating water from oil",
+      "Separates proteins based on the hydrophobicity (water-repelling nature) of their surface patches; binding occurs at high salt concentrations and elution at low salt",
+      "Separating based on charge",
+      "Separating based on DNA"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 7,
+    "prompt": "What is 'Lyophilization'?",
+    "options": [
+      "A type of lie detector",
+      "Freeze-drying; a gentle process where water is removed from a biological product by freezing it and then placing it under a vacuum, allowing the ice to sublimate directly to vapor",
+      "Boiling it dry",
+      "Adding preservatives"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 8,
+    "prompt": "Why is Lyophilization preferred for formulating biopharmaceuticals (like vaccines or antibodies)?",
+    "options": [
+      "It is the cheapest method",
+      "It drastically extends shelf-life and stability at room temperature without destroying the fragile, heat-sensitive protein structures (unlike thermal evaporation)",
+      "It makes it taste better",
+      "It turns it into a liquid"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Downstream Processes - II",
+    "i": 9,
+    "prompt": "What is a 'Theoretical Plate' in chromatography?",
+    "options": [
+      "A real metal plate",
+      "A hypothetical concept used to measure column efficiency; a column with more theoretical plates achieves better, sharper resolution between closely related molecules",
+      "A dish to hold the chemicals",
+      "The pump pushing the liquid"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 0,
+    "prompt": "What is the primary purpose of 'Estimation' in an engineering project?",
+    "options": [
+      "To guess the finish date",
+      "To calculate the probable cost of a project before its execution, determining materials, labor, equipment, and overhead required",
+      "To hire workers",
+      "To design the blueprints"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 1,
+    "prompt": "What is a 'Bill of Quantities' (BOQ)?",
+    "options": [
+      "A receipt for bought items",
+      "A detailed, itemized document used in tendering that lists the exact quantities of materials, parts, and labor (and their costs) required to construct a project",
+      "A list of rules",
+      "A safety manual"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 2,
+    "prompt": "What is 'Contingency' in a project budget?",
+    "options": [
+      "Money to pay for lunch",
+      "A specific amount of money allocated in the budget to cover unforeseen risks, uncertainties, or unexpected costs that may arise during the project",
+      "The profit margin",
+      "The cost of land"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 3,
+    "prompt": "What does 'Project Management' fundamentally entail?",
+    "options": [
+      "Being the boss",
+      "The application of knowledge, skills, tools, and techniques to project activities to meet the project requirements (balancing scope, time, cost, and quality)",
+      "Doing all the work yourself",
+      "Writing reports"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 4,
+    "prompt": "What is the 'Project Life Cycle'?",
+    "options": [
+      "The lifespan of the building",
+      "The standard phases a project goes through: Initiation, Planning, Execution, Monitoring/Controlling, and Closure",
+      "The time it takes to get paid",
+      "The daily schedule of a worker"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Estimation, Costing and Project Management",
+    "i": 5,
+    "prompt": "What is a Gantt Chart?",
+    "options": [
+      "A chart showing project costs",
+      "A bar chart that visually represents a project schedule, showing the start and finish dates of the terminal elements and summary elements of a project",
+      "A flowchart of the organization",
+      "A map of the construction site"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  }
+]

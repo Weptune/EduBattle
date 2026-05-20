@@ -5,7 +5,7 @@ import "./globals.css";
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MIT Ranked Subject Battler",
+  title: "Synapse.gg | Collegiate Trivia Arena",
   description: "A competitive multiplayer game for students at Manipal Institute of Technology (MIT).",
 };
 

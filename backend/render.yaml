@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: edubattle-backend
+    name: synapse-backend
     runtime: node
     buildCommand: npm install
     startCommand: npm run start

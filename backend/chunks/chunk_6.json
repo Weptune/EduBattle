@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Medical Devices",
+    "i": 2,
+    "prompt": "What is a 'Pacemaker'?",
+    "options": [
+      "A device for runners",
+      "A small, implantable Class III medical device that uses electrical impulses, delivered by electrodes contacting the heart muscles, to regulate the beating of the heart",
+      "A watch that measures heart rate",
+      "A defibrillator"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 3,
+    "prompt": "What is an 'ECG' (Electrocardiogram) machine?",
+    "options": [
+      "A machine that shocks the heart",
+      "A diagnostic device that records the electrical signal from your heart to check for different heart conditions",
+      "A machine that pumps blood",
+      "A machine that measures brain waves"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 4,
+    "prompt": "What is the primary function of a 'Ventilator'?",
+    "options": [
+      "To cool down the room",
+      "A life-support machine that moves breathable air into and out of the lungs, providing breathing for a patient who is physically unable to breathe, or breathing insufficiently",
+      "To filter the air in a hospital",
+      "To measure oxygen in the blood"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 6,
+    "prompt": "What is an 'Endoscope'?",
+    "options": [
+      "A telescope for the night sky",
+      "A long, thin, flexible medical instrument with a light and camera attached to it, used to look deep inside the body (like the stomach or colon) without major surgery",
+      "A microscope",
+      "A tool for listening to the heart"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 7,
+    "prompt": "What is a 'Stent'?",
+    "options": [
+      "A type of bandage",
+      "A tiny, expandable metal or plastic tube inserted into a blocked passageway (like an artery) to keep it open and restore blood flow",
+      "A type of artificial heart",
+      "A surgical knife"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 8,
+    "prompt": "What is a 'Pulse Oximeter'?",
+    "options": [
+      "A device that measures heart strength",
+      "A non-invasive device, usually clipped to a fingertip, that indirectly monitors the oxygen saturation of a patient's blood (as opposed to measuring oxygen directly through a blood sample) and changes in blood volume in the skin",
+      "A device that measures blood pressure",
+      "A device that measures body temperature"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Medical Devices",
+    "i": 9,
+    "prompt": "What is 'In Vitro Diagnostics' (IVD)?",
+    "options": [
+      "Diagnosing plants",
+      "Tests done on samples such as blood or tissue that have been taken *from* the human body (in glass/test tubes) to detect diseases or other conditions, rather than testing on the patient directly",
+      "Testing on animals",
+      "Virtual reality surgery training"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 0,
+    "prompt": "What is the primary focus of 'Mechanics of Structures'?",
+    "options": [
+      "Designing robots",
+      "Analyzing the behavior of solid bodies (like beams, columns, and frames) subjected to various types of external loading, to ensure they don't break or deform excessively",
+      "Studying fluid flow in pipes",
+      "Designing electrical circuits"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 1,
+    "prompt": "What is 'Stress' in solid mechanics?",
+    "options": [
+      "Emotional anxiety",
+      "The internal resistance force per unit area that particles of a material exert on each other to resist deformation caused by an applied external load (Stress = Force / Area)",
+      "The overall weight of the object",
+      "The speed at which it breaks"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 2,
+    "prompt": "What is 'Strain'?",
+    "options": [
+      "Straining water from pasta",
+      "A dimensionless measure of the physical deformation (change in length or shape) of a material relative to its original, undeformed state (Strain = Change in Length / Original Length)",
+      "The strength of a material",
+      "The temperature of a material"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 3,
+    "prompt": "What does Hooke's Law state?",
+    "options": [
+      "All pirates need a hook",
+      "For small deformations, the stress applied to a solid material is directly proportional to the strain produced (Stress = Modulus of Elasticity * Strain)",
+      "Heavy objects fall faster",
+      "Force equals mass times acceleration"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 4,
+    "prompt": "What is the 'Modulus of Elasticity' (Young's Modulus)?",
+    "options": [
+      "How rubbery a material is",
+      "A fundamental material property that represents the 'stiffness' of a material; it is the slope of the linear portion of the stress-strain curve",
+      "The maximum weight it can hold",
+      "How easily it melts"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 5,
+    "prompt": "What is the 'Yield Point' on a stress-strain curve?",
+    "options": [
+      "Where the material yields to traffic",
+      "The point at which a material begins to deform *plastically* (permanently); before this point, deformation is elastic and fully reversible",
+      "The point where it snaps in half",
+      "The starting point of the test"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 6,
+    "prompt": "What is the 'Ultimate Tensile Strength' (UTS)?",
+    "options": [
+      "The strongest hero",
+      "The absolute maximum stress that a material can withstand while being stretched or pulled before necking and eventual failure occurs",
+      "The strength of a bolt",
+      "The thickness of a beam"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 7,
+    "prompt": "What is 'Bending Moment' in a beam?",
+    "options": [
+      "A brief pause to think",
+      "The internal reaction torque that causes a structural element to bend; it is the product of the force and the perpendicular distance from the force to the point of interest",
+      "The speed of the beam falling",
+      "The physical weight of the beam itself"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 8,
+    "prompt": "What does the 'Moment of Inertia' (Area Moment of Inertia) of a cross-section measure?",
+    "options": [
+      "How heavy it is",
+      "A geometric property of an area that reflects how its points are distributed with regard to an arbitrary axis; it represents a beam's geometric resistance to bending",
+      "How fast it rotates",
+      "How much water it displaces"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Mechanics of Structures",
+    "i": 9,
+    "prompt": "What is 'Torsion'?",
+    "options": [
+      "A type of spring",
+      "The twisting of an object due to an applied torque; in shafts, this creates internal shear stresses that must be analyzed to prevent fracture",
+      "A type of bending",
+      "A type of compression"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 0,
+    "prompt": "What is Microbiology?",
+    "options": [
+      "Studying small machines",
+      "The study of all living organisms that are too small to be visible with the naked eye, including bacteria, archaea, viruses, fungi, prions, protozoa and algae",
+      "Studying insects",
+      "Studying human cells"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 2,
+    "prompt": "What is the primary difference between Eukaryotes and Prokaryotes?",
+    "options": [
+      "Eukaryotes are plants, Prokaryotes are animals",
+      "Eukaryotes (like humans and yeast) have a true nucleus enclosing their DNA and membrane-bound organelles; Prokaryotes (like bacteria) lack a true nucleus",
+      "Prokaryotes are much larger",
+      "They are exactly the same"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 4,
+    "prompt": "What is 'Pasteurization'?",
+    "options": [
+      "Making milk into cheese",
+      "A process of heating food, usually a liquid like milk, to a specific temperature for a definite length of time and then cooling it immediately, slowing microbial growth in the food",
+      "Boiling water completely",
+      "Freezing food to kill bacteria"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 5,
+    "prompt": "What is a 'Petri Dish' used for?",
+    "options": [
+      "Serving tiny meals",
+      "A shallow transparent glass or plastic cylindrical lidded dish used by biologists to culture (grow) cells, such as bacteria, or small mosses",
+      "Storing chemicals",
+      "Looking at the stars"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 6,
+    "prompt": "What is 'Agar'?",
+    "options": [
+      "A type of bacteria",
+      "A jelly-like substance obtained from red algae, used extensively as a solid substrate (growth medium) to culture microbes in petri dishes",
+      "A chemical that kills viruses",
+      "A type of microscope lens"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 7,
+    "prompt": "What does the Gram Stain test determine?",
+    "options": [
+      "The weight of bacteria",
+      "It differentiates bacteria into two large groups (Gram-positive and Gram-negative) based on the structural differences in their cell walls, which dictates how they react to antibiotics",
+      "The age of bacteria",
+      "The speed bacteria move"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 8,
+    "prompt": "What are 'Pathogens'?",
+    "options": [
+      "Good bacteria",
+      "Any organism (such as bacteria, viruses, fungi, or parasites) that can produce disease in a host",
+      "Vitamins",
+      "White blood cells"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Microbiology",
+    "i": 9,
+    "prompt": "What is 'Antimicrobial Resistance' (AMR)?",
+    "options": [
+      "Being immune to disease naturally",
+      "Occurs when microbes (bacteria, viruses, fungi) evolve over time and no longer respond to medicines (antibiotics) making infections harder to treat and increasing the risk of disease spread",
+      "A type of vaccine",
+      "Cleaning with bleach"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 0,
+    "prompt": "What is the core concept behind 'Modeling and Simulation'?",
+    "options": [
+      "Building plastic model airplanes",
+      "Creating a mathematical or computational representation (model) of a real-world system, and then running experiments on that model (simulation) to understand behavior or predict outcomes without building the physical system",
+      "Drawing pictures",
+      "Writing science fiction"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 1,
+    "prompt": "What is a 'Mathematical Model'?",
+    "options": [
+      "A model made of numbers shaped like a car",
+      "An abstract model that uses mathematical language, equations, and logic to describe the behavior of a system (e.g., differential equations describing population growth or fluid flow)",
+      "A famous mathematician",
+      "A calculator"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 2,
+    "prompt": "What is the difference between a 'Static' and 'Dynamic' model?",
+    "options": [
+      "Static models are boring",
+      "A static model represents a system at a single point in time (like a snapshot in equilibrium); a dynamic model accounts for time-dependent changes in the system state",
+      "Dynamic models move physically",
+      "Static models are made of plastic"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 3,
+    "prompt": "What is the difference between a 'Deterministic' and 'Stochastic' model?",
+    "options": [
+      "Deterministic is for math, Stochastic is for science",
+      "A deterministic model has no randomness (same input always gives exact same output); a stochastic model incorporates random variables and probabilities, giving a range of possible outcomes",
+      "They mean the same thing",
+      "Stochastic is faster"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 4,
+    "prompt": "What is 'Discrete-Event Simulation' (DES)?",
+    "options": [
+      "Simulating continuous fluid flow",
+      "A modeling approach where the operation of a system is represented as a chronological sequence of distinct, separate 'events' occurring at specific points in time (like customers arriving at a bank)",
+      "A simulation of continuous chemical reactions",
+      "Simulating the universe"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 5,
+    "prompt": "What is 'Continuous Simulation'?",
+    "options": [
+      "Simulating discrete queues",
+      "A modeling approach where the state variables change continuously over time, typically represented by a set of differential equations (like simulating the water level in a draining tank)",
+      "A simulation that never stops",
+      "Simulating a coin flip"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 6,
+    "prompt": "What is the purpose of 'Verification' in modeling?",
+    "options": [
+      "Checking if the model works in the real world",
+      "Ensuring that the computer program correctly implements the conceptual mathematical model ('Did we build the model right?'); debugging the code",
+      "Selling the model",
+      "Publishing a paper"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 7,
+    "prompt": "What is the purpose of 'Validation' in modeling?",
+    "options": [
+      "Debugging the code",
+      "Determining if the model accurately represents the *real-world* system it is intended to simulate ('Did we build the right model?'), usually by comparing simulation output to real experimental data",
+      "Making the model look pretty",
+      "Getting a patent"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 8,
+    "prompt": "What is a 'Monte Carlo Simulation'?",
+    "options": [
+      "A gambling game",
+      "A broad class of computational algorithms that rely on repeated random sampling (generating thousands of random scenarios) to obtain numerical results and calculate the probability of different outcomes",
+      "Simulating a car race",
+      "A simulation using only integers"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Modeling and Simulation",
+    "i": 9,
+    "prompt": "What is 'Agent-Based Modeling' (ABM)?",
+    "options": [
+      "Modeling chemical agents",
+      "A class of computational models for simulating the actions and interactions of autonomous individuals ('agents', like people in a crowd or cells in a tissue) to assess their effects on the system as a whole",
+      "Modeling a real estate agent",
+      "A type of static model"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 1,
+    "prompt": "What physical property of a fluid is primarily responsible for momentum transfer (friction) within the fluid?",
+    "options": [
+      "Density",
+      "Viscosity (it causes shear stress between moving layers of fluid)",
+      "Temperature",
+      "Color"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 2,
+    "prompt": "What does Newton's Law of Viscosity state?",
+    "options": [
+      "Gravity makes fluids fall",
+      "The shear stress between two adjacent fluid layers is directly proportional to the negative value of the velocity gradient between the two layers",
+      "Viscosity equals density times speed",
+      "Fluids always move in circles"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 3,
+    "prompt": "What is a 'Newtonian Fluid'?",
+    "options": [
+      "A fluid discovered by Newton",
+      "A fluid whose viscosity remains constant regardless of the applied shear stress or shear rate (e.g., water, air, light oils)",
+      "A fluid that gets thicker when you stir it",
+      "A fluid that acts like a solid"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 4,
+    "prompt": "What is a 'Non-Newtonian Fluid'?",
+    "options": [
+      "A fluid that defies gravity",
+      "A fluid whose viscosity changes depending on the applied shear rate or shear stress (e.g., ketchup gets thinner when you shake it, cornstarch paste gets thicker when you punch it)",
+      "A fluid that is invisible",
+      "Only a gas"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 6,
+    "prompt": "What is the 'No-Slip Condition'?",
+    "options": [
+      "A rule against running near a pool",
+      "The physical observation that a fluid in direct contact with a solid surface 'sticks' to it, meaning the fluid velocity exactly at the surface is zero relative to the surface",
+      "Tires gripping the road",
+      "Fluid falling without resistance"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 7,
+    "prompt": "What are the 'Navier-Stokes Equations'?",
+    "options": [
+      "Equations for building boats",
+      "A complex set of nonlinear partial differential equations that describe the motion of viscous fluid substances, serving as the fundamental foundation of fluid mechanics and momentum transfer",
+      "Equations for chemical reactions",
+      "Equations for heat transfer"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 8,
+    "prompt": "What is the 'Fanning Friction Factor' (or Darcy friction factor) used for?",
+    "options": [
+      "Cooling down a pipe",
+      "A dimensionless number used to calculate the pressure drop (head loss) due to friction in a pipe based on the fluid velocity, pipe diameter, and pipe roughness",
+      "Calculating pump speed",
+      "Measuring the thickness of a fluid"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Momentum Transfer",
+    "i": 9,
+    "prompt": "What is 'Flow Separation'?",
+    "options": [
+      "Separating oil from water",
+      "When the boundary layer travels far enough against an adverse pressure gradient (like on the back of a car or airfoil) that the fluid detaches from the surface, creating a large, turbulent, high-drag wake",
+      "Filtering a fluid",
+      "Pumping fluid into two different pipes"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Operations Management",
+    "i": 0,
+    "prompt": "What is the primary focus of 'Operations Management' (OM)?",
+    "options": [
+      "Performing surgeries",
+      "Designing, managing, and improving the systems and processes that create and deliver a firm's primary products and services (transforming inputs into outputs efficiently)",
+      "Managing financial investments",
+      "Marketing to consumers"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Operations Management",
+    "i": 1,
+    "prompt": "What is 'Supply Chain Management' (SCM)?",
+    "options": [
+      "Making metal chains",
+      "The active management of supply chain activities (from raw material sourcing to final delivery) to maximize customer value and achieve a sustainable competitive advantage",
+      "Managing employees in a factory",
+      "Inventorying office supplies"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Operations Management",
+    "i": 2,
+    "prompt": "What is 'Just-in-Time' (JIT) manufacturing?",
+    "options": [
+      "Arriving at work right on time",
+      "An inventory strategy companies employ to increase efficiency and decrease waste by receiving goods only as they are absolutely needed in the production process, thereby reducing inventory costs",
+      "Manufacturing as fast as possible",
+      "Making products right before they expire"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Operations Management",
+    "i": 3,
+    "prompt": "What does 'Lean Manufacturing' emphasize?",
+    "options": [
+      "Using thin materials",
+      "A systematic method for the elimination of waste ('Muda') within a manufacturing system without sacrificing productivity, focusing heavily on what adds value from the customer's perspective",
+      "Making products lighter",
+      "Hiring fewer people"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Operations Management",
+    "i": 5,
+    "prompt": "What is a 'Bottleneck' in a production process?",
+    "options": [
+      "A narrow glass bottle",
+      "The specific stage or machine in a production process that has the lowest capacity, thereby limiting the overall throughput (speed) of the entire system",
+      "A traffic jam",
+      "A shortage of raw materials"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  }
+]

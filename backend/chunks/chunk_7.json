@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Operations Management",
+    "i": 6,
+    "prompt": "What is 'Inventory Turnover'?",
+    "options": [
+      "Flipping boxes over",
+      "A financial ratio showing how many times a company has sold and replaced its inventory over a given period; a higher number generally indicates efficient operations",
+      "Taking inventory quickly",
+      "Moving inventory to a new warehouse"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Operations Management",
+    "i": 7,
+    "prompt": "What is 'Capacity Planning'?",
+    "options": [
+      "Planning the size of a room",
+      "The process of determining the production capacity needed by an organization to meet changing demands for its products over a specific time period",
+      "Planning a party",
+      "Measuring the volume of a tank"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Operations Management",
+    "i": 8,
+    "prompt": "What is 'Total Quality Management' (TQM)?",
+    "options": [
+      "Checking quality at the very end",
+      "A comprehensive management approach that works horizontally across an organization, involving all departments and employees in a continual effort to improve quality and customer satisfaction",
+      "A software program",
+      "A statistical chart"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Particle Technology",
+    "i": 0,
+    "prompt": "What is the focus of 'Particle Technology'?",
+    "options": [
+      "Studying subatomic particles like quarks",
+      "The branch of engineering dealing with the handling, processing, characterization, and behavior of bulk solid materials, powders, and particulates",
+      "Studying dust in space",
+      "Making plastic parts"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Particle Technology",
+    "i": 1,
+    "prompt": "Why are granular materials (powders) sometimes considered a 'fourth state of matter'?",
+    "options": [
+      "Because they are hot",
+      "Because their behavior is incredibly complex; they can act like a solid when piled, a liquid when poured, and a gas when fluidized",
+      "Because they are invisible",
+      "Because they are synthetic"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Particle Technology",
+    "i": 2,
+    "prompt": "What is 'Comminution'?",
+    "options": [
+      "Talking to particles",
+      "The mechanical process of reducing the size of solid materials from large chunks into smaller particles or powders (e.g., crushing, grinding, milling)",
+      "Sticking particles together",
+      "Filtering particles"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Particle Technology",
+    "i": 3,
+    "prompt": "What is 'Agglomeration' (or Granulation)?",
+    "options": [
+      "Breaking things apart",
+      "The process of intentionally joining very fine particles together into larger, stronger masses (granules) to improve flowability, reduce dust, or prevent segregation",
+      "Melting particles",
+      "Freezing particles"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Particle Technology",
+    "i": 4,
+    "prompt": "What is the 'Angle of Repose'?",
+    "options": [
+      "The angle to rest on a chair",
+      "The steepest angle of descent or dip relative to the horizontal plane to which a bulk solid material can be piled without slumping; a simple measure of flowability",
+      "The angle a particle bounces",
+      "The angle of a pipe"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Particle Technology",
+    "i": 8,
+    "prompt": "What is a 'Hopper' or 'Silo'?",
+    "options": [
+      "A jumping insect",
+      "A large industrial container used to store bulk solid materials; hoppers usually have conical bottoms for gravity discharge, while silos are often tall cylinders",
+      "A crushing machine",
+      "A type of pump"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Particle Technology",
+    "i": 9,
+    "prompt": "What is 'Ratholing' (or Piping) in a hopper?",
+    "options": [
+      "Rats eating the powder",
+      "A severe flow problem where the powder directly above the discharge outlet empties, leaving a stable 'hole' through the material, while the rest of the stagnant powder remains stuck to the walls",
+      "A pipe leaking",
+      "Drilling a hole in a rock"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 0,
+    "prompt": "What distinguishes Organic Chemistry from Physical Chemistry?",
+    "options": [
+      "They are the same",
+      "Organic focuses specifically on the structure, properties, and reactions of carbon-based compounds; Physical applies physics (thermodynamics, quantum mechanics) to study how any chemical systems behave",
+      "Organic is about food, Physical is about rocks",
+      "Physical is only math, Organic is only drawing"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 2,
+    "prompt": "What is an 'Isomer' in organic chemistry?",
+    "options": [
+      "A type of plastic",
+      "Molecules with exactly the same chemical formula (same number of each atom) but a different physical arrangement of those atoms, resulting in different chemical properties",
+      "A radioactive element",
+      "A broken molecule"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 3,
+    "prompt": "What is an 'Alkanes'?",
+    "options": [
+      "A type of metal",
+      "The simplest class of organic hydrocarbons consisting entirely of single bonds between carbon and hydrogen atoms (e.g., methane, ethane, propane)",
+      "A molecule with a double bond",
+      "A sugar molecule"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 4,
+    "prompt": "What is a 'Functional Group' in organic chemistry?",
+    "options": [
+      "A study group",
+      "A specific group of atoms or bonds within a molecule (like an alcohol -OH group, or a carboxylic acid -COOH) that are responsible for the characteristic chemical reactions of that molecule",
+      "A group of elements on the periodic table",
+      "A type of plastic"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 5,
+    "prompt": "In physical chemistry, what is 'Chemical Kinetics'?",
+    "options": [
+      "The energy of moving chemicals",
+      "The study of the speed or rate at which a chemical reaction occurs, and the detailed step-by-step mechanism by which reactants turn into products",
+      "The study of heat",
+      "The study of light"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 6,
+    "prompt": "What is a 'Reaction Mechanism'?",
+    "options": [
+      "A machine that stirs chemicals",
+      "The detailed, step-by-step sequence of elementary reactions by which overall chemical change occurs, showing exactly which bonds break and form",
+      "A safety protocol",
+      "The heat of the reaction"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 8,
+    "prompt": "What does 'Le Chatelier's Principle' state in physical chemistry?",
+    "options": [
+      "Everything falls down",
+      "If a dynamic chemical equilibrium is disturbed by changing the conditions (like temperature, pressure, or concentration), the position of equilibrium shifts to counteract the change to reestablish an equilibrium",
+      "Matter cannot be destroyed",
+      "Heat travels to cold"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Physical and Organic Chemistry",
+    "i": 9,
+    "prompt": "What is 'Spectroscopy' (like NMR or IR) used for in chemistry?",
+    "options": [
+      "Looking through a telescope",
+      "The study of the interaction between matter and electromagnetic radiation, used as the primary tool to identify the exact structure and functional groups of unknown organic molecules",
+      "Weighing molecules",
+      "Burning chemicals"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Pollution Control and Safety in Chemical Industry",
+    "i": 0,
+    "prompt": "What is the primary goal of Pollution Control in the chemical industry?",
+    "options": [
+      "To make more pollution",
+      "To reduce, eliminate, or safely manage the release of hazardous solid, liquid, and gaseous wastes into the environment",
+      "To hide the waste",
+      "To dump waste in the ocean"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Pollution Control and Safety in Chemical Industry",
+    "i": 1,
+    "prompt": "What does 'VOC' stand for, a major target of air pollution control?",
+    "options": [
+      "Very Old Chemicals",
+      "Volatile Organic Compounds; carbon-based chemicals that easily evaporate at room temperature and contribute to smog and health issues",
+      "Volume Of Container",
+      "Virtual Operating Computer"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Pollution Control and Safety in Chemical Industry",
+    "i": 3,
+    "prompt": "What is an 'Electrostatic Precipitator' (ESP)?",
+    "options": [
+      "A machine that causes rain",
+      "A highly efficient filtration device that removes fine particles, like dust and smoke, from a flowing gas using the force of an induced electrostatic charge",
+      "A lightning rod",
+      "A water pump"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Pollution Control and Safety in Chemical Industry",
+    "i": 4,
+    "prompt": "In wastewater treatment, what is 'Primary Treatment'?",
+    "options": [
+      "The final step",
+      "The first physical step that relies on gravity to settle out large, heavy suspended solids and skim off floating oil and grease",
+      "Adding bacteria to eat waste",
+      "Adding chlorine"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Pollution Control and Safety in Chemical Industry",
+    "i": 6,
+    "prompt": "What is 'Process Safety Management' (PSM)?",
+    "options": [
+      "Wearing a hard hat",
+      "A comprehensive, systematic framework of management systems and regulations intended to prevent catastrophic releases of highly hazardous, toxic, reactive, or flammable chemicals",
+      "Managing the budget",
+      "Managing human resources"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Pollution Control and Safety in Chemical Industry",
+    "i": 7,
+    "prompt": "What is a 'HAZOP' (Hazard and Operability Study)?",
+    "options": [
+      "A hazardous chemical",
+      "A highly structured, rigorous team-based brainstorming technique used to identify potential hazards and operability problems caused by deviations from the design intent in a chemical process",
+      "A safety manual",
+      "A type of fire extinguisher"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Pollution Control and Safety in Chemical Industry",
+    "i": 9,
+    "prompt": "What does an MSDS (or SDS - Safety Data Sheet) provide?",
+    "options": [
+      "The price of a chemical",
+      "Detailed, critical safety information about a chemical, including its physical properties, toxicity, health hazards, first aid, reactivity, and spill-handling procedures",
+      "The chemical formula only",
+      "A recipe to make the chemical"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 0,
+    "prompt": "What is the fundamental driving force for Heat Transfer?",
+    "options": [
+      "A difference in height",
+      "A difference in temperature; heat always flows spontaneously from a region of higher temperature to a region of lower temperature",
+      "A difference in pressure",
+      "A difference in concentration"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 2,
+    "prompt": "What is 'Conduction'?",
+    "options": [
+      "Transfer by a fluid",
+      "The transfer of heat through a stationary solid or fluid material by direct physical contact and microscopic collisions of particles (described by Fourier's Law)",
+      "Transfer through a vacuum",
+      "Transfer by a fan"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 3,
+    "prompt": "What is 'Convection'?",
+    "options": [
+      "Transfer through a solid wall",
+      "The transfer of heat between a solid surface and an adjacent moving fluid (liquid or gas), involving both conduction at the boundary and bulk macroscopic motion of the fluid",
+      "Transfer by light",
+      "Transfer by radiation"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 4,
+    "prompt": "What is 'Thermal Radiation'?",
+    "options": [
+      "Radioactive decay",
+      "The transfer of energy via electromagnetic waves (primarily infrared); it requires no physical medium and can occur perfectly through a total vacuum (like the sun heating the earth)",
+      "Transfer by a fluid",
+      "Transfer by touching"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 5,
+    "prompt": "What is 'Thermal Conductivity' (k)?",
+    "options": [
+      "How hot something gets",
+      "An intrinsic material property that indicates its ability to conduct heat; metals have high 'k' (good conductors), while fiberglass has a low 'k' (good insulator)",
+      "The speed of light",
+      "The weight of a material"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 7,
+    "prompt": "What is the fundamental driving force for Mass Transfer?",
+    "options": [
+      "A difference in temperature",
+      "A difference in concentration (or chemical potential); mass moves from an area of high concentration to low concentration (e.g., a drop of ink spreading in a glass of water)",
+      "A difference in pressure",
+      "A difference in height"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 8,
+    "prompt": "What does Fick's Law describe?",
+    "options": [
+      "The law of heat",
+      "The fundamental law of molecular diffusion, stating that the mass flux is directly proportional to the concentration gradient",
+      "The law of gravity",
+      "The law of thermodynamics"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Principles of Heat and Mass Transfer",
+    "i": 9,
+    "prompt": "What is the 'Analogy' between Heat and Mass transfer?",
+    "options": [
+      "They are totally different",
+      "The mathematical equations governing conduction (Fourier's law) and diffusion (Fick's law) are identical in form; thus, solutions for heat transfer can often be directly applied to analogous mass transfer problems",
+      "Heat is heavier than mass",
+      "Mass is faster than heat"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 0,
+    "prompt": "What is the primary goal of 'Process Design of Chemical Equipment'?",
+    "options": [
+      "Painting equipment",
+      "Translating a conceptual chemical process (flowsheet) into detailed physical specifications and sizing for real-world equipment (reactors, heat exchangers, distillation columns) to ensure it works safely and economically",
+      "Designing logos for chemical plants",
+      "Inventing new chemicals"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 1,
+    "prompt": "What is a 'P&ID' (Piping and Instrumentation Diagram)?",
+    "options": [
+      "A picture of the plant",
+      "A detailed schematic drawing in the process industry that shows all the piping, equipment, valves, and instrumentation/control systems with standard symbols",
+      "A financial report",
+      "A chemical formula"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 3,
+    "prompt": "When designing a distillation column, what does calculating the 'Number of Theoretical Plates' tell you?",
+    "options": [
+      "How many real plates to buy",
+      "The minimum number of equilibrium stages theoretically required to achieve the desired separation; this dictates the physical height of the column",
+      "The weight of the column",
+      "The temperature of the boiler"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 4,
+    "prompt": "What is 'Reflux Ratio' in distillation column design?",
+    "options": [
+      "The speed of the pump",
+      "The ratio of the liquid condensed and returned to the top of the column (reflux) to the liquid withdrawn as top product (distillate); higher reflux improves separation but costs more energy",
+      "The ratio of water to oil",
+      "The slope of the column"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 5,
+    "prompt": "What is a 'Packed Column'?",
+    "options": [
+      "A column full of suitcases",
+      "A hollow vessel filled with randomly dumped packing material (like Raschig rings or Pall rings) designed to maximize the surface area for continuous gas-liquid contact, often used for absorption",
+      "A column filled with concrete",
+      "A supporting pillar for a roof"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 6,
+    "prompt": "What is 'Flooding' in a distillation or absorption column?",
+    "options": [
+      "Adding too much water",
+      "A severe operational failure where the upward gas velocity is so high it prevents the liquid from flowing downward, causing liquid to rapidly accumulate and fill the column, stopping mass transfer",
+      "A leak in the pipe",
+      "Raining on the equipment"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 7,
+    "prompt": "In pressure vessel design, what is 'Hoop Stress' (Circumferential Stress)?",
+    "options": [
+      "Stress from playing basketball",
+      "The mechanical stress that acts tangentially to the circumference of a cylindrical vessel due to internal pressure, tending to tear the cylinder along its length (usually the largest stress to design against)",
+      "Stress on the bolts",
+      "Stress from temperature changes"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 8,
+    "prompt": "What does the ASME Boiler and Pressure Vessel Code (BPVC) provide?",
+    "options": [
+      "A list of prices",
+      "The legally mandated engineering rules and safety standards governing the design, fabrication, and inspection of boilers and pressure vessels to prevent catastrophic explosions",
+      "A guide for mixing chemicals",
+      "A recipe book"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Design of Chemical Equipment",
+    "i": 9,
+    "prompt": "When sizing a chemical reactor, what is 'Residence Time'?",
+    "options": [
+      "Time spent living in the plant",
+      "The average amount of time a discrete parcel of fluid spends inside the reactor volume, critical for ensuring the chemical reaction reaches the desired conversion",
+      "The time to build the reactor",
+      "The time it takes to heat up"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 0,
+    "prompt": "What is the primary purpose of 'Process Control' in a chemical plant?",
+    "options": [
+      "To tell workers what to do",
+      "To maintain process variables (like temperature, pressure, level, flow) at desired values (setpoints) automatically, ensuring safety, quality, and efficiency despite disturbances",
+      "To shut the plant down",
+      "To calculate profits"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 1,
+    "prompt": "What is a 'Setpoint' (SP)?",
+    "options": [
+      "A point on a map",
+      "The target or desired value at which a process variable (like the temperature of a reactor) should be maintained by the control system",
+      "The starting time",
+      "The maximum pressure allowed"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 2,
+    "prompt": "What is a 'Feedback Control Loop'?",
+    "options": [
+      "A loop of wire",
+      "A control system that measures the actual output (process variable), compares it to the setpoint to find the error, and then takes corrective action to minimize that error",
+      "A system that only looks forward",
+      "A daily meeting"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 3,
+    "prompt": "What is a 'Disturbance' (or Load Variable) in process control?",
+    "options": [
+      "A loud noise",
+      "An uncontrollable external variable (like a sudden drop in cooling water temperature or change in feed flow rate) that pushes the process away from its setpoint",
+      "A broken valve",
+      "A planned maintenance shutdown"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 4,
+    "prompt": "What is a PID Controller?",
+    "options": [
+      "Personal Identification Device",
+      "Proportional-Integral-Derivative Controller; the most common industrial control algorithm, calculating an error value and applying a correction based on proportional, integral, and derivative terms",
+      "Pressure Inside Drum",
+      "Pump Inverter Drive"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 5,
+    "prompt": "In a PID controller, what does the 'Proportional' (P) term do?",
+    "options": [
+      "Guesses the future",
+      "It produces an output action that is directly proportional to the current magnitude of the error (the larger the error, the larger the correction)",
+      "It ignores the error",
+      "It shuts the system down"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  }
+]

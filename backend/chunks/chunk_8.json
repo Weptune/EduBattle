@@ -1,0 +1,674 @@
+[
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 6,
+    "prompt": "In a PID controller, what does the 'Integral' (I) term do?",
+    "options": [
+      "Calculates the area",
+      "It looks at the *accumulation* of past errors over time, guaranteeing that any steady-state offset (constant lingering error) is eventually eliminated",
+      "It speeds up the process",
+      "It measures the pressure"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 7,
+    "prompt": "What is 'Feedforward Control'?",
+    "options": [
+      "Feeding a machine from the front",
+      "An advanced control strategy that measures a disturbance *before* it affects the process and takes preemptive corrective action, rather than waiting for an error to occur like feedback control",
+      "Moving the product forward",
+      "A fast conveyor belt"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Dynamics and Control",
+    "i": 8,
+    "prompt": "What is a 'Cascade Control' system?",
+    "options": [
+      "Controlling a waterfall",
+      "A multi-loop strategy where the output of one controller (the 'master') dictates the setpoint of a second, faster-responding controller (the 'slave') to handle disturbances more effectively",
+      "A chain of emails",
+      "Dropping chemicals in sequence"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 0,
+    "prompt": "What is 'Process Modelling' in chemical engineering?",
+    "options": [
+      "Making miniature plastic plants",
+      "Formulating mathematical equations (based on mass, energy, and momentum balances) that accurately describe the physical and chemical phenomena occurring in a process",
+      "Drawing pictures of pipes",
+      "Hiring models to advertise chemicals"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 1,
+    "prompt": "What is the difference between a 'First-Principles' (Mechanistic) model and an 'Empirical' (Data-driven) model?",
+    "options": [
+      "First-principles are better",
+      "First-principles models are derived from fundamental laws of physics/chemistry; Empirical models are just mathematical curves fitted to experimental input/output data (black box)",
+      "They are the exact same thing",
+      "Empirical models use empirical units (inches)"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 2,
+    "prompt": "What is a 'Lumped Parameter' model vs. a 'Distributed Parameter' model?",
+    "options": [
+      "Lumped has lumps of coal",
+      "A lumped model assumes the system (like a stirred tank) is perfectly uniform everywhere (uses Ordinary Differential Equations); a distributed model accounts for spatial variations (uses Partial Differential Equations)",
+      "They refer to how the software is sold",
+      "Lumped models are heavier"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 3,
+    "prompt": "Why are non-linear differential equations common in process modelling?",
+    "options": [
+      "Because they are easy to solve",
+      "Because chemical processes inherently involve non-linear phenomena, like reaction rates that depend exponentially on temperature (Arrhenius equation) or complex fluid dynamics",
+      "Because linear equations are copyrighted",
+      "They are not common; everything is linear"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 4,
+    "prompt": "What is a 'Degrees of Freedom' (DOF) analysis?",
+    "options": [
+      "Checking if the software is free",
+      "A mathematical check performed before solving a model: DOF = (Number of unknown variables) - (Number of independent equations). If DOF is exactly 0, the model is uniquely solvable",
+      "Measuring how freely a fluid flows",
+      "A political survey"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 5,
+    "prompt": "What is a 'Steady-State Simulation'?",
+    "options": [
+      "A simulation that is boring",
+      "A computer simulation that calculates the operating conditions (flows, temperatures, pressures) of a plant when it is running smoothly and variables are no longer changing with time (d/dt = 0)",
+      "A simulation of a solid rock",
+      "A simulation that stops immediately"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 6,
+    "prompt": "What is a 'Dynamic Simulation'?",
+    "options": [
+      "A simulation with lots of action",
+      "A computer simulation that solves time-dependent differential equations to show how a process behaves over time (e.g., during startup, shutdown, or when a disturbance hits)",
+      "A fast computer",
+      "A simulation of a moving car"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 7,
+    "prompt": "What is the 'Sequential Modular' approach in process simulation software (like Aspen Plus)?",
+    "options": [
+      "Doing things one at a time",
+      "An architecture where the flowsheet is solved unit-by-unit in sequence, using the output stream of one block as the input for the next, iteratively solving recycle loops",
+      "A type of Lego",
+      "Solving all equations at once"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 8,
+    "prompt": "What is the 'Equation-Oriented' approach in process simulation?",
+    "options": [
+      "Writing a book of equations",
+      "An architecture where all the mathematical equations for the entire plant are collected into one massive system and solved simultaneously using powerful numerical solvers",
+      "Solving equations by hand",
+      "Using only algebraic equations"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Process Modelling and Simulation",
+    "i": 9,
+    "prompt": "What is 'Parameter Estimation' (or Data Reconciliation)?",
+    "options": [
+      "Guessing the numbers",
+      "Using mathematical optimization algorithms to adjust the unknown parameters in a theoretical model so that the model's predictions closely match actual, real-world plant data",
+      "Estimating the cost of the software",
+      "Rounding numbers up"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 0,
+    "prompt": "What is Simulation Modeling and Analysis?",
+    "options": [
+      "Analyzing video games",
+      "The process of creating and analyzing a digital prototype of a physical model to predict its performance in the real world, often using stochastic (random) variables",
+      "Building physical models",
+      "Analyzing chemical formulas"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 1,
+    "prompt": "What is 'Discrete-Event Simulation' (DES)?",
+    "options": [
+      "Simulating continuous fluids",
+      "A modeling approach where the system state changes instantly at distinct, separate points in time (events), like a customer arriving or a machine breaking down",
+      "Simulating time linearly",
+      "A static model"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 2,
+    "prompt": "What is an 'Entity' in a discrete-event simulation?",
+    "options": [
+      "A ghost",
+      "An object or item (like a customer, a part on an assembly line, or an email) that moves through the simulated system and interacts with resources",
+      "The software code",
+      "The computer running it"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 4,
+    "prompt": "What is the purpose of generating 'Random Numbers' (actually pseudo-random numbers) in a simulation?",
+    "options": [
+      "To make it fun",
+      "To introduce necessary variability and uncertainty (stochasticity) into the model, mimicking real-world randomness like varying arrival times or processing times",
+      "To confuse the user",
+      "To encrypt the data"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 5,
+    "prompt": "What does 'Input Probability Distribution' mean in a simulation?",
+    "options": [
+      "Handing out flyers",
+      "A statistical distribution (like Normal, Exponential, or Poisson) assigned to a random variable in the model to dictate its behavior, such as using an Exponential distribution for time between arrivals",
+      "The layout of the factory",
+      "The physical weight of the input"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 6,
+    "prompt": "What is 'Warm-up Period' (or Initialization Bias) in a simulation?",
+    "options": [
+      "Waiting for the computer to start",
+      "The initial period of a simulation run before the system reaches a steady-state; data collected during this period is often discarded because it doesn't represent normal, long-term operation",
+      "Putting a sweater on",
+      "The time to write the code"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 8,
+    "prompt": "What is a 'Queueing Theory' model?",
+    "options": [
+      "A model of a British line",
+      "The mathematical study of waiting lines (queues), which forms the analytical foundation for many discrete-event simulations, predicting wait times and queue lengths",
+      "A theory about letters",
+      "A theory of gravity"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Simulation Modeling and Analysis",
+    "i": 9,
+    "prompt": "What does 'Optimization via Simulation' involve?",
+    "options": [
+      "Making the simulation run faster",
+      "Using intelligent search algorithms (like genetic algorithms) coupled with a simulation model to systematically find the best set of input parameters that maximize or minimize a specific output metric",
+      "Buying a faster computer",
+      "Drawing a better flowchart"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 0,
+    "prompt": "What is Total Quality Management (TQM)?",
+    "options": [
+      "A software for inspecting parts",
+      "A continuous, organization-wide management philosophy focusing on teamwork, customer satisfaction, and continuous improvement of all processes",
+      "A department that fires people",
+      "A marketing slogan"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 1,
+    "prompt": "Who is the ultimate judge of 'Quality' in TQM?",
+    "options": [
+      "The CEO",
+      "The Customer (both internal and external); quality is defined as meeting or exceeding customer expectations",
+      "The Inspector",
+      "The Government"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 2,
+    "prompt": "What is the 'PDCA Cycle' (Deming Wheel)?",
+    "options": [
+      "A bicycle brand",
+      "A continuous quality improvement model consisting of a logical sequence of four repetitive steps: Plan, Do, Check, Act",
+      "A type of engine",
+      "A chemical process"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 3,
+    "prompt": "What is 'Kaizen'?",
+    "options": [
+      "A type of sushi",
+      "A Japanese business philosophy of continuous, incremental improvement involving all employees, from the CEO to the assembly line workers",
+      "A martial art",
+      "A strict set of rules"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 4,
+    "prompt": "What is 'Quality Assurance' (QA) vs. 'Quality Control' (QC)?",
+    "options": [
+      "They are identical",
+      "QA is proactive (process-oriented) focusing on preventing defects during production; QC is reactive (product-oriented) focusing on identifying defects in the finished product",
+      "QC is better than QA",
+      "QA is for computers, QC is for machines"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 6,
+    "prompt": "What does the DMAIC methodology stand for in Six Sigma?",
+    "options": [
+      "Don't Make Any Irritating Comments",
+      "Define, Measure, Analyze, Improve, Control (the standard problem-solving process for improving existing processes)",
+      "Do More And Increase Cash",
+      "Determine, Make, Assess, Implement, Change"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 7,
+    "prompt": "What is 'Statistical Process Control' (SPC)?",
+    "options": [
+      "Using math to control people",
+      "The use of statistical techniques, specifically Control Charts, to monitor a process behavior in real-time, differentiating between normal variation and assignable 'special causes' of variation",
+      "A software program",
+      "Controlling a process with a computer"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Total Quality Management",
+    "i": 8,
+    "prompt": "On a Control Chart, what do the Upper and Lower Control Limits (UCL, LCL) represent?",
+    "options": [
+      "The absolute maximum and minimum the machine can do",
+      "The statistically calculated boundaries (usually +/- 3 standard deviations from the mean) of the process's natural, expected variation; points outside these limits indicate the process is 'out of control'",
+      "The customer's tolerance limits",
+      "The speed limit"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 0,
+    "prompt": "What are the three fundamental 'Transport Phenomena'?",
+    "options": [
+      "Cars, Trains, Planes",
+      "Momentum Transfer (Fluid Mechanics), Heat Transfer, and Mass Transfer",
+      "Solid, Liquid, Gas",
+      "Evaporation, Condensation, Precipitation"
+    ],
+    "answer": 1,
+    "difficulty": 1000,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 1,
+    "prompt": "What makes the study of Transport Phenomena so elegant and cohesive?",
+    "options": [
+      "It is very easy math",
+      "The underlying mathematical equations (PDEs) describing all three phenomena are strikingly analogous; they all state that a 'flux' is proportional to a 'driving force' gradient",
+      "It requires no computers",
+      "It is only about water"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 2,
+    "prompt": "What is the driving force for Momentum Transfer?",
+    "options": [
+      "Temperature gradient",
+      "Velocity gradient (fluids with different velocities sliding past each other create shear stress/friction)",
+      "Concentration gradient",
+      "Gravity"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 3,
+    "prompt": "What is the driving force for Heat Transfer?",
+    "options": [
+      "Pressure gradient",
+      "Temperature gradient (heat flows from hot to cold regions)",
+      "Velocity gradient",
+      "Mass gradient"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 4,
+    "prompt": "What is the driving force for Mass Transfer?",
+    "options": [
+      "Velocity gradient",
+      "Concentration gradient (or chemical potential gradient; molecules diffuse from high to low concentration)",
+      "Temperature gradient",
+      "Light gradient"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 5,
+    "prompt": "Which three fundamental laws govern these transport mechanisms?",
+    "options": [
+      "Newton's Laws of Motion",
+      "Newton's Law of Viscosity (Momentum), Fourier's Law (Heat), and Fick's First Law (Mass)",
+      "The Laws of Thermodynamics",
+      "Boyle's, Charles's, and Avogadro's Laws"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 6,
+    "prompt": "What are the three corresponding transport coefficients in those laws?",
+    "options": [
+      "Density, Volume, Mass",
+      "Kinematic Viscosity (momentum diffusivity), Thermal Diffusivity, and Mass Diffusivity",
+      "Pressure, Temperature, Flow",
+      "Speed, Acceleration, Force"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 8,
+    "prompt": "What is the 'Prandtl Number'?",
+    "options": [
+      "A type of phone number",
+      "A dimensionless number relating the momentum diffusivity (kinematic viscosity) to the thermal diffusivity of a fluid; it dictates the relative thickness of the velocity and thermal boundary layers",
+      "A number for predicting fluid flow",
+      "A chemical constant"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transport Phenomena",
+    "i": 9,
+    "prompt": "What is the 'Reynolds Analogy'?",
+    "options": [
+      "A story about Reynolds",
+      "A mathematical relationship that links turbulent momentum transfer (fluid friction) to turbulent heat transfer, allowing you to predict heat transfer coefficients if you know the fluid friction, and vice versa",
+      "A type of fluid",
+      "An equation for pump power"
+    ],
+    "answer": 1,
+    "difficulty": 1900,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 1,
+    "prompt": "What is 'Traffic Flow Theory'?",
+    "options": [
+      "The study of flowing water",
+      "The mathematical study of the interactions between vehicles, drivers, and infrastructure (highways, intersections) to understand and optimize traffic networks",
+      "The study of air currents",
+      "A theory about pedestrians"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 2,
+    "prompt": "What are the three macroscopic variables of traffic flow?",
+    "options": [
+      "Red, Yellow, Green",
+      "Flow (vehicles/hour), Density (vehicles/mile), and Speed (miles/hour)",
+      "Cars, Trucks, Motorcycles",
+      "Left, Right, Straight"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 3,
+    "prompt": "What is 'Level of Service' (LOS) in traffic engineering?",
+    "options": [
+      "How nice the toll booth worker is",
+      "A qualitative measure (graded A through F) used to relate the quality of motor vehicle traffic service, characterizing operating conditions like speed, travel time, freedom to maneuver, and traffic interruptions",
+      "How many lanes a road has",
+      "The speed limit"
+    ],
+    "answer": 1,
+    "difficulty": 1300,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 4,
+    "prompt": "What is 'Geometric Design' of highways?",
+    "options": [
+      "Painting shapes on the road",
+      "The design of the visible dimensions of a roadway, including horizontal/vertical alignment (curves, hills), cross-sections, lane widths, and sight distances to ensure safety and efficiency",
+      "Designing the bridge supports",
+      "Designing the toll booths"
+    ],
+    "answer": 1,
+    "difficulty": 1400,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 5,
+    "prompt": "What is 'Stopping Sight Distance'?",
+    "options": [
+      "How far you can see on a clear day",
+      "The minimum distance required for a driver traveling at a given speed to perceive an unexpected hazard in the road, react, and brake to a complete stop before hitting it",
+      "The distance between two stop signs",
+      "The distance a car skids"
+    ],
+    "answer": 1,
+    "difficulty": 1500,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 6,
+    "prompt": "Why are highway curves 'Superelevated' (banked)?",
+    "options": [
+      "To drain water faster",
+      "To counteract the centrifugal force that acts on a vehicle traveling through a curve, helping to keep it from sliding outward off the road at higher speeds",
+      "To look cool",
+      "To make it harder to drive"
+    ],
+    "answer": 1,
+    "difficulty": 1600,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 7,
+    "prompt": "What is the 'Four-Step Travel Demand Model'?",
+    "options": [
+      "A dance",
+      "A classic urban transportation planning process: Trip Generation (how many?), Trip Distribution (where to?), Mode Choice (what vehicle?), and Route Assignment (which road?)",
+      "A rule for pedestrians",
+      "A way to buy train tickets"
+    ],
+    "answer": 1,
+    "difficulty": 1700,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Transportation Engineering",
+    "i": 8,
+    "prompt": "What is 'Flexible Pavement' (Asphalt) vs. 'Rigid Pavement' (Concrete)?",
+    "options": [
+      "They are the same",
+      "Flexible pavement bends slightly to distribute loads to sub-layers; Rigid pavement (concrete slabs) acts like a stiff beam to spread the load over a wide area",
+      "Flexible is for walking, Rigid is for cars",
+      "Flexible is plastic"
+    ],
+    "answer": 1,
+    "difficulty": 1800,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Unit Operations",
+    "i": 1,
+    "prompt": "How do Unit Operations differ from Unit Processes?",
+    "options": [
+      "They are the exact same thing",
+      "Unit Operations involve purely *physical* changes (like boiling or filtering); Unit Processes involve *chemical* changes (like oxidation, polymerization, or fermentation)",
+      "Operations are big, Processes are small",
+      "Operations are manual, Processes are automatic"
+    ],
+    "answer": 1,
+    "difficulty": 1100,
+    "timeLimit": 20
+  },
+  {
+    "cat": "Unit Operations",
+    "i": 2,
+    "prompt": "Distillation is a unit operation based on what physical property difference?",
+    "options": [
+      "Color",
+      "Difference in Boiling Points (Volatility) of the components",
+      "Density",
+      "Particle Size"
+    ],
+    "answer": 1,
+    "difficulty": 1200,
+    "timeLimit": 20
+  }
+]
