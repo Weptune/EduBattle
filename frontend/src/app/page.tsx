@@ -32,6 +32,7 @@ type Account = {
   gamesPlayed: number;
   bestElo: number;
   fieldElos?: Record<string, number>;
+  fieldStats?: Record<string, { wins: number; losses: number }>;
   createdAt: string;
 };
 
@@ -596,6 +597,79 @@ export default function Home() {
           {!account || screen === "auth" ? renderAuth() : screen === "profile" ? renderProfile() : screen === "leaderboard" ? renderLeaderboard() : renderGame()}
         </AnimatePresence>
       </div>
+
+      {/* Disciplines Elo Modal */}
+      <AnimatePresence>
+        {showFieldElosModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+              onClick={() => setShowFieldElosModal(false)}
+            />
+            <motion.div
+              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/90 p-6 shadow-2xl backdrop-blur-2xl z-10"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="mb-6 flex items-start justify-between">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-teal-400">Synapse Arena Ratings</p>
+                  <h3 className="text-2xl font-black uppercase text-white">Your Discipline Elos</h3>
+                  <p className="text-xs text-slate-400 mt-1">Separate MMR is tracked and updated only when playing real ranked games in the field-wise queue.</p>
+                </div>
+                <button
+                  onClick={() => setShowFieldElosModal(false)}
+                  className="rounded-lg bg-white/5 p-2 text-slate-400 hover:bg-white/10 hover:text-white"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {FIELDS.filter(f => f.id !== "all").map(field => {
+                  const rating = account?.fieldElos?.[field.id] ?? 1200;
+
+                  // Scholar Tiers
+                  let tierName = "Bronze Scholar";
+                  let tierColor = "text-amber-500 border-amber-500/20 bg-amber-500/10";
+                  if (rating >= 1800) {
+                    tierName = "Diamond Dean";
+                    tierColor = "text-cyan-400 border-cyan-400/20 bg-cyan-400/10 shadow-[0_0_12px_rgba(34,211,238,0.15)]";
+                  } else if (rating >= 1500) {
+                    tierName = "Gold Guru";
+                    tierColor = "text-yellow-400 border-yellow-400/20 bg-yellow-400/10";
+                  } else if (rating >= 1300) {
+                    tierName = "Silver Specialist";
+                    tierColor = "text-slate-300 border-slate-300/20 bg-slate-300/10";
+                  }
+
+                  return (
+                    <div key={field.id} className="group relative overflow-hidden rounded-xl border border-white/[0.06] bg-slate-950/45 p-4 transition-all duration-300 hover:border-teal-500/20">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="text-sm font-black uppercase tracking-wide text-slate-200 group-hover:text-teal-300 transition-colors">{field.name}</p>
+                          <span className={`inline-block mt-1.5 rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wider ${tierColor}`}>
+                            {tierName}
+                          </span>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="font-mono text-2xl font-black text-teal-300">{rating}</p>
+                          <p className="text-[9px] uppercase tracking-widest text-slate-500">Rating</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </main>
   );
 
@@ -678,6 +752,12 @@ export default function Home() {
                 <p className="font-mono text-sm text-teal-300">@{account.username}</p>
                 <h1 className="text-4xl font-black uppercase tracking-normal text-white">{account.username}</h1>
                 <p className="mt-2 max-w-xl text-slate-300">{account.bio}</p>
+                <button
+                  onClick={() => { playSound("select"); setShowFieldElosModal(true); }}
+                  className="mt-4 flex items-center gap-2 rounded-lg border border-teal-400/30 bg-teal-400/5 px-3.5 py-2 text-xs font-black uppercase tracking-widest text-teal-300 hover:bg-teal-400/10 hover:text-white transition duration-300 shadow-[0_0_12px_rgba(45,212,191,0.05)]"
+                >
+                   View Discipline Elos
+                </button>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -778,6 +858,10 @@ export default function Home() {
               const rank = entry.rank;
               const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
               const rankColor = rank === 1 ? "text-amber-400" : rank === 2 ? "text-slate-300" : rank === 3 ? "text-amber-600" : "text-slate-400";
+              const wins = leaderboardField === "all" ? entry.user.wins : (entry.user.fieldStats?.[leaderboardField]?.wins || 0);
+              const losses = leaderboardField === "all" ? entry.user.losses : (entry.user.fieldStats?.[leaderboardField]?.losses || 0);
+              const totalGames = wins + losses;
+              const wrPercent = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
               return (
                 <div key={entry.user.id} className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-xl border p-3.5 transition-all duration-300 hover:border-teal-500/20 ${isSelf ? "border-teal-400/40 bg-teal-400/[0.06] shadow-[0_0_15px_rgba(45,212,191,0.05)]" : "border-white/[0.06] bg-slate-950/20"}`}>
                   <div className={`w-10 text-center font-mono text-lg font-black ${rankColor}`}>{rankIcon}</div>
@@ -785,7 +869,7 @@ export default function Home() {
                     <img src={getImageUrl(entry.user.avatarUrl)} alt="" className="h-11 w-11 rounded-lg object-cover border border-white/10" />
                     <div className="min-w-0">
                       <p className="truncate font-black uppercase text-sm tracking-wide text-slate-100">{entry.user.username}</p>
-                      <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">{entry.user.wins} Wins / {entry.user.losses} Losses</p>
+                      <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">{wins} Wins / {losses} Losses • {wrPercent}% WR</p>
                     </div>
                   </div>
                   <div className="text-right">
@@ -834,79 +918,6 @@ export default function Home() {
             )}
           </div>
         </div>
-
-        {/* Disciplines Elo Modal */}
-        <AnimatePresence>
-          {showFieldElosModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
-                onClick={() => setShowFieldElosModal(false)}
-              />
-              <motion.div
-                initial={{ scale: 0.95, y: 15, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.95, y: 15, opacity: 0 }}
-                className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/90 p-6 shadow-2xl backdrop-blur-2xl z-10"
-                onClick={e => e.stopPropagation()}
-              >
-                <div className="mb-6 flex items-start justify-between">
-                  <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-teal-400">Synapse Arena Ratings</p>
-                    <h3 className="text-2xl font-black uppercase text-white">Your Discipline Elos</h3>
-                    <p className="text-xs text-slate-400 mt-1">Separate MMR is tracked and updated only when playing real ranked games in the field-wise queue.</p>
-                  </div>
-                  <button
-                    onClick={() => setShowFieldElosModal(false)}
-                    className="rounded-lg bg-white/5 p-2 text-slate-400 hover:bg-white/10 hover:text-white"
-                  >
-                    ✕
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  {FIELDS.filter(f => f.id !== "all").map(field => {
-                    const rating = account?.fieldElos?.[field.id] ?? 1200;
-
-                    // Scholar Tiers
-                    let tierName = "Bronze Scholar";
-                    let tierColor = "text-amber-500 border-amber-500/20 bg-amber-500/10";
-                    if (rating >= 1800) {
-                      tierName = "Diamond Dean";
-                      tierColor = "text-cyan-400 border-cyan-400/20 bg-cyan-400/10 shadow-[0_0_12px_rgba(34,211,238,0.15)]";
-                    } else if (rating >= 1500) {
-                      tierName = "Gold Guru";
-                      tierColor = "text-yellow-400 border-yellow-400/20 bg-yellow-400/10";
-                    } else if (rating >= 1300) {
-                      tierName = "Silver Specialist";
-                      tierColor = "text-slate-300 border-slate-300/20 bg-slate-300/10";
-                    }
-
-                    return (
-                      <div key={field.id} className="group relative overflow-hidden rounded-xl border border-white/[0.06] bg-slate-950/45 p-4 transition-all duration-300 hover:border-teal-500/20">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="min-w-0">
-                            <p className="text-sm font-black uppercase tracking-wide text-slate-200 group-hover:text-teal-300 transition-colors">{field.name}</p>
-                            <span className={`inline-block mt-1.5 rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wider ${tierColor}`}>
-                              {tierName}
-                            </span>
-                          </div>
-                          <div className="text-right shrink-0">
-                            <p className="font-mono text-2xl font-black text-teal-300">{rating}</p>
-                            <p className="text-[9px] uppercase tracking-widest text-slate-500">Rating</p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
       </motion.section>
     );
   }
@@ -1172,29 +1183,57 @@ export default function Home() {
             🏟️ {matchData?.domain && matchData.domain !== 'all' ? `${matchData.domain} Arena` : 'All Subjects Arena'}
           </span>
         </div>
-        <div className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.06] p-4 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <Fighter name={player.name} elo={player.elo} hp={player.hp} tone="teal" />
-          <p className="text-center text-3xl font-black text-slate-500">VS</p>
-          <Fighter name={opponent.name} elo={opponent.elo} hp={opponent.hp} tone="red" alignRight />
+        <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-center">
+          <Fighter profile={player} tone="teal" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-slate-900 text-xs font-black italic text-slate-400 mx-auto shadow-md">
+            VS
+          </div>
+          <Fighter profile={opponent} tone="red" alignRight />
         </div>
       </div>
     );
   }
 }
 
-function Fighter({ name, elo, hp, tone, alignRight = false }: { name: string; elo: number; hp: number; tone: "teal" | "red"; alignRight?: boolean }) {
+function Fighter({ profile, tone, alignRight = false }: { profile: FighterProfile; tone: "teal" | "red"; alignRight?: boolean }) {
   const color = tone === "teal" ? "from-teal-300 to-blue-400" : "from-red-400 to-amber-300";
+  const avatar = profile.avatarUrl ? getImageUrl(profile.avatarUrl) : "";
+  const banner = profile.bannerUrl ? getImageUrl(profile.bannerUrl) : "";
 
   return (
-    <div className={alignRight ? "text-right" : ""}>
-      <div className="mb-2 flex justify-between gap-3">
-        <span className="font-black">{name}</span>
-        <span className="font-mono text-sm text-slate-300">{elo} Elo</span>
+    <div className="relative overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-4 shadow-lg backdrop-blur-md">
+      {banner && (
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-30" 
+          style={{ backgroundImage: `url(${banner})` }} 
+        />
+      )}
+      <div className={`absolute inset-0 bg-gradient-to-t ${tone === "teal" ? "from-slate-950 via-slate-950/80" : "from-slate-950 via-slate-950/80"} to-slate-950/30`} />
+
+      <div className={`relative z-10 flex ${alignRight ? "flex-row-reverse text-right" : "flex-row"} items-center gap-3`}>
+        {avatar && (
+          <img 
+            src={avatar} 
+            alt="" 
+            className="h-12 w-12 rounded-lg object-cover border border-white/10 shadow-md shrink-0 bg-slate-800" 
+          />
+        )}
+        <div className="min-w-0 flex-1">
+          <div className={`flex ${alignRight ? "flex-row-reverse" : "flex-row"} items-center justify-between gap-2`}>
+            <span className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{profile.name}</span>
+            <span className="font-mono text-[10px] font-black text-teal-300 shrink-0">{profile.elo} Elo</span>
+          </div>
+          <div className="mt-2.5">
+            <div className="h-2.5 overflow-hidden rounded-full bg-black/60 border border-white/5">
+              <div className={`h-full bg-gradient-to-r ${color}`} style={{ width: `${Math.max(0, profile.hp)}%` }} />
+            </div>
+            <div className={`mt-1 flex ${alignRight ? "flex-row-reverse" : "flex-row"} items-center justify-between text-[9px] font-mono text-slate-400`}>
+              <span>{Math.max(0, profile.hp)} HP</span>
+              <span>{profile.hp} / 100</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="h-3 overflow-hidden rounded-full bg-black/50">
-        <div className={`h-full bg-gradient-to-r ${color}`} style={{ width: `${Math.max(0, hp)}%` }} />
-      </div>
-      <p className="mt-1 font-mono text-xs text-slate-400">{hp} HP</p>
     </div>
   );
 }

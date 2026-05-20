@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -74,6 +75,7 @@ function publicUser(user) {
     gamesPlayed: user.gamesPlayed || 0,
     bestElo: user.bestElo || user.elo,
     fieldElos: user.fieldElos || {},
+    fieldStats: user.fieldStats || {},
     createdAt: user.createdAt
   };
 }
@@ -152,7 +154,7 @@ app.post('/auth/signup', async (req, res) => {
     gamesPlayed: 0,
     avatarUrl: `https://api.dicebear.com/9.x/shapes/svg?seed=${encodeURIComponent(username)}`,
     bannerUrl: `https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=80`,
-    bio: 'New challenger in the MIT arena.',
+    bio: 'hi',
   };
 
   const createdUser = await storage.createUser(user);
@@ -860,6 +862,11 @@ async function endMatch(match) {
             const elos = user.fieldElos || {};
             elos[domain] = winner.elo;
             nextUser.fieldElos = elos;
+
+            const stats = user.fieldStats || {};
+            if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
+            stats[domain].wins = (stats[domain].wins || 0) + 1;
+            nextUser.fieldStats = stats;
           } else {
             nextUser.elo = winner.elo;
             nextUser.bestElo = Math.max(user.bestElo || user.elo || 1200, winner.elo);
@@ -882,6 +889,11 @@ async function endMatch(match) {
             const elos = user.fieldElos || {};
             elos[domain] = loser.elo;
             nextUser.fieldElos = elos;
+
+            const stats = user.fieldStats || {};
+            if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
+            stats[domain].losses = (stats[domain].losses || 0) + 1;
+            nextUser.fieldStats = stats;
           } else {
             nextUser.elo = loser.elo;
           }
