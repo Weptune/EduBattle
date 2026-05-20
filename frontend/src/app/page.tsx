@@ -550,24 +550,24 @@ export default function Home() {
     <main className="min-h-screen overflow-x-hidden bg-[#070912] text-slate-50">
       <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_20%_10%,rgba(20,184,166,0.18),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(217,119,6,0.16),transparent_30%),linear-gradient(180deg,#070912_0%,#111827_100%)]" />
 
-      <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5">
-        <button onClick={() => setScreen(account ? "play" : "auth")} className="flex items-center gap-3 text-left">
-          <div className="grid h-10 w-10 place-items-center rounded-lg bg-teal-400 text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.35)]">
-            <Swords size={22} />
+      <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5 gap-2">
+        <button onClick={() => setScreen(account ? "play" : "auth")} className="flex items-center gap-2 sm:gap-3 text-left min-w-0">
+          <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-teal-400 text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.35)] sm:h-10 sm:w-10">
+            <Swords size={20} className="sm:h-[22px] sm:w-[22px]" />
           </div>
-          <div>
-            <p className="text-lg font-black uppercase tracking-wide text-teal-400">Synapse.gg</p>
-            <p className="text-xs font-mono text-slate-400">Collegiate Trivia Arena</p>
+          <div className="truncate">
+            <p className="text-base font-black uppercase tracking-wide text-teal-400 sm:text-lg">Synapse.gg</p>
+            <p className="hidden text-[10px] font-mono text-slate-400 sm:block">Collegiate Trivia Arena</p>
           </div>
         </button>
 
         {account ? (
-          <div className="flex items-center gap-2">
-            <button onClick={() => { playSound("select"); setScreen("play"); }} className="rounded-lg px-4 py-2 text-sm font-bold text-slate-300 hover:bg-white/10">Play</button>
-            <button onClick={() => { playSound("select"); setScreen("profile"); }} className="rounded-lg px-4 py-2 text-sm font-bold text-slate-300 hover:bg-white/10">Profile</button>
-            <button onClick={() => { playSound("select"); refreshPlayerMeta(); setScreen("leaderboard"); }} className="rounded-lg px-4 py-2 text-sm font-bold text-slate-300 hover:bg-white/10">Ranks</button>
-            <button onClick={logout} className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10" title="Log out">
-              <LogOut size={18} />
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            <button onClick={() => { playSound("select"); setScreen("play"); }} className={`rounded-lg px-2.5 py-1.5 text-xs font-bold transition hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm ${screen === "play" ? "bg-white/10 text-white" : "text-slate-300"}`}>Play</button>
+            <button onClick={() => { playSound("select"); setScreen("profile"); }} className={`rounded-lg px-2.5 py-1.5 text-xs font-bold transition hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm ${screen === "profile" ? "bg-white/10 text-white" : "text-slate-300"}`}>Profile</button>
+            <button onClick={() => { playSound("select"); refreshPlayerMeta(); setScreen("leaderboard"); }} className={`rounded-lg px-2.5 py-1.5 text-xs font-bold transition hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm ${screen === "leaderboard" ? "bg-white/10 text-white" : "text-slate-300"}`}>Ranks</button>
+            <button onClick={logout} className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 transition sm:h-10 sm:w-10" title="Log out">
+              <LogOut size={16} className="sm:h-[18px] sm:w-[18px]" />
             </button>
           </div>
         ) : null}
