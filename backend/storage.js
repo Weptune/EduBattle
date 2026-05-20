@@ -71,6 +71,7 @@ async function init() {
         avatar_url TEXT,
         banner_url TEXT,
         bio TEXT,
+        field_elos TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
       );
@@ -100,6 +101,7 @@ async function init() {
         domain TEXT DEFAULT 'all'
       );
 
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS field_elos TEXT;
       ALTER TABLE match_history ADD COLUMN IF NOT EXISTS domain TEXT DEFAULT 'all';
     `);
   }
@@ -111,6 +113,12 @@ async function init() {
 
 function rowToUser(row) {
   if (!row) return null;
+  let fieldElos = {};
+  try {
+    fieldElos = row.field_elos ? JSON.parse(row.field_elos) : {};
+  } catch (e) {
+    console.error('Failed to parse field_elos:', e);
+  }
   return {
     id: row.id,
     username: row.username,
@@ -125,6 +133,7 @@ function rowToUser(row) {
     avatarUrl: row.avatar_url,
     bannerUrl: row.banner_url,
     bio: row.bio,
+    fieldElos: fieldElos,
     createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
     updatedAt: row.updated_at instanceof Date ? row.updated_at.toISOString() : row.updated_at
   };
@@ -144,6 +153,7 @@ function userToRow(user) {
     avatar_url: user.avatarUrl,
     banner_url: user.bannerUrl,
     bio: user.bio,
+    field_elos: user.fieldElos ? JSON.stringify(user.fieldElos) : '{}',
     created_at: user.createdAt,
     updated_at: user.updatedAt || new Date().toISOString()
   };
@@ -179,12 +189,12 @@ async function createUser(user) {
     await pool.query(
       `INSERT INTO users (
         id, username, password_salt, password_hash, elo, best_elo, wins, losses,
-        games_played, avatar_url, banner_url, bio, created_at, updated_at
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
+        games_played, avatar_url, banner_url, bio, field_elos, created_at, updated_at
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`,
       [
         row.id, row.username, row.password_salt, row.password_hash, row.elo, row.best_elo,
         row.wins, row.losses, row.games_played, row.avatar_url, row.banner_url, row.bio,
-        row.created_at, row.updated_at
+        row.field_elos, row.created_at, row.updated_at
       ]
     );
     return stored;
@@ -255,12 +265,14 @@ async function updateUser(userId, patch) {
         avatar_url = $8,
         banner_url = $9,
         bio = $10,
+        field_elos = $11,
         updated_at = now()
       WHERE id = $1
       RETURNING *`,
       [
         userId, patch.username, patch.elo, patch.bestElo, patch.wins, patch.losses,
-        patch.gamesPlayed, patch.avatarUrl, patch.bannerUrl, patch.bio
+        patch.gamesPlayed, patch.avatarUrl, patch.bannerUrl, patch.bio,
+        patch.fieldElos ? JSON.stringify(patch.fieldElos) : '{}'
       ]
     );
     return rowToUser(result.rows[0]);

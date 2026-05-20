@@ -31,6 +31,7 @@ type Account = {
   losses: number;
   gamesPlayed: number;
   bestElo: number;
+  fieldElos?: Record<string, number>;
   createdAt: string;
 };
 
@@ -202,6 +203,8 @@ export default function Home() {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [recentMatches, setRecentMatches] = useState<MatchRecord[]>([]);
   const [isMetaLoading, setIsMetaLoading] = useState(false);
+  const [leaderboardField, setLeaderboardField] = useState<string>("all");
+  const [showFieldElosModal, setShowFieldElosModal] = useState(false);
 
   const [gameState, setGameState] = useState<GameState>("menu");
   const [player, setPlayer] = useState<FighterProfile>({ name: "Player", elo: 1200, hp: 100 });
@@ -222,6 +225,21 @@ export default function Home() {
     if (!account?.gamesPlayed) return 0;
     return Math.round((account.wins / account.gamesPlayed) * 100);
   }, [account]);
+
+  const displayLeaderboard = useMemo(() => {
+    if (leaderboardField === "all") {
+      return leaderboard.map(entry => ({ ...entry, displayElo: entry.user.elo }));
+    }
+    const sorted = [...leaderboard].map(entry => {
+      const elo = entry.user.fieldElos?.[leaderboardField] ?? 1200;
+      return { ...entry, displayElo: elo };
+    }).sort((a, b) => b.displayElo - a.displayElo);
+
+    return sorted.map((entry, idx) => ({
+      ...entry,
+      rank: idx + 1
+    }));
+  }, [leaderboard, leaderboardField]);
 
   const refreshPlayerMeta = useCallback(async (activeToken = token) => {
     if (!activeToken) return;
@@ -449,8 +467,8 @@ export default function Home() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ 
-          ...profileForm, 
+        body: JSON.stringify({
+          ...profileForm,
           username: profileForm.username.trim(),
           avatarUrl,
           bannerUrl
@@ -717,18 +735,45 @@ export default function Home() {
     return (
       <motion.section key="leaderboard" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
         <div className="rounded-lg border border-white/10 bg-white/[0.06] p-5">
-          <div className="mb-5 flex items-center justify-between gap-4">
+          <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-teal-300">Global Ladder</p>
               <h1 className="text-3xl font-black uppercase tracking-normal">Leaderboard</h1>
             </div>
-            <button onClick={() => refreshPlayerMeta()} className="rounded-lg border border-teal-300/30 px-4 py-2 text-sm font-black uppercase tracking-widest text-teal-200 hover:bg-teal-300/10">
-              {isMetaLoading ? "Syncing" : "Refresh"}
-            </button>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => { playSound("select"); setShowFieldElosModal(true); }}
+                className="rounded-lg border border-amber-300/30 px-3.5 py-2 text-xs font-black uppercase tracking-widest text-amber-200 hover:bg-amber-300/10 transition duration-300"
+              >
+                Your Field Elos
+              </button>
+              <button onClick={() => refreshPlayerMeta()} className="rounded-lg border border-teal-300/30 px-3.5 py-2 text-xs font-black uppercase tracking-widest text-teal-200 hover:bg-teal-300/10 transition duration-300">
+                {isMetaLoading ? "Syncing" : "Refresh"}
+              </button>
+            </div>
+          </div>
+
+          {/* New Field-wise Leaderboard Selector */}
+          <div className="mb-5">
+            <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Rank by Academic Field:</p>
+            <div className="flex flex-wrap gap-1.5">
+              {FIELDS.map(f => (
+                <button
+                  key={f.id}
+                  onClick={() => { playSound("select"); setLeaderboardField(f.id); }}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-bold transition duration-300 border ${leaderboardField === f.id
+                    ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
+                    : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
+                    }`}
+                >
+                  {f.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="space-y-2">
-            {leaderboard.length ? leaderboard.map(entry => {
+            {displayLeaderboard.length ? displayLeaderboard.map(entry => {
               const isSelf = entry.user.id === account?.id;
               const rank = entry.rank;
               const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
@@ -744,8 +789,8 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-mono text-lg font-black text-teal-300">{entry.user.elo}</p>
-                    <p className="text-[9px] uppercase tracking-widest text-slate-500">Elo</p>
+                    <p className="font-mono text-lg font-black text-teal-300">{entry.displayElo}</p>
+                    <p className="text-[9px] uppercase tracking-widest text-slate-500">{leaderboardField === "all" ? "Global Elo" : "Field Elo"}</p>
                   </div>
                 </div>
               );
@@ -789,6 +834,79 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        {/* Disciplines Elo Modal */}
+        <AnimatePresence>
+          {showFieldElosModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+                onClick={() => setShowFieldElosModal(false)}
+              />
+              <motion.div
+                initial={{ scale: 0.95, y: 15, opacity: 0 }}
+                animate={{ scale: 1, y: 0, opacity: 1 }}
+                exit={{ scale: 0.95, y: 15, opacity: 0 }}
+                className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/90 p-6 shadow-2xl backdrop-blur-2xl z-10"
+                onClick={e => e.stopPropagation()}
+              >
+                <div className="mb-6 flex items-start justify-between">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-teal-400">Synapse Arena Ratings</p>
+                    <h3 className="text-2xl font-black uppercase text-white">Your Discipline Elos</h3>
+                    <p className="text-xs text-slate-400 mt-1">Separate MMR is tracked and updated only when playing real ranked games in the field-wise queue.</p>
+                  </div>
+                  <button
+                    onClick={() => setShowFieldElosModal(false)}
+                    className="rounded-lg bg-white/5 p-2 text-slate-400 hover:bg-white/10 hover:text-white"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  {FIELDS.filter(f => f.id !== "all").map(field => {
+                    const rating = account?.fieldElos?.[field.id] ?? 1200;
+
+                    // Scholar Tiers
+                    let tierName = "Bronze Scholar";
+                    let tierColor = "text-amber-500 border-amber-500/20 bg-amber-500/10";
+                    if (rating >= 1800) {
+                      tierName = "Diamond Dean";
+                      tierColor = "text-cyan-400 border-cyan-400/20 bg-cyan-400/10 shadow-[0_0_12px_rgba(34,211,238,0.15)]";
+                    } else if (rating >= 1500) {
+                      tierName = "Gold Guru";
+                      tierColor = "text-yellow-400 border-yellow-400/20 bg-yellow-400/10";
+                    } else if (rating >= 1300) {
+                      tierName = "Silver Specialist";
+                      tierColor = "text-slate-300 border-slate-300/20 bg-slate-300/10";
+                    }
+
+                    return (
+                      <div key={field.id} className="group relative overflow-hidden rounded-xl border border-white/[0.06] bg-slate-950/45 p-4 transition-all duration-300 hover:border-teal-500/20">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="min-w-0">
+                            <p className="text-sm font-black uppercase tracking-wide text-slate-200 group-hover:text-teal-300 transition-colors">{field.name}</p>
+                            <span className={`inline-block mt-1.5 rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wider ${tierColor}`}>
+                              {tierName}
+                            </span>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <p className="font-mono text-2xl font-black text-teal-300">{rating}</p>
+                            <p className="text-[9px] uppercase tracking-widest text-slate-500">Rating</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </motion.section>
     );
   }
@@ -827,28 +945,26 @@ export default function Home() {
                 <div className="rounded-2xl border border-teal-500/20 bg-teal-950/25 p-5 shadow-[0_0_40px_rgba(45,212,191,0.04)] backdrop-blur-md">
                   <p className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-teal-300"><Sparkles size={16} /> Ready Check</p>
                   <h2 className="text-3xl font-black uppercase tracking-normal">Choose your queue</h2>
-                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">Ranked uses your account Elo. Bot matches are safe practice, but still update your current prototype rating.</p>
-                  
+                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">Ranked uses your account Elo. Bot matches are safe practice, they do not affect your elo.</p>
+
                   <div className="mt-5 border-t border-white/[0.08] pt-4">
                     <p className="mb-3 text-xs font-black uppercase tracking-widest text-slate-400">Select Queue Type</p>
                     <div className="grid gap-2 grid-cols-2 mb-4 bg-black/40 p-1.5 rounded-xl border border-white/5">
                       <button
                         onClick={() => { playSound("select"); setQueueMode("global"); setSelectedField("all"); }}
-                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all duration-300 ${
-                          queueMode === "global"
-                            ? "bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.2)]"
-                            : "text-slate-400 hover:text-white"
-                        }`}
+                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all duration-300 ${queueMode === "global"
+                          ? "bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.2)]"
+                          : "text-slate-400 hover:text-white"
+                          }`}
                       >
                         Main Queue
                       </button>
                       <button
                         onClick={() => { playSound("select"); setQueueMode("field"); if (selectedField === "all" || !selectedField) setSelectedField("Common / First Year"); }}
-                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all duration-300 ${
-                          queueMode === "field"
-                            ? "bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.2)]"
-                            : "text-slate-400 hover:text-white"
-                        }`}
+                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all duration-300 ${queueMode === "field"
+                          ? "bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.2)]"
+                          : "text-slate-400 hover:text-white"
+                          }`}
                       >
                         Field-wise Queue
                       </button>
@@ -866,11 +982,10 @@ export default function Home() {
                               <button
                                 key={field.id}
                                 onClick={() => { playSound("select"); setSelectedField(field.id); }}
-                                className={`p-3 rounded-lg border text-left font-bold text-xs uppercase tracking-wider transition-all truncate ${
-                                  isSelected 
-                                    ? "border-teal-300 bg-teal-300/10 text-teal-200 shadow-[0_0_15px_rgba(45,212,191,0.15)]" 
-                                    : "border-white/10 bg-black/20 text-slate-300 hover:border-white/20 hover:bg-black/30"
-                                }`}
+                                className={`p-3 rounded-lg border text-left font-bold text-xs uppercase tracking-wider transition-all truncate ${isSelected
+                                  ? "border-teal-300 bg-teal-300/10 text-teal-200 shadow-[0_0_15px_rgba(45,212,191,0.15)]"
+                                  : "border-white/10 bg-black/20 text-slate-300 hover:border-white/20 hover:bg-black/30"
+                                  }`}
                               >
                                 {field.name}
                               </button>

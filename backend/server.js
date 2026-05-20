@@ -73,6 +73,7 @@ function publicUser(user) {
     losses: user.losses || 0,
     gamesPlayed: user.gamesPlayed || 0,
     bestElo: user.bestElo || user.elo,
+    fieldElos: user.fieldElos || {},
     createdAt: user.createdAt
   };
 }
@@ -370,17 +371,24 @@ async function createPlayer(socket, data = {}) {
   const user = await storage.getUserByToken(data.authToken);
   if (!user) return null;
 
+  const domain = normalizeDomain(data.domain);
+  const fieldElos = user.fieldElos || {};
+  let elo = user.elo || 1200;
+  if (domain && domain !== 'all') {
+    elo = fieldElos[domain] || 1200;
+  }
+
   return {
     id: socket.id,
     userId: user.id,
     name: user.username,
     username: user.username,
-    elo: user.elo || 1200,
+    elo: elo,
     avatarUrl: user.avatarUrl,
     bannerUrl: user.bannerUrl,
     hp: 100,
     socketId: socket.id,
-    domain: normalizeDomain(data.domain),
+    domain: domain,
     queuedAt: Date.now()
   };
 }
@@ -811,44 +819,75 @@ async function endMatch(match) {
     loser = match.p1;
   }
 
+  const isBotMatch = Boolean(match.p1.isBot || match.p2.isBot);
+
   // Robust ELO calculation
   if (winner && loser) {
-    // Dynamic K-Factor: new/lower-ranked players swing faster
-    let K_winner = winner.elo < 1300 ? 50 : (winner.elo > 1800 ? 16 : 32);
-    let K_loser = loser.elo < 1300 ? 50 : (loser.elo > 1800 ? 16 : 32);
+    let winnerDelta = 0;
+    let loserDelta = 0;
 
-    const expectedWinner = 1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
-    const expectedLoser = 1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
+    if (!isBotMatch) {
+      // Dynamic K-Factor: new/lower-ranked players swing faster
+      let K_winner = winner.elo < 1300 ? 50 : (winner.elo > 1800 ? 16 : 32);
+      let K_loser = loser.elo < 1300 ? 50 : (loser.elo > 1800 ? 16 : 32);
 
-    // Margin of Victory Multiplier (up to 1.5x for a flawless 100HP win)
-    const marginMultiplier = 1 + (winner.hp / 100) * 0.5;
+      const expectedWinner = 1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
+      const expectedLoser = 1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
 
-    const winnerDelta = Math.round(K_winner * marginMultiplier * (1 - expectedWinner));
-    const loserDelta = Math.round(K_loser * marginMultiplier * (0 - expectedLoser));
+      // Margin of Victory Multiplier (up to 1.5x for a flawless 100HP win)
+      const marginMultiplier = 1 + (winner.hp / 100) * 0.5;
 
-    winner.elo = winner.elo + winnerDelta;
-    loser.elo = Math.max(0, loser.elo + loserDelta);
+      winnerDelta = Math.round(K_winner * marginMultiplier * (1 - expectedWinner));
+      loserDelta = Math.round(K_loser * marginMultiplier * (0 - expectedLoser));
+
+      winner.elo = winner.elo + winnerDelta;
+      loser.elo = Math.max(0, loser.elo + loserDelta);
+    }
     
     winner.eloDelta = winnerDelta;
     loser.eloDelta = loserDelta;
 
     if (!winner.isBot && winner.userId) {
-      await storage.updateUserWith(winner.userId, user => ({
-        ...user,
-        elo: winner.elo,
-        bestElo: Math.max(user.bestElo || user.elo || 1200, winner.elo),
-        wins: (user.wins || 0) + 1,
-        gamesPlayed: (user.gamesPlayed || 0) + 1
-      }));
+      await storage.updateUserWith(winner.userId, user => {
+        const nextUser = {
+          ...user,
+          wins: (user.wins || 0) + 1,
+          gamesPlayed: (user.gamesPlayed || 0) + 1
+        };
+        if (!isBotMatch) {
+          const domain = match.domain;
+          if (domain && domain !== 'all') {
+            const elos = user.fieldElos || {};
+            elos[domain] = winner.elo;
+            nextUser.fieldElos = elos;
+          } else {
+            nextUser.elo = winner.elo;
+            nextUser.bestElo = Math.max(user.bestElo || user.elo || 1200, winner.elo);
+          }
+        }
+        return nextUser;
+      });
     }
 
     if (!loser.isBot && loser.userId) {
-      await storage.updateUserWith(loser.userId, user => ({
-        ...user,
-        elo: loser.elo,
-        losses: (user.losses || 0) + 1,
-        gamesPlayed: (user.gamesPlayed || 0) + 1
-      }));
+      await storage.updateUserWith(loser.userId, user => {
+        const nextUser = {
+          ...user,
+          losses: (user.losses || 0) + 1,
+          gamesPlayed: (user.gamesPlayed || 0) + 1
+        };
+        if (!isBotMatch) {
+          const domain = match.domain;
+          if (domain && domain !== 'all') {
+            const elos = user.fieldElos || {};
+            elos[domain] = loser.elo;
+            nextUser.fieldElos = elos;
+          } else {
+            nextUser.elo = loser.elo;
+          }
+        }
+        return nextUser;
+      });
     }
 
     await storage.recordMatch({
