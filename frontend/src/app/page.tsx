@@ -975,7 +975,7 @@ export default function Home() {
               initial={{ scale: 0.95, y: 15, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 15, opacity: 0 }}
-              className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/90 p-6 shadow-2xl backdrop-blur-2xl z-10"
+              className="relative flex max-h-[90dvh] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/90 p-5 sm:p-6 shadow-2xl backdrop-blur-2xl z-10"
               onClick={e => e.stopPropagation()}
             >
               <div className="mb-6 flex items-start justify-between">
@@ -992,7 +992,7 @@ export default function Home() {
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 overflow-y-auto pr-1 scrollbar-thin flex-1 max-h-[60vh]">
                 {FIELDS.filter(f => f.id !== "all").map(field => {
                   const rating = account?.fieldElos?.[field.id] ?? 1200;
 
@@ -1073,7 +1073,7 @@ export default function Home() {
               {/* Profile details */}
               <div className="relative z-10 -mt-12 flex-1 overflow-y-auto overscroll-contain px-4 pb-6 scrollbar-thin sm:px-6">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-end justify-between mb-6">
-                  <div className="flex flex-col sm:flex-row gap-3 items-end">
+                  <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-end">
                     <img 
                       src={getImageUrl(viewingUser.avatarUrl)} 
                       alt="" 
@@ -1308,35 +1308,49 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Incoming Challenge Modal */}
+      {/* Incoming Challenge Notification */}
       <AnimatePresence>
         {incomingChallenge && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/90 backdrop-blur-md animate-fade-in" />
+          <div className="fixed left-4 right-4 top-4 z-50 flex justify-center sm:left-auto sm:right-6 sm:top-6 sm:w-96 pointer-events-none">
             <motion.div
-              initial={{ scale: 0.9, rotate: -2, opacity: 0 }}
-              animate={{ scale: 1, rotate: 0, opacity: 1 }}
-              exit={{ scale: 0.9, rotate: 2, opacity: 0 }}
-              className="relative w-full max-w-md overflow-hidden rounded-2xl border-2 border-teal-400/40 bg-slate-950 p-6 text-center shadow-[0_0_60px_rgba(45,212,191,0.15)] z-50"
+              initial={{ y: -50, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -20, opacity: 0, scale: 0.95 }}
+              className="pointer-events-auto w-full overflow-hidden rounded-2xl border border-teal-500/40 bg-slate-950/95 p-4 shadow-[0_0_30px_rgba(45,212,191,0.25)] backdrop-blur-xl"
             >
-              <motion.div
-                animate={{ boxShadow: ["0 0 0 rgba(45,212,191,0)", "0 0 30px rgba(45,212,191,0.35)", "0 0 0 rgba(45,212,191,0)"] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="mx-auto mb-4 h-16 w-16 rounded-full bg-teal-400/10 border border-teal-300 grid place-items-center text-teal-400"
-              >
-                <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
-                  <Swords size={28} />
-                </motion.div>
-              </motion.div>
-              <h2 className="text-2xl font-black uppercase tracking-wider text-teal-300">Duel Challenge!</h2>
-              <p className="mt-2 text-slate-300 font-bold">
-                <span className="text-teal-200">@{incomingChallenge.challenger.username}</span> has challenged you to a direct duel!
-              </p>
-              <div className="mt-4 inline-block rounded-full bg-slate-900 border border-white/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-slate-300">
-                 Arena: {incomingChallenge.domain === 'all' || incomingChallenge.domain === 'Common / First Year' ? 'All Subjects' : incomingChallenge.domain}
+              <div className="flex items-start gap-3">
+                <div className="relative shrink-0">
+                  <img 
+                    src={getImageUrl(incomingChallenge.challenger.avatarUrl)} 
+                    alt="" 
+                    className="h-12 w-12 rounded-xl border border-white/10 bg-slate-800 object-cover"
+                  />
+                  <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 border border-teal-500/30 text-teal-400">
+                    <Swords size={10} />
+                  </div>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <p className="font-mono text-xs font-black uppercase tracking-wider text-teal-300">⚔️ Duel Challenge!</p>
+                  </div>
+                  <p className="mt-0.5 text-sm font-black text-white truncate">
+                    @{incomingChallenge.challenger.username}
+                  </p>
+                  <div className="mt-1 flex items-center gap-2 flex-wrap">
+                    <span className="rounded bg-slate-800 border border-white/[0.06] px-1.5 py-0.5 text-[9px] font-mono font-black text-amber-300">
+                      Lvl {incomingChallenge.challenger.level || 1}
+                    </span>
+                    <span className="font-mono text-[10px] text-slate-400">
+                      {incomingChallenge.challenger.elo} Elo
+                    </span>
+                  </div>
+                  <div className="mt-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 bg-white/[0.03] border border-white/[0.06] px-2 py-1 rounded inline-block">
+                    Arena: {incomingChallenge.domain === 'all' || incomingChallenge.domain === 'Common / First Year' ? 'All Subjects' : incomingChallenge.domain}
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-8 grid grid-cols-2 gap-3">
+              <div className="mt-4 flex gap-2">
                 <button 
                   onClick={() => {
                     if (!socketRef.current) return;
@@ -1344,7 +1358,7 @@ export default function Home() {
                     socketRef.current.emit("decline_challenge", { challengeId: incomingChallenge.challengeId });
                     setIncomingChallenge(null);
                   }}
-                  className="rounded-xl border border-white/10 bg-white/5 py-3.5 text-sm font-black uppercase tracking-widest text-slate-300 hover:bg-white/10 transition"
+                  className="flex-1 rounded-lg border border-white/10 bg-white/5 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
                 >
                   Decline
                 </button>
@@ -1355,9 +1369,9 @@ export default function Home() {
                     socketRef.current.emit("accept_challenge", { challengeId: incomingChallenge.challengeId });
                     setIncomingChallenge(null);
                   }}
-                  className="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 py-3.5 text-sm font-black uppercase tracking-widest text-slate-950 shadow-[0_0_20px_rgba(45,212,191,0.25)] hover:from-teal-350 hover:to-emerald-350 transition duration-300"
+                  className="flex-1 rounded-lg bg-gradient-to-r from-teal-400 to-emerald-400 py-2 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_12px_rgba(45,212,191,0.2)] hover:from-teal-350 hover:to-emerald-350 transition duration-300"
                 >
-                  Accept Match
+                  Accept
                 </button>
               </div>
             </motion.div>
