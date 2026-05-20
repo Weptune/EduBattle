@@ -102,7 +102,9 @@ const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:3001"
 const getImageUrl = (url?: string) => {
   if (!url) return "";
   if (url.startsWith("/") && !url.startsWith("//")) {
-    return `${SOCKET_URL}${url}`;
+    const baseUrl = SOCKET_URL.replace(/\/+$/, "");
+    const cleanUrl = "/" + url.replace(/^\/+/, "");
+    return `${baseUrl}${cleanUrl}`;
   }
   return url;
 };
@@ -110,10 +112,13 @@ const getImageUrl = (url?: string) => {
 async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
   let response: Response;
 
+  const baseUrl = SOCKET_URL.replace(/\/+$/, "");
+  const cleanPath = "/" + path.replace(/^\/+/, "");
+
   try {
-    response = await fetch(`${SOCKET_URL}${path}`, options);
+    response = await fetch(`${baseUrl}${cleanPath}`, options);
   } catch {
-    throw new Error(`Cannot reach backend at ${SOCKET_URL}. Make sure the updated backend server is running.`);
+    throw new Error(`Cannot reach backend at ${baseUrl}. Make sure the updated backend server is running.`);
   }
 
   const text = await response.text();
