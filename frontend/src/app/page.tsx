@@ -954,7 +954,6 @@ export default function Home() {
 
               <div className="space-y-4">
                 <div className="rounded-2xl border border-teal-500/20 bg-teal-950/25 p-5 shadow-[0_0_40px_rgba(45,212,191,0.04)] backdrop-blur-md">
-                  <p className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-teal-300"><Sparkles size={16} /> Ready Check</p>
                   <h2 className="text-3xl font-black uppercase tracking-normal">Choose your queue</h2>
                   <p className="mt-2 text-sm text-slate-300 leading-relaxed">Ranked uses your account Elo. Bot matches are safe practice, they do not affect your elo.</p>
 
