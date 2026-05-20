@@ -868,12 +868,12 @@ export default function Home() {
     <main className="relative min-h-screen overflow-x-hidden text-slate-50">
       <ArenaBackdrop />
 
-      <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5 gap-2">
+      <nav className="relative z-20 mx-auto flex w-full max-w-6xl min-w-0 items-center justify-between gap-2 px-3 py-3 safe-pt sm:px-4 sm:py-5">
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => setScreen(account ? "play" : "auth")}
-          className="flex items-center gap-2 sm:gap-3 text-left min-w-0"
+          className="flex min-w-0 items-center gap-2 text-left sm:gap-3"
         >
           <motion.div
             animate={{ boxShadow: ["0 0 20px rgba(45,212,191,0.25)", "0 0 32px rgba(45,212,191,0.45)", "0 0 20px rgba(45,212,191,0.25)"] }}
@@ -882,25 +882,28 @@ export default function Home() {
           >
             <Swords size={20} className="sm:h-[22px] sm:w-[22px]" />
           </motion.div>
-          <div className="truncate">
-            <p className="font-display text-base font-black uppercase tracking-wide text-teal-400 sm:text-lg text-glow-teal">Synapse.gg</p>
+          <div className="min-w-0 truncate">
+            <p className="font-display text-sm font-black uppercase tracking-wide text-teal-400 text-glow-teal sm:text-lg">
+              <span className="sm:hidden">Synapse</span>
+              <span className="hidden sm:inline">Synapse.gg</span>
+            </p>
             <p className="hidden text-[10px] font-mono text-slate-400 sm:block">Collegiate Trivia Arena</p>
           </div>
         </motion.button>
 
         {account ? (
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <div className="relative hidden sm:flex items-center gap-0.5 rounded-xl border border-white/[0.06] bg-black/40 p-1 backdrop-blur-md">
+          <div className="flex shrink-0 items-center gap-2">
+            <div className="relative hidden items-center gap-0.5 rounded-xl border border-white/[0.06] bg-black/40 p-1 backdrop-blur-md md:flex">
               {navTabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={tab.onClick}
-                  className={`relative z-10 rounded-lg px-3 py-2 text-xs font-bold transition-colors sm:px-4 sm:text-sm ${screen === tab.id ? "text-white" : "text-slate-400 hover:text-slate-200"}`}
+                  className={`relative z-10 rounded-lg px-3 py-2 text-xs font-bold transition-colors lg:px-4 lg:text-sm ${screen === tab.id ? "text-white" : "text-slate-400 hover:text-slate-200"}`}
                 >
                   {screen === tab.id && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg nav-tab-glow bg-gradient-to-b from-white/12 to-white/[0.04] border border-white/10"
+                      className="absolute inset-0 rounded-lg nav-tab-glow border border-white/10 bg-gradient-to-b from-white/12 to-white/[0.04]"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -908,22 +911,11 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            <div className="flex sm:hidden items-center gap-0.5">
-              {navTabs.map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={tab.onClick}
-                  className={`rounded-lg px-2 py-1.5 text-[10px] font-bold ${screen === tab.id ? "bg-white/10 text-white" : "text-slate-400"}`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={logout}
-              className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:border-red-400/30 hover:bg-red-500/10 hover:text-red-200 transition sm:h-10 sm:w-10"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 transition hover:border-red-400/30 hover:bg-red-500/10 hover:text-red-200 sm:h-10 sm:w-10"
               title="Log out"
             >
               <LogOut size={16} className="sm:h-[18px] sm:w-[18px]" />
@@ -932,7 +924,29 @@ export default function Home() {
         ) : null}
       </nav>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-10">
+      {account ? (
+        <nav className="fixed bottom-0 left-0 right-0 z-30 border-t border-white/10 bg-slate-950/95 backdrop-blur-xl md:hidden safe-pb">
+          <div className="mx-auto grid max-w-lg grid-cols-4 gap-0.5 px-1 py-1.5">
+            {navTabs.map(tab => {
+              const active = screen === tab.id;
+              const Icon = tab.id === "play" ? Swords : tab.id === "social" ? MessageSquare : tab.id === "profile" ? Users : Trophy;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={tab.onClick}
+                  className={`flex min-h-[52px] flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 transition ${active ? "bg-teal-400/15 text-teal-300" : "text-slate-500"}`}
+                >
+                  <Icon size={18} strokeWidth={active ? 2.5 : 2} />
+                  <span className="text-[9px] font-black uppercase tracking-wide">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      ) : null}
+
+      <div className="relative z-10 mx-auto w-full min-w-0 max-w-6xl px-3 pb-24 md:px-4 md:pb-10">
         <AnimatePresence mode="wait">
           {!account || screen === "auth" 
             ? renderAuth() 
@@ -1022,7 +1036,7 @@ export default function Home() {
       {/* User Profile Detail Modal */}
       <AnimatePresence>
         {(viewingUser || isViewingUserLoading) && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -1031,10 +1045,10 @@ export default function Home() {
               className="absolute inset-0 bg-black/85 backdrop-blur-sm"
             />
             <motion.div
-              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              initial={{ scale: 0.98, y: 24, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 15, opacity: 0 }}
-              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-slate-950 shadow-2xl z-50"
+              exit={{ scale: 0.98, y: 24, opacity: 0 }}
+              className="relative z-50 flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-slate-950 shadow-2xl sm:max-h-[90dvh] sm:rounded-2xl"
             >
               {isViewingUserLoading && !viewingUser ? (
                 <div className="flex h-64 items-center justify-center">
@@ -1057,7 +1071,7 @@ export default function Home() {
               </div>
 
               {/* Profile details */}
-              <div className="px-6 pb-6 relative z-10 -mt-12">
+              <div className="relative z-10 -mt-12 flex-1 overflow-y-auto overscroll-contain px-4 pb-6 scrollbar-thin sm:px-6">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-end justify-between mb-6">
                   <div className="flex flex-col sm:flex-row gap-3 items-end">
                     <img 
@@ -1066,8 +1080,8 @@ export default function Home() {
                       className="h-24 w-24 rounded-xl border-4 border-slate-950 bg-slate-800 object-cover shadow-lg" 
                     />
                     <div className="pb-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-2xl font-black uppercase tracking-tight text-white">{viewingUser.username}</h3>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="text-xl font-black uppercase tracking-tight text-white break-all sm:text-2xl">{viewingUser.username}</h3>
                         <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-1.5 py-0.5 text-[10px] font-mono font-black text-slate-950 shadow-[0_0_10px_rgba(45,212,191,0.2)]">
                           Lvl {viewingUser.level || 1}
                         </span>
@@ -1240,9 +1254,9 @@ export default function Home() {
                         const l = stats?.losses || 0;
                         const wr = w + l > 0 ? Math.round((w / (w + l)) * 100) : 0;
                         return (
-                          <div key={f.id} className="flex items-center justify-between text-xs border-b border-white/5 pb-1.5 last:border-b-0 last:pb-0">
-                            <span className="font-bold text-slate-400">{f.name}</span>
-                            <div className="text-right">
+                          <div key={f.id} className="flex flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between sm:gap-3 text-xs">
+                            <span className="font-bold text-slate-400 break-words leading-snug">{f.name}</span>
+                            <div className="shrink-0 text-left sm:text-right">
                               <span className="font-mono font-bold text-teal-300">{elo} Elo</span>
                               <span className="block text-[8px] font-mono text-slate-500">{w}W-{l}L ({wr}% WR)</span>
                             </div>
@@ -1358,7 +1372,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -24, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -24, scale: 0.9 }}
-            className="fixed top-6 right-6 z-50 rounded-xl border border-teal-400/40 bg-slate-900/90 px-5 py-4 shadow-2xl backdrop-blur-md"
+            className="fixed left-3 right-3 top-4 z-50 rounded-xl border border-teal-400/40 bg-slate-900/90 px-4 py-3 shadow-2xl backdrop-blur-md sm:left-auto sm:right-6 sm:top-6 sm:px-5 sm:py-4"
           >
             <div className="flex items-center gap-3">
               <div className="rounded-full bg-teal-500/10 p-1.5 text-teal-400">
@@ -1381,23 +1395,23 @@ export default function Home() {
         initial={{ opacity: 0, y: 16 }} 
         animate={{ opacity: 1, y: 0 }} 
         exit={{ opacity: 0, y: -16 }} 
-        className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] h-[calc(100vh-140px)] max-h-[850px]"
+        className="flex min-w-0 flex-col gap-4 lg:grid lg:grid-cols-[1.2fr_0.8fr] lg:gap-6"
       >
-        {/* Left Column: Global Arena Chat */}
-        <div className="glass-panel flex flex-col overflow-hidden scanline-overlay relative">
+        {/* Global Arena Chat */}
+        <div className="glass-panel relative flex min-h-[min(42vh,360px)] max-h-[min(52vh,440px)] flex-col overflow-hidden scanline-overlay lg:min-h-[min(68vh,560px)] lg:max-h-[calc(100vh-11rem)]">
           {/* Chat Header */}
-          <div className="flex items-center justify-between border-b border-white/[0.08] bg-slate-950/20 px-6 py-4">
-            <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-teal-500/10 p-2 text-teal-400">
-                <MessageSquare size={20} />
+          <div className="flex flex-col gap-2 border-b border-white/[0.08] bg-slate-950/20 px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:py-4">
+            <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+              <div className="shrink-0 rounded-lg bg-teal-500/10 p-2 text-teal-400">
+                <MessageSquare size={18} />
               </div>
-              <div>
-                <h2 className="text-lg font-black uppercase tracking-wider text-slate-100">Global Arena Chat</h2>
+              <div className="min-w-0">
+                <h2 className="text-sm font-black uppercase tracking-wider text-slate-100 sm:text-lg">Global Arena Chat</h2>
                 <p className="text-[10px] font-mono text-slate-400">Interact with online challengers</p>
               </div>
             </div>
             {socketId ? (
-              <span className="flex items-center gap-1.5 rounded-full bg-teal-500/10 px-3 py-1 text-[10px] font-mono font-black text-teal-300">
+              <span className="flex w-fit items-center gap-1.5 rounded-full bg-teal-500/10 px-2.5 py-1 text-[10px] font-mono font-black text-teal-300">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal-400" />
                 Live Connection
               </span>
@@ -1410,7 +1424,7 @@ export default function Home() {
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          <div className="flex-1 space-y-3 overflow-y-auto overscroll-contain p-3 scrollbar-thin sm:space-y-4 sm:p-4">
             {chatMessages.length ? (
               chatMessages.map(msg => {
                 const isSelf = account?.id === msg.userId;
@@ -1480,31 +1494,31 @@ export default function Home() {
           </div>
 
           {/* Chat Input Form */}
-          <form onSubmit={sendChatMessage} className="border-t border-white/[0.08] bg-slate-950/25 p-4 flex gap-2">
+          <form onSubmit={sendChatMessage} className="flex shrink-0 gap-2 border-t border-white/[0.08] bg-slate-950/25 p-3 sm:p-4">
             <input 
               value={chatMessageInput}
               onChange={e => setChatMessageInput(e.target.value)}
-              placeholder="Type a message to the arena..." 
+              placeholder="Message the arena..." 
               maxLength={300}
-              className="flex-1 rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none focus:border-teal-400/80 transition"
+              className="min-w-0 flex-1 rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none transition focus:border-teal-400/80 sm:px-4 sm:py-3"
             />
             <button 
               type="submit" 
-              className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_15px_rgba(45,212,191,0.2)] transition duration-300"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 transition duration-300 hover:from-teal-350 hover:to-emerald-350 sm:h-11 sm:w-11"
             >
               <Send size={18} />
             </button>
           </form>
         </div>
 
-        {/* Right Column: Campus Friends & Actions */}
-        <div className="flex flex-col gap-6 overflow-y-auto">
+        {/* Friends & actions */}
+        <div className="flex min-w-0 flex-col gap-4">
           {/* Add Friend Card */}
-          <div className="rounded-2xl border border-white/[0.08] bg-slate-900/40 p-5 backdrop-blur-md">
-            <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-200">
+          <div className="glass-panel rounded-2xl p-3 sm:p-4">
+            <h3 className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-200 sm:mb-3 sm:text-sm">
               <UserPlus size={16} className="text-teal-300" /> Add Challenger
             </h3>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row">
               <div className="relative flex-1">
                 <input 
                   id="friend-username-input"
@@ -1530,7 +1544,7 @@ export default function Home() {
                     input.value = "";
                   }
                 }}
-                className="rounded-xl border border-white/10 bg-white/5 px-4 text-xs font-black uppercase tracking-wider text-white hover:bg-white/10 transition"
+                className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white transition hover:bg-white/10 sm:py-0"
               >
                 Send
               </button>
@@ -1587,7 +1601,7 @@ export default function Home() {
           )}
 
           {/* Friends List */}
-          <div className="flex-1 rounded-2xl border border-white/[0.08] bg-slate-900/40 p-5 backdrop-blur-md flex flex-col min-h-[300px]">
+          <div className="glass-panel flex min-h-0 flex-1 flex-col rounded-2xl p-3 sm:p-4">
             <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-200">
               <Users size={16} className="text-teal-300" /> Friends List
             </h3>
@@ -1680,7 +1694,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -16 }}
-        className="grid min-h-[calc(100vh-96px)] items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]"
+        className="grid min-w-0 items-center gap-6 py-4 sm:gap-8 lg:min-h-[calc(100vh-96px)] lg:grid-cols-[1.1fr_0.9fr]"
       >
         <div className="max-w-2xl">
           <motion.div
@@ -1695,7 +1709,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08 }}
-            className="font-display text-5xl font-black uppercase leading-none tracking-normal md:text-7xl text-glow-teal"
+            className="font-display text-3xl font-black uppercase leading-none tracking-normal text-glow-teal sm:text-5xl md:text-7xl"
           >
             Build your ranked identity.
           </motion.h1>
@@ -1771,18 +1785,18 @@ export default function Home() {
     if (!account) return null;
 
     return (
-      <motion.section key="profile" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="space-y-6">
+      <motion.section key="profile" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="min-w-0 space-y-4 sm:space-y-6">
         <div className="glass-panel overflow-hidden rounded-2xl scanline-overlay relative">
           <div className="h-56 bg-cover bg-center relative" style={{ backgroundImage: `url(${getImageUrl(account.bannerUrl)})` }}>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
           </div>
-          <div className="flex flex-col gap-6 px-6 pb-6 md:flex-row md:items-end md:justify-between relative z-10 -mt-10">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end">
-              <img src={getImageUrl(account.avatarUrl)} alt={`${account.username} avatar`} className="h-32 w-32 rounded-2xl border-4 border-slate-900/80 bg-slate-800 object-cover shadow-2xl" />
-              <div className="pb-1">
+          <div className="relative z-10 -mt-10 flex flex-col gap-4 px-4 pb-6 sm:gap-6 sm:px-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:gap-4">
+              <img src={getImageUrl(account.avatarUrl)} alt={`${account.username} avatar`} className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-slate-800 object-cover shadow-2xl sm:h-32 sm:w-32" />
+              <div className="min-w-0 pb-1">
                 <p className="font-mono text-sm text-teal-300">@{account.username}</p>
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl font-black uppercase tracking-normal text-white">{account.username}</h1>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <h1 className="text-2xl font-black uppercase tracking-normal text-white break-all sm:text-4xl">{account.username}</h1>
                   <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-2 py-0.5 text-xs font-mono font-black text-slate-950 shadow-[0_0_12px_rgba(45,212,191,0.25)]">Lvl {account.level || 1}</span>
                 </div>
                 
@@ -1806,7 +1820,7 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
               <Stat icon={<Zap size={18} />} label="Elo" value={String(account.elo)} />
               <Stat icon={<Trophy size={18} />} label="Best" value={String(account.bestElo)} />
               <Stat icon={<Swords size={18} />} label="Games" value={String(account.gamesPlayed)} />
@@ -1815,8 +1829,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-lg border border-white/10 bg-white/[0.06] p-5">
+        <div className="grid min-w-0 gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:gap-6">
+          <div className="glass-panel rounded-2xl p-3 sm:p-5">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-black uppercase"><Medal className="text-amber-300" /> Battle Record</h2>
             <div className="grid grid-cols-2 gap-3">
               <Stat icon={<Trophy size={18} />} label="Wins" value={String(account.wins)} />
@@ -1828,8 +1842,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-white/[0.06] p-5">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-black uppercase"><Camera className="text-teal-300" /> Edit Profile</h2>
+          <div className="glass-panel rounded-2xl p-3 sm:p-5">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-black uppercase sm:text-xl"><Camera className="text-teal-300" /> Edit Profile</h2>
             <div className="grid gap-4">
               <input value={profileForm.username} onChange={event => setProfileForm({ ...profileForm, username: event.target.value })} placeholder="Username" className="rounded-lg border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-teal-300" />
               <input value={profileForm.bio} onChange={event => setProfileForm({ ...profileForm, bio: event.target.value })} placeholder="Bio" className="rounded-lg border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-teal-300" />
@@ -1859,12 +1873,12 @@ export default function Home() {
 
   function renderLeaderboard() {
     return (
-      <motion.section key="leaderboard" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
-        <div className="glass-panel rounded-2xl p-5">
+      <motion.section key="leaderboard" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="grid min-w-0 gap-4 lg:grid-cols-[1fr_0.85fr] lg:gap-6">
+        <div className="glass-panel min-w-0 rounded-2xl p-3 sm:p-5">
           <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-teal-300">Global Ladder</p>
-              <h1 className="font-display text-3xl font-black uppercase tracking-normal text-glow-teal">Leaderboard</h1>
+              <h1 className="font-display text-2xl font-black uppercase tracking-normal text-glow-teal sm:text-3xl">Leaderboard</h1>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button
@@ -1882,12 +1896,12 @@ export default function Home() {
           {/* New Field-wise Leaderboard Selector */}
           <div className="mb-5">
             <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Rank by Academic Field:</p>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="-mx-1 flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin sm:flex-wrap sm:overflow-visible">
               {FIELDS.map(f => (
                 <button
                   key={f.id}
                   onClick={() => { playSound("select"); setLeaderboardField(f.id); }}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-bold transition duration-300 border ${leaderboardField === f.id
+                  className={`shrink-0 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[10px] font-bold transition duration-300 border sm:px-3 sm:text-xs ${leaderboardField === f.id
                     ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
                     : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
                     }`}
@@ -1911,27 +1925,27 @@ export default function Home() {
               return (
                 <motion.div
                   key={entry.user.id}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.35, delay: Math.min(rank * 0.04, 0.4) }}
-                  whileHover={{ scale: 1.01, x: 4 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: Math.min(rank * 0.03, 0.25) }}
                   onClick={() => openUserProfile(entry.user.id)}
-                  className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-xl border p-3.5 cursor-pointer card-hover-lift ${isSelf ? "border-teal-400/40 bg-teal-400/[0.06] shadow-[0_0_15px_rgba(45,212,191,0.08)]" : "border-white/[0.06] bg-slate-950/20"} ${rank <= 3 ? "ring-1 ring-amber-400/10" : ""}`}
+                  className={`cursor-pointer rounded-xl border p-3 card-hover-lift min-w-0 sm:grid sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-3 sm:p-3.5 ${isSelf ? "border-teal-400/40 bg-teal-400/[0.06] shadow-[0_0_15px_rgba(45,212,191,0.08)]" : "border-white/[0.06] bg-slate-950/20"} ${rank <= 3 ? "ring-1 ring-amber-400/10" : ""}`}
                 >
-                  <div className={`w-10 text-center font-mono text-lg font-black ${rankColor}`}>{rankIcon}</div>
-                  <div className="flex min-w-0 items-center gap-3">
-                    <img src={getImageUrl(entry.user.avatarUrl)} alt="" className="h-11 w-11 rounded-lg object-cover border border-white/10" />
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <p className="truncate font-black uppercase text-sm tracking-wide text-slate-100">{entry.user.username}</p>
-                        <span className="shrink-0 rounded bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-[9px] font-mono font-black text-amber-300">Lvl {entry.user.level || 1}</span>
+                  <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+                    <div className={`w-8 shrink-0 text-center font-mono text-base font-black sm:w-10 sm:text-lg ${rankColor}`}>{rankIcon}</div>
+                    <img src={getImageUrl(entry.user.avatarUrl)} alt="" className="h-10 w-10 shrink-0 rounded-lg border border-white/10 object-cover sm:h-11 sm:w-11" />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                        <p className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{entry.user.username}</p>
+                        <span className="shrink-0 rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[9px] font-mono font-black text-amber-300">Lvl {entry.user.level || 1}</span>
                       </div>
-                      <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">{wins} Wins / {losses} Losses • {wrPercent}% WR</p>
+                      <p className="font-mono text-[9px] uppercase tracking-wider text-slate-400 sm:text-[10px]">{wins}W / {losses}L · {wrPercent}% WR</p>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="mt-2 flex items-center justify-between border-t border-white/5 pt-2 sm:mt-0 sm:block sm:border-0 sm:pt-0 sm:text-right">
+                    <p className="text-[9px] uppercase tracking-widest text-slate-500 sm:hidden">{leaderboardField === "all" ? "Global Elo" : "Field Elo"}</p>
                     <p className="font-mono text-lg font-black text-teal-300">{entry.displayElo}</p>
-                    <p className="text-[9px] uppercase tracking-widest text-slate-500">{leaderboardField === "all" ? "Global Elo" : "Field Elo"}</p>
+                    <p className="hidden text-[9px] uppercase tracking-widest text-slate-500 sm:block">{leaderboardField === "all" ? "Global Elo" : "Field Elo"}</p>
                   </div>
                 </motion.div>
               );
@@ -1941,9 +1955,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="glass-panel rounded-2xl p-5">
+        <div className="glass-panel min-w-0 rounded-2xl p-3 sm:p-5">
           <p className="text-xs font-black uppercase tracking-widest text-amber-300">Your Timeline</p>
-          <h2 className="font-display mb-5 text-2xl font-black uppercase tracking-normal">Recent Matches</h2>
+          <h2 className="font-display mb-4 text-xl font-black uppercase tracking-normal sm:mb-5 sm:text-2xl">Recent Matches</h2>
           <div className="space-y-3">
             {recentMatches.length ? recentMatches.map(match => {
               const p1Name = match.player_one_name || match.playerOneName || "Player 1";
@@ -2009,7 +2023,7 @@ export default function Home() {
       <motion.section key="game" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="min-h-[calc(100vh-96px)]">
         <AnimatePresence mode="wait">
           {gameState === "menu" && (
-            <motion.div key="menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+            <motion.div key="menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid min-w-0 items-center gap-4 py-2 sm:gap-6 lg:min-h-[calc(100vh-120px)] lg:grid-cols-[1.05fr_0.95fr]">
               <div className="space-y-5">
                 <div className="glass-panel overflow-hidden rounded-2xl scanline-overlay relative">
                   <div className="h-32 bg-cover bg-center relative opacity-80" style={{ backgroundImage: `url(${getImageUrl(account?.bannerUrl)})` }}>
@@ -2020,7 +2034,7 @@ export default function Home() {
                       <img src={getImageUrl(account?.avatarUrl)} alt="" className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-white/10 object-cover shadow-2xl" />
                       <div className="min-w-0 pb-1">
                         <p className="font-mono text-sm text-teal-300">@{account?.username}</p>
-                        <h1 className="text-4xl font-black uppercase tracking-normal md:text-5xl whitespace-nowrap text-white">{account?.username}</h1>
+                        <h1 className="text-2xl font-black uppercase tracking-normal text-white break-all sm:text-4xl md:text-5xl">{account?.username}</h1>
                       </div>
                     </div>
                   </div>
@@ -2225,7 +2239,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className={`mx-auto flex min-h-[calc(100vh-120px)] max-w-5xl flex-col justify-center gap-8 ${isShaking ? "animate-[shake_0.4s_ease-in-out]" : ""}`}
+              className={`mx-auto flex w-full min-w-0 max-w-5xl flex-col justify-center gap-5 px-0 sm:gap-8 sm:px-2 ${isShaking ? "animate-[shake_0.4s_ease-in-out]" : ""}`}
             >
               <DuelHeader player={player} opponent={opponent} matchData={matchData} />
               <BattleTimerBar
@@ -2235,7 +2249,7 @@ export default function Home() {
               />
               <div className="text-center">
                 <p className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-amber-100">{selectedSubject}</p>
-                <h2 className="mx-auto max-w-3xl font-sans text-2xl font-semibold normal-case leading-snug tracking-normal text-slate-100 md:text-4xl">
+                <h2 className="mx-auto max-w-3xl px-1 font-sans text-lg font-semibold normal-case leading-snug tracking-normal text-slate-100 sm:text-2xl md:text-4xl">
                   {roundData?.question.prompt}
                 </h2>
               </div>
@@ -2426,7 +2440,7 @@ const Fighter = memo(function Fighter({ profile, tone, alignRight = false }: { p
   const hp = Math.max(0, Math.min(100, profile.hp));
 
   return (
-    <div className="relative overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-4 shadow-lg backdrop-blur-md">
+    <div className="relative min-w-0 overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-3 shadow-lg backdrop-blur-md sm:p-4">
       {banner && (
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30" 
@@ -2446,7 +2460,7 @@ const Fighter = memo(function Fighter({ profile, tone, alignRight = false }: { p
         <div className="min-w-0 flex-1">
           <div className={`flex ${alignRight ? "flex-row-reverse" : "flex-row"} items-center justify-between gap-2`}>
             <div className={`flex ${alignRight ? "flex-row-reverse" : "flex-row"} items-center gap-1.5 min-w-0`}>
-              <span className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{profile.name}</span>
+              <span className="truncate font-black text-xs uppercase tracking-wide text-slate-100 sm:text-sm">{profile.name}</span>
               <span className="shrink-0 rounded bg-slate-800 border border-slate-700 px-1 py-0.5 text-[8px] font-mono font-black text-amber-300">Lvl {profile.level || 1}</span>
             </div>
             <span className="font-mono text-[10px] font-black text-teal-300 shrink-0">{profile.elo} Elo</span>
