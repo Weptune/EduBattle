@@ -608,8 +608,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-white/10 bg-white/[0.06] p-6 shadow-2xl backdrop-blur">
-          <div className="mb-6 grid grid-cols-2 rounded-lg bg-black/30 p-1">
+        <div className="rounded-2xl border border-white/[0.08] bg-slate-900/40 p-6 shadow-2xl backdrop-blur-md">
+          <div className="mb-6 grid grid-cols-2 rounded-xl bg-black/40 p-1 border border-white/5">
             {(["signup", "login"] as const).map(mode => (
               <button
                 key={mode}
@@ -618,7 +618,7 @@ export default function Home() {
                   setStatus("");
                   playSound("select");
                 }}
-                className={`rounded-md py-3 text-sm font-black uppercase tracking-wider transition ${authMode === mode ? "bg-teal-300 text-slate-950" : "text-slate-400 hover:text-white"}`}
+                className={`rounded-lg py-3 text-sm font-black uppercase tracking-wider transition-all duration-300 ${authMode === mode ? "bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.2)]" : "text-slate-400 hover:text-white"}`}
               >
                 {mode === "signup" ? "Create" : "Login"}
               </button>
@@ -628,14 +628,14 @@ export default function Home() {
           <div className="space-y-4">
             <label className="block">
               <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-400">Username</span>
-              <input value={authForm.username} onChange={event => setAuthForm({ ...authForm, username: event.target.value })} className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-teal-300" />
+              <input value={authForm.username} onChange={event => setAuthForm({ ...authForm, username: event.target.value })} className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 outline-none transition focus:border-teal-400/80 focus:ring-1 focus:ring-teal-400/30" />
             </label>
             <label className="block">
               <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-400">Password</span>
-              <input type="password" value={authForm.password} onChange={event => setAuthForm({ ...authForm, password: event.target.value })} className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-teal-300" />
+              <input type="password" value={authForm.password} onChange={event => setAuthForm({ ...authForm, password: event.target.value })} className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 outline-none transition focus:border-teal-400/80 focus:ring-1 focus:ring-teal-400/30" />
             </label>
-            {status ? <p className="rounded-lg border border-amber-300/20 bg-amber-300/10 p-3 text-sm text-amber-100">{status}</p> : null}
-            <button onClick={authenticate} disabled={isAuthBusy} className="w-full rounded-lg bg-teal-300 py-4 font-black uppercase tracking-widest text-slate-950 hover:bg-teal-200 disabled:cursor-not-allowed disabled:opacity-60">
+            {status ? <p className="rounded-xl border border-amber-300/20 bg-amber-300/10 p-3.5 text-sm text-amber-100">{status}</p> : null}
+            <button onClick={authenticate} disabled={isAuthBusy} className="relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 py-4 font-black uppercase tracking-widest text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.15)] hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_32px_rgba(45,212,191,0.3)] transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60">
               {isAuthBusy ? "Working..." : authMode === "signup" ? "Create Account" : "Enter Arena"}
             </button>
           </div>
@@ -649,14 +649,16 @@ export default function Home() {
 
     return (
       <motion.section key="profile" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="space-y-6">
-        <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.06]">
-          <div className="h-56 bg-cover bg-center" style={{ backgroundImage: `url(${getImageUrl(account.bannerUrl)})` }} />
-          <div className="flex flex-col gap-6 px-6 pb-6 md:flex-row md:items-end md:justify-between">
-            <div className="-mt-16 flex flex-col gap-4 md:flex-row md:items-end">
-              <img src={getImageUrl(account.avatarUrl)} alt={`${account.username} avatar`} className="h-32 w-32 rounded-lg border-4 border-[#070912] bg-slate-800 object-cover" />
+        <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/40 backdrop-blur-md">
+          <div className="h-56 bg-cover bg-center relative" style={{ backgroundImage: `url(${getImageUrl(account.bannerUrl)})` }}>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
+          </div>
+          <div className="flex flex-col gap-6 px-6 pb-6 md:flex-row md:items-end md:justify-between relative z-10 -mt-10">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end">
+              <img src={getImageUrl(account.avatarUrl)} alt={`${account.username} avatar`} className="h-32 w-32 rounded-2xl border-4 border-slate-900/80 bg-slate-800 object-cover shadow-2xl" />
               <div className="pb-1">
                 <p className="font-mono text-sm text-teal-300">@{account.username}</p>
-                <h1 className="text-4xl font-black uppercase tracking-normal">{account.username}</h1>
+                <h1 className="text-4xl font-black uppercase tracking-normal text-white">{account.username}</h1>
                 <p className="mt-2 max-w-xl text-slate-300">{account.bio}</p>
               </div>
             </div>
@@ -726,23 +728,29 @@ export default function Home() {
           </div>
 
           <div className="space-y-2">
-            {leaderboard.length ? leaderboard.map(entry => (
-              <div key={entry.user.id} className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-lg border p-3 ${entry.user.id === account?.id ? "border-teal-300/50 bg-teal-300/10" : "border-white/10 bg-black/25"}`}>
-                <div className="w-10 text-center font-mono text-lg font-black text-slate-300">#{entry.rank}</div>
-                <div className="flex min-w-0 items-center gap-3">
-                  <img src={getImageUrl(entry.user.avatarUrl)} alt="" className="h-11 w-11 rounded-lg object-cover" />
-                  <div className="min-w-0">
-                    <p className="truncate font-black uppercase">{entry.user.username}</p>
-                    <p className="font-mono text-xs text-slate-500">{entry.user.wins}W / {entry.user.losses}L</p>
+            {leaderboard.length ? leaderboard.map(entry => {
+              const isSelf = entry.user.id === account?.id;
+              const rank = entry.rank;
+              const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
+              const rankColor = rank === 1 ? "text-amber-400" : rank === 2 ? "text-slate-300" : rank === 3 ? "text-amber-600" : "text-slate-400";
+              return (
+                <div key={entry.user.id} className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-xl border p-3.5 transition-all duration-300 hover:border-teal-500/20 ${isSelf ? "border-teal-400/40 bg-teal-400/[0.06] shadow-[0_0_15px_rgba(45,212,191,0.05)]" : "border-white/[0.06] bg-slate-950/20"}`}>
+                  <div className={`w-10 text-center font-mono text-lg font-black ${rankColor}`}>{rankIcon}</div>
+                  <div className="flex min-w-0 items-center gap-3">
+                    <img src={getImageUrl(entry.user.avatarUrl)} alt="" className="h-11 w-11 rounded-lg object-cover border border-white/10" />
+                    <div className="min-w-0">
+                      <p className="truncate font-black uppercase text-sm tracking-wide text-slate-100">{entry.user.username}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">{entry.user.wins} Wins / {entry.user.losses} Losses</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-mono text-lg font-black text-teal-300">{entry.user.elo}</p>
+                    <p className="text-[9px] uppercase tracking-widest text-slate-500">Elo</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-mono text-xl font-black text-teal-200">{entry.user.elo}</p>
-                  <p className="text-xs uppercase tracking-widest text-slate-500">Elo</p>
-                </div>
-              </div>
-            )) : (
-              <div className="rounded-lg border border-white/10 bg-black/25 p-8 text-center text-slate-400">No ranked players yet.</div>
+              );
+            }) : (
+              <div className="rounded-xl border border-white/[0.06] bg-slate-950/20 p-8 text-center text-slate-400">No ranked players yet.</div>
             )}
           </div>
         </div>
@@ -792,14 +800,16 @@ export default function Home() {
           {gameState === "menu" && (
             <motion.div key="menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
               <div className="space-y-5">
-                <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.06]">
-                  <div className="h-32 bg-cover bg-center opacity-80" style={{ backgroundImage: `url(${getImageUrl(account?.bannerUrl)})` }} />
-                  <div className="-mt-10 flex flex-col gap-5 p-5 sm:flex-row sm:items-end">
+                <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/40 backdrop-blur-md">
+                  <div className="h-32 bg-cover bg-center relative opacity-80" style={{ backgroundImage: `url(${getImageUrl(account?.bannerUrl)})` }}>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
+                  </div>
+                  <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-end relative z-10 -mt-10">
                     <div className="flex min-w-0 items-end gap-4">
-                      <img src={getImageUrl(account?.avatarUrl)} alt="" className="h-24 w-24 rounded-lg border-4 border-[#070912] bg-white/10 object-cover" />
+                      <img src={getImageUrl(account?.avatarUrl)} alt="" className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-white/10 object-cover shadow-2xl" />
                       <div className="min-w-0 pb-1">
                         <p className="font-mono text-sm text-teal-300">@{account?.username}</p>
-                        <h1 className="text-4xl font-black uppercase tracking-normal md:text-5xl whitespace-nowrap">{account?.username}</h1>
+                        <h1 className="text-4xl font-black uppercase tracking-normal md:text-5xl whitespace-nowrap text-white">{account?.username}</h1>
                       </div>
                     </div>
                   </div>
@@ -814,19 +824,19 @@ export default function Home() {
               </div>
 
               <div className="space-y-4">
-                <div className="rounded-lg border border-teal-300/20 bg-teal-300/[0.08] p-5 shadow-[0_0_40px_rgba(45,212,191,0.08)]">
-                  <p className="mb-2 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-teal-200"><Sparkles size={18} /> Ready Check</p>
+                <div className="rounded-2xl border border-teal-500/20 bg-teal-950/25 p-5 shadow-[0_0_40px_rgba(45,212,191,0.04)] backdrop-blur-md">
+                  <p className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-teal-300"><Sparkles size={16} /> Ready Check</p>
                   <h2 className="text-3xl font-black uppercase tracking-normal">Choose your queue</h2>
-                  <p className="mt-2 text-slate-300">Ranked uses your account Elo. Bot matches are safe practice, but still update your current prototype rating.</p>
+                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">Ranked uses your account Elo. Bot matches are safe practice, but still update your current prototype rating.</p>
                   
-                  <div className="mt-5 border-t border-white/10 pt-4">
-                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">Select Queue Type</p>
-                    <div className="grid gap-2 grid-cols-2 mb-4 bg-black/40 p-1.5 rounded-lg border border-white/5">
+                  <div className="mt-5 border-t border-white/[0.08] pt-4">
+                    <p className="mb-3 text-xs font-black uppercase tracking-widest text-slate-400">Select Queue Type</p>
+                    <div className="grid gap-2 grid-cols-2 mb-4 bg-black/40 p-1.5 rounded-xl border border-white/5">
                       <button
                         onClick={() => { playSound("select"); setQueueMode("global"); setSelectedField("all"); }}
-                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-md transition-all ${
+                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all duration-300 ${
                           queueMode === "global"
-                            ? "bg-teal-300 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.15)]"
+                            ? "bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.2)]"
                             : "text-slate-400 hover:text-white"
                         }`}
                       >
@@ -834,9 +844,9 @@ export default function Home() {
                       </button>
                       <button
                         onClick={() => { playSound("select"); setQueueMode("field"); if (selectedField === "all" || !selectedField) setSelectedField("Common / First Year"); }}
-                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-md transition-all ${
+                        className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all duration-300 ${
                           queueMode === "field"
-                            ? "bg-teal-300 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.15)]"
+                            ? "bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.2)]"
                             : "text-slate-400 hover:text-white"
                         }`}
                       >
@@ -872,8 +882,8 @@ export default function Home() {
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <button onClick={() => joinQueue(false)} className="rounded-lg bg-teal-300 px-6 py-5 font-black uppercase tracking-widest text-slate-950 hover:bg-teal-200">Find Ranked Match</button>
-                    <button onClick={() => joinQueue(true)} className="rounded-lg border border-white/15 bg-white/10 px-6 py-5 font-black uppercase tracking-widest text-white hover:bg-white/15">Play vs AI Bot</button>
+                    <button onClick={() => joinQueue(false)} className="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 px-6 py-5 font-black uppercase tracking-widest text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.15)] hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_32px_rgba(45,212,191,0.3)] transition-all duration-300">Find Ranked Match</button>
+                    <button onClick={() => joinQueue(true)} className="rounded-xl border border-white/10 bg-white/[0.04] px-6 py-5 font-black uppercase tracking-widest text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300">Play vs AI Bot</button>
                   </div>
                 </div>
               </div>
@@ -908,7 +918,7 @@ export default function Home() {
                 🏟️ {matchData?.domain && matchData.domain !== 'all' ? `${matchData.domain} Arena` : 'All Subjects Arena'}
               </div>
 
-              <motion.div initial={{ scale: 0.5, opacity: 0, rotate: -8 }} animate={{ scale: 1, opacity: 1, rotate: 0 }} transition={{ delay: 0.45, type: "spring", stiffness: 180, damping: 12 }} className="relative z-20 rounded-full bg-white px-6 py-3 text-5xl font-black italic text-slate-950 shadow-[0_0_60px_rgba(255,255,255,0.45)] md:px-8 md:py-4 md:text-7xl">
+              <motion.div initial={{ scale: 0.5, opacity: 0, rotate: -8 }} animate={{ scale: 1, opacity: 1, rotate: 0 }} transition={{ delay: 0.45, type: "spring", stiffness: 180, damping: 12 }} className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full border-4 border-slate-950 bg-gradient-to-br from-amber-400 to-orange-500 text-4xl font-black italic text-slate-950 shadow-[0_0_40px_rgba(245,158,11,0.4)] md:h-28 md:w-28 md:text-5xl">
                 VS
               </motion.div>
             </motion.div>
@@ -968,15 +978,15 @@ export default function Home() {
                   const myAns = socketId && roundResult ? roundResult.answers[socketId]?.answer : null;
                   const oppId = roundResult ? opponent?.id || Object.keys(roundResult.answers).find(id => id !== socketId) : null;
                   const oppAns = oppId && roundResult ? roundResult.answers[oppId]?.answer : null;
-                  let buttonClass = "border-white/10 bg-white/[0.06] hover:border-white/30";
-                  if (roundResult?.correctAnswer === i) buttonClass = "border-green-400 bg-green-500/20 text-green-200";
-                  else if (myAns === i) buttonClass = "border-red-400 bg-red-500/20 text-red-200";
-                  else if (oppAns === i) buttonClass = "border-amber-400 bg-amber-500/10 text-amber-100";
-                  else if (myAnswer === i) buttonClass = "border-teal-300 bg-teal-300/15 text-teal-100";
+                  let buttonClass = "border-white/[0.08] bg-slate-900/40 hover:border-teal-500/30 hover:bg-slate-900/60";
+                  if (roundResult?.correctAnswer === i) buttonClass = "border-emerald-500/50 bg-emerald-500/10 text-emerald-200 shadow-[0_0_20px_rgba(16,185,129,0.1)]";
+                  else if (myAns === i) buttonClass = "border-rose-500/50 bg-rose-500/10 text-rose-200";
+                  else if (oppAns === i) buttonClass = "border-amber-500/50 bg-amber-500/10 text-amber-200";
+                  else if (myAnswer === i) buttonClass = "border-teal-400 bg-teal-400/15 text-teal-200 shadow-[0_0_20px_rgba(45,212,191,0.08)]";
 
                   return (
-                    <button key={i} onClick={() => submitAnswer(i)} disabled={!!roundResult || myAnswer !== null} className={`rounded-lg border-2 p-5 text-left text-lg font-bold transition ${buttonClass}`}>
-                      <span className="mb-3 block text-xs font-black uppercase tracking-widest opacity-60">Option {i + 1}</span>
+                    <button key={i} onClick={() => submitAnswer(i)} disabled={!!roundResult || myAnswer !== null} className={`group relative overflow-hidden rounded-2xl border-2 p-6 text-left text-lg font-bold transition-all duration-300 ${buttonClass}`}>
+                      <span className="mb-2 block text-[10px] font-black uppercase tracking-widest opacity-50 group-hover:opacity-85 transition-opacity">Option {i + 1}</span>
                       {opt}
                     </button>
                   );
@@ -1025,12 +1035,12 @@ export default function Home() {
               <div>
                 {winnerInfo?.winner === socketId ? <Trophy size={96} className="mx-auto mb-6 text-amber-300" /> : <Skull size={96} className="mx-auto mb-6 text-red-400" />}
                 <h2 className="text-6xl font-black uppercase">{winnerInfo?.winner === socketId ? "Victory" : "Defeat"}</h2>
-                <div className="mx-auto my-8 w-80 rounded-lg border border-white/10 bg-white/[0.06] p-6">
-                  <p className="text-xs font-bold uppercase tracking-widest text-slate-400">New Rating</p>
-                  <p className="mt-2 font-mono text-5xl font-black text-teal-200">{winnerInfo?.elo}</p>
-                  <p className={`mt-2 font-bold ${(winnerInfo?.eloDelta ?? 0) >= 0 ? "text-green-300" : "text-red-300"}`}>{(winnerInfo?.eloDelta ?? 0) >= 0 ? "+" : ""}{winnerInfo?.eloDelta ?? 0} Elo</p>
+                <div className="mx-auto my-8 w-80 rounded-2xl border border-white/[0.08] bg-slate-900/40 p-6 shadow-xl backdrop-blur-md">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">New Rating</p>
+                  <p className="mt-2 font-mono text-5xl font-black text-teal-300">{winnerInfo?.elo}</p>
+                  <p className={`mt-2 font-bold ${(winnerInfo?.eloDelta ?? 0) >= 0 ? "text-emerald-300" : "text-rose-300"}`}>{(winnerInfo?.eloDelta ?? 0) >= 0 ? "+" : ""}{winnerInfo?.eloDelta ?? 0} Elo</p>
                 </div>
-                <button onClick={() => { playSound("select"); setGameState("menu"); }} className="rounded-lg bg-teal-300 px-8 py-4 font-black uppercase tracking-widest text-slate-950">Return to Menu</button>
+                <button onClick={() => { playSound("select"); setGameState("menu"); }} className="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 px-8 py-4 font-black uppercase tracking-widest text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.15)] hover:from-teal-350 hover:to-emerald-350 hover:shadow-[0_0_32px_rgba(45,212,191,0.3)] transition-all duration-300">Return to Menu</button>
               </div>
             </motion.div>
           )}
@@ -1097,10 +1107,15 @@ function VersusPlayer({ profile, side }: { profile: FighterProfile; side: "left"
 
 function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-black/25 p-4">
-      <div className="mb-3 text-teal-200">{icon}</div>
-      <p className="text-xs font-bold uppercase tracking-widest text-slate-500">{label}</p>
-      <p className="mt-1 font-mono text-2xl font-black text-white">{value}</p>
+    <div className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-4 transition-all duration-300 hover:border-teal-500/30 hover:shadow-[0_0_20px_rgba(45,212,191,0.04)]">
+      <div className="absolute -right-2 -bottom-2 opacity-5 text-teal-400 group-hover:scale-110 transition-transform duration-300">
+        {icon}
+      </div>
+      <div className="mb-3 flex items-center justify-between">
+        <span className="text-teal-400/90 group-hover:text-teal-300 transition-colors">{icon}</span>
+      </div>
+      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</p>
+      <p className="mt-1.5 font-mono text-2xl font-black text-white group-hover:text-teal-200 transition-colors">{value}</p>
     </div>
   );
 }
