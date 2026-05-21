@@ -504,6 +504,69 @@ function shuffleQuestionOptions(question) {
   };
 }
 
+function getQuestionKey(question) {
+  return question.prompt;
+}
+
+function buildFallbackQuestionPool(subject) {
+  const pool = [];
+  for (let i = 0; i < 10; i++) {
+    const difficulty = 1000 + (i * 100);
+    const isHard = i >= 6;
+    pool.push({
+      prompt: isHard
+        ? `Advanced Scenario ${i + 1}: Applying principles of ${subject} in a complex system requires which of the following?`
+        : `Core Foundation ${i + 1}: Which of these best describes the primary focus of ${subject}?`,
+      options: [
+        isHard ? `Multi-variable optimization specific to ${subject}` : `Fundamental theory of ${subject}`,
+        'Unrelated concept from a different engineering branch',
+        'Common misconception often taught incorrectly',
+        'Outdated theory no longer used in modern applications'
+      ],
+      answer: 0,
+      difficulty,
+      timeLimit: 30
+    });
+  }
+  return pool;
+}
+
+function getQuestionPoolForSubject(subject) {
+  const pool = QUESTIONS[subject];
+  return pool && pool.length > 0 ? pool : buildFallbackQuestionPool(subject);
+}
+
+function pickQuestionForMatch(match, subject) {
+  if (!match.usedQuestionKeys) {
+    match.usedQuestionKeys = new Set();
+  }
+
+  const pool = getQuestionPoolForSubject(subject);
+  let available = pool.filter(question => !match.usedQuestionKeys.has(getQuestionKey(question)));
+
+  // Only reuse questions after every question for this subject has been played once.
+  if (available.length === 0) {
+    available = [...pool];
+  }
+
+  const avgElo = (match.p1.elo + match.p2.elo) / 2;
+  const sortedPool = [...available].sort(
+    (a, b) => Math.abs(a.difficulty - avgElo) - Math.abs(b.difficulty - avgElo)
+  );
+
+  const candidateCount = Math.min(
+    sortedPool.length,
+    Math.max(5, Math.ceil(sortedPool.length * 0.2))
+  );
+  const candidates = sortedPool.slice(0, candidateCount);
+  const picked = shuffleQuestionOptions(
+    candidates[Math.floor(Math.random() * candidates.length)]
+  );
+
+  match.usedQuestionKeys.add(getQuestionKey(picked));
+  return picked;
+}
+
 function getRandomSubjects(count, pool = RANKED_SUBJECTS, exclude = []) {
   let available = pool.filter(s => !exclude.includes(s));
   let result = [];
@@ -618,6 +681,7 @@ function createMatch(p1, p2, domain = 'all') {
     subjects: SUBJECT_CATEGORIES,
     subjectPool,
     usedSubjects: [],
+    usedQuestionKeys: new Set(),
     draftTurn: Math.random() > 0.5 ? p2.id : p1.id,
     selectedSubject: null,
     currentRound: 0,
@@ -1058,38 +1122,7 @@ function processDraft(match, playerId, subject) {
   match.selectedSubject = subject;
   match.state = 'battle';
 
-  let pool = QUESTIONS[match.selectedSubject];
-  if (!pool || pool.length === 0) {
-    pool = [];
-    for (let i = 0; i < 10; i++) {
-      const difficulty = 1000 + (i * 100);
-      const isHard = i >= 6;
-      pool.push({
-        prompt: isHard
-          ? `Advanced Scenario: Applying principles of ${match.selectedSubject} in a complex system requires which of the following?`
-          : `Core Foundation: Which of these best describes the primary focus of ${match.selectedSubject}?`,
-        options: [
-          isHard ? `Multi-variable optimization specific to ${match.selectedSubject}` : `Fundamental theory of ${match.selectedSubject}`,
-          `Unrelated concept from a different engineering branch`,
-          `Common misconception often taught incorrectly`,
-          `Outdated theory no longer used in modern applications`
-        ],
-        answer: 0,
-        difficulty: difficulty,
-        timeLimit: 30
-      });
-    }
-  }
-
-  const avgElo = (match.p1.elo + match.p2.elo) / 2;
-
-  const sortedPool = [...pool].sort((a, b) => Math.abs(a.difficulty - avgElo) - Math.abs(b.difficulty - avgElo));
-  const candidates = sortedPool.slice(0, 3); // pick from the top 3 closest difficulty questions
-  const randomQuestion = shuffleQuestionOptions(
-    candidates[Math.floor(Math.random() * candidates.length)]
-  );
-
-  match.questions[match.currentRound] = randomQuestion;
+  match.questions[match.currentRound] = pickQuestionForMatch(match, match.selectedSubject);
 
   emitToPlayer(match.p1, 'draft_complete', { subject: match.selectedSubject });
   emitToPlayer(match.p2, 'draft_complete', { subject: match.selectedSubject });
