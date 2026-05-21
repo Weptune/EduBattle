@@ -22,7 +22,11 @@ import {
   X,
   MessageSquare,
   Users,
-  Send
+  Send,
+  Volume2,
+  VolumeX,
+  Award,
+  Smile
 } from "lucide-react";
 
 type GameState = "menu" | "queue" | "versus_intro" | "initial_discard" | "drafting" | "battle" | "results";
@@ -165,6 +169,81 @@ const getImageUrl = (url?: string) => {
   return url;
 };
 
+const AvatarImage = ({
+  username,
+  avatarUrl,
+  className,
+  alt = "",
+  style = {}
+}: {
+  username?: string;
+  avatarUrl?: string;
+  className?: string;
+  alt?: string;
+  style?: React.CSSProperties;
+}) => {
+  const [src, setSrc] = useState("");
+
+  useEffect(() => {
+    setSrc(getImageUrl(avatarUrl));
+  }, [avatarUrl]);
+
+  const fallbackUrl = `https://api.dicebear.com/9.x/shapes/svg?seed=${encodeURIComponent(username || "default")}`;
+
+  return (
+    <img
+      src={src || fallbackUrl}
+      alt={alt}
+      className={className}
+      style={style}
+      onError={() => {
+        if (src !== fallbackUrl) {
+          setSrc(fallbackUrl);
+        }
+      }}
+    />
+  );
+};
+
+const BannerContainer = ({
+  bannerUrl,
+  className,
+  children,
+  style = {}
+}: {
+  bannerUrl?: string;
+  className?: string;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+}) => {
+  const defaultBanner = "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=80";
+  const [src, setSrc] = useState(defaultBanner);
+
+  useEffect(() => {
+    const url = getImageUrl(bannerUrl);
+    if (!url) {
+      setSrc(defaultBanner);
+      return;
+    }
+    const img = new Image();
+    img.src = url;
+    img.onload = () => setSrc(url);
+    img.onerror = () => setSrc(defaultBanner);
+  }, [bannerUrl]);
+
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        backgroundImage: `url(${src})`
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
   let response: Response;
 
@@ -261,6 +340,8 @@ export default function Home() {
   const [isMetaLoading, setIsMetaLoading] = useState(false);
   const [leaderboardField, setLeaderboardField] = useState<string>("all");
   const [showFieldElosModal, setShowFieldElosModal] = useState(false);
+  const [leaderboardSearch, setLeaderboardSearch] = useState("");
+  const [leaderboardSort, setLeaderboardSort] = useState<"elo" | "level" | "wins" | "winRate">("elo");
 
   // Social & Friends System States
   const [friends, setFriends] = useState<Friendship[]>([]);
@@ -276,6 +357,8 @@ export default function Home() {
   const [isViewingUserLoading, setIsViewingUserLoading] = useState(false);
   const [challengeChosenField, setChallengeChosenField] = useState<string>("all");
   const [isChallenging, setIsChallenging] = useState(false);
+  const [dmFriendId, setDmFriendId] = useState<string | null>(null);
+  const [dmMessages, setDmMessages] = useState<Record<string, ChatMessage[]>>({});
 
   const [gameState, setGameState] = useState<GameState>("menu");
   const [player, setPlayer] = useState<FighterProfile>({ name: "Player", elo: 1200, hp: 100 });
@@ -291,8 +374,8 @@ export default function Home() {
   const [lockedSubject, setLockedSubject] = useState<string | null>(null);
   const versusTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const answerLockedRef = useRef(false);
-  const refreshPlayerMetaRef = useRef<(token?: string | null) => Promise<void>>(async () => {});
-  const refreshFriendsListRef = useRef<(token?: string | null) => Promise<void>>(async () => {});
+  const refreshPlayerMetaRef = useRef<(token?: string | null) => Promise<void>>(async () => { });
+  const refreshFriendsListRef = useRef<(token?: string | null) => Promise<void>>(async () => { });
 
   const winRate = useMemo(() => {
     if (!account?.gamesPlayed) return 0;
@@ -300,19 +383,45 @@ export default function Home() {
   }, [account]);
 
   const displayLeaderboard = useMemo(() => {
-    if (leaderboardField === "all") {
-      return leaderboard.map(entry => ({ ...entry, displayElo: entry.user.elo }));
-    }
-    const sorted = [...leaderboard].map(entry => {
-      const elo = entry.user.fieldElos?.[leaderboardField] ?? 1200;
-      return { ...entry, displayElo: elo };
-    }).sort((a, b) => b.displayElo - a.displayElo);
+    let filtered = leaderboardField === "all"
+      ? leaderboard.map(entry => ({ ...entry, displayElo: entry.user.elo }))
+      : leaderboard.map(entry => {
+        const elo = entry.user.fieldElos?.[leaderboardField] ?? 1200;
+        return { ...entry, displayElo: elo };
+      });
 
-    return sorted.map((entry, idx) => ({
+    // Filter by search
+    if (leaderboardSearch.trim()) {
+      const searchLower = leaderboardSearch.toLowerCase();
+      filtered = filtered.filter(entry =>
+        entry.user.username.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Sort
+    filtered.sort((a, b) => {
+      switch (leaderboardSort) {
+        case "elo":
+          return b.displayElo - a.displayElo;
+        case "level":
+          return (b.user.level || 1) - (a.user.level || 1);
+        case "wins":
+          return b.user.wins - a.user.wins;
+        case "winRate":
+          const aWR = a.user.gamesPlayed > 0 ? a.user.wins / a.user.gamesPlayed : 0;
+          const bWR = b.user.gamesPlayed > 0 ? b.user.wins / b.user.gamesPlayed : 0;
+          return bWR - aWR;
+        default:
+          return b.displayElo - a.displayElo;
+      }
+    });
+
+    // Assign ranks
+    return filtered.map((entry, idx) => ({
       ...entry,
       rank: idx + 1
     }));
-  }, [leaderboard, leaderboardField]);
+  }, [leaderboard, leaderboardField, leaderboardSearch, leaderboardSort]);
 
   const refreshFriendsList = useCallback(async (activeToken = token) => {
     if (!activeToken) return;
@@ -355,16 +464,16 @@ export default function Home() {
       setLeaderboard(leaderboardData.leaderboard);
       setRecentMatches(matchData.matches);
       setAccount(meData.user);
-      setPlayer({ 
-        name: meData.user.username, 
-        username: meData.user.username, 
-        elo: meData.user.elo, 
-        hp: 100, 
-        avatarUrl: meData.user.avatarUrl, 
+      setPlayer({
+        name: meData.user.username,
+        username: meData.user.username,
+        elo: meData.user.elo,
+        hp: 100,
+        avatarUrl: meData.user.avatarUrl,
         bannerUrl: meData.user.bannerUrl,
         level: meData.user.level || 1
       });
-      
+
       refreshFriendsList(activeToken);
     } catch {
       // Meta panels are non-critical; auth/profile errors are shown elsewhere.
@@ -405,6 +514,45 @@ export default function Home() {
     if (!text || !socketRef.current) return;
     socketRef.current.emit("send_chat_message", { message: text });
     setChatMessageInput("");
+  };
+
+  const sendDmMessage = (e: React.FormEvent, friendId: string) => {
+    e.preventDefault();
+    const text = chatMessageInput.trim();
+    if (!text || !socketRef.current || !account) return;
+
+    // Add message to local state immediately for better UX
+    const tempMessage: ChatMessage = {
+      id: `temp-${Date.now()}`,
+      userId: account.id,
+      username: account.username,
+      avatarUrl: account.avatarUrl,
+      bannerUrl: account.bannerUrl,
+      elo: account.elo,
+      level: account.level || 1,
+      message: text,
+      timestamp: new Date().toISOString()
+    };
+
+    setDmMessages(prev => ({
+      ...prev,
+      [friendId]: [...(prev[friendId] || []), tempMessage]
+    }));
+
+    socketRef.current.emit("send_direct_message", { recipientId: friendId, message: text });
+    setChatMessageInput("");
+  };
+
+  const loadDmHistory = async (friendId: string) => {
+    if (!token) return;
+    try {
+      const data = await apiRequest<{ messages: ChatMessage[] }>(`/chat/dms/${friendId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setDmMessages(prev => ({ ...prev, [friendId]: data.messages }));
+    } catch (err) {
+      console.error("Failed to load DM history:", err);
+    }
   };
 
   const startDuelWithUser = (userId: string) => {
@@ -615,6 +763,33 @@ export default function Home() {
       setChatMessages(prev => {
         if (prev.some(m => m.id === msg.id)) return prev;
         return [...prev.slice(-99), msg];
+      });
+    });
+
+    activeSocket.on("direct_message", (msg: any) => {
+      const senderId = msg.senderId;
+      const recipientId = account?.id;
+
+      // Convert backend message format to frontend format
+      const chatMessage: ChatMessage = {
+        id: msg.id,
+        userId: msg.senderId,
+        username: msg.sender?.username || "Unknown",
+        avatarUrl: msg.sender?.avatarUrl || "",
+        bannerUrl: "",
+        elo: 0,
+        level: 1,
+        message: msg.message,
+        timestamp: msg.createdAt
+      };
+
+      // Add message to the conversation (either sent or received)
+      setDmMessages(prev => {
+        const conversationId = msg.senderId === recipientId ? senderId : (recipientId || senderId);
+        return {
+          ...prev,
+          [conversationId]: [...(prev[conversationId] || []).slice(-99), chatMessage]
+        };
       });
     });
 
@@ -857,11 +1032,11 @@ export default function Home() {
 
   const navTabs: { id: Screen; label: string; onClick: () => void }[] = account
     ? [
-        { id: "play", label: "Play", onClick: () => { playSound("select"); setScreen("play"); } },
-        { id: "social", label: "Social", onClick: () => { playSound("select"); setScreen("social"); refreshFriendsList(); loadChatHistory(); } },
-        { id: "profile", label: "Profile", onClick: () => { playSound("select"); setScreen("profile"); } },
-        { id: "leaderboard", label: "Ranks", onClick: () => { playSound("select"); refreshPlayerMeta(); setScreen("leaderboard"); } },
-      ]
+      { id: "play", label: "Play", onClick: () => { playSound("select"); setScreen("play"); } },
+      { id: "social", label: "Social", onClick: () => { playSound("select"); setScreen("social"); refreshFriendsList(); loadChatHistory(); } },
+      { id: "profile", label: "Profile", onClick: () => { playSound("select"); setScreen("profile"); } },
+      { id: "leaderboard", label: "Ranks", onClick: () => { playSound("select"); refreshPlayerMeta(); setScreen("leaderboard"); } },
+    ]
     : [];
 
   return (
@@ -948,12 +1123,12 @@ export default function Home() {
 
       <div className="relative z-10 mx-auto w-full min-w-0 max-w-6xl px-3 pb-24 md:px-4 md:pb-10">
         <AnimatePresence mode="wait">
-          {!account || screen === "auth" 
-            ? renderAuth() 
-            : screen === "profile" 
-              ? renderProfile() 
-              : screen === "leaderboard" 
-                ? renderLeaderboard() 
+          {!account || screen === "auth"
+            ? renderAuth()
+            : screen === "profile"
+              ? renderProfile()
+              : screen === "leaderboard"
+                ? renderLeaderboard()
                 : screen === "social"
                   ? renderSocial()
                   : renderGame()}
@@ -1055,253 +1230,253 @@ export default function Home() {
                   <p className="font-mono text-xs font-black uppercase tracking-widest text-teal-300 animate-pulse">Loading profile...</p>
                 </div>
               ) : viewingUser ? (
-              <>
-              {/* Profile banner */}
-              <div 
-                className="h-36 bg-cover bg-center relative" 
-                style={{ backgroundImage: `url(${getImageUrl(viewingUser.bannerUrl)})` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
-                <button 
-                  onClick={() => { setViewingUser(null); setIsChallenging(false); setIsViewingUserLoading(false); }}
-                  className="absolute top-4 right-4 h-8 w-8 grid place-items-center rounded-full bg-black/60 border border-white/10 text-slate-300 hover:text-white hover:bg-black/80 transition z-20"
-                >
-                  <X size={16} />
-                </button>
-              </div>
+                <>
+                  {/* Profile banner */}
+                  <BannerContainer
+                    bannerUrl={viewingUser.bannerUrl}
+                    className="h-36 bg-cover bg-center relative"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+                    <button
+                      onClick={() => { setViewingUser(null); setIsChallenging(false); setIsViewingUserLoading(false); }}
+                      className="absolute top-4 right-4 h-8 w-8 grid place-items-center rounded-full bg-black/60 border border-white/10 text-slate-300 hover:text-white hover:bg-black/80 transition z-20"
+                    >
+                      <X size={16} />
+                    </button>
+                  </BannerContainer>
 
-              {/* Profile details */}
-              <div className="relative z-10 -mt-12 flex-1 overflow-y-auto overscroll-contain px-4 pb-6 scrollbar-thin sm:px-6">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-end justify-between mb-6">
-                  <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-end">
-                    <img 
-                      src={getImageUrl(viewingUser.avatarUrl)} 
-                      alt="" 
-                      className="h-24 w-24 rounded-xl border-4 border-slate-950 bg-slate-800 object-cover shadow-lg" 
-                    />
-                    <div className="pb-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="text-xl font-black uppercase tracking-tight text-white break-all sm:text-2xl">{viewingUser.username}</h3>
-                        <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-1.5 py-0.5 text-[10px] font-mono font-black text-slate-950 shadow-[0_0_10px_rgba(45,212,191,0.2)]">
-                          Lvl {viewingUser.level || 1}
-                        </span>
-                      </div>
-                      <p className="font-mono text-[10px] text-teal-400 mt-0.5">@{viewingUser.username}</p>
-                      <div className="mt-2 w-full max-w-[200px]">
-                        <div className="flex justify-between text-[9px] font-mono font-black text-slate-400 mb-0.5">
-                          <span>XP Progress</span>
-                          <span>{(viewingUser.xp || 0) % 500} / 500</span>
-                        </div>
-                        <div className="h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border border-white/5">
-                          <div
-                            className="h-full bg-gradient-to-r from-teal-400 to-emerald-400 transition-all duration-500"
-                            style={{ width: `${(((viewingUser.xp || 0) % 500) / 500) * 100}%` }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Friendship & Duel actions */}
-                  <div className="flex flex-wrap gap-2">
-                    {account && viewingUser.id !== account.id && (
-                      <>
-                        {friendshipStatus === "none" && (
-                          <button 
-                            onClick={() => addFriend(viewingUser.username)}
-                            className="flex items-center gap-1.5 rounded-lg bg-teal-400 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-teal-350 transition duration-300"
-                          >
-                            <UserPlus size={14} />
-                            Add Friend
-                          </button>
-                        )}
-                        {friendshipStatus === "incoming" && (
-                          <div className="flex gap-1.5">
-                            <button 
-                              onClick={() => acceptFriend(viewingUser.id)}
-                              className="flex items-center gap-1 rounded-lg bg-emerald-500 px-3 py-2 text-xs font-black uppercase tracking-wider text-white hover:bg-emerald-400 transition"
-                            >
-                              <Check size={14} /> Accept
-                            </button>
-                            <button 
-                              onClick={() => removeFriend(viewingUser.id)}
-                              className="flex items-center gap-1 rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
-                            >
-                              Ignore
-                            </button>
+                  {/* Profile details */}
+                  <div className="relative z-10 -mt-12 flex-1 overflow-y-auto overscroll-contain px-4 pb-6 scrollbar-thin sm:px-6">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-end justify-between mb-6">
+                      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-end">
+                        <AvatarImage
+                          username={viewingUser.username}
+                          avatarUrl={viewingUser.avatarUrl}
+                          className="h-24 w-24 rounded-xl border-4 border-slate-950 bg-slate-800 object-cover shadow-lg"
+                        />
+                        <div className="pb-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="text-xl font-black uppercase tracking-tight text-white break-all sm:text-2xl">{viewingUser.username}</h3>
+                            <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-1.5 py-0.5 text-[10px] font-mono font-black text-slate-950 shadow-[0_0_10px_rgba(45,212,191,0.2)]">
+                              Lvl {viewingUser.level || 1}
+                            </span>
                           </div>
-                        )}
-                        {friendshipStatus === "outgoing" && (
-                          <button 
-                            onClick={() => removeFriend(viewingUser.id)}
-                            className="flex items-center gap-1.5 rounded-lg bg-white/5 border border-white/10 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
-                          >
-                            <X size={14} />
-                            Cancel Request
-                          </button>
-                        )}
-                        {friendshipStatus === "friend" && (
+                          <p className="font-mono text-[10px] text-teal-400 mt-0.5">@{viewingUser.username}</p>
+                          <div className="mt-2 w-full max-w-[200px]">
+                            <div className="flex justify-between text-[9px] font-mono font-black text-slate-400 mb-0.5">
+                              <span>XP Progress</span>
+                              <span>{(viewingUser.xp || 0) % 500} / 500</span>
+                            </div>
+                            <div className="h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border border-white/5">
+                              <div
+                                className="h-full bg-gradient-to-r from-teal-400 to-emerald-400 transition-all duration-500"
+                                style={{ width: `${(((viewingUser.xp || 0) % 500) / 500) * 100}%` }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Friendship & Duel actions */}
+                      <div className="flex flex-wrap gap-2">
+                        {account && viewingUser.id !== account.id && (
                           <>
-                            <button 
-                              onClick={() => removeFriend(viewingUser.id)}
-                              className="flex items-center gap-1.5 rounded-lg bg-red-500/10 border border-red-500/30 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-red-400 hover:bg-red-500 hover:text-white transition duration-300"
-                            >
-                              <UserMinus size={14} />
-                              Unfriend
-                            </button>
-                            {onlineFriends.has(viewingUser.id) && !isChallenging && (
-                              <button 
-                                onClick={() => { playSound("select"); setIsChallenging(true); }}
-                                className="flex items-center gap-1.5 rounded-lg bg-teal-400/10 border border-teal-400/30 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-teal-300 hover:bg-teal-400 hover:text-slate-950 transition duration-300"
+                            {friendshipStatus === "none" && (
+                              <button
+                                onClick={() => addFriend(viewingUser.username)}
+                                className="flex items-center gap-1.5 rounded-lg bg-teal-400 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-teal-350 transition duration-300"
                               >
-                                <Swords size={14} />
-                                Duel Challenge
+                                <UserPlus size={14} />
+                                Add Friend
                               </button>
+                            )}
+                            {friendshipStatus === "incoming" && (
+                              <div className="flex gap-1.5">
+                                <button
+                                  onClick={() => acceptFriend(viewingUser.id)}
+                                  className="flex items-center gap-1 rounded-lg bg-emerald-500 px-3 py-2 text-xs font-black uppercase tracking-wider text-white hover:bg-emerald-400 transition"
+                                >
+                                  <Check size={14} /> Accept
+                                </button>
+                                <button
+                                  onClick={() => removeFriend(viewingUser.id)}
+                                  className="flex items-center gap-1 rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
+                                >
+                                  Ignore
+                                </button>
+                              </div>
+                            )}
+                            {friendshipStatus === "outgoing" && (
+                              <button
+                                onClick={() => removeFriend(viewingUser.id)}
+                                className="flex items-center gap-1.5 rounded-lg bg-white/5 border border-white/10 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
+                              >
+                                <X size={14} />
+                                Cancel Request
+                              </button>
+                            )}
+                            {friendshipStatus === "friend" && (
+                              <>
+                                <button
+                                  onClick={() => removeFriend(viewingUser.id)}
+                                  className="flex items-center gap-1.5 rounded-lg bg-red-500/10 border border-red-500/30 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-red-400 hover:bg-red-500 hover:text-white transition duration-300"
+                                >
+                                  <UserMinus size={14} />
+                                  Unfriend
+                                </button>
+                                {onlineFriends.has(viewingUser.id) && !isChallenging && (
+                                  <button
+                                    onClick={() => { playSound("select"); setIsChallenging(true); }}
+                                    className="flex items-center gap-1.5 rounded-lg bg-teal-400/10 border border-teal-400/30 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-teal-300 hover:bg-teal-400 hover:text-slate-950 transition duration-300"
+                                  >
+                                    <Swords size={14} />
+                                    Duel Challenge
+                                  </button>
+                                )}
+                              </>
                             )}
                           </>
                         )}
-                      </>
+                      </div>
+                    </div>
+
+                    {/* Duel Challenge Selection Menu */}
+                    {isChallenging && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        className="mb-6 rounded-xl border border-teal-400/30 bg-teal-400/5 p-4"
+                      >
+                        <p className="text-[10px] font-black uppercase tracking-widest text-teal-300 mb-3">Select Duel Academic Subject:</p>
+                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 mb-4">
+                          <button
+                            onClick={() => { playSound("select"); setChallengeChosenField("all"); }}
+                            className={`rounded-lg px-2.5 py-2 text-xs font-black uppercase tracking-wider border transition ${challengeChosenField === "all" ? "bg-teal-400 text-slate-950 border-teal-400" : "bg-black/40 text-slate-300 border-white/10 hover:border-white/20"}`}
+                          >
+                            All Subjects
+                          </button>
+                          {FIELDS.map(f => (
+                            <button
+                              key={f.id}
+                              onClick={() => { playSound("select"); setChallengeChosenField(f.id); }}
+                              className={`rounded-lg px-2.5 py-2 text-xs font-black uppercase tracking-wider border transition truncate ${challengeChosenField === f.id ? "bg-teal-400 text-slate-950 border-teal-400" : "bg-black/40 text-slate-300 border-white/10 hover:border-white/20"}`}
+                            >
+                              {f.name}
+                            </button>
+                          ))}
+                        </div>
+                        <div className="flex gap-2 justify-end">
+                          <button
+                            onClick={() => { playSound("select"); setIsChallenging(false); }}
+                            className="rounded-lg border border-white/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-300 hover:bg-white/5 transition"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (!socketRef.current) return;
+                              playSound("confirm");
+                              socketRef.current.emit("challenge_friend", { friendId: viewingUser.id, domain: challengeChosenField });
+                              setChallengeStatus(`Duel request sent to ${viewingUser.username}!`);
+                              setViewingUser(null);
+                              setIsChallenging(false);
+                              setTimeout(() => setChallengeStatus(null), 4000);
+                            }}
+                            className="rounded-lg bg-teal-400 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-950 hover:bg-teal-300 transition"
+                          >
+                            Send Duel Invitation
+                          </button>
+                        </div>
+                      </motion.div>
                     )}
-                  </div>
-                </div>
 
-                {/* Duel Challenge Selection Menu */}
-                {isChallenging && (
-                  <motion.div 
-                    initial={{ height: 0, opacity: 0 }} 
-                    animate={{ height: "auto", opacity: 1 }} 
-                    className="mb-6 rounded-xl border border-teal-400/30 bg-teal-400/5 p-4"
-                  >
-                    <p className="text-[10px] font-black uppercase tracking-widest text-teal-300 mb-3">Select Duel Academic Subject:</p>
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 mb-4">
-                      <button 
-                        onClick={() => { playSound("select"); setChallengeChosenField("all"); }}
-                        className={`rounded-lg px-2.5 py-2 text-xs font-black uppercase tracking-wider border transition ${challengeChosenField === "all" ? "bg-teal-400 text-slate-950 border-teal-400" : "bg-black/40 text-slate-300 border-white/10 hover:border-white/20"}`}
-                      >
-                        All Subjects
-                      </button>
-                      {FIELDS.map(f => (
-                        <button 
-                          key={f.id}
-                          onClick={() => { playSound("select"); setChallengeChosenField(f.id); }}
-                          className={`rounded-lg px-2.5 py-2 text-xs font-black uppercase tracking-wider border transition truncate ${challengeChosenField === f.id ? "bg-teal-400 text-slate-950 border-teal-400" : "bg-black/40 text-slate-300 border-white/10 hover:border-white/20"}`}
-                        >
-                          {f.name}
-                        </button>
-                      ))}
+                    {/* Bio text */}
+                    <p className="text-slate-300 text-sm mb-6 leading-relaxed bg-black/20 p-3 rounded-lg border border-white/5">{viewingUser.bio || "hi"}</p>
+
+                    {/* Grid stats */}
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-6">
+                      <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Overall Elo</p>
+                        <p className="mt-1 font-mono text-xl font-black text-teal-300">{viewingUser.elo}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Wins</p>
+                        <p className="mt-1 font-mono text-xl font-black text-white">{viewingUser.wins}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Losses</p>
+                        <p className="mt-1 font-mono text-xl font-black text-white">{viewingUser.losses}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Win Rate</p>
+                        <p className="mt-1 font-mono text-xl font-black text-teal-300">
+                          {viewingUser.wins + viewingUser.losses > 0
+                            ? `${Math.round((viewingUser.wins / (viewingUser.wins + viewingUser.losses)) * 100)}%`
+                            : "0%"}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex gap-2 justify-end">
-                      <button 
-                        onClick={() => { playSound("select"); setIsChallenging(false); }}
-                        className="rounded-lg border border-white/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-300 hover:bg-white/5 transition"
-                      >
-                        Cancel
-                      </button>
-                      <button 
-                        onClick={() => {
-                          if (!socketRef.current) return;
-                          playSound("confirm");
-                          socketRef.current.emit("challenge_friend", { friendId: viewingUser.id, domain: challengeChosenField });
-                          setChallengeStatus(`Duel request sent to ${viewingUser.username}!`);
-                          setViewingUser(null);
-                          setIsChallenging(false);
-                          setTimeout(() => setChallengeStatus(null), 4000);
-                        }}
-                        className="rounded-lg bg-teal-400 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-950 hover:bg-teal-300 transition"
-                      >
-                        Send Duel Invitation
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
 
-                {/* Bio text */}
-                <p className="text-slate-300 text-sm mb-6 leading-relaxed bg-black/20 p-3 rounded-lg border border-white/5">{viewingUser.bio || "hi"}</p>
-
-                {/* Grid stats */}
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-6">
-                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Overall Elo</p>
-                    <p className="mt-1 font-mono text-xl font-black text-teal-300">{viewingUser.elo}</p>
-                  </div>
-                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Wins</p>
-                    <p className="mt-1 font-mono text-xl font-black text-white">{viewingUser.wins}</p>
-                  </div>
-                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Losses</p>
-                    <p className="mt-1 font-mono text-xl font-black text-white">{viewingUser.losses}</p>
-                  </div>
-                  <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Win Rate</p>
-                    <p className="mt-1 font-mono text-xl font-black text-teal-300">
-                      {viewingUser.wins + viewingUser.losses > 0 
-                        ? `${Math.round((viewingUser.wins / (viewingUser.wins + viewingUser.losses)) * 100)}%` 
-                        : "0%"}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Discipline Ratings & Matches */}
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4">
-                    <h4 className="text-xs font-black uppercase tracking-widest text-slate-300 mb-3">Field Ratings</h4>
-                    <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
-                      {FIELDS.map(f => {
-                        const elo = viewingUser.fieldElos?.[f.id] || 1200;
-                        const stats = viewingUser.fieldStats?.[f.id];
-                        const w = stats?.wins || 0;
-                        const l = stats?.losses || 0;
-                        const wr = w + l > 0 ? Math.round((w / (w + l)) * 100) : 0;
-                        return (
-                          <div key={f.id} className="flex flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between sm:gap-3 text-xs">
-                            <span className="font-bold text-slate-400 break-words leading-snug">{f.name}</span>
-                            <div className="shrink-0 text-left sm:text-right">
-                              <span className="font-mono font-bold text-teal-300">{elo} Elo</span>
-                              <span className="block text-[8px] font-mono text-slate-500">{w}W-{l}L ({wr}% WR)</span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4">
-                    <h4 className="text-xs font-black uppercase tracking-widest text-slate-300 mb-3">Match History</h4>
-                    <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
-                      {viewingUserMatches.length ? (
-                        viewingUserMatches.map(m => {
-                          const isWin = m.winnerId === viewingUser.id || m.winner_id === viewingUser.id;
-                          const oppName = (m.playerOneName || m.player_one_name) === viewingUser.username
-                            ? (m.playerTwoName || m.player_two_name)
-                            : (m.playerOneName || m.player_one_name);
-                          const delta = (m.playerOneName || m.player_one_name) === viewingUser.username
-                            ? (m.playerOneDelta ?? m.player_one_delta)
-                            : (m.playerTwoDelta ?? m.player_two_delta);
-                          const formattedDelta = delta && delta >= 0 ? `+${delta}` : delta;
-                          return (
-                            <div key={m.id} className="flex items-center justify-between text-[10px] border-b border-white/5 pb-1.5 last:border-b-0 last:pb-0">
-                              <div className="min-w-0">
-                                <span className={`font-black uppercase ${isWin ? "text-emerald-400" : "text-red-400"}`}>
-                                  {isWin ? "Victory" : "Defeat"}
-                                </span>
-                                <span className="text-slate-500 font-bold block truncate">vs {oppName || "AI Bot"}</span>
+                    {/* Discipline Ratings & Matches */}
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4">
+                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-300 mb-3">Field Ratings</h4>
+                        <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                          {FIELDS.map(f => {
+                            const elo = viewingUser.fieldElos?.[f.id] || 1200;
+                            const stats = viewingUser.fieldStats?.[f.id];
+                            const w = stats?.wins || 0;
+                            const l = stats?.losses || 0;
+                            const wr = w + l > 0 ? Math.round((w / (w + l)) * 100) : 0;
+                            return (
+                              <div key={f.id} className="flex flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between sm:gap-3 text-xs">
+                                <span className="font-bold text-slate-400 break-words leading-snug">{f.name}</span>
+                                <div className="shrink-0 text-left sm:text-right">
+                                  <span className="font-mono font-bold text-teal-300">{elo} Elo</span>
+                                  <span className="block text-[8px] font-mono text-slate-500">{w}W-{l}L ({wr}% WR)</span>
+                                </div>
                               </div>
-                              <span className={`font-mono font-bold ${isWin ? "text-emerald-400" : "text-red-400"}`}>
-                                {formattedDelta || ""} Elo
-                              </span>
-                            </div>
-                          );
-                        })
-                      ) : (
-                        <p className="text-[10px] text-slate-500 text-center py-4">No recent matches played.</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                            );
+                          })}
+                        </div>
+                      </div>
 
-              </div>
-              </>
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4">
+                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-300 mb-3">Match History</h4>
+                        <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                          {viewingUserMatches.length ? (
+                            viewingUserMatches.map(m => {
+                              const isWin = m.winnerId === viewingUser.id || m.winner_id === viewingUser.id;
+                              const oppName = (m.playerOneName || m.player_one_name) === viewingUser.username
+                                ? (m.playerTwoName || m.player_two_name)
+                                : (m.playerOneName || m.player_one_name);
+                              const delta = (m.playerOneName || m.player_one_name) === viewingUser.username
+                                ? (m.playerOneDelta ?? m.player_one_delta)
+                                : (m.playerTwoDelta ?? m.player_two_delta);
+                              const formattedDelta = delta && delta >= 0 ? `+${delta}` : delta;
+                              return (
+                                <div key={m.id} className="flex items-center justify-between text-[10px] border-b border-white/5 pb-1.5 last:border-b-0 last:pb-0">
+                                  <div className="min-w-0">
+                                    <span className={`font-black uppercase ${isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                      {isWin ? "Victory" : "Defeat"}
+                                    </span>
+                                    <span className="text-slate-500 font-bold block truncate">vs {oppName || "AI Bot"}</span>
+                                  </div>
+                                  <span className={`font-mono font-bold ${isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                    {formattedDelta || ""} Elo
+                                  </span>
+                                </div>
+                              );
+                            })
+                          ) : (
+                            <p className="text-[10px] text-slate-500 text-center py-4">No recent matches played.</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </>
               ) : null}
             </motion.div>
           </div>
@@ -1320,9 +1495,9 @@ export default function Home() {
             >
               <div className="flex items-start gap-3">
                 <div className="relative shrink-0">
-                  <img 
-                    src={getImageUrl(incomingChallenge.challenger.avatarUrl)} 
-                    alt="" 
+                  <AvatarImage
+                    username={incomingChallenge.challenger.username}
+                    avatarUrl={incomingChallenge.challenger.avatarUrl}
                     className="h-12 w-12 rounded-xl border border-white/10 bg-slate-800 object-cover"
                   />
                   <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 border border-teal-500/30 text-teal-400">
@@ -1351,7 +1526,7 @@ export default function Home() {
               </div>
 
               <div className="mt-4 flex gap-2">
-                <button 
+                <button
                   onClick={() => {
                     if (!socketRef.current) return;
                     playSound("select");
@@ -1362,7 +1537,7 @@ export default function Home() {
                 >
                   Decline
                 </button>
-                <button 
+                <button
                   onClick={() => {
                     if (!socketRef.current) return;
                     playSound("confirm");
@@ -1382,7 +1557,7 @@ export default function Home() {
       {/* Toast notifications */}
       <AnimatePresence>
         {challengeStatus && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -24, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -24, scale: 0.9 }}
@@ -1404,11 +1579,11 @@ export default function Home() {
     if (!account) return null;
 
     return (
-      <motion.section 
-        key="social" 
-        initial={{ opacity: 0, y: 16 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        exit={{ opacity: 0, y: -16 }} 
+      <motion.section
+        key="social"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -16 }}
         className="flex min-w-0 flex-col gap-4 lg:grid lg:grid-cols-[1.2fr_0.8fr] lg:gap-6"
       >
         {/* Global Arena Chat */}
@@ -1447,53 +1622,57 @@ export default function Home() {
                 const canInvite = !isSelf && isFriend && isOnline;
 
                 return (
-                <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 10, x: isSelf ? 8 : -8 }}
-                  animate={{ opacity: 1, y: 0, x: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={`flex items-start gap-3 group chat-msg-in ${isSelf ? "flex-row-reverse" : ""}`}
-                >
-                  <img 
-                    src={getImageUrl(msg.avatarUrl)} 
-                    alt="" 
-                    onClick={() => openUserProfile(msg.userId)}
-                    className="h-9 w-9 cursor-pointer rounded-lg object-cover border border-white/10 hover:border-teal-400 transition-colors shadow bg-slate-800" 
-                  />
-                  <div className={`min-w-0 flex-1 rounded-xl border px-4 py-3 transition-all ${isSelf ? "border-teal-400/15 bg-teal-400/[0.06] group-hover:border-teal-400/25" : "border-white/[0.04] bg-white/[0.02] group-hover:border-white/[0.08]"}`}>
-                    <div className="flex items-baseline justify-between gap-2 flex-wrap mb-1">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span 
-                          onClick={() => openUserProfile(msg.userId)}
-                          className="cursor-pointer font-black text-xs uppercase text-teal-200 hover:text-teal-350 transition-colors"
-                        >
-                          {msg.username}
-                        </span>
-                        <span className="rounded bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-[8px] font-mono font-black text-amber-300">
-                          Lvl {msg.level || 1}
-                        </span>
-                        <span className="font-mono text-[9px] text-slate-400">
-                          ({msg.elo} Elo)
+                  <motion.div
+                    key={msg.id}
+                    initial={{ opacity: 0, y: 10, x: isSelf ? 8 : -8 }}
+                    animate={{ opacity: 1, y: 0, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className={`flex items-start gap-3 group chat-msg-in ${isSelf ? "flex-row-reverse" : ""}`}
+                  >
+                    <div
+                      onClick={() => openUserProfile(msg.userId)}
+                      className="cursor-pointer"
+                    >
+                      <AvatarImage
+                        username={msg.username}
+                        avatarUrl={msg.avatarUrl}
+                        className="h-9 w-9 rounded-lg object-cover border border-white/10 hover:border-teal-400 transition-colors shadow bg-slate-800"
+                      />
+                    </div>
+                    <div className={`min-w-0 flex-1 rounded-xl border px-4 py-3 transition-all ${isSelf ? "border-teal-400/15 bg-teal-400/[0.06] group-hover:border-teal-400/25" : "border-white/[0.04] bg-white/[0.02] group-hover:border-white/[0.08]"}`}>
+                      <div className="flex items-baseline justify-between gap-2 flex-wrap mb-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span
+                            onClick={() => openUserProfile(msg.userId)}
+                            className="cursor-pointer font-black text-xs uppercase text-teal-200 hover:text-teal-350 transition-colors"
+                          >
+                            {msg.username}
+                          </span>
+                          <span className="rounded bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-[8px] font-mono font-black text-amber-300">
+                            Lvl {msg.level || 1}
+                          </span>
+                          <span className="font-mono text-[9px] text-slate-400">
+                            ({msg.elo} Elo)
+                          </span>
+                        </div>
+                        <span className="font-mono text-[9px] text-slate-500">
+                          {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
-                      <span className="font-mono text-[9px] text-slate-500">
-                        {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                      </span>
+                      <p className="text-slate-200 text-sm break-words selection:bg-teal-400/20">{msg.message}</p>
+                      {canInvite && (
+                        <button
+                          type="button"
+                          onClick={() => startDuelWithUser(msg.userId)}
+                          className="mt-2 flex items-center gap-1 rounded-lg border border-teal-400/30 bg-teal-400/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-teal-300 hover:bg-teal-400 hover:text-slate-950 transition"
+                        >
+                          <Swords size={10} />
+                          Invite to Duel
+                        </button>
+                      )}
                     </div>
-                    <p className="text-slate-200 text-sm break-words selection:bg-teal-400/20">{msg.message}</p>
-                    {canInvite && (
-                      <button
-                        type="button"
-                        onClick={() => startDuelWithUser(msg.userId)}
-                        className="mt-2 flex items-center gap-1 rounded-lg border border-teal-400/30 bg-teal-400/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-teal-300 hover:bg-teal-400 hover:text-slate-950 transition"
-                      >
-                        <Swords size={10} />
-                        Invite to Duel
-                      </button>
-                    )}
-                  </div>
-                </motion.div>
-              );
+                  </motion.div>
+                );
               })
             ) : (
               <div className="flex h-full flex-col items-center justify-center text-center opacity-40">
@@ -1509,15 +1688,15 @@ export default function Home() {
 
           {/* Chat Input Form */}
           <form onSubmit={sendChatMessage} className="flex shrink-0 gap-2 border-t border-white/[0.08] bg-slate-950/25 p-3 sm:p-4">
-            <input 
+            <input
               value={chatMessageInput}
               onChange={e => setChatMessageInput(e.target.value)}
-              placeholder="Message the arena..." 
+              placeholder="Message the arena..."
               maxLength={300}
               className="min-w-0 flex-1 rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none transition focus:border-teal-400/80 sm:px-4 sm:py-3"
             />
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 transition duration-300 hover:from-teal-350 hover:to-emerald-350 sm:h-11 sm:w-11"
             >
               <Send size={18} />
@@ -1534,9 +1713,9 @@ export default function Home() {
             </h3>
             <div className="flex flex-col gap-2 sm:flex-row">
               <div className="relative flex-1">
-                <input 
+                <input
                   id="friend-username-input"
-                  placeholder="Enter username..." 
+                  placeholder="Enter username..."
                   className="w-full rounded-xl border border-white/10 bg-black/40 pl-9 pr-3 py-2.5 text-xs text-white outline-none focus:border-teal-400/80 transition"
                   onKeyDown={e => {
                     if (e.key === "Enter") {
@@ -1550,7 +1729,7 @@ export default function Home() {
                 />
                 <Search size={14} className="absolute left-3 top-3.5 text-slate-400" />
               </div>
-              <button 
+              <button
                 onClick={() => {
                   const input = document.getElementById("friend-username-input") as HTMLInputElement;
                   if (input?.value.trim()) {
@@ -1578,14 +1757,18 @@ export default function Home() {
                 {incomingRequests.map(req => (
                   <div key={req.friend.id} className="flex items-center justify-between rounded-xl bg-black/20 p-3 border border-white/[0.04]">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <img 
-                        src={getImageUrl(req.friend.avatarUrl)} 
-                        alt="" 
+                      <div
                         onClick={() => openUserProfile(req.friend.id)}
-                        className="h-8 w-8 cursor-pointer rounded object-cover border border-white/10 bg-slate-800" 
-                      />
+                        className="cursor-pointer"
+                      >
+                        <AvatarImage
+                          username={req.friend.username}
+                          avatarUrl={req.friend.avatarUrl}
+                          className="h-8 w-8 rounded object-cover border border-white/10 bg-slate-800"
+                        />
+                      </div>
                       <div className="min-w-0">
-                        <p 
+                        <p
                           onClick={() => openUserProfile(req.friend.id)}
                           className="cursor-pointer font-black text-xs uppercase text-white truncate hover:text-teal-200"
                         >
@@ -1595,13 +1778,13 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="flex gap-1.5 shrink-0">
-                      <button 
+                      <button
                         onClick={() => acceptFriend(req.friend.id)}
                         className="grid h-7 w-7 place-items-center rounded bg-teal-400 text-slate-950 hover:bg-teal-300 transition"
                       >
                         <Check size={14} />
                       </button>
-                      <button 
+                      <button
                         onClick={() => removeFriend(req.friend.id)}
                         className="grid h-7 w-7 place-items-center rounded bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10 hover:text-white transition"
                       >
@@ -1619,7 +1802,7 @@ export default function Home() {
             <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-200">
               <Users size={16} className="text-teal-300" /> Friends List
             </h3>
-            
+
             <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
               {friends.length ? (
                 // Sort friends so online ones are at the top
@@ -1630,23 +1813,27 @@ export default function Home() {
                 }).map(f => {
                   const isOnline = onlineFriends.has(f.friend.id);
                   return (
-                    <div 
-                      key={f.friend.id} 
+                    <div
+                      key={f.friend.id}
                       className="group/friend flex items-center justify-between rounded-xl bg-black/20 p-3.5 border border-white/[0.04] hover:border-teal-500/10 hover:bg-white/[0.01] transition-all"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div className="relative">
-                          <img 
-                            src={getImageUrl(f.friend.avatarUrl)} 
-                            alt="" 
+                          <div
                             onClick={() => openUserProfile(f.friend.id)}
-                            className="h-10 w-10 cursor-pointer rounded-lg object-cover border border-white/10 bg-slate-800" 
-                          />
+                            className="cursor-pointer"
+                          >
+                            <AvatarImage
+                              username={f.friend.username}
+                              avatarUrl={f.friend.avatarUrl}
+                              className="h-10 w-10 rounded-lg object-cover border border-white/10 bg-slate-800"
+                            />
+                          </div>
                           <span className={`absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-slate-900 ${isOnline ? "bg-emerald-400" : "bg-slate-500"}`} />
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5 flex-wrap">
-                            <span 
+                            <span
                               onClick={() => openUserProfile(f.friend.id)}
                               className="cursor-pointer font-black text-xs uppercase text-slate-100 hover:text-teal-300 truncate"
                             >
@@ -1663,8 +1850,19 @@ export default function Home() {
                       </div>
 
                       <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          onClick={() => {
+                            playSound("select");
+                            setDmFriendId(f.friend.id);
+                            loadDmHistory(f.friend.id);
+                          }}
+                          className="rounded border border-white/10 bg-white/5 p-1.5 text-slate-400 hover:bg-white/10 hover:text-white transition"
+                          title="Send Message"
+                        >
+                          <MessageSquare size={12} />
+                        </button>
                         {isOnline && (
-                          <button 
+                          <button
                             onClick={() => {
                               playSound("select");
                               startDuelWithUser(f.friend.id);
@@ -1676,7 +1874,7 @@ export default function Home() {
                             Duel
                           </button>
                         )}
-                        <button 
+                        <button
                           onClick={() => openUserProfile(f.friend.id)}
                           className="rounded border border-white/10 bg-white/5 p-1.5 text-slate-400 hover:bg-white/10 hover:text-white transition"
                           title="View Profile"
@@ -1697,6 +1895,93 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* DM Conversation Modal */}
+        <AnimatePresence>
+          {dmFriendId && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+              onClick={() => setDmFriendId(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="glass-panel-strong w-full max-w-lg rounded-2xl p-4 sm:p-6 max-h-[80vh] flex flex-col"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-black uppercase tracking-widest text-teal-300">Direct Message</h3>
+                  <button
+                    onClick={() => setDmFriendId(null)}
+                    className="rounded border border-white/10 bg-white/5 p-1.5 text-slate-400 hover:bg-white/10 hover:text-white transition"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto space-y-3 mb-4 min-h-[200px] max-h-[400px]">
+                  {dmMessages[dmFriendId]?.length ? (
+                    dmMessages[dmFriendId].map((msg) => {
+                      const isOwn = msg.userId === account?.id;
+                      return (
+                        <div
+                          key={msg.id}
+                          className={`flex ${isOwn ? "justify-end" : "justify-start"}`}
+                        >
+                          <div
+                            className={`max-w-[80%] rounded-xl px-3 py-2 ${isOwn
+                              ? "bg-teal-400/20 border border-teal-400/30 text-white"
+                              : "bg-white/5 border border-white/10 text-slate-200"
+                              }`}
+                          >
+                            <div className="flex items-center gap-2 mb-1">
+                              <AvatarImage
+                                username={msg.username}
+                                avatarUrl={msg.avatarUrl}
+                                className="h-5 w-5 rounded-full object-cover"
+                              />
+                              <span className="text-[10px] font-bold uppercase text-slate-400">{msg.username}</span>
+                            </div>
+                            <p className="text-xs break-words">{msg.message}</p>
+                            <p className="text-[9px] text-slate-500 mt-1">
+                              {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="flex h-full flex-col items-center justify-center text-center opacity-40 py-8">
+                      <MessageSquare size={36} className="text-slate-400 mb-2" />
+                      <p className="font-black uppercase tracking-wider text-xs">No messages yet</p>
+                      <p className="text-[10px] text-slate-400 max-w-xs mt-1">Start a conversation!</p>
+                    </div>
+                  )}
+                </div>
+
+                <form onSubmit={(e) => sendDmMessage(e, dmFriendId)} className="flex shrink-0 gap-2">
+                  <input
+                    value={chatMessageInput}
+                    onChange={e => setChatMessageInput(e.target.value)}
+                    placeholder="Type a message..."
+                    maxLength={300}
+                    className="min-w-0 flex-1 rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none transition focus:border-teal-400/80"
+                  />
+                  <button
+                    type="submit"
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 transition duration-300 hover:from-teal-350 hover:to-emerald-350"
+                  >
+                    <Send size={18} />
+                  </button>
+                </form>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.section>
     );
   }
@@ -1801,19 +2086,19 @@ export default function Home() {
     return (
       <motion.section key="profile" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="min-w-0 space-y-4 sm:space-y-6">
         <div className="glass-panel overflow-hidden rounded-2xl scanline-overlay relative">
-          <div className="h-56 bg-cover bg-center relative" style={{ backgroundImage: `url(${getImageUrl(account.bannerUrl)})` }}>
+          <BannerContainer bannerUrl={account.bannerUrl} className="h-56 bg-cover bg-center relative">
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
-          </div>
+          </BannerContainer>
           <div className="relative z-10 -mt-10 flex flex-col gap-4 px-4 pb-6 sm:gap-6 sm:px-6 md:flex-row md:items-end md:justify-between">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:gap-4">
-              <img src={getImageUrl(account.avatarUrl)} alt={`${account.username} avatar`} className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-slate-800 object-cover shadow-2xl sm:h-32 sm:w-32" />
+              <AvatarImage username={account.username} avatarUrl={account.avatarUrl} alt={`${account.username} avatar`} className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-slate-800 object-cover shadow-2xl sm:h-32 sm:w-32" />
               <div className="min-w-0 pb-1">
                 <p className="font-mono text-sm text-teal-300">@{account.username}</p>
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   <h1 className="text-2xl font-black uppercase tracking-normal text-white break-all sm:text-4xl">{account.username}</h1>
                   <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-2 py-0.5 text-xs font-mono font-black text-slate-950 shadow-[0_0_12px_rgba(45,212,191,0.25)]">Lvl {account.level || 1}</span>
                 </div>
-                
+
                 {/* XP Progress Bar */}
                 <div className="mt-3 max-w-sm">
                   <div className="flex justify-between text-[9px] font-mono font-black uppercase text-slate-400 mb-1">
@@ -1830,7 +2115,7 @@ export default function Home() {
                   onClick={() => { playSound("select"); setShowFieldElosModal(true); }}
                   className="mt-4 flex items-center gap-2 rounded-lg border border-teal-400/30 bg-teal-400/5 px-3.5 py-2 text-xs font-black uppercase tracking-widest text-teal-300 hover:bg-teal-400/10 hover:text-white transition duration-300 shadow-[0_0_12px_rgba(45,212,191,0.05)]"
                 >
-                   View Discipline Elos
+                  View Discipline Elos
                 </button>
               </div>
             </div>
@@ -1865,14 +2150,14 @@ export default function Home() {
                 <label className="cursor-pointer rounded-lg border border-white/10 bg-black/30 p-4 transition hover:border-teal-300/60 hover:bg-teal-300/10">
                   <span className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-teal-200"><Camera size={16} /> Avatar File</span>
                   <div className="flex items-center gap-4">
-                    <img src={getImageUrl(profileForm.avatarUrl)} alt="" className="h-16 w-16 rounded-lg bg-slate-800 object-cover" />
+                    <AvatarImage username={profileForm.username || account?.username} avatarUrl={profileForm.avatarUrl} className="h-16 w-16 rounded-lg bg-slate-800 object-cover" />
                     <span className="text-sm text-slate-300">Choose from your PC</span>
                   </div>
                   <input type="file" accept="image/*" className="hidden" onChange={event => setProfileImage("avatarUrl", event.target.files?.[0])} />
                 </label>
                 <label className="cursor-pointer rounded-lg border border-white/10 bg-black/30 p-4 transition hover:border-teal-300/60 hover:bg-teal-300/10">
                   <span className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-teal-200"><Camera size={16} /> Banner File</span>
-                  <div className="h-16 rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${getImageUrl(profileForm.bannerUrl)})` }} />
+                  <BannerContainer bannerUrl={profileForm.bannerUrl} className="h-16 rounded-lg bg-cover bg-center" />
                   <input type="file" accept="image/*" className="hidden" onChange={event => setProfileImage("bannerUrl", event.target.files?.[0])} />
                 </label>
               </div>
@@ -1908,26 +2193,101 @@ export default function Home() {
           </div>
 
           {/* New Field-wise Leaderboard Selector */}
-          <div className="mb-5">
-            <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Rank by Academic Field:</p>
-            <div className="-mx-1 flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin sm:flex-wrap sm:overflow-visible">
-              {FIELDS.map(f => (
-                <button
-                  key={f.id}
-                  onClick={() => { playSound("select"); setLeaderboardField(f.id); }}
-                  className={`shrink-0 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[10px] font-bold transition duration-300 border sm:px-3 sm:text-xs ${leaderboardField === f.id
-                    ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
-                    : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
-                    }`}
-                >
-                  {f.name}
-                </button>
-              ))}
+          <div className="mb-5 space-y-4">
+            {/* Search Input */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search players..."
+                value={leaderboardSearch}
+                onChange={(e) => setLeaderboardSearch(e.target.value)}
+                className="w-full rounded-lg border border-white/10 bg-slate-950/45 pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-md focus:border-teal-400/50 focus:outline-none focus:ring-1 focus:ring-teal-400/50 transition-all"
+              />
+            </div>
+
+            {/* Sort Buttons */}
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => { playSound("select"); setLeaderboardSort("elo"); }}
+                className={`shrink-0 rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider border transition-all ${leaderboardSort === "elo"
+                  ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
+                  : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
+                  }`}
+              >
+                Elo
+              </button>
+              <button
+                onClick={() => { playSound("select"); setLeaderboardSort("level"); }}
+                className={`shrink-0 rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider border transition-all ${leaderboardSort === "level"
+                  ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
+                  : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
+                  }`}
+              >
+                Level
+              </button>
+              <button
+                onClick={() => { playSound("select"); setLeaderboardSort("wins"); }}
+                className={`shrink-0 rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider border transition-all ${leaderboardSort === "wins"
+                  ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
+                  : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
+                  }`}
+              >
+                Wins
+              </button>
+              <button
+                onClick={() => { playSound("select"); setLeaderboardSort("winRate"); }}
+                className={`shrink-0 rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider border transition-all ${leaderboardSort === "winRate"
+                  ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
+                  : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
+                  }`}
+              >
+                Win Rate
+              </button>
+            </div>
+
+            {/* Field-wise Leaderboard Selector */}
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Rank by Academic Field:</p>
+              <div className="-mx-1 flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin sm:flex-wrap sm:overflow-visible">
+                {FIELDS.map(f => (
+                  <button
+                    key={f.id}
+                    onClick={() => { playSound("select"); setLeaderboardField(f.id); }}
+                    className={`shrink-0 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[10px] font-bold transition duration-300 border sm:px-3 sm:text-xs ${leaderboardField === f.id
+                      ? "bg-teal-400 text-slate-950 border-teal-400 font-black shadow-[0_0_12px_rgba(45,212,191,0.15)]"
+                      : "bg-slate-950/45 text-slate-400 border-white/[0.08] hover:text-white hover:border-teal-500/20"
+                      }`}
+                  >
+                    {f.name}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           <div className="space-y-2">
-            {displayLeaderboard.length ? displayLeaderboard.map(entry => {
+            {isMetaLoading ? (
+              // Glassmorphic loading skeletons
+              Array.from({ length: 8 }).map((_, i) => (
+                <div
+                  key={`skeleton-${i}`}
+                  className="rounded-xl border border-white/[0.06] bg-slate-950/20 p-3 sm:grid sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-3 sm:p-3.5"
+                >
+                  <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+                    <div className="w-8 h-8 shrink-0 rounded-lg bg-white/5 animate-pulse sm:w-10 sm:h-10" />
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-white/5 animate-pulse sm:h-11 sm:w-11" />
+                    <div className="min-w-0 flex-1 space-y-2">
+                      <div className="h-4 w-24 rounded bg-white/5 animate-pulse" />
+                      <div className="h-3 w-16 rounded bg-white/5 animate-pulse" />
+                    </div>
+                  </div>
+                  <div className="mt-2 sm:mt-0 sm:text-right">
+                    <div className="h-5 w-16 rounded bg-white/5 animate-pulse" />
+                  </div>
+                </div>
+              ))
+            ) : displayLeaderboard.length ? displayLeaderboard.map(entry => {
               const isSelf = entry.user.id === account?.id;
               const rank = entry.rank;
               const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
@@ -1947,7 +2307,7 @@ export default function Home() {
                 >
                   <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
                     <div className={`w-8 shrink-0 text-center font-mono text-base font-black sm:w-10 sm:text-lg ${rankColor}`}>{rankIcon}</div>
-                    <img src={getImageUrl(entry.user.avatarUrl)} alt="" className="h-10 w-10 shrink-0 rounded-lg border border-white/10 object-cover sm:h-11 sm:w-11" />
+                    <AvatarImage username={entry.user.username} avatarUrl={entry.user.avatarUrl} className="h-10 w-10 shrink-0 rounded-lg border border-white/10 object-cover sm:h-11 sm:w-11" />
                     <div className="min-w-0 flex-1">
                       <div className="flex min-w-0 flex-wrap items-center gap-1.5">
                         <p className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{entry.user.username}</p>
@@ -2040,12 +2400,12 @@ export default function Home() {
             <motion.div key="menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid min-w-0 items-center gap-4 py-2 sm:gap-6 lg:min-h-[calc(100vh-120px)] lg:grid-cols-[1.05fr_0.95fr]">
               <div className="space-y-5">
                 <div className="glass-panel overflow-hidden rounded-2xl scanline-overlay relative">
-                  <div className="h-32 bg-cover bg-center relative opacity-80" style={{ backgroundImage: `url(${getImageUrl(account?.bannerUrl)})` }}>
+                  <BannerContainer bannerUrl={account?.bannerUrl} className="h-32 bg-cover bg-center relative opacity-80">
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
-                  </div>
+                  </BannerContainer>
                   <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-end relative z-10 -mt-10">
                     <div className="flex min-w-0 items-end gap-4">
-                      <img src={getImageUrl(account?.avatarUrl)} alt="" className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-white/10 object-cover shadow-2xl" />
+                      <AvatarImage username={account?.username} avatarUrl={account?.avatarUrl} className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-white/10 object-cover shadow-2xl" />
                       <div className="min-w-0 pb-1">
                         <p className="font-mono text-sm text-teal-300">@{account?.username}</p>
                         <h1 className="text-2xl font-black uppercase tracking-normal text-white break-all sm:text-4xl md:text-5xl">{account?.username}</h1>
@@ -2155,13 +2515,13 @@ export default function Home() {
           {gameState === "versus_intro" && (
             <motion.div key="versus" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative -mx-4 grid min-h-[calc(100vh-96px)] place-items-center overflow-hidden rounded-lg border border-white/10 bg-black">
               <motion.div initial={{ x: "-100%" }} animate={{ x: 0 }} transition={{ type: "spring", stiffness: 80, damping: 18 }} className="absolute left-0 top-0 h-1/2 w-full overflow-hidden md:h-full md:w-[52%]">
-                <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: `url(${getImageUrl(player.bannerUrl || account?.bannerUrl)})` }} />
+                <BannerContainer bannerUrl={player.bannerUrl || account?.bannerUrl} className="absolute inset-0 bg-cover bg-center opacity-60" />
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-500/55 via-slate-950/70 to-slate-950/90" />
                 <VersusPlayer profile={{ ...player, avatarUrl: getImageUrl(player.avatarUrl || account?.avatarUrl), bannerUrl: getImageUrl(player.bannerUrl || account?.bannerUrl) }} side="left" />
               </motion.div>
 
               <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} transition={{ type: "spring", stiffness: 80, damping: 18, delay: 0.1 }} className="absolute bottom-0 right-0 h-1/2 w-full overflow-hidden md:h-full md:w-[52%]">
-                <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: `url(${getImageUrl(opponent.bannerUrl)})` }} />
+                <BannerContainer bannerUrl={opponent.bannerUrl} className="absolute inset-0 bg-cover bg-center opacity-60" />
                 <div className="absolute inset-0 bg-gradient-to-l from-red-500/55 via-slate-950/70 to-slate-950/90" />
                 <VersusPlayer profile={{ ...opponent, avatarUrl: getImageUrl(opponent.avatarUrl), bannerUrl: getImageUrl(opponent.bannerUrl) }} side="right" />
               </motion.div>
@@ -2456,19 +2816,19 @@ const Fighter = memo(function Fighter({ profile, tone, alignRight = false }: { p
   return (
     <div className="relative min-w-0 overflow-hidden rounded-xl border border-white/[0.08] bg-slate-950/45 p-3 shadow-lg backdrop-blur-md sm:p-4">
       {banner && (
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30" 
-          style={{ backgroundImage: `url(${banner})` }} 
+        <BannerContainer
+          bannerUrl={profile.bannerUrl}
+          className="absolute inset-0 bg-cover bg-center opacity-30"
         />
       )}
       <div className={`absolute inset-0 bg-gradient-to-t ${tone === "teal" ? "from-slate-950 via-slate-950/80" : "from-slate-950 via-slate-950/80"} to-slate-950/30`} />
 
       <div className={`relative z-10 flex ${alignRight ? "flex-row-reverse text-right" : "flex-row"} items-center gap-3`}>
         {avatar && (
-          <img 
-            src={avatar} 
-            alt="" 
-            className="h-12 w-12 rounded-lg object-cover border border-white/10 shadow-md shrink-0 bg-slate-800" 
+          <AvatarImage
+            username={profile.username || profile.name}
+            avatarUrl={profile.avatarUrl}
+            className="h-12 w-12 rounded-lg object-cover border border-white/10 shadow-md shrink-0 bg-slate-800"
           />
         )}
         <div className="min-w-0 flex-1">
@@ -2502,14 +2862,17 @@ function VersusPlayer({ profile, side }: { profile: FighterProfile; side: "left"
 
   return (
     <div className={`absolute z-10 flex h-full w-full flex-col justify-center gap-4 p-8 ${align}`}>
-      <motion.img
+      <motion.div
         initial={{ scale: 0.75, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.35 }}
-        src={getImageUrl(profile.avatarUrl)}
-        alt=""
-        className="h-20 w-20 rounded-full border-4 border-white/80 bg-slate-900 object-cover shadow-2xl md:h-24 md:w-24"
-      />
+      >
+        <AvatarImage
+          username={profile.username || profile.name}
+          avatarUrl={profile.avatarUrl}
+          className="h-20 w-20 rounded-full border-4 border-white/80 bg-slate-900 object-cover shadow-2xl md:h-24 md:w-24"
+        />
+      </motion.div>
       <motion.div initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="max-w-[min(28rem,78vw)] md:max-w-[22rem]">
         <div className="flex items-center gap-2 flex-wrap">
           <p className="break-words text-3xl font-black uppercase leading-none tracking-normal text-white drop-shadow-lg md:text-4xl">{profile.name}</p>

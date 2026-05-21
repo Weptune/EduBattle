@@ -89,6 +89,15 @@ async function init() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT now()
     );
 
+    CREATE TABLE IF NOT EXISTS direct_messages (
+      id TEXT PRIMARY KEY,
+      sender_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      receiver_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      message TEXT NOT NULL,
+      is_read BOOLEAN NOT NULL DEFAULT FALSE,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+
     ALTER TABLE users ADD COLUMN IF NOT EXISTS field_elos TEXT;
     ALTER TABLE users ADD COLUMN IF NOT EXISTS field_stats TEXT;
     ALTER TABLE users ADD COLUMN IF NOT EXISTS xp INTEGER DEFAULT 0;
@@ -413,6 +422,56 @@ async function listArenaChatMessages(limit = 100) {
     .reverse();
 }
 
+async function saveDirectMessage(dm) {
+  await init();
+  await pool.query(
+    `INSERT INTO direct_messages (id, sender_id, receiver_id, message, is_read, created_at)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [dm.id, dm.senderId, dm.receiverId, dm.message, dm.isRead || false, dm.createdAt]
+  );
+}
+
+async function listDirectMessages(userId1, userId2, limit = 50) {
+  await init();
+  const result = await pool.query(
+    `SELECT dm.id, dm.sender_id, dm.receiver_id, dm.message, dm.is_read, dm.created_at,
+            u.username as sender_username, u.avatar_url as sender_avatar_url
+     FROM direct_messages dm
+     JOIN users u ON dm.sender_id = u.id
+     WHERE (dm.sender_id = $1 AND dm.receiver_id = $2)
+        OR (dm.sender_id = $2 AND dm.receiver_id = $1)
+     ORDER BY dm.created_at DESC
+     LIMIT $3`,
+    [userId1, userId2, limit]
+  );
+
+  return result.rows
+    .map(row => ({
+      id: row.id,
+      senderId: row.sender_id,
+      receiverId: row.receiver_id,
+      message: row.message,
+      isRead: row.is_read,
+      createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
+      sender: {
+        id: row.sender_id,
+        username: row.sender_username,
+        avatarUrl: row.sender_avatar_url
+      }
+    }))
+    .reverse();
+}
+
+async function markDMsAsRead(senderId, receiverId) {
+  await init();
+  await pool.query(
+    `UPDATE direct_messages
+     SET is_read = TRUE
+     WHERE sender_id = $1 AND receiver_id = $2 AND is_read = FALSE`,
+    [senderId, receiverId]
+  );
+}
+
 module.exports = {
   init,
   getUserByUsername,
@@ -431,5 +490,8 @@ module.exports = {
   acceptFriendRequest,
   removeFriendship,
   saveArenaChatMessage,
-  listArenaChatMessages
+  listArenaChatMessages,
+  saveDirectMessage,
+  listDirectMessages,
+  markDMsAsRead
 };

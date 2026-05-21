@@ -22,9 +22,9 @@ function normalizeOrigin(origin) {
 
 const allowedOrigins = process.env.CLIENT_ORIGIN
   ? process.env.CLIENT_ORIGIN
-      .split(',')
-      .map(origin => normalizeOrigin(origin.trim()))
-      .filter(Boolean)
+    .split(',')
+    .map(origin => normalizeOrigin(origin.trim()))
+    .filter(Boolean)
   : ['*'];
 
 const allowAllOrigins = allowedOrigins.includes('*');
@@ -316,12 +316,12 @@ app.post('/upload', requireAuth, async (req, res) => {
     const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1].replace('xml+svg', 'svg');
     const data = matches[2];
     const buffer = Buffer.from(data, 'base64');
-    
+
     const filename = `${crypto.randomUUID()}.${ext}`;
     const filepath = path.join(UPLOADS_DIR, filename);
-    
+
     fs.writeFileSync(filepath, buffer);
-    
+
     const imageUrl = `/uploads/${filename}`;
     res.json({ url: imageUrl });
   } catch (error) {
@@ -371,21 +371,32 @@ app.get('/chat/messages', requireAuth, async (req, res) => {
   }
 });
 
+app.get('/chat/dms/:friendId', requireAuth, async (req, res) => {
+  try {
+    const friendId = req.params.friendId;
+    const messages = await storage.listDirectMessages(req.user.id, friendId, 50);
+    await storage.markDMsAsRead(friendId, req.user.id);
+    res.json({ messages });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.post('/friends/request', requireAuth, async (req, res) => {
   try {
     const friendUsername = String(req.body.friendUsername || '').trim();
     if (!friendUsername) return res.status(400).json({ error: 'Username is required.' });
-    
+
     const targetUser = await storage.getUserByUsername(friendUsername);
     if (!targetUser) return res.status(404).json({ error: 'User not found.' });
-    
+
     await storage.createFriendRequest(req.user.id, targetUser.id);
-    
+
     const targetSocketId = userSockets.get(targetUser.id);
     if (targetSocketId) {
       io.to(targetSocketId).emit('friend_request_received', { requester: publicUser(req.user) });
     }
-    
+
     res.json({ ok: true });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -396,14 +407,14 @@ app.post('/friends/accept', requireAuth, async (req, res) => {
   try {
     const { friendId } = req.body;
     if (!friendId) return res.status(400).json({ error: 'Friend ID is required.' });
-    
+
     await storage.acceptFriendRequest(req.user.id, friendId);
-    
+
     const friendSocketId = userSockets.get(friendId);
     if (friendSocketId) {
       io.to(friendSocketId).emit('friend_request_accepted', { friendId: req.user.id });
     }
-    
+
     res.json({ ok: true });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -414,14 +425,14 @@ app.post('/friends/remove', requireAuth, async (req, res) => {
   try {
     const { friendId } = req.body;
     if (!friendId) return res.status(400).json({ error: 'Friend ID is required.' });
-    
+
     await storage.removeFriendship(req.user.id, friendId);
-    
+
     const friendSocketId = userSockets.get(friendId);
     if (friendSocketId) {
-      io.to(friendSocketId).emit('friend_request_received'); 
+      io.to(friendSocketId).emit('friend_request_received');
     }
-    
+
     res.json({ ok: true });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -585,7 +596,7 @@ function createMatch(p1, p2, domain = 'all') {
   const normalizedDomain = normalizeDomain(domain);
   const subjectPool = getSubjectPool(normalizedDomain);
   const matchId = `match_${p1.id}_${p2.id}`;
-  
+
   const match = {
     id: matchId,
     p1,
@@ -638,7 +649,7 @@ io.on('connection', (socket) => {
       socket.userId = user.id;
       console.log(`Registered socket ${socket.id} to user ${user.username}`);
       await notifyFriendsStatusChange(user.id, true);
-      
+
       const friendships = await storage.getFriendships(user.id);
       const friends = friendships.filter(f => f.status === 'accepted');
       for (const f of friends) {
@@ -676,6 +687,82 @@ io.on('connection', (socket) => {
     } catch (err) {
       console.error('Failed to save chat message:', err);
       socket.emit('chat_error', { error: 'Message could not be saved.' });
+    }
+  });
+
+  socket.on('send_direct_message', async (data) => {
+    if (!socket.userId || !data || !data.recipientId || !data.message) return;
+    const user = await storage.getUserById(socket.userId);
+    if (!user) return;
+
+    const text = String(data.message).trim().slice(0, 500);
+    if (!text) return;
+
+    const dm = {
+      id: 'dm_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+      senderId: user.id,
+      receiverId: data.recipientId,
+      message: text,
+      isRead: false,
+      createdAt: new Date().toISOString(),
+      sender: {
+        id: user.id,
+        username: user.username,
+        avatarUrl: user.avatarUrl
+      }
+    };
+
+    try {
+      await storage.saveDirectMessage(dm);
+      socket.emit('direct_message', dm);
+      const recipientSocketId = userSockets.get(data.recipientId);
+      if (recipientSocketId) {
+        io.to(recipientSocketId).emit('direct_message', dm);
+      }
+    } catch (err) {
+      console.error('Failed to save/send direct message:', err);
+      socket.emit('chat_error', { error: 'Direct message could not be sent.' });
+    }
+  });
+
+  socket.on('battle_reaction', (data) => {
+    if (!socket.userId || !data || !data.reaction) return;
+    const player = players[socket.id];
+    if (!player || !player.matchId) return;
+    const match = matches[player.matchId];
+    if (!match) return;
+
+    const isP1 = match.p1.id === player.id;
+    const opponent = isP1 ? match.p2 : match.p1;
+
+    // Broadcast back to sender to sync
+    socket.emit('battle_reaction', {
+      senderId: player.id,
+      reaction: data.reaction
+    });
+
+    if (opponent) {
+      if (opponent.isBot) {
+        // Trigger a bot reaction back with 40% probability after a small delay
+        if (Math.random() < 0.4) {
+          setTimeout(() => {
+            const botReactions = ['GG', 'Wow!', 'Close One!', 'Thinking...', 'Angry'];
+            const randomReaction = botReactions[Math.floor(Math.random() * botReactions.length)];
+            socket.emit('battle_reaction', {
+              senderId: opponent.id,
+              reaction: randomReaction
+            });
+          }, 1200);
+        }
+      } else {
+        const opponentSocketId = userSockets.get(opponent.id);
+        if (opponentSocketId) {
+          io.to(opponentSocketId).emit('battle_reaction', {
+            senderId: player.id,
+            reaction: data.reaction
+          });
+        }
+      }
     }
   });
 
@@ -818,7 +905,7 @@ io.on('connection', (socket) => {
       return;
     }
     players[socket.id] = player;
-    
+
     const opponentIndex = findRankedOpponent(player);
     if (opponentIndex !== -1) {
       const [opponent] = queue.splice(opponentIndex, 1);
@@ -862,7 +949,7 @@ io.on('connection', (socket) => {
       return;
     }
     players[socket.id] = player;
-    
+
     const bot = {
       id: 'bot_' + Date.now(),
       name: 'AlphaZero (Bot)',
@@ -942,14 +1029,14 @@ io.on('connection', (socket) => {
 });
 
 function processDraft(match, playerId, subject) {
-  if (match.draftTurn !== playerId) return; 
+  if (match.draftTurn !== playerId) return;
   if (match.state !== 'drafting') return;
-  
+
   const player = match.p1.id === playerId ? match.p1 : match.p2;
   if (!player.hand.includes(subject)) return;
 
   if (match.draftTimer) clearTimeout(match.draftTimer);
-  
+
   // Replace card
   player.hand = player.hand.filter(s => s !== subject);
   player.hand.push(getRandomSubjects(1, match.subjectPool, [...player.hand, subject])[0]);
@@ -958,7 +1045,7 @@ function processDraft(match, playerId, subject) {
 
   match.selectedSubject = subject;
   match.state = 'battle';
-  
+
   let pool = QUESTIONS[match.selectedSubject];
   if (!pool || pool.length === 0) {
     pool = [];
@@ -966,7 +1053,7 @@ function processDraft(match, playerId, subject) {
       const difficulty = 1000 + (i * 100);
       const isHard = i >= 6;
       pool.push({
-        prompt: isHard 
+        prompt: isHard
           ? `Advanced Scenario: Applying principles of ${match.selectedSubject} in a complex system requires which of the following?`
           : `Core Foundation: Which of these best describes the primary focus of ${match.selectedSubject}?`,
         options: [
@@ -981,9 +1068,9 @@ function processDraft(match, playerId, subject) {
       });
     }
   }
-  
+
   const avgElo = (match.p1.elo + match.p2.elo) / 2;
-  
+
   const sortedPool = [...pool].sort((a, b) => Math.abs(a.difficulty - avgElo) - Math.abs(b.difficulty - avgElo));
   const candidates = sortedPool.slice(0, 3); // pick from the top 3 closest difficulty questions
   const randomQuestion = shuffleQuestionOptions(
@@ -994,7 +1081,7 @@ function processDraft(match, playerId, subject) {
 
   emitToPlayer(match.p1, 'draft_complete', { subject: match.selectedSubject });
   emitToPlayer(match.p2, 'draft_complete', { subject: match.selectedSubject });
-  
+
   setTimeout(() => startNextRound(match), 2000);
 }
 
@@ -1003,7 +1090,7 @@ function startNextRound(match) {
     endMatch(match);
     return;
   }
-  
+
   const question = match.questions[match.currentRound];
   match.roundState = {
     startTime: Date.now(),
@@ -1026,11 +1113,11 @@ function startNextRound(match) {
   // Set timer to auto-resolve if no answers
   match.roundTimer = setTimeout(() => {
     resolveRound(match);
-  }, question.timeLimit * 1000 + 2000); 
+  }, question.timeLimit * 1000 + 2000);
 
   if (match.p1.isBot || match.p2.isBot) {
     const botId = match.p1.isBot ? match.p1.id : match.p2.id;
-    const delay = 1800 + Math.random() * 3200;
+    const delay = 3500 + Math.random() * 4500;
     setTimeout(() => {
       const liveMatch = matches[match.id];
       if (!liveMatch || liveMatch.state !== 'battle' || !liveMatch.roundState) return;
@@ -1060,14 +1147,14 @@ function resolveRound(match) {
 
   const question = roundState.question;
   const answers = roundState.answers;
-  
+
   let p1Damage = 0;
   let p2Damage = 0;
   const ans1 = answers[match.p1.id];
   const ans2 = answers[match.p2.id];
   const p1Correct = Boolean(ans1 && ans1.answer === question.answer);
   const p2Correct = Boolean(ans2 && ans2.answer === question.answer);
-  
+
   if (p1Correct && !p2Correct) {
     p2Damage = 25;
   } else if (!p1Correct && p2Correct) {
@@ -1135,13 +1222,13 @@ function resolveRound(match) {
     match.currentRound++;
     match.draftTurn = match.draftTurn === match.p1.id ? match.p2.id : match.p1.id;
     match.state = 'drafting';
-    
+
     setTimeout(() => {
       emitToPlayer(match.p1, 'back_to_draft', { draftTurn: match.draftTurn, round: match.currentRound + 1 });
       emitToPlayer(match.p2, 'back_to_draft', { draftTurn: match.draftTurn, round: match.currentRound + 1 });
-      
+
       startDraftTimer(match.id);
-      
+
       const botId = match.p1.isBot ? match.p1.id : match.p2.isBot ? match.p2.id : null;
       if (botId && match.draftTurn === botId) {
         setTimeout(() => {
@@ -1192,7 +1279,7 @@ async function endMatch(match) {
       winner.elo = winner.elo + winnerDelta;
       loser.elo = Math.max(0, loser.elo + loserDelta);
     }
-    
+
     winner.eloDelta = winnerDelta;
     loser.eloDelta = loserDelta;
 
@@ -1289,7 +1376,7 @@ function startDraftTimer(matchId) {
   const match = matches[matchId];
   if (!match) return;
   if (match.draftTimer) clearTimeout(match.draftTimer);
-  
+
   match.draftTimer = setTimeout(() => {
     if (matches[matchId] && matches[matchId].state === 'drafting') {
       const player = match.p1.id === match.draftTurn ? match.p1 : match.p2;
@@ -1303,7 +1390,7 @@ function startDiscardTimer(matchId) {
   const match = matches[matchId];
   if (!match) return;
   if (match.draftTimer) clearTimeout(match.draftTimer);
-  
+
   match.draftTimer = setTimeout(() => {
     if (matches[matchId] && matches[matchId].state === 'initial_discard') {
       match.p1.hasDiscarded = true;
@@ -1320,7 +1407,7 @@ function checkDiscardPhase(match) {
     emitToPlayer(match.p1, 'discard_phase_end', { match: publicMatch(match) });
     emitToPlayer(match.p2, 'discard_phase_end', { match: publicMatch(match) });
     startDraftTimer(match.id);
-    
+
     const botId = match.p1.isBot ? match.p1.id : match.p2.isBot ? match.p2.id : null;
     if (botId && match.draftTurn === botId) {
       setTimeout(() => {
