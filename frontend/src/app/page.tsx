@@ -388,6 +388,7 @@ export default function Home() {
   const [isChallenging, setIsChallenging] = useState(false);
   const [dmFriendId, setDmFriendId] = useState<string | null>(null);
   const [dmMessages, setDmMessages] = useState<Record<string, ChatMessage[]>>({});
+  const [incomingDm, setIncomingDm] = useState<DirectMessagePayload | null>(null);
 
   const [gameState, setGameState] = useState<GameState>("menu");
   const [player, setPlayer] = useState<FighterProfile>({ name: "Player", elo: 1200, hp: 100 });
@@ -814,6 +815,12 @@ export default function Home() {
           [friendId]: [...withoutOptimisticDup.slice(-99), chatMessage],
         };
       });
+
+      // Show popup for incoming DMs (only if not sent by self)
+      if (msg.senderId !== currentAccount?.id) {
+        setIncomingDm(msg);
+        playSound("intro");
+      }
     });
 
     activeSocket.on("friend_status_change", (data: { friendId: string; isOnline: boolean }) => {
@@ -1574,6 +1581,68 @@ export default function Home() {
                   className="flex-1 rounded-lg bg-gradient-to-r from-teal-400 to-emerald-400 py-2 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_12px_rgba(45,212,191,0.2)] hover:from-teal-350 hover:to-emerald-350 transition duration-300"
                 >
                   Accept
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Incoming DM Notification */}
+      <AnimatePresence>
+        {incomingDm && (
+          <div className="fixed left-4 right-4 top-4 z-50 flex justify-center sm:left-auto sm:right-6 sm:top-6 sm:w-96 pointer-events-none">
+            <motion.div
+              initial={{ y: -50, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -20, opacity: 0, scale: 0.95 }}
+              className="pointer-events-auto w-full overflow-hidden rounded-2xl border border-purple-500/40 bg-slate-950/95 p-4 shadow-[0_0_30px_rgba(168,85,247,0.25)] backdrop-blur-xl"
+            >
+              <div className="flex items-start gap-3">
+                <div className="relative shrink-0">
+                  <AvatarImage
+                    username={incomingDm.sender?.username}
+                    avatarUrl={incomingDm.sender?.avatarUrl}
+                    className="h-12 w-12 rounded-xl border border-white/10 bg-slate-800 object-cover"
+                  />
+                  <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 border border-purple-500/30 text-purple-400">
+                    <MessageSquare size={10} />
+                  </div>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <p className="font-mono text-xs font-black uppercase tracking-wider text-purple-300">💬 New Message!</p>
+                  </div>
+                  <p className="mt-0.5 text-sm font-black text-white truncate">
+                    @{incomingDm.sender?.username}
+                  </p>
+                  <div className="mt-2 text-xs text-slate-300 bg-white/[0.03] border border-white/[0.06] px-2 py-1.5 rounded-lg max-h-20 overflow-y-auto">
+                    {incomingDm.message}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  onClick={() => {
+                    playSound("select");
+                    setIncomingDm(null);
+                  }}
+                  className="flex-1 rounded-lg border border-white/10 bg-white/5 py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:bg-white/10 transition"
+                >
+                  Dismiss
+                </button>
+                <button
+                  onClick={() => {
+                    playSound("confirm");
+                    setDmFriendId(incomingDm.senderId);
+                    setScreen("social");
+                    setIncomingDm(null);
+                    loadDmHistory(incomingDm.senderId);
+                  }}
+                  className="flex-1 rounded-lg bg-gradient-to-r from-purple-400 to-pink-400 py-2 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_12px_rgba(168,85,247,0.2)] hover:from-purple-350 hover:to-pink-350 transition duration-300"
+                >
+                  Reply
                 </button>
               </div>
             </motion.div>
