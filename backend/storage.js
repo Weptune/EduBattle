@@ -1,4 +1,7 @@
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
 const { Pool } = require('pg');
 
 const databaseUrl = process.env.DATABASE_URL;
@@ -103,6 +106,14 @@ async function init() {
     ALTER TABLE users ADD COLUMN IF NOT EXISTS xp INTEGER DEFAULT 0;
     ALTER TABLE users ADD COLUMN IF NOT EXISTS level INTEGER DEFAULT 1;
     ALTER TABLE match_history ADD COLUMN IF NOT EXISTS domain TEXT DEFAULT 'all';
+
+    CREATE TABLE IF NOT EXISTS user_assets (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      mime_type TEXT NOT NULL,
+      data_base64 TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
   `);
 
   initialized = true;
@@ -472,6 +483,86 @@ async function markDMsAsRead(senderId, receiverId) {
   );
 }
 
+async function saveUserAsset(userId, mimeType, base64Data) {
+  await init();
+  const id = crypto.randomUUID();
+  await pool.query(
+    `INSERT INTO user_assets (id, user_id, mime_type, data_base64)
+     VALUES ($1, $2, $3, $4)`,
+    [id, userId, mimeType, base64Data]
+  );
+  return id;
+}
+
+async function getUserAsset(assetId) {
+  await init();
+  const result = await pool.query(
+    `SELECT id, mime_type, data_base64 FROM user_assets WHERE id = $1`,
+    [assetId]
+  );
+  const row = result.rows[0];
+  if (!row) return null;
+  return {
+    id: row.id,
+    mimeType: row.mime_type,
+    dataBase64: row.data_base64
+  };
+}
+
+function mimeTypeFromExtension(ext) {
+  if (ext === 'jpg' || ext === 'jpeg') return 'image/jpeg';
+  if (ext === 'png') return 'image/png';
+  if (ext === 'gif') return 'image/gif';
+  if (ext === 'webp') return 'image/webp';
+  if (ext === 'svg') return 'image/svg+xml';
+  return `image/${ext}`;
+}
+
+async function migrateLocalUploadUrlsToAssets(uploadsDir) {
+  await init();
+  if (!uploadsDir || !fs.existsSync(uploadsDir)) return { migrated: 0 };
+
+  const result = await pool.query(
+    `SELECT id, avatar_url, banner_url FROM users
+     WHERE avatar_url LIKE '/uploads/%' OR banner_url LIKE '/uploads/%'`
+  );
+
+  let migrated = 0;
+
+  for (const row of result.rows) {
+    let avatarUrl = row.avatar_url;
+    let bannerUrl = row.banner_url;
+    let changed = false;
+
+    for (const [field, currentUrl] of [['avatar', avatarUrl], ['banner', bannerUrl]]) {
+      if (!currentUrl || !currentUrl.startsWith('/uploads/')) continue;
+
+      const filePath = path.join(uploadsDir, path.basename(currentUrl));
+      if (!fs.existsSync(filePath)) continue;
+
+      const buffer = fs.readFileSync(filePath);
+      const ext = path.extname(filePath).slice(1).toLowerCase();
+      const mimeType = mimeTypeFromExtension(ext);
+      const assetId = await saveUserAsset(row.id, mimeType, buffer.toString('base64'));
+      const assetUrl = `/assets/${assetId}`;
+
+      if (field === 'avatar') avatarUrl = assetUrl;
+      else bannerUrl = assetUrl;
+      changed = true;
+      migrated += 1;
+    }
+
+    if (changed) {
+      await pool.query(
+        `UPDATE users SET avatar_url = $1, banner_url = $2, updated_at = now() WHERE id = $3`,
+        [avatarUrl, bannerUrl, row.id]
+      );
+    }
+  }
+
+  return { migrated };
+}
+
 module.exports = {
   init,
   getUserByUsername,
@@ -493,5 +584,8 @@ module.exports = {
   listArenaChatMessages,
   saveDirectMessage,
   listDirectMessages,
-  markDMsAsRead
+  markDMsAsRead,
+  saveUserAsset,
+  getUserAsset,
+  migrateLocalUploadUrlsToAssets
 };

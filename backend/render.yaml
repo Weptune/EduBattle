@@ -10,3 +10,12 @@ services:
         value: 0.0.0.0
       - key: CLIENT_ORIGIN
         sync: false
+      - key: DATABASE_URL
+        sync: false
+      # Optional: use Cloudinary CDN instead of DB-backed /assets/ URLs
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

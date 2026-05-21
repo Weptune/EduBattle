@@ -16,6 +16,23 @@ if (!fs.existsSync(UPLOADS_DIR)) {
 }
 app.use('/uploads', express.static(UPLOADS_DIR));
 
+app.get('/assets/:assetId', async (req, res) => {
+  try {
+    const asset = await storage.getUserAsset(req.params.assetId);
+    if (!asset) {
+      res.status(404).end();
+      return;
+    }
+
+    const buffer = Buffer.from(asset.dataBase64, 'base64');
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+    res.type(asset.mimeType).send(buffer);
+  } catch (error) {
+    console.error('Failed to serve asset:', error);
+    res.status(500).end();
+  }
+});
+
 function normalizeOrigin(origin) {
   return origin ? origin.replace(/\/+$/, '') : origin;
 }
@@ -307,25 +324,20 @@ app.post('/upload', requireAuth, async (req, res) => {
   }
 
   try {
-    const matches = image.match(/^data:image\/([A-Za-z+]+);base64,(.+)$/);
+    const matches = image.match(/^data:image\/([A-Za-z0-9+.-]+);base64,(.+)$/);
     if (!matches || matches.length !== 3) {
       res.status(400).json({ error: 'Invalid base64 image data format.' });
       return;
     }
 
-    const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1].replace('xml+svg', 'svg');
+    const subtype = matches[1] === 'jpeg' ? 'jpeg' : matches[1].replace('xml+svg', 'svg');
+    const mimeType = `image/${subtype}`;
     const data = matches[2];
-    const buffer = Buffer.from(data, 'base64');
 
-    const filename = `${crypto.randomUUID()}.${ext}`;
-    const filepath = path.join(UPLOADS_DIR, filename);
-
-    fs.writeFileSync(filepath, buffer);
-
-    const imageUrl = `/uploads/${filename}`;
-    res.json({ url: imageUrl });
+    const assetId = await storage.saveUserAsset(req.user.id, mimeType, data);
+    res.json({ url: `/assets/${assetId}` });
   } catch (error) {
-    console.error('Local upload failed:', error);
+    console.error('Database upload failed:', error);
     res.status(500).json({ error: 'Failed to save upload.' });
   }
 });
@@ -1422,7 +1434,11 @@ function checkDiscardPhase(match) {
 }
 
 storage.init()
-  .then(() => {
+  .then(() => storage.migrateLocalUploadUrlsToAssets(UPLOADS_DIR))
+  .then(({ migrated }) => {
+    if (migrated > 0) {
+      console.log(`Migrated ${migrated} local upload(s) into database-backed assets.`);
+    }
     server.listen(PORT, HOST, () => {
       console.log(`Server listening on ${HOST}:${PORT}`);
     });
