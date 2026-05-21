@@ -83,6 +83,34 @@ type ChatMessage = {
   timestamp: string;
 };
 
+type DirectMessagePayload = {
+  id: string;
+  senderId: string;
+  receiverId: string;
+  message: string;
+  createdAt: string;
+  sender?: {
+    id: string;
+    username: string;
+    avatarUrl: string;
+  };
+};
+
+function dmToChatMessage(msg: DirectMessagePayload, account: Account | null): ChatMessage {
+  const isOwn = msg.senderId === account?.id;
+  return {
+    id: msg.id,
+    userId: msg.senderId,
+    username: isOwn ? (account?.username || "You") : (msg.sender?.username || "Unknown"),
+    avatarUrl: isOwn ? (account?.avatarUrl || "") : (msg.sender?.avatarUrl || ""),
+    bannerUrl: isOwn ? (account?.bannerUrl || "") : "",
+    elo: isOwn ? (account?.elo || 0) : 0,
+    level: isOwn ? (account?.level || 1) : 1,
+    message: msg.message,
+    timestamp: msg.createdAt || new Date().toISOString(),
+  };
+}
+
 type IncomingChallenge = {
   challengeId: string;
   challenger: Account;
@@ -330,6 +358,7 @@ export default function Home() {
     return localStorage.getItem("synapse_token");
   });
   const [account, setAccount] = useState<Account | null>(null);
+  const accountRef = useRef<Account | null>(null);
   const [authForm, setAuthForm] = useState({ username: "", password: "" });
   const [profileForm, setProfileForm] = useState({ username: "", bio: "", avatarUrl: "", bannerUrl: "" });
   const [status, setStatus] = useState("");
@@ -544,12 +573,13 @@ export default function Home() {
   };
 
   const loadDmHistory = async (friendId: string) => {
-    if (!token) return;
+    if (!token || !account) return;
     try {
-      const data = await apiRequest<{ messages: ChatMessage[] }>(`/chat/dms/${friendId}`, {
+      const data = await apiRequest<{ messages: DirectMessagePayload[] }>(`/chat/dms/${friendId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setDmMessages(prev => ({ ...prev, [friendId]: data.messages }));
+      const messages = data.messages.map(msg => dmToChatMessage(msg, account));
+      setDmMessages(prev => ({ ...prev, [friendId]: messages }));
     } catch (err) {
       console.error("Failed to load DM history:", err);
     }
@@ -766,29 +796,22 @@ export default function Home() {
       });
     });
 
-    activeSocket.on("direct_message", (msg: any) => {
-      const senderId = msg.senderId;
-      const recipientId = account?.id;
+    activeSocket.on("direct_message", (msg: DirectMessagePayload) => {
+      const currentAccount = accountRef.current;
+      const friendId = msg.senderId === currentAccount?.id ? msg.receiverId : msg.senderId;
+      const chatMessage = dmToChatMessage(msg, currentAccount);
 
-      // Convert backend message format to frontend format
-      const chatMessage: ChatMessage = {
-        id: msg.id,
-        userId: msg.senderId,
-        username: msg.sender?.username || "Unknown",
-        avatarUrl: msg.sender?.avatarUrl || "",
-        bannerUrl: "",
-        elo: 0,
-        level: 1,
-        message: msg.message,
-        timestamp: msg.createdAt
-      };
-
-      // Add message to the conversation (either sent or received)
       setDmMessages(prev => {
-        const conversationId = msg.senderId === recipientId ? senderId : (recipientId || senderId);
+        const existing = prev[friendId] || [];
+        if (existing.some(m => m.id === chatMessage.id)) return prev;
+
+        const withoutOptimisticDup = existing.filter(
+          m => !(m.id.startsWith("temp-") && m.userId === chatMessage.userId && m.message === chatMessage.message)
+        );
+
         return {
           ...prev,
-          [conversationId]: [...(prev[conversationId] || []).slice(-99), chatMessage]
+          [friendId]: [...withoutOptimisticDup.slice(-99), chatMessage],
         };
       });
     });
@@ -837,6 +860,10 @@ export default function Home() {
       if (versusTimerRef.current) clearTimeout(versusTimerRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    accountRef.current = account;
+  }, [account]);
 
   useEffect(() => {
     if (!token || !socketRef.current?.connected) return;
