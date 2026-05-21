@@ -7364,306 +7364,3141 @@ const QUESTIONS = {
   { prompt: "What fundamentally distinguishes computational number theory?", options: ["Algorithmic integer analysis", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
   { prompt: "Which challenge mainly affects advanced factorization algorithms?", options: ["Astronomical runtime complexity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
 ],
-  "Embedded and Decentralized Finance": [
-    { prompt: "What does 'DeFi' stand for?", options: ["Defined Finances", "Decentralized Finance", "Digital Fiat", "Direct Funding"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What technology is DeFi primarily built upon?", options: ["Cloud Computing", "Blockchain Technology (usually Ethereum)", "Mainframes", "SQL Databases"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is 'Embedded Finance'?", options: ["Money hide", "Service merge", "Bank trad", "Crypto mine"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is a 'Smart Contract'?", options: ["Law paper", "Code on blockchain", "Clever lawyer", "AI tool"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is a 'Stablecoin'?", options: ["Rolling coin", "Pegged crypto", "Volatile stock", "Token"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "In DeFi, what is a 'DEX'?", options: ["Digital Exchange", "Decentralized Exchange", "Direct Execution", "Data Extraction"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What does 'Yield Farming' refer to?", options: ["Crop growth", "Crypto staking", "Coal mining", "Money print"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is a 'Liquidity Pool' in a DEX?", options: ["Bank account", "Locked funds", "Bank loan", "Dark pool"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'API-driven banking' crucial for?", options: ["Letter writing", "Embedded finance", "Check print", "Data entry"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is a 'Flash Loan' in DeFi?", options: ["Long loan", "Uncollateralized loan", "Credit card", "Student loan"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+ "Embedded and Decentralized Finance": [
+  // 1000 ELO — basic DeFi concepts
+
+  { prompt: "What fundamentally distinguishes decentralized finance?", options: ["Finance without intermediaries", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which technology mainly powers DeFi systems?", options: ["Blockchain network technology", "Relational database systems", "Centralized server clusters", "Analog communication systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cryptocurrencies digitally?", options: ["Blockchain-based currencies", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which structure mainly records blockchain transactions?", options: ["Distributed ledger system", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes Bitcoin transactions?", options: ["Peer-to-peer transfers", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly validates blockchain activity?", options: ["Consensus verification methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes public blockchains?", options: ["Open network participation", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects traditional finance?", options: ["Centralized intermediaries reliance", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes crypto wallets?", options: ["Store digital credentials", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects blockchain adoption?", options: ["User accessibility barriers", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — blockchain infrastructure
+
+  { prompt: "What fundamentally distinguishes Ethereum blockchains?", options: ["Support programmable contracts", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which mechanism mainly secures Bitcoin networks?", options: ["Proof-of-work consensus", "Proof-of-storage consensus", "Recursive balancing consensus", "Graph compression consensus"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes blockchain miners?", options: ["Validate transaction blocks", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which structure mainly chains blockchain records?", options: ["Cryptographic hash linking", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes distributed ledgers?", options: ["Shared synchronized records", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly confirms crypto ownership?", options: ["Private-key authentication", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes blockchain nodes?", options: ["Maintain network copies", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects proof-of-work systems?", options: ["High energy consumption", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes transaction hashes?", options: ["Unique cryptographic identifiers", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects decentralized networks?", options: ["Consensus coordination complexity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — embedded finance basics
+
+  { prompt: "What fundamentally distinguishes embedded finance?", options: ["Finance inside applications", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which service mainly enables app-based payments?", options: ["Embedded payment integration", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes buy-now-pay-later systems?", options: ["Deferred installment payments", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly supports embedded banking?", options: ["API financial integration", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes fintech platforms?", options: ["Technology-driven finance services", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which service mainly embeds insurance digitally?", options: ["Integrated coverage products", "Proof-of-storage protocols", "Recursive consensus systems", "Graph synchronization layers"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes digital wallets?", options: ["Store payment credentials", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects embedded payments?", options: ["Regulatory compliance complexity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes banking-as-a-service?", options: ["APIs expose banking", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects fintech scaling?", options: ["Infrastructure reliability demands", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — smart contracts
+
+  { prompt: "What fundamentally distinguishes smart contracts?", options: ["Self-executing blockchain code", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which language mainly programs Ethereum contracts?", options: ["Solidity programming language", "Recursive balancing language", "Graph traversal language", "Central storage language"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes decentralized applications?", options: ["Blockchain-powered applications", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly executes contract logic?", options: ["Virtual machine computation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes gas fees?", options: ["Blockchain execution costs", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which structure mainly stores contract states?", options: ["Distributed blockchain storage", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes immutable contracts?", options: ["Cannot easily modify", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects contract deployment?", options: ["Permanent coding vulnerabilities", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes token standards?", options: ["Define blockchain interoperability", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects contract scalability?", options: ["Limited transaction throughput", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — stablecoins and tokens
+
+  { prompt: "What fundamentally distinguishes stablecoins?", options: ["Pegged-value cryptocurrencies", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which asset mainly backs fiat stablecoins?", options: ["Reserve currency holdings", "Recursive balancing reserves", "Graph traversal reserves", "Centralized subnet reserves"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes algorithmic stablecoins?", options: ["Use supply adjustments", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly creates blockchain tokens?", options: ["Smart-contract minting", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes governance tokens?", options: ["Enable voting rights", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which structure mainly tracks token balances?", options: ["Distributed ledger entries", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes token liquidity?", options: ["Ease of trading", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects stablecoins?", options: ["Peg maintenance failures", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes tokenomics?", options: ["Study token economics", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects crypto volatility?", options: ["Rapid market speculation", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — decentralized exchanges
+
+  { prompt: "What fundamentally distinguishes decentralized exchanges?", options: ["Peer-to-peer token trading", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which mechanism mainly powers modern DEX pricing?", options: ["Automated market makers", "Recursive balancing engines", "Graph traversal matrices", "Centralized storage ledgers"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes liquidity pools?", options: ["Shared trading reserves", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly swaps decentralized assets?", options: ["Smart-contract exchange execution", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes AMM protocols?", options: ["Algorithmic liquidity pricing", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which formula mainly powers constant-product markets?", options: ["x times y constant", "Recursive balance equation", "Graph traversal identity", "Central storage theorem"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes slippage in trading?", options: ["Price movement during", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects liquidity providers?", options: ["Impermanent loss exposure", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes on-chain trading?", options: ["Blockchain-recorded transactions", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects DEX scalability?", options: ["Network congestion fees", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — lending and yield farming
+
+  { prompt: "What fundamentally distinguishes yield farming?", options: ["Earn rewards providing liquidity", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which platform mainly enables decentralized lending?", options: ["DeFi lending protocols", "Recursive balancing engines", "Graph traversal matrices", "Centralized storage ledgers"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes collateralized loans?", options: ["Backed by pledged assets", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly distributes staking rewards?", options: ["Protocol incentive allocation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes staking systems?", options: ["Lock tokens securely", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which structure mainly tracks lending positions?", options: ["Smart-contract accounting ledgers", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes annual percentage yield?", options: ["Compounded return measurement", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects leveraged yield farming?", options: ["Liquidation risk exposure", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes protocol incentives?", options: ["Reward user participation", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects lending markets?", options: ["Collateral volatility swings", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — advanced DeFi mechanisms
+
+  { prompt: "What fundamentally distinguishes flash loans?", options: ["Instant uncollateralized borrowing", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which condition mainly enables flash loans?", options: ["Single-transaction repayment", "Recursive balancing repayment", "Graph traversal repayment", "Centralized subnet repayment"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes decentralized governance?", options: ["Token-holder voting systems", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly updates decentralized protocols?", options: ["Governance proposal voting", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes oracle networks?", options: ["Provide external data", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which structure mainly secures proof-of-stake systems?", options: ["Validator staking pools", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cross-chain bridges?", options: ["Transfer blockchain assets", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects oracle systems?", options: ["External data manipulation", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes DAO organizations?", options: ["Community-controlled protocols", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects cross-chain finance?", options: ["Bridge security vulnerabilities", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — embedded banking infrastructure
+
+  { prompt: "What fundamentally distinguishes API-driven banking?", options: ["Programmatic financial access", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which architecture mainly powers embedded finance scaling?", options: ["Microservice financial platforms", "Recursive balancing engines", "Graph traversal matrices", "Centralized storage ledgers"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes open banking systems?", options: ["Shared banking APIs", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly verifies embedded identities?", options: ["Digital KYC authentication", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes neobank platforms?", options: ["Digital-only banking services", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which structure mainly manages payment authorization?", options: ["Financial API gateways", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes embedded lending products?", options: ["Integrated credit offerings", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects embedded banking systems?", options: ["Strict regulatory compliance", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes financial orchestration layers?", options: ["Coordinate multiple services", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects global fintech platforms?", options: ["Cross-border regulation complexity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — expert DeFi and protocol risk
+
+  { prompt: "What fundamentally distinguishes MEV in blockchain systems?", options: ["Miner extractable value", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which attack mainly exploits flash-loan liquidity?", options: ["Oracle manipulation attacks", "Recursive balancing attacks", "Graph traversal attacks", "Central storage attacks"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes liquidity fragmentation?", options: ["Split trading capital", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly secures Layer-2 scaling?", options: ["Rollup transaction aggregation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes zk-rollup systems?", options: ["Zero-knowledge transaction proofs", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which structure mainly coordinates decentralized derivatives?", options: ["Synthetic asset protocols", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes protocol composability?", options: ["Interconnected smart contracts", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects composable finance?", options: ["Cascading protocol failures", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes decentralized derivatives?", options: ["Blockchain-based financial contracts", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects advanced DeFi ecosystems?", options: ["Systemic smart-contract risks", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Embedded System Design": [
-    { prompt: "What is an embedded system?", options: ["General computer", "Dedicated system", "Software type", "Network protocol"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "Which of the following is typically the core of an embedded system?", options: ["Hard Drive", "Microcontroller or Microprocessor", "Keyboard", "Monitor"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What does RTOS stand for?", options: ["Real-Time Operating System", "Random-Time Operating System", "Run-Time Optimization System", "Read-Through Output System"], answer: 0, difficulty: 1200, timeLimit: 20 },
-    { prompt: "In embedded systems, what is a 'Watchdog Timer'?", options: ["Time clock", "Malfunction detector", "Security alarm", "Power meter"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "Which communication protocol is a synchronous, multi-master, multi-slave, single-ended, serial computer bus?", options: ["UART", "I2C", "Ethernet", "HDMI"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What does SPI stand for in embedded communications?", options: ["Serial Peripheral Interface", "Standard Protocol Internet", "Synchronous Parallel Interface", "System Power Input"], answer: 0, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is the primary difference between a microprocessor and a microcontroller?", options: ["Cost", "Integrated chip", "Slow speed", "No difference"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "In RTOS, what is 'Priority Inversion'?", options: ["Random tasks", "Priority reversal", "Interrupts off", "Sorting algorithm"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'DMA' (Direct Memory Access) used for?", options: ["Data encrypt", "CPU-independent access", "Cooling system", "Wireless comms"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Debouncing' in the context of reading mechanical switches?", options: ["Bouncing switch", "Clean state change", "Voltage boost", "Power save"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — embedded basics
+
+  { prompt: "What fundamentally distinguishes embedded systems?", options: ["Dedicated computing devices", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which component mainly controls embedded hardware?", options: ["Microcontroller processing unit", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes real-time systems?", options: ["Strict timing responses", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly reads external sensors?", options: ["Signal acquisition methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes firmware software?", options: ["Low-level device code", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which device mainly stores embedded programs?", options: ["Flash memory storage", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes standalone controllers?", options: ["Operate independently locally", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects embedded hardware?", options: ["Limited resource availability", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes IoT devices?", options: ["Internet-connected embedded systems", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects battery devices?", options: ["Strict power efficiency", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — controllers and processors
+
+  { prompt: "What fundamentally distinguishes microcontrollers?", options: ["Integrated computing components", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which component mainly executes embedded instructions?", options: ["Central processing unit", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes microprocessors?", options: ["Require external peripherals", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly converts analog signals?", options: ["ADC conversion methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes GPIO pins?", options: ["Programmable digital interfaces", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which memory mainly stores temporary variables?", options: ["RAM working memory", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes clock frequencies?", options: ["Control execution speed", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects processor timing?", options: ["Clock synchronization errors", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes Harvard architectures?", options: ["Separate code memory", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects low-cost controllers?", options: ["Limited processing capability", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — RTOS and scheduling
+
+  { prompt: "What fundamentally distinguishes RTOS systems?", options: ["Deterministic task scheduling", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which mechanism mainly schedules RTOS tasks?", options: ["Priority-based scheduling", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hard real-time systems?", options: ["Strict deadline guarantees", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly switches running tasks?", options: ["Context switching methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes task priorities?", options: ["Control execution order", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which timer mainly triggers periodic execution?", options: ["System tick timer", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes interrupt-driven systems?", options: ["Respond asynchronously quickly", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects multitasking systems?", options: ["Task synchronization conflicts", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes semaphore mechanisms?", options: ["Coordinate shared resources", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects real-time scheduling?", options: ["Missed timing deadlines", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — watchdogs and interrupts
+
+  { prompt: "What fundamentally distinguishes watchdog timers?", options: ["Detect software failures", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which mechanism mainly handles urgent events?", options: ["Interrupt service routines", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hardware interrupts?", options: ["External signal triggers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly restores failed systems?", options: ["Automatic watchdog resets", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes polling methods?", options: ["Repeated status checking", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which signal mainly requests processor attention?", options: ["Interrupt request line", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes nested interrupts?", options: ["Interrupts within handlers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects interrupt systems?", options: ["Excessive interrupt latency", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes interrupt priorities?", options: ["Control handler precedence", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects watchdog configuration?", options: ["False system resets", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — communication protocols
+
+  { prompt: "What fundamentally distinguishes UART communication?", options: ["Asynchronous serial transmission", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which protocol mainly supports multi-device communication?", options: ["I2C serial protocol", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes SPI interfaces?", options: ["High-speed synchronous transfers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly synchronizes serial devices?", options: ["Clock signal coordination", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes CAN bus networks?", options: ["Reliable automotive communication", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which line mainly carries serial data?", options: ["Transmit receive channels", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes synchronous protocols?", options: ["Use shared clocks", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects serial communication?", options: ["Transmission timing mismatches", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bus arbitration?", options: ["Manage shared access", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects embedded networking?", options: ["Signal integrity problems", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — memory and DMA
+
+  { prompt: "What fundamentally distinguishes DMA transfers?", options: ["CPU-independent memory access", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which memory mainly stores boot programs?", options: ["Nonvolatile flash memory", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cache memory?", options: ["Fast temporary storage", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly improves transfer efficiency?", options: ["Direct memory access", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes EEPROM storage?", options: ["Electrically rewritable memory", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which controller mainly manages memory transfers?", options: ["DMA control hardware", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes volatile memory?", options: ["Requires continuous power", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects memory systems?", options: ["Data corruption faults", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes memory-mapped I/O?", options: ["Devices use addresses", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects embedded storage?", options: ["Limited memory capacity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — sensors and interfacing
+
+  { prompt: "What fundamentally distinguishes sensor interfaces?", options: ["Convert physical signals", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which circuit mainly converts analog voltages?", options: ["Analog-to-digital converter", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes PWM outputs?", options: ["Variable pulse widths", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly filters noisy signals?", options: ["Signal conditioning methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes DAC systems?", options: ["Generate analog outputs", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which interface mainly connects displays?", options: ["Peripheral communication buses", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes actuator devices?", options: ["Convert electrical motion", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects sensor systems?", options: ["Environmental signal noise", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes debouncing methods?", options: ["Stabilize switch readings", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects analog interfacing?", options: ["Precision measurement errors", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — advanced RTOS concepts
+
+  { prompt: "What fundamentally distinguishes priority inversion?", options: ["Low tasks blocking", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which mechanism mainly solves priority inversion?", options: ["Priority inheritance protocol", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes mutex synchronization?", options: ["Exclusive resource locking", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly coordinates concurrent tasks?", options: ["Intertask synchronization methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes deadlock conditions?", options: ["Tasks wait indefinitely", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which structure mainly stores RTOS queues?", options: ["Intertask message buffers", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes deterministic execution?", options: ["Predictable timing behavior", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects concurrent systems?", options: ["Race condition conflicts", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes real-time kernels?", options: ["Manage timed scheduling", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects embedded multitasking?", options: ["Timing synchronization complexity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — optimization and low-level systems
+
+  { prompt: "What fundamentally distinguishes low-power design?", options: ["Minimize energy consumption", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which technique mainly reduces processor consumption?", options: ["Dynamic clock scaling", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes bare-metal programming?", options: ["No operating system", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly optimizes embedded timing?", options: ["Instruction-level tuning", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bootloaders?", options: ["Initialize startup execution", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which interface mainly supports debugging hardware?", options: ["JTAG debugging interface", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes sleep modes?", options: ["Reduce inactive power", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects optimized firmware?", options: ["Difficult debugging visibility", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes hardware abstraction layers?", options: ["Simplify device portability", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects low-level optimization?", options: ["Architecture-specific tuning", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — advanced embedded architecture
+
+  { prompt: "What fundamentally distinguishes deterministic latency?", options: ["Predictable response timing", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which architecture mainly supports fault tolerance?", options: ["Redundant embedded systems", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hardware accelerators?", options: ["Specialized processing units", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly validates embedded reliability?", options: ["Hardware-in-loop testing", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes multicore embedded processors?", options: ["Parallel execution capability", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which mechanism mainly protects secure firmware?", options: ["Trusted boot verification", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes edge embedded computing?", options: ["Local real-time processing", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects safety-critical systems?", options: ["Catastrophic failure risks", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes embedded virtualization?", options: ["Multiple isolated environments", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects advanced embedded platforms?", options: ["Balancing reliability performance", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Embedded Systems Design and Programming": [
-    { prompt: "Which programming language is most heavily used for writing embedded firmware?", options: ["Python", "Java", "C / C++", "Ruby"], answer: 2, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What is 'Firmware'?", options: ["Rigid hardware", "Programmed ROM", "Firewall type", "Network cable"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What does an 'ADC' do?", options: ["Add code", "Analog to digital", "Amplify current", "Door control"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What does a 'DAC' do?", options: ["Digital to analog", "Delete code", "Data access", "Audio control"], answer: 0, difficulty: 1300, timeLimit: 20 },
-    { prompt: "In embedded C programming, what keyword is used to tell the compiler that a variable's value may change at any time, typically by an interrupt or hardware register?", options: ["static", "volatile", "const", "extern"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is an 'Interrupt'?", options: ["Syntax error", "Event signal", "Power outage", "Slow loop"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is an ISR?", options: ["Internet router", "Interrupt handler", "Instruction set", "System RAM"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is 'Bit Masking'?", options: ["Hide machine", "Bitwise ops", "Password encrypt", "File compress"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "Which interface relies on TX (Transmit) and RX (Receive) lines for asynchronous serial communication?", options: ["SPI", "I2C", "UART", "USB"], answer: 2, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'JTAG' primarily used for?", options: ["Testing and debugging printed circuit boards and embedded chips", "Powering devices", "Connecting to Wi-Fi", "Storing data"], answer: 0, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — firmware and embedded basics
+
+  { prompt: "What fundamentally distinguishes embedded firmware?", options: ["Low-level device software", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which language mainly powers embedded programming?", options: ["C and C++", "Recursive balancing language", "Graph traversal language", "Central storage language"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes microcontroller programs?", options: ["Direct hardware control", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly compiles embedded code?", options: ["Cross-platform compilation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes embedded applications?", options: ["Dedicated functional tasks", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which memory mainly stores firmware permanently?", options: ["Flash program memory", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes low-level programming?", options: ["Closer hardware interaction", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects embedded software?", options: ["Strict memory limitations", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes embedded debugging?", options: ["Hardware-aware troubleshooting", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects firmware development?", options: ["Hardware dependency complexity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — firmware structure and memory
+
+  { prompt: "What fundamentally distinguishes firmware updates?", options: ["Replace embedded software", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which keyword mainly preserves variable values?", options: ["Static storage keyword", "Recursive balancing keyword", "Graph traversal keyword", "Central storage keyword"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes constant variables?", options: ["Prevent runtime modification", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly initializes embedded hardware?", options: ["Startup boot sequence", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes stack memory?", options: ["Stores function calls", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which memory mainly stores global variables?", options: ["Static data section", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes heap allocation?", options: ["Dynamic runtime memory", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects embedded memory?", options: ["Memory fragmentation risks", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes linker scripts?", options: ["Control memory layout", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects static allocation?", options: ["Limited runtime flexibility", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — ADC, DAC, sensors
+
+  { prompt: "What fundamentally distinguishes ADC hardware?", options: ["Convert analog signals", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which circuit mainly generates analog outputs?", options: ["Digital-to-analog converter", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes sampled signals?", options: ["Discrete measurement intervals", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly measures sensor voltages?", options: ["Analog signal sampling", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes resolution bits?", options: ["Control conversion precision", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which component mainly references ADC voltages?", options: ["Reference voltage source", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes quantization errors?", options: ["Limited conversion precision", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects analog readings?", options: ["Electrical signal noise", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes sensor calibration?", options: ["Improve measurement accuracy", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects precise conversions?", options: ["Voltage stability requirements", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — interrupts and ISRs
+
+  { prompt: "What fundamentally distinguishes hardware interrupts?", options: ["Asynchronous event handling", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which routine mainly handles interrupts?", options: ["Interrupt service routine", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes polling methods?", options: ["Repeated status checking", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly saves processor states?", options: ["Context preservation methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes interrupt latency?", options: ["Delay before response", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which signal mainly triggers external interrupts?", options: ["Hardware event changes", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes nested interrupts?", options: ["Interrupts interrupt handlers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects interrupt systems?", options: ["Excessive service delays", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes interrupt priorities?", options: ["Control handler ordering", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects interrupt-heavy firmware?", options: ["Timing unpredictability problems", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — volatile, registers, low-level C
+
+  { prompt: "What fundamentally distinguishes volatile variables?", options: ["Values change unexpectedly", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which keyword mainly prevents optimization removal?", options: ["Volatile memory keyword", "Recursive balancing keyword", "Graph traversal keyword", "Central storage keyword"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hardware registers?", options: ["Control peripheral operations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly accesses peripherals directly?", options: ["Memory-mapped register access", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes pointer arithmetic?", options: ["Address-based calculations", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which operator mainly dereferences pointers?", options: ["Indirect memory operator", "Recursive balancing operator", "Graph traversal operator", "Central storage operator"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes register-level coding?", options: ["Direct hardware manipulation", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects low-level programming?", options: ["Hard debugging complexity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bitwise operators?", options: ["Manipulate binary values", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects pointer management?", options: ["Invalid memory access", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — serial communication
+
+  { prompt: "What fundamentally distinguishes UART communication?", options: ["Asynchronous serial transfer", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which protocol mainly supports master-slave buses?", options: ["I2C communication protocol", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes SPI communication?", options: ["Fast synchronous transfer", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly frames serial bytes?", options: ["Start-stop synchronization", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes baud rates?", options: ["Transmission speed measurement", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which line mainly carries transmitted UART data?", options: ["Transmit communication channel", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes full-duplex transfers?", options: ["Simultaneous bidirectional communication", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects serial communication?", options: ["Signal timing mismatches", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes communication parity?", options: ["Detect transmission errors", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects embedded buses?", options: ["Electrical interference problems", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — timers and PWM
+
+  { prompt: "What fundamentally distinguishes hardware timers?", options: ["Generate precise delays", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which signal mainly controls PWM outputs?", options: ["Variable duty cycles", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes timer interrupts?", options: ["Periodic event triggering", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly measures elapsed durations?", options: ["Counter register tracking", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes PWM control?", options: ["Average power regulation", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which peripheral mainly generates timed signals?", options: ["Programmable timer hardware", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes capture-compare modules?", options: ["Measure timing events", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects timer precision?", options: ["Clock drift inaccuracies", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes duty cycles?", options: ["Percentage active duration", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects motor PWM control?", options: ["Switching noise interference", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — bit masking and optimization
+
+  { prompt: "What fundamentally distinguishes bit masking?", options: ["Selective bit operations", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which operator mainly shifts binary values?", options: ["Bitwise shift operator", "Recursive balancing operator", "Graph traversal operator", "Central storage operator"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes binary masking?", options: ["Enable specific bits", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly clears selected bits?", options: ["AND-mask operations", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes embedded optimization?", options: ["Improve execution efficiency", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which compiler mainly optimizes machine code?", options: ["Code optimization compiler", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes inline functions?", options: ["Reduce call overhead", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects aggressive optimization?", options: ["Unexpected debugging behavior", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes preprocessor macros?", options: ["Compile-time code expansion", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects bit-level programming?", options: ["Readability maintenance difficulty", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — debugging and testing
+
+  { prompt: "What fundamentally distinguishes JTAG debugging?", options: ["Hardware-level chip access", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which interface mainly programs embedded chips?", options: ["In-circuit programming interface", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hardware breakpoints?", options: ["Pause processor execution", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly traces firmware execution?", options: ["Real-time debugging analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes unit testing frameworks?", options: ["Verify isolated modules", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which signal mainly indicates logic states?", options: ["Digital waveform transitions", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes oscilloscopes?", options: ["Visualize electrical signals", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects embedded testing?", options: ["Hardware reproduction difficulty", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes logic analyzers?", options: ["Capture digital timings", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects firmware validation?", options: ["Complex real-time interactions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — advanced embedded programming
+
+  { prompt: "What fundamentally distinguishes deterministic firmware?", options: ["Predictable execution timing", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which mechanism mainly protects shared resources?", options: ["Mutual exclusion locks", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes race conditions?", options: ["Concurrent access conflicts", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly validates embedded reliability?", options: ["Stress reliability testing", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bootloaders securely?", options: ["Verify firmware authenticity", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which architecture mainly isolates memory regions?", options: ["Memory protection hardware", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hardware abstraction layers?", options: ["Portable device interfaces", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects advanced firmware systems?", options: ["Concurrent synchronization failures", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes fail-safe firmware?", options: ["Recover safely automatically", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects safety-critical programming?", options: ["Strict reliability guarantees", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Engineering Economics & Financial Management": [
-    { prompt: "What is the primary objective of financial management?", options: ["To pay taxes", "To maximize shareholder wealth", "To hire employees", "To write reports"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What is a 'Sunk Cost'?", options: ["Money found in the ocean", "A cost that has already been incurred and cannot be recovered", "A future expected cost", "A variable cost"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What does 'Time Value of Money' imply?", options: ["Money loses value", "Money earns more", "Time is gold", "Banks close"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is 'Depreciation'?", options: ["Value up", "Asset cost spread", "Inflation rate", "Tax fine"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is 'ROI'?", options: ["Return on Investment", "Rate of Inflation", "Risk of Injury", "Revenue on Income"], answer: 0, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What does NPV (Net Present Value) measure?", options: ["Future sales", "Cash in minus out", "Cash size", "Debt amount"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is the 'Internal Rate of Return' (IRR)?", options: ["NPV to zero", "Savings rate", "Inflation rate", "Tax rate"], answer: 0, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is the 'Break-Even Point'?", options: ["When the business closes", "The production level where total revenues equal total expenses", "When profits are maximized", "When loans are paid off"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'Opportunity Cost'?", options: ["Buying cost", "Next best value", "Bank fee", "Marketing cost"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "In capital budgeting, what does the 'Payback Period' indicate?", options: ["Recovery time", "Loan time", "Project duration", "Company age"], answer: 0, difficulty: 1900, timeLimit: 20 }
-  ],
-  "Engineering Economics and Financial Management": [
-    { prompt: "What financial statement shows the financial position of a company at a specific point in time?", options: ["Income Statement", "Cash Flow Statement", "Balance Sheet", "Retained Earnings"], answer: 2, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What are 'Fixed Costs'?", options: ["Costs that change with production volume", "Costs that remain constant regardless of production volume", "Broken costs", "Costs that are always zero"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is the formula for calculating Simple Interest?", options: ["P * (1+r)^t", "P * r * t", "P / (r*t)", "P + r + t"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is 'Compound Interest'?", options: ["Initial interest", "Accumulated interest", "No interest", "Fixed fee"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What does MARR stand for in engineering economics?", options: ["Minimum Acceptable Rate of Return", "Maximum Annual Real Revenue", "Marginal Average Rate of Return", "Minimum Average Revenue Rate"], answer: 0, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is a 'Cash Flow Diagram'?", options: ["River picture", "Cash graph", "Spreadsheet", "Stock ticker"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is the 'Cost of Capital'?", options: ["Real estate", "Expected return", "Machinery cost", "Taxes"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What does the 'Benefit-Cost Ratio' (BCR) indicate?", options: ["If it's > 1, the project delivers positive net value", "If it's < 1, the project delivers positive net value", "It shows the exact profit amount", "It indicates the inflation rate"], answer: 0, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'Working Capital'?", options: ["Total Assets - Total Liabilities", "Current Assets - Current Liabilities", "Fixed Assets + Debt", "Equity + Cash"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Sensitivity Analysis' used for?", options: ["Feelings test", "Variable impact", "Tax return", "Book audit"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
-  "Essentials of Management": [
-    { prompt: "What are the core functions of management?", options: ["Coding, Testing, Deploying", "Planning, Organizing, Leading, Controlling", "Marketing, Sales, HR", "Buying, Selling, Trading"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "Who is known as the father of Scientific Management?", options: ["Henri Fayol", "Frederick Winslow Taylor", "Max Weber", "Elton Mayo"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is the 'Hierarchy of Needs' theory, and who proposed it?", options: ["A triangle of motivation proposed by Abraham Maslow", "A flat structure by Taylor", "A management grid by Blake and Mouton", "Two-factor theory by Herzberg"], answer: 0, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What does 'SWOT' analysis stand for?", options: ["Strengths, Weaknesses, Opportunities, Threats", "Sales, Wealth, Organization, Team", "Strategy, Work, Operation, Time", "System, Workflow, Output, Target"], answer: 0, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is 'Delegation' in management?", options: ["Firing employees", "Assigning responsibility and authority to subordinates", "Micromanaging", "Ignoring tasks"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What does the 'Span of Control' refer to?", options: ["The physical distance between offices", "The number of subordinates a manager can effectively supervise", "The budget a manager controls", "The amount of time in a meeting"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "Which leadership style involves making decisions without consulting team members?", options: ["Democratic", "Laissez-Faire", "Autocratic", "Transformational"], answer: 2, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is 'Matrix Organization'?", options: ["Computer sim", "Dual reports", "Linear chain", "Decentralized"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "According to McGregor, what does 'Theory X' assume?", options: ["Love work", "Dislike work", "Want responsibility", "Self-motivate"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is the 'Hawthorne Effect'?", options: ["Plant growth", "Behavior change", "Lighting trick", "Factory fail"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic finance concepts
+
+  { prompt: "What fundamentally distinguishes financial management?", options: ["Manage organizational money", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which goal mainly drives corporate finance?", options: ["Maximize shareholder wealth", "Recursive balancing profits", "Graph traversal expansion", "Central storage growth"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes business revenue?", options: ["Income from operations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly tracks company spending?", options: ["Expense accounting methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes profit generation?", options: ["Revenue exceeds costs", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which statement mainly reports financial position?", options: ["Balance sheet report", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes liabilities financially?", options: ["Represent owed obligations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects business finance?", options: ["Insufficient cash availability", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes company assets?", options: ["Resources with value", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects startup financing?", options: ["Limited capital access", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — costs and accounting
+
+  { prompt: "What fundamentally distinguishes sunk costs?", options: ["Already unrecoverable expenses", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which cost mainly changes production output?", options: ["Variable operating cost", "Recursive balancing cost", "Graph traversal cost", "Central storage cost"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes fixed expenses?", options: ["Remain relatively constant", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly allocates business expenses?", options: ["Cost accounting methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes overhead costs?", options: ["Indirect operating expenses", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which report mainly summarizes profitability?", options: ["Income statement report", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes depreciation methods?", options: ["Spread asset costs", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects accounting accuracy?", options: ["Incorrect expense allocation", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes operating costs?", options: ["Support daily operations", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects cost estimation?", options: ["Uncertain future expenses", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — time value of money
+
+  { prompt: "What fundamentally distinguishes time value principles?", options: ["Money gains earning potential", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly increases future value?", options: ["Compound interest growth", "Recursive balancing growth", "Graph traversal growth", "Central storage growth"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes present value?", options: ["Current worth today", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly discounts future cash?", options: ["Present value calculation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes compound interest?", options: ["Interest earns interest", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which rate mainly measures borrowing cost?", options: ["Interest percentage rate", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes annuity payments?", options: ["Equal recurring payments", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects long-term investments?", options: ["Inflation reducing value", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes discounting methods?", options: ["Reduce future amounts", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects future forecasting?", options: ["Interest rate uncertainty", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — depreciation and assets
+
+  { prompt: "What fundamentally distinguishes asset depreciation?", options: ["Reduce asset value", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which method mainly spreads equal depreciation?", options: ["Straight-line depreciation method", "Recursive balancing method", "Graph traversal method", "Central storage method"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes salvage value?", options: ["Remaining asset worth", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly records asset decline?", options: ["Depreciation accounting entries", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes book values?", options: ["Asset value recorded", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which expense mainly reflects equipment usage?", options: ["Annual depreciation expense", "Recursive balancing expense", "Graph traversal expense", "Central storage expense"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes accelerated depreciation?", options: ["Higher early expenses", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects asset valuation?", options: ["Incorrect depreciation estimates", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes capital assets?", options: ["Support long-term operations", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects equipment planning?", options: ["Estimating useful lifespan", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — investment evaluation
+
+  { prompt: "What fundamentally distinguishes return on investment?", options: ["Measures investment profitability", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which metric mainly evaluates investment efficiency?", options: ["ROI performance ratio", "Recursive balancing ratio", "Graph traversal ratio", "Central storage ratio"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes capital budgeting?", options: ["Evaluate major investments", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly compares project alternatives?", options: ["Investment appraisal analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes project feasibility?", options: ["Assess practical viability", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly influences investment returns?", options: ["Associated financial risks", "Recursive balancing factor", "Graph traversal factor", "Central storage factor"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes portfolio diversification?", options: ["Spread investment risks", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects investment decisions?", options: ["Market uncertainty exposure", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes capital expenditures?", options: ["Long-term investment spending", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects project valuation?", options: ["Forecasting future returns", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — NPV and cash flow
+
+  { prompt: "What fundamentally distinguishes net present value?", options: ["Discounted cash difference", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly improves project NPV?", options: ["Higher future cashflows", "Recursive balancing cashflows", "Graph traversal cashflows", "Central storage cashflows"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes positive NPV projects?", options: ["Increase organizational value", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates discounted returns?", options: ["Cashflow present valuation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes cash inflows?", options: ["Money entering business", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which rate mainly discounts project cashflows?", options: ["Required return percentage", "Recursive balancing rate", "Graph traversal rate", "Central storage rate"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cash outflows?", options: ["Money leaving business", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects discounted analysis?", options: ["Inaccurate cashflow projections", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes discount rates?", options: ["Reflect investment risk", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects NPV estimation?", options: ["Changing economic conditions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — IRR and advanced returns
+
+  { prompt: "What fundamentally distinguishes internal return rates?", options: ["NPV equals zero", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which metric mainly compares project profitability?", options: ["Internal rate return", "Recursive balancing return", "Graph traversal return", "Central storage return"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes acceptable investments?", options: ["IRR exceeds requirements", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly estimates investment attractiveness?", options: ["Rate-of-return analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes hurdle rates?", options: ["Minimum acceptable returns", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly affects project returns?", options: ["Investment risk levels", "Recursive balancing factor", "Graph traversal factor", "Central storage factor"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes reinvestment assumptions?", options: ["Future earnings reuse", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects IRR calculations?", options: ["Multiple possible solutions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes modified IRR methods?", options: ["Improve reinvestment assumptions", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects return comparisons?", options: ["Different project durations", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — break-even and operations
+
+  { prompt: "What fundamentally distinguishes break-even analysis?", options: ["Revenue equals costs", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which quantity mainly determines break-even output?", options: ["Fixed cost levels", "Recursive balancing levels", "Graph traversal levels", "Central storage levels"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes contribution margins?", options: ["Revenue minus variable", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates operational profitability?", options: ["Cost-volume-profit analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes operating leverage?", options: ["Fixed-cost sensitivity effects", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly shifts break-even points?", options: ["Changes variable costs", "Recursive balancing factor", "Graph traversal factor", "Central storage factor"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes margin safety?", options: ["Sales above breakeven", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects operational planning?", options: ["Demand forecasting uncertainty", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes production efficiency?", options: ["Lower operating costs", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects capacity decisions?", options: ["Balancing demand fluctuations", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — opportunity cost and decision theory
+
+  { prompt: "What fundamentally distinguishes opportunity costs?", options: ["Value of alternatives", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly influences opportunity decisions?", options: ["Best forgone option", "Recursive balancing option", "Graph traversal option", "Central storage option"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes economic tradeoffs?", options: ["Limited resource choices", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly selects optimal alternatives?", options: ["Economic decision analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes marginal analysis?", options: ["Evaluate incremental changes", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly affects economic efficiency?", options: ["Resource allocation quality", "Recursive balancing factor", "Graph traversal factor", "Central storage factor"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes scarce resources?", options: ["Limited available supply", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects strategic investments?", options: ["Competing opportunity losses", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes rational economic choices?", options: ["Maximize expected benefit", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects economic forecasting?", options: ["Unpredictable market behavior", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — advanced capital budgeting
+
+  { prompt: "What fundamentally distinguishes payback periods?", options: ["Investment recovery duration", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which metric mainly evaluates liquidity recovery?", options: ["Project payback analysis", "Recursive balancing analysis", "Graph traversal analysis", "Central storage analysis"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes discounted payback methods?", options: ["Include time value", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly prioritizes capital projects?", options: ["Strategic portfolio budgeting", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes sensitivity analysis?", options: ["Test assumption changes", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which technique mainly models uncertain outcomes?", options: ["Scenario risk analysis", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes capital rationing?", options: ["Limited investment budgets", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects long-term budgeting?", options: ["High forecasting uncertainty", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes engineering economics?", options: ["Economic engineering decisions", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects capital-intensive projects?", options: ["Large financial exposure", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
+ "Essentials of Management": [
+  // 1000 ELO — management basics
+
+  { prompt: "What fundamentally distinguishes management activities?", options: ["Coordinate organizational resources", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which function mainly defines organizational goals?", options: ["Strategic planning process", "Recursive balancing process", "Graph traversal process", "Central storage process"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes organizing functions?", options: ["Arrange work responsibilities", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly guides employee efforts?", options: ["Leadership management practices", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes controlling activities?", options: ["Monitor organizational performance", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which level mainly handles daily supervision?", options: ["Lower-level management", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes effective managers?", options: ["Achieve organizational objectives", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects workplace productivity?", options: ["Poor employee coordination", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes business organizations?", options: ["Operate toward objectives", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects managers initially?", options: ["Balancing multiple responsibilities", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — management theories
+
+  { prompt: "What fundamentally distinguishes scientific management?", options: ["Improve worker efficiency", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which theorist mainly developed scientific management?", options: ["Frederick Taylor principles", "Recursive balancing principles", "Graph traversal principles", "Central storage principles"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Fayol's management theory?", options: ["Administrative management principles", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly improves work methods?", options: ["Time-motion study analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bureaucracy models?", options: ["Formal organizational structures", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which principle mainly emphasizes specialization?", options: ["Division of labor", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes administrative authority?", options: ["Right to command", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affected early industries?", options: ["Low operational efficiency", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes classical management?", options: ["Structured organizational control", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affected factory management?", options: ["Standardizing worker productivity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — motivation theories
+
+  { prompt: "What fundamentally distinguishes Maslow's hierarchy?", options: ["Layered human motivation", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which need mainly appears highest in Maslow's model?", options: ["Self-actualization requirements", "Recursive balancing requirements", "Graph traversal requirements", "Central storage requirements"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes motivational theories?", options: ["Explain employee behavior", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly improves employee morale?", options: ["Workplace motivation strategies", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes Herzberg's hygiene factors?", options: ["Prevent job dissatisfaction", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly increases employee satisfaction?", options: ["Recognition and achievement", "Recursive balancing engine", "Graph traversal matrix", "Central storage table"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes intrinsic motivation?", options: ["Internal personal satisfaction", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly reduces workplace morale?", options: ["Lack of recognition", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes employee engagement?", options: ["Commitment toward workplace", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects workforce motivation?", options: ["Meeting diverse employee needs", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — planning and SWOT
+
+  { prompt: "What fundamentally distinguishes SWOT analysis?", options: ["Evaluate strategic position", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly represents internal advantages?", options: ["Organizational strengths category", "Recursive balancing category", "Graph traversal category", "Central storage category"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes strategic planning?", options: ["Long-term organizational direction", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates business environments?", options: ["Strategic assessment analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes organizational objectives?", options: ["Define expected outcomes", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which element mainly represents external possibilities?", options: ["Market opportunity factors", "Recursive balancing factors", "Graph traversal factors", "Central storage factors"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes operational planning?", options: ["Short-term activity focus", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects strategic planning?", options: ["Uncertain market conditions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes business threats?", options: ["External risk factors", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects organizational strategies?", options: ["Rapid competitive changes", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — delegation and authority
+
+  { prompt: "What fundamentally distinguishes delegation practices?", options: ["Transfer responsibilities downward", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly supports effective delegation?", options: ["Clear authority assignment", "Recursive balancing assignment", "Graph traversal assignment", "Central storage assignment"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes managerial authority?", options: ["Right to direct", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly distributes organizational tasks?", options: ["Delegation management practices", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes accountability structures?", options: ["Responsibility for outcomes", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which relationship mainly links managers and employees?", options: ["Authority responsibility connection", "Recursive balancing connection", "Graph traversal connection", "Central storage connection"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes centralized organizations?", options: ["Decisions held upward", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly reduces delegation effectiveness?", options: ["Lack of employee trust", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes empowerment approaches?", options: ["Increase employee autonomy", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects organizational delegation?", options: ["Balancing control and freedom", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — span of control and structures
+
+  { prompt: "What fundamentally distinguishes span of control?", options: ["Manageable subordinate count", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly narrows managerial supervision?", options: ["Complex employee responsibilities", "Recursive balancing responsibilities", "Graph traversal responsibilities", "Central storage responsibilities"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes tall organizations?", options: ["Many management layers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly coordinates departments?", options: ["Organizational structure management", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes flat organizations?", options: ["Fewer managerial layers", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which structure mainly groups similar activities?", options: ["Functional departmental structure", "Recursive balancing structure", "Graph traversal structure", "Central storage structure"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes departmentalization methods?", options: ["Group organizational activities", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects broad supervision spans?", options: ["Reduced managerial attention", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes chain of command?", options: ["Formal reporting hierarchy", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects organizational structures?", options: ["Maintaining communication efficiency", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — leadership styles
+
+  { prompt: "What fundamentally distinguishes autocratic leadership?", options: ["Leader-centered decision making", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which leadership mainly encourages participation?", options: ["Democratic leadership approach", "Recursive balancing approach", "Graph traversal approach", "Central storage approach"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes laissez-faire leadership?", options: ["Minimal managerial involvement", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly inspires organizational change?", options: ["Transformational leadership practices", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes transactional leadership?", options: ["Reward-performance exchange systems", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which trait mainly supports effective leadership?", options: ["Strong communication abilities", "Recursive balancing abilities", "Graph traversal abilities", "Central storage abilities"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes charismatic leadership?", options: ["Influence through personality", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects leadership effectiveness?", options: ["Poor employee motivation", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes situational leadership?", options: ["Adapt leadership approaches", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects organizational leaders?", options: ["Managing diverse personalities", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — matrix and advanced structures
+
+  { prompt: "What fundamentally distinguishes matrix organizations?", options: ["Dual reporting relationships", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which structure mainly combines functional teams?", options: ["Matrix organizational design", "Recursive balancing design", "Graph traversal design", "Central storage design"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes project-based structures?", options: ["Temporary team organization", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly coordinates cross-functional groups?", options: ["Matrix management systems", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes decentralized structures?", options: ["Distributed decision authority", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves organizational flexibility?", options: ["Adaptive management structures", "Recursive balancing structures", "Graph traversal structures", "Central storage structures"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes network organizations?", options: ["External partnership coordination", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects matrix organizations?", options: ["Conflicting reporting authority", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes team structures?", options: ["Collaborative work emphasis", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects organizational coordination?", options: ["Balancing shared authority", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — McGregor and behavioral management
+
+  { prompt: "What fundamentally distinguishes Theory X assumptions?", options: ["Employees dislike work", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which theory mainly views workers positively?", options: ["Theory Y assumptions", "Recursive balancing assumptions", "Graph traversal assumptions", "Central storage assumptions"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes behavioral management?", options: ["Focus on human relations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly studies workplace behavior?", options: ["Organizational behavior analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes employee participation?", options: ["Involvement in decisions", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly supports Theory Y management?", options: ["Trust in employees", "Recursive balancing employees", "Graph traversal employees", "Central storage employees"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes organizational culture?", options: ["Shared workplace values", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects workplace relationships?", options: ["Poor communication practices", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes human relations approaches?", options: ["Employee satisfaction importance", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects organizational behavior?", options: ["Managing interpersonal conflicts", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — Hawthorne and advanced management behavior
+
+  { prompt: "What fundamentally distinguishes the Hawthorne Effect?", options: ["Behavior changes observed", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which study mainly influenced behavioral management?", options: ["Hawthorne workplace experiments", "Recursive balancing experiments", "Graph traversal experiments", "Central storage experiments"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes organizational change management?", options: ["Guide structured transitions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly resolves workplace disputes?", options: ["Conflict management strategies", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes emotional intelligence?", options: ["Understand emotional responses", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly strengthens organizational commitment?", options: ["Positive workplace culture", "Recursive balancing culture", "Graph traversal culture", "Central storage culture"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes change resistance?", options: ["Opposition toward transitions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects organizational transformations?", options: ["Employee resistance behaviors", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes strategic leadership?", options: ["Guide long-term direction", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects senior management?", options: ["Balancing innovation and stability", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Financial Management": [
-    { prompt: "What is the primary goal of a financial manager in a corporation?", options: ["Maximize profits in the short term", "Minimize risk", "Maximize shareholder wealth (stock price)", "Increase market share"], answer: 2, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What is a 'Bond'?", options: ["Type glue", "Loan instrument", "Ownership share", "Bank account"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is 'Equity'?", options: ["Debt", "Ownership interest in a corporation (e.g., stock)", "A loan from a bank", "Taxes owed"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What does the 'Debt-to-Equity Ratio' measure?", options: ["Profitability", "Financial leverage and risk", "Liquidity", "Employee turnover"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is a 'Dividend'?", options: ["Penalty fee", "Earnings share", "Loan interest", "Tax deduct"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is 'Capital Budgeting'?", options: ["Vacation save", "Big expense eval", "Daily bills", "Staff hire"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What does WACC stand for?", options: ["Weighted Average Cost of Capital", "Worldwide Asset Control Center", "Wealth And Cash Capital", "Working Average Cash Cost"], answer: 0, difficulty: 1600, timeLimit: 20 },
-    { prompt: "In portfolio theory, what is 'Diversification'?", options: ["One basket", "Risk reduce", "Cash only", "Borrow money"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What does the CAPM (Capital Asset Pricing Model) calculate?", options: ["Stock price", "Return risk", "Inflation rate", "Company debt"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Free Cash Flow' (FCF)?", options: ["Giving money", "Cash after costs", "Pre-tax revenue", "Idle cash"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — finance fundamentals
+
+  { prompt: "What fundamentally distinguishes financial management?", options: ["Manage corporate finances", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which goal mainly drives corporate finance?", options: ["Maximize shareholder wealth", "Recursive balancing wealth", "Graph traversal wealth", "Central storage wealth"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes financial assets?", options: ["Represent economic value", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly allocates company funds?", options: ["Financial planning activities", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes business liquidity?", options: ["Ability to pay", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which report mainly summarizes company finances?", options: ["Corporate financial statements", "Recursive balancing statements", "Graph traversal statements", "Central storage statements"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes corporate profitability?", options: ["Generate financial earnings", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects financial stability?", options: ["Insufficient operating cash", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes investment decisions?", options: ["Allocate future capital", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects financial managers?", options: ["Balancing risk and return", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — bonds and debt
+
+  { prompt: "What fundamentally distinguishes corporate bonds?", options: ["Borrowing debt instruments", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which factor mainly determines bond payments?", options: ["Fixed interest coupons", "Recursive balancing coupons", "Graph traversal coupons", "Central storage coupons"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes bond maturity?", options: ["Debt repayment deadline", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly raises borrowed capital?", options: ["Corporate bond issuance", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes government bonds?", options: ["Issued by governments", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which market mainly trades debt securities?", options: ["Bond investment market", "Recursive balancing market", "Graph traversal market", "Central storage market"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes interest payments?", options: ["Compensation for lending", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects bond investors?", options: ["Default repayment risks", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes fixed-income securities?", options: ["Provide regular payments", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects debt financing?", options: ["Managing repayment obligations", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — equity and ownership
+
+  { prompt: "What fundamentally distinguishes corporate equity?", options: ["Ownership in companies", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which instrument mainly represents company ownership?", options: ["Common stock shares", "Recursive balancing shares", "Graph traversal shares", "Central storage shares"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes shareholders?", options: ["Own corporate equity", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly raises ownership capital?", options: ["Public stock issuance", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes stock exchanges?", options: ["Trade company shares", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which right mainly belongs to shareholders?", options: ["Corporate voting rights", "Recursive balancing rights", "Graph traversal rights", "Central storage rights"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes retained earnings?", options: ["Profits kept internally", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects equity investors?", options: ["Fluctuating stock prices", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes preferred shares?", options: ["Priority dividend claims", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects equity financing?", options: ["Diluting ownership control", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — leverage and ratios
+
+  { prompt: "What fundamentally distinguishes financial leverage?", options: ["Use borrowed capital", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which ratio mainly measures leverage risk?", options: ["Debt-equity relationship ratio", "Recursive balancing ratio", "Graph traversal ratio", "Central storage ratio"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes solvency ratios?", options: ["Measure long-term stability", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates company finances?", options: ["Financial ratio analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes current ratios?", options: ["Measure short-term liquidity", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly increases leverage risks?", options: ["Higher debt obligations", "Recursive balancing obligations", "Graph traversal obligations", "Central storage obligations"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes profitability ratios?", options: ["Measure earning performance", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects leveraged companies?", options: ["Large interest expenses", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes return ratios?", options: ["Evaluate investment efficiency", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects debt-heavy firms?", options: ["Maintaining repayment capacity", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — dividends and shareholder returns
+
+  { prompt: "What fundamentally distinguishes corporate dividends?", options: ["Shareholder profit distributions", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which policy mainly determines dividend payments?", options: ["Corporate payout strategy", "Recursive balancing strategy", "Graph traversal strategy", "Central storage strategy"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes dividend yields?", options: ["Dividend return percentage", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly distributes company profits?", options: ["Dividend payment procedures", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes retained profits?", options: ["Reinvested company earnings", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly affects dividend decisions?", options: ["Available corporate earnings", "Recursive balancing earnings", "Graph traversal earnings", "Central storage earnings"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes shareholder returns?", options: ["Profits from investments", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects dividend stability?", options: ["Fluctuating company profits", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes payout ratios?", options: ["Dividend profit proportion", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects dividend policies?", options: ["Balancing growth and payouts", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — capital budgeting
+
+  { prompt: "What fundamentally distinguishes capital budgeting?", options: ["Evaluate major investments", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which method mainly values investment projects?", options: ["Discounted cashflow analysis", "Recursive balancing analysis", "Graph traversal analysis", "Central storage analysis"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes investment appraisals?", options: ["Assess project viability", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly selects profitable projects?", options: ["Capital investment screening", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes project cashflows?", options: ["Expected money movements", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly influences project profitability?", options: ["Future expected returns", "Recursive balancing returns", "Graph traversal returns", "Central storage returns"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes payback evaluations?", options: ["Measure recovery periods", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects investment projects?", options: ["Uncertain future cashflows", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes investment risks?", options: ["Possibility of losses", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects capital allocation?", options: ["Limited investment resources", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — WACC and cost of capital
+
+  { prompt: "What fundamentally distinguishes weighted capital costs?", options: ["Average financing expense", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which measure mainly estimates financing costs?", options: ["Weighted average capital", "Recursive balancing capital", "Graph traversal capital", "Central storage capital"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cost of equity?", options: ["Required shareholder return", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly combines financing sources?", options: ["Capital structure analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes debt financing costs?", options: ["Interest borrowing expenses", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly lowers WACC values?", options: ["Cheaper financing sources", "Recursive balancing sources", "Graph traversal sources", "Central storage sources"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes optimal capital structures?", options: ["Minimize financing costs", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects financing decisions?", options: ["Rising interest rates", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes capital structures?", options: ["Debt-equity financing mix", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects corporate financing?", options: ["Balancing financing risks", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — diversification and portfolio theory
+
+  { prompt: "What fundamentally distinguishes diversification strategies?", options: ["Reduce investment risks", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which method mainly spreads investment exposure?", options: ["Portfolio diversification approach", "Recursive balancing approach", "Graph traversal approach", "Central storage approach"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes portfolio management?", options: ["Manage investment combinations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly balances investment risk?", options: ["Portfolio allocation analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes systematic risks?", options: ["Affect entire markets", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly reduces portfolio volatility?", options: ["Uncorrelated asset holdings", "Recursive balancing holdings", "Graph traversal holdings", "Central storage holdings"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes unsystematic risks?", options: ["Company-specific investment risks", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects diversified portfolios?", options: ["Broad market downturns", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes efficient portfolios?", options: ["Maximum return efficiency", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects portfolio managers?", options: ["Predicting market behavior", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — CAPM and advanced valuation
+
+  { prompt: "What fundamentally distinguishes CAPM analysis?", options: ["Relates risk and return", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly measures market sensitivity?", options: ["Beta risk coefficient", "Recursive balancing coefficient", "Graph traversal coefficient", "Central storage coefficient"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes risk-free returns?", options: ["Returns without uncertainty", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly estimates expected returns?", options: ["Capital asset pricing", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes market portfolios?", options: ["Represent entire markets", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly increases required returns?", options: ["Higher investment risk", "Recursive balancing risk", "Graph traversal risk", "Central storage risk"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes expected returns?", options: ["Forecasted investment profits", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects valuation models?", options: ["Incorrect market assumptions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes security valuation?", options: ["Estimate asset worth", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects investment pricing?", options: ["Changing economic conditions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — free cash flow and advanced finance
+
+  { prompt: "What fundamentally distinguishes free cashflows?", options: ["Cash after expenses", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which measure mainly evaluates available company cash?", options: ["Free cashflow metric", "Recursive balancing metric", "Graph traversal metric", "Central storage metric"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes operational cashflows?", options: ["Cash from operations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly values corporate enterprises?", options: ["Discounted cashflow valuation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes leveraged buyouts?", options: ["Acquisitions using debt", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves free cashflows?", options: ["Higher operational efficiency", "Recursive balancing efficiency", "Graph traversal efficiency", "Central storage efficiency"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes corporate valuation models?", options: ["Estimate business worth", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects free cashflows?", options: ["Large capital expenditures", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes enterprise value?", options: ["Total company valuation", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects advanced valuation?", options: ["Forecasting future cashflows", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Foundation of Computer Vision": [
-    { prompt: "What is the main objective of Computer Vision?", options: ["Build screens", "Understand visuals", "Boost speeds", "Design UI"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "An image is represented in a computer as a grid of:", options: ["Vectors", "Pixels", "Lines", "Nodes"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "In a standard RGB color image, how many channels represent each pixel?", options: ["1", "2", "3", "4"], answer: 2, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is 'Grayscale'?", options: ["Colorful image", "Light intensity", "3D image", "Vector graphic"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What operation uses a small matrix (kernel) applied across an image to perform blurring, sharpening, or edge detection?", options: ["Interpolation", "Convolution", "Concatenation", "Normalization"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "Which popular operator is used for Edge Detection?", options: ["Gaussian", "Sobel", "Median", "ReLU"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What does 'Image Segmentation' involve?", options: ["Cutting photo", "Pixel grouping", "Resizing image", "Format change"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "Which algorithm is highly famous for real-time Object Detection (using bounding boxes)?", options: ["K-Means", "YOLO (You Only Look Once)", "Dijkstra", "RSA"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "In feature extraction, what does SIFT stand for?", options: ["Scale-Invariant Feature Transform", "Simple Image Formatting Tool", "Static Image Feature Test", "Spatial Input Frequency Transform"], answer: 0, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Stereo Vision' used for?", options: ["2D view", "3D depth", "Color fix", "Compression"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic concepts
+
+  { prompt: "What fundamentally distinguishes computer vision?", options: ["Interpret visual information", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which element mainly forms digital images?", options: ["Individual image pixels", "Recursive balancing pixels", "Graph traversal pixels", "Central storage pixels"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes image processing?", options: ["Manipulate visual data", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly captures digital photographs?", options: ["Image sensor recording", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes computer images?", options: ["Stored pixel values", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which format mainly stores photographs efficiently?", options: ["JPEG image format", "Recursive balancing format", "Graph traversal format", "Central storage format"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes visual recognition?", options: ["Identify image content", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects image quality?", options: ["Excessive visual noise", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes image resolution?", options: ["Amount of detail", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects computer vision?", options: ["Interpreting complex scenes", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — pixels and channels
+
+  { prompt: "What fundamentally distinguishes RGB images?", options: ["Three color channels", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which channel mainly represents red intensity?", options: ["Red color component", "Recursive balancing component", "Graph traversal component", "Central storage component"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes grayscale images?", options: ["Single intensity channel", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly converts RGB images?", options: ["Grayscale transformation method", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes image brightness?", options: ["Pixel intensity levels", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which value mainly represents black pixels?", options: ["Zero intensity value", "Recursive balancing value", "Graph traversal value", "Central storage value"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes color depth?", options: ["Bits per pixel", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects low-resolution images?", options: ["Visible pixelation artifacts", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes image channels?", options: ["Separate color information", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects digital imaging?", options: ["Managing large image data", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — image representations
+
+  { prompt: "What fundamentally distinguishes binary images?", options: ["Two pixel values", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which format mainly preserves transparency?", options: ["PNG image format", "Recursive balancing format", "Graph traversal format", "Central storage format"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes vector graphics?", options: ["Shape-based image representation", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly enlarges digital images?", options: ["Image scaling techniques", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes raster graphics?", options: ["Grid-based image storage", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly determines image sharpness?", options: ["Higher pixel density", "Recursive balancing density", "Graph traversal density", "Central storage density"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes image interpolation?", options: ["Estimate missing pixels", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects compressed images?", options: ["Visible compression artifacts", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes image encoding?", options: ["Store visual information", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects image storage?", options: ["Balancing quality and size", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — grayscale and filtering
+
+  { prompt: "What fundamentally distinguishes grayscale processing?", options: ["Analyze intensity variations", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which filter mainly smooths noisy images?", options: ["Gaussian blur filtering", "Recursive balancing filtering", "Graph traversal filtering", "Central storage filtering"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes image filtering?", options: ["Modify pixel neighborhoods", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly sharpens image details?", options: ["High-pass image filtering", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes image contrast?", options: ["Difference in intensities", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly improves image visibility?", options: ["Higher visual contrast", "Recursive balancing contrast", "Graph traversal contrast", "Central storage contrast"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes median filtering?", options: ["Remove salt-noise artifacts", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects low-light images?", options: ["Heavy sensor noise", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes histogram equalization?", options: ["Enhance image contrast", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects image enhancement?", options: ["Preserving natural appearance", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — convolution and kernels
+
+  { prompt: "What fundamentally distinguishes convolution operations?", options: ["Apply moving kernels", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which kernel mainly detects vertical edges?", options: ["Sobel edge operator", "Recursive balancing operator", "Graph traversal operator", "Central storage operator"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes convolution kernels?", options: ["Small transformation matrices", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly detects image boundaries?", options: ["Edge detection filtering", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes sharpening filters?", options: ["Enhance intensity differences", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly controls blur strength?", options: ["Kernel size selection", "Recursive balancing selection", "Graph traversal selection", "Central storage selection"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Laplacian filters?", options: ["Detect rapid intensity changes", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects convolution outputs?", options: ["Boundary edge distortions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes low-pass filters?", options: ["Reduce high-frequency detail", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects convolution processing?", options: ["Computational processing costs", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — edge detection
+
+  { prompt: "What fundamentally distinguishes edge detection?", options: ["Locate intensity boundaries", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which operator mainly computes image gradients?", options: ["Sobel gradient operator", "Recursive balancing operator", "Graph traversal operator", "Central storage operator"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes gradient magnitude?", options: ["Strength of intensity change", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly highlights image contours?", options: ["Edge extraction analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes Canny detection?", options: ["Multi-stage edge extraction", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly improves edge accuracy?", options: ["Noise reduction preprocessing", "Recursive balancing preprocessing", "Graph traversal preprocessing", "Central storage preprocessing"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes image gradients?", options: ["Measure directional intensity change", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects edge detection?", options: ["Noise causing false edges", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes contour extraction?", options: ["Trace object outlines", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects edge algorithms?", options: ["Separating edges from noise", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — segmentation
+
+  { prompt: "What fundamentally distinguishes image segmentation?", options: ["Partition meaningful regions", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which method mainly groups similar pixels?", options: ["Region clustering segmentation", "Recursive balancing segmentation", "Graph traversal segmentation", "Central storage segmentation"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes threshold segmentation?", options: ["Separate intensity ranges", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly isolates image objects?", options: ["Object segmentation analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes semantic segmentation?", options: ["Classify every pixel", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves segmentation quality?", options: ["Clear object boundaries", "Recursive balancing boundaries", "Graph traversal boundaries", "Central storage boundaries"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes instance segmentation?", options: ["Separate individual objects", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects segmentation systems?", options: ["Overlapping visual objects", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes region growing?", options: ["Expand neighboring pixels", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects segmentation accuracy?", options: ["Complex image backgrounds", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — object detection
+
+  { prompt: "What fundamentally distinguishes object detection?", options: ["Locate classified objects", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which algorithm mainly supports realtime detection?", options: ["YOLO detection framework", "Recursive balancing framework", "Graph traversal framework", "Central storage framework"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes bounding boxes?", options: ["Mark object locations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly identifies image categories?", options: ["Visual object classification", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes detection confidence?", options: ["Probability prediction certainty", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves detection accuracy?", options: ["Larger training datasets", "Recursive balancing datasets", "Graph traversal datasets", "Central storage datasets"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes non-maximum suppression?", options: ["Remove duplicate detections", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects detection systems?", options: ["Occluded visual objects", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes realtime detection?", options: ["Fast visual inference", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects object detectors?", options: ["Recognizing small objects", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — feature extraction
+
+  { prompt: "What fundamentally distinguishes feature extraction?", options: ["Detect important patterns", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which method mainly extracts scale-invariant features?", options: ["SIFT feature extraction", "Recursive balancing extraction", "Graph traversal extraction", "Central storage extraction"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes keypoint descriptors?", options: ["Represent local image patterns", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly compares image features?", options: ["Feature matching analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes ORB descriptors?", options: ["Efficient feature matching", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly improves feature robustness?", options: ["Rotation invariance properties", "Recursive balancing properties", "Graph traversal properties", "Central storage properties"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes local descriptors?", options: ["Describe nearby regions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects feature matching?", options: ["Large viewpoint variations", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes feature detectors?", options: ["Locate informative points", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects feature extraction?", options: ["Handling illumination changes", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — stereo vision and depth
+
+  { prompt: "What fundamentally distinguishes stereo vision?", options: ["Estimate scene depth", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which concept mainly supports depth perception?", options: ["Binocular image disparity", "Recursive balancing disparity", "Graph traversal disparity", "Central storage disparity"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes depth estimation?", options: ["Measure object distances", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly reconstructs 3D scenes?", options: ["Stereo correspondence matching", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes disparity maps?", options: ["Store depth differences", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves depth accuracy?", options: ["Precise feature matching", "Recursive balancing matching", "Graph traversal matching", "Central storage matching"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes 3D reconstruction?", options: ["Build spatial geometry", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects stereo systems?", options: ["Textureless image regions", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes epipolar geometry?", options: ["Relates stereo camera views", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects 3D vision?", options: ["Recovering accurate depth", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "High Performance Computing": [
-    { prompt: "What does HPC stand for?", options: ["High Processing Capacity", "High Performance Computing", "Hardware Protocol Control", "Hyper Processor Cache"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What is a 'Supercomputer'?", options: ["Laptop", "High performer", "Quantum PC", "Server farm"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What does 'Parallel Processing' mean?", options: ["Sequential run", "Multi-use", "Double-sided print", "Dual monitors"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is 'Amdahl’s Law'?", options: ["Light speed", "Speedup formula", "Network law", "RAM law"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "In HPC, what are 'Nodes'?", options: ["Points on a graph", "Individual computers connected together to form a cluster", "Code blocks", "Network cables"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What does MPI stand for in parallel programming?", options: ["Message Passing Interface", "Multiple Processor Input", "Memory Processing Instruction", "Main Program Identifier"], answer: 0, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is 'GPU Acceleration'?", options: ["Overclock monitor", "GPU boost", "Blur graphics", "CPU only"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What metric is commonly used to measure supercomputer performance?", options: ["Megabytes", "FLOPS (Floating Point Operations Per Second)", "Pixels", "Hertz"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is OpenMP?", options: ["Media player", "Multi-platform API", "Open OS", "Database system"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "In cluster computing, what does a 'Job Scheduler' (like Slurm) do?", options: ["Schedule meetings", "Manage queues", "Update OS", "Defrag disks"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — HPC basics
+
+  { prompt: "What fundamentally distinguishes high-performance computing?", options: ["Solve massive computations", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which system mainly performs scientific simulations?", options: ["Supercomputer computing systems", "Recursive balancing systems", "Graph traversal systems", "Central storage systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes HPC workloads?", options: ["Require extreme processing", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly speeds scientific calculations?", options: ["Parallel computation methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes computing clusters?", options: ["Connected processing machines", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which field mainly uses HPC systems?", options: ["Scientific research simulations", "Recursive balancing simulations", "Graph traversal simulations", "Central storage simulations"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes computational performance?", options: ["Amount of processing", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects large computations?", options: ["Long execution times", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes supercomputers?", options: ["Extremely powerful processors", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects HPC engineers?", options: ["Managing computational resources", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — supercomputers and clusters
+
+  { prompt: "What fundamentally distinguishes supercomputer architectures?", options: ["Massively parallel hardware", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which component mainly connects cluster machines?", options: ["High-speed network interconnects", "Recursive balancing interconnects", "Graph traversal interconnects", "Central storage interconnects"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes compute clusters?", options: ["Multiple linked computers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly distributes cluster workloads?", options: ["Task scheduling systems", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes distributed systems?", options: ["Operate across machines", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which factor mainly improves cluster performance?", options: ["Faster communication networks", "Recursive balancing networks", "Graph traversal networks", "Central storage networks"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes scalable computing?", options: ["Performance grows efficiently", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects cluster systems?", options: ["Communication overhead delays", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes compute nodes?", options: ["Individual processing systems", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects cluster computing?", options: ["Balancing node workloads", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — parallel processing
+
+  { prompt: "What fundamentally distinguishes parallel processing?", options: ["Execute tasks simultaneously", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which method mainly divides computations?", options: ["Parallel task decomposition", "Recursive balancing decomposition", "Graph traversal decomposition", "Central storage decomposition"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes sequential programs?", options: ["Single execution stream", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly increases throughput?", options: ["Concurrent execution methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes data parallelism?", options: ["Same operation repeated", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly improves parallel speed?", options: ["More processing cores", "Recursive balancing cores", "Graph traversal cores", "Central storage cores"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes task parallelism?", options: ["Different tasks concurrently", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects parallel systems?", options: ["Synchronization bottlenecks", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes multicore processors?", options: ["Contain multiple cores", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects concurrency?", options: ["Coordinating shared resources", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — Amdahl's Law
+
+  { prompt: "What fundamentally distinguishes Amdahl's Law?", options: ["Limits parallel speedup", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly restricts HPC acceleration?", options: ["Sequential code portions", "Recursive balancing portions", "Graph traversal portions", "Central storage portions"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes theoretical speedup?", options: ["Expected performance increase", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly measures scalability limits?", options: ["Parallel performance analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes serial bottlenecks?", options: ["Nonparallel program sections", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly reduces efficiency gains?", options: ["Communication synchronization costs", "Recursive balancing costs", "Graph traversal costs", "Central storage costs"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes parallel efficiency?", options: ["Useful processor utilization", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects scaling performance?", options: ["Increasing coordination overhead", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes strong scaling?", options: ["Fixed workload acceleration", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects scalability models?", options: ["Predicting realistic speedups", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — nodes and clusters
+
+  { prompt: "What fundamentally distinguishes compute nodes?", options: ["Independent processing units", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which component mainly manages cluster resources?", options: ["Cluster management software", "Recursive balancing software", "Graph traversal software", "Central storage software"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes distributed memory systems?", options: ["Separate local memories", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly coordinates cluster communication?", options: ["Inter-node message exchange", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes cluster architectures?", options: ["Linked computing machines", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly improves cluster reliability?", options: ["Redundant compute nodes", "Recursive balancing nodes", "Graph traversal nodes", "Central storage nodes"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes head nodes?", options: ["Control cluster operations", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects distributed clusters?", options: ["Network communication latency", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes shared memory systems?", options: ["Processors access common memory", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects node communication?", options: ["Minimizing transfer delays", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — MPI
+
+  { prompt: "What fundamentally distinguishes MPI programming?", options: ["Message-based communication model", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which interface mainly supports distributed parallelism?", options: ["Message Passing Interface", "Recursive balancing interface", "Graph traversal interface", "Central storage interface"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes MPI processes?", options: ["Independent execution entities", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly exchanges distributed data?", options: ["Interprocess message transfer", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes collective communication?", options: ["Coordinate multiple processes", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly improves MPI scalability?", options: ["Efficient communication patterns", "Recursive balancing patterns", "Graph traversal patterns", "Central storage patterns"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes MPI broadcasts?", options: ["Send data collectively", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects MPI programs?", options: ["Communication synchronization delays", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes distributed parallelism?", options: ["Work shared across nodes", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects MPI development?", options: ["Managing process communication", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — GPU acceleration
+
+  { prompt: "What fundamentally distinguishes GPU acceleration?", options: ["Massively parallel execution", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which processor mainly accelerates matrix operations?", options: ["Graphics processing units", "Recursive balancing units", "Graph traversal units", "Central storage units"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes GPU architectures?", options: ["Thousands of lightweight cores", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly speeds neural training?", options: ["Parallel GPU computation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes CUDA programming?", options: ["NVIDIA parallel framework", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves GPU throughput?", options: ["Large parallel workloads", "Recursive balancing workloads", "Graph traversal workloads", "Central storage workloads"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes accelerator hardware?", options: ["Specialized computation devices", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects GPU systems?", options: ["Memory transfer bottlenecks", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes heterogeneous computing?", options: ["Combine multiple processors", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects GPU optimization?", options: ["Balancing memory access", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — FLOPS and benchmarking
+
+  { prompt: "What fundamentally distinguishes FLOPS metrics?", options: ["Measure floating operations", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which benchmark mainly ranks supercomputers?", options: ["LINPACK performance benchmark", "Recursive balancing benchmark", "Graph traversal benchmark", "Central storage benchmark"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes petascale systems?", options: ["Quadrillion operations performance", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates HPC efficiency?", options: ["Performance benchmarking analysis", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes exascale computing?", options: ["Quintillion operations capability", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves benchmark scores?", options: ["Higher computational throughput", "Recursive balancing throughput", "Graph traversal throughput", "Central storage throughput"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes benchmark suites?", options: ["Measure computing performance", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects performance benchmarks?", options: ["Unrealistic workload patterns", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes throughput metrics?", options: ["Amount of completed work", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects performance measurement?", options: ["Comparing diverse architectures", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — OpenMP and threading
+
+  { prompt: "What fundamentally distinguishes OpenMP programming?", options: ["Shared-memory parallel framework", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which model mainly supports threaded execution?", options: ["OpenMP parallel directives", "Recursive balancing directives", "Graph traversal directives", "Central storage directives"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes multithreading systems?", options: ["Multiple concurrent threads", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly synchronizes shared threads?", options: ["Thread coordination mechanisms", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes critical sections?", options: ["Protected shared resources", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly improves thread efficiency?", options: ["Balanced workload distribution", "Recursive balancing distribution", "Graph traversal distribution", "Central storage distribution"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes thread parallelism?", options: ["Concurrent instruction execution", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects shared-memory systems?", options: ["Thread synchronization overhead", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes race conditions?", options: ["Unsafe concurrent access", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects OpenMP programs?", options: ["Avoiding thread contention", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — schedulers and resource management
+
+  { prompt: "What fundamentally distinguishes job schedulers?", options: ["Manage cluster workloads", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which system mainly allocates compute resources?", options: ["Slurm scheduling software", "Recursive balancing software", "Graph traversal software", "Central storage software"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes workload management?", options: ["Coordinate resource usage", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly queues computation jobs?", options: ["Cluster scheduling management", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes resource allocation?", options: ["Assign computing capacity", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves cluster utilization?", options: ["Efficient scheduling policies", "Recursive balancing policies", "Graph traversal policies", "Central storage policies"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes batch scheduling?", options: ["Queue submitted workloads", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects job schedulers?", options: ["Uneven resource utilization", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes HPC resource managers?", options: ["Coordinate cluster resources", "Compress recursive routing", "Encrypt subnet packets", "Balance graph heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects workload scheduling?", options: ["Balancing fairness and speed", "Heap overflow", "Queue starvation", "Graph imbalance"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Information Security": [
-    { prompt: "What is the practice of protecting information by mitigating information risks?", options: ["Cyber Security", "Information Security (InfoSec)", "Cryptography", "Network Security"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What does the CIA triad stand for in InfoSec?", options: ["Central Intelligence Agency", "Confidentiality, Integrity, Availability", "Control, Identity, Authentication", "Cryptography, Internet, Access"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is a 'Phishing' attack?", options: ["Fishing", "Fake trust", "Database hack", "Server overload"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is the purpose of 'Encryption'?", options: ["Delete data", "Secure data", "Compress files", "Speed networks"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is 'Multi-Factor Authentication' (MFA)?", options: ["Long password", "Two-factor", "Firewall type", "Multi-login"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is 'Social Engineering' in the context of security?", options: ["Social network", "Psychological trick", "Social media analysis", "Malware type"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is a 'Zero-Day Vulnerability'?", options: ["Data destroyer", "Unknown flaw", "Calendar bug", "Easy hack"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "In cryptography, what ensures 'Non-repudiation'?", options: ["Symmetric encryption", "Digital Signatures", "Hashing", "Firewalls"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'RBAC'?", options: ["Role-Based Access Control", "Random Block Authentication Code", "Router Based Action Center", "Risk Based Attack Countermeasure"], answer: 0, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is an 'Intrusion Detection System' (IDS)?", options: ["Door lock", "Malware detector", "Password policy", "Antivirus"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic InfoSec concepts
+
+  { prompt: "What fundamentally distinguishes information security?", options: ["Protect digital information", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which principle mainly protects sensitive data?", options: ["Confidentiality protection principle", "Recursive balancing principle", "Graph traversal principle", "Central routing principle"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes secure systems?", options: ["Prevent unauthorized access", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which threat mainly targets computer systems?", options: ["Malicious software attacks", "Packet balancing attacks", "Recursive traversal attacks", "Heap optimization attacks"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes cybersecurity practices?", options: ["Protect digital infrastructure", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which method mainly secures online accounts?", options: ["Strong password protection", "Recursive balancing protection", "Graph traversal protection", "Central routing protection"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes protected networks?", options: ["Restricted unauthorized access", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly affects digital safety?", options: ["Data breach incidents", "Packet balancing incidents", "Recursive traversal incidents", "Heap optimization incidents"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes secure information?", options: ["Protected against threats", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects organizations?", options: ["Protecting sensitive records", "Packet balancing records", "Recursive traversal records", "Heap optimization records"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — CIA triad
+
+  { prompt: "What fundamentally distinguishes confidentiality?", options: ["Prevent unauthorized disclosure", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which principle mainly ensures accurate data?", options: ["Integrity verification principle", "Recursive balancing principle", "Graph traversal principle", "Central routing principle"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes system availability?", options: ["Access when needed", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly protects data integrity?", options: ["Prevent unauthorized modification", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes CIA principles?", options: ["Core security objectives", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which factor mainly improves data availability?", options: ["Reliable backup systems", "Recursive balancing systems", "Graph traversal systems", "Central routing systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes information integrity?", options: ["Accuracy and consistency", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects confidentiality?", options: ["Unauthorized information exposure", "Packet balancing exposure", "Recursive traversal exposure", "Heap optimization exposure"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes secure availability?", options: ["Reliable authorized access", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects data integrity?", options: ["Preventing unauthorized changes", "Packet balancing changes", "Recursive traversal changes", "Heap optimization changes"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — phishing and attacks
+
+  { prompt: "What fundamentally distinguishes phishing attacks?", options: ["Trick users fraudulently", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which method mainly steals credentials?", options: ["Fraudulent email deception", "Recursive balancing deception", "Graph traversal deception", "Central routing deception"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes social engineering?", options: ["Manipulate human behavior", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly spreads malware?", options: ["Malicious attachment delivery", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes spoofed websites?", options: ["Imitate trusted services", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly increases phishing success?", options: ["User trust exploitation", "Recursive balancing exploitation", "Graph traversal exploitation", "Central routing exploitation"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes malware attacks?", options: ["Damage computer systems", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects online users?", options: ["Credential theft attempts", "Packet balancing attempts", "Recursive traversal attempts", "Heap optimization attempts"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes ransomware attacks?", options: ["Encrypt victim files", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects phishing defense?", options: ["Recognizing fraudulent messages", "Packet balancing messages", "Recursive traversal messages", "Heap optimization messages"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — encryption basics
+
+  { prompt: "What fundamentally distinguishes encryption methods?", options: ["Convert readable data", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly secures transmitted data?", options: ["Cryptographic data protection", "Recursive balancing protection", "Graph traversal protection", "Central routing protection"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes ciphertext?", options: ["Encrypted unreadable information", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which method mainly restores encrypted information?", options: ["Decryption recovery process", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes symmetric encryption?", options: ["Single shared secret", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly improves encryption security?", options: ["Strong cryptographic algorithms", "Recursive balancing algorithms", "Graph traversal algorithms", "Central routing algorithms"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes secure communication?", options: ["Protected transmitted information", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects weak encryption?", options: ["Easy unauthorized decryption", "Packet balancing decryption", "Recursive traversal decryption", "Heap optimization decryption"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes cryptographic keys?", options: ["Control encryption operations", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects encrypted systems?", options: ["Managing secret keys", "Packet balancing keys", "Recursive traversal keys", "Heap optimization keys"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — MFA and authentication
+
+  { prompt: "What fundamentally distinguishes multi-factor authentication?", options: ["Require multiple proofs", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly strengthens account security?", options: ["Additional authentication methods", "Recursive balancing methods", "Graph traversal methods", "Central routing methods"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes biometric authentication?", options: ["Uses physical traits", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly verifies user identity?", options: ["Authentication validation procedures", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes authorization systems?", options: ["Control permitted actions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly reduces account compromise?", options: ["Strong identity verification", "Recursive balancing verification", "Graph traversal verification", "Central routing verification"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes secure authentication?", options: ["Verify legitimate access", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects password-only systems?", options: ["Credential theft vulnerability", "Packet balancing vulnerability", "Recursive traversal vulnerability", "Heap optimization vulnerability"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes one-time passwords?", options: ["Temporary authentication codes", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects identity systems?", options: ["Preventing unauthorized logins", "Packet balancing logins", "Recursive traversal logins", "Heap optimization logins"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — social engineering
+
+  { prompt: "What fundamentally distinguishes social engineering attacks?", options: ["Exploit human psychology", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which tactic mainly manipulates victims emotionally?", options: ["Psychological trust exploitation", "Recursive balancing exploitation", "Graph traversal exploitation", "Central routing exploitation"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes pretexting attacks?", options: ["Fake believable scenarios", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly tricks employees?", options: ["Fraudulent impersonation techniques", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes baiting attacks?", options: ["Lure victims deliberately", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly increases social vulnerabilities?", options: ["Poor security awareness", "Recursive balancing awareness", "Graph traversal awareness", "Central routing awareness"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes tailgating attacks?", options: ["Unauthorized physical entry", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects organizational security?", options: ["Manipulated employee behavior", "Packet balancing behavior", "Recursive traversal behavior", "Heap optimization behavior"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes spear phishing?", options: ["Highly targeted deception", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects social defenses?", options: ["Training human awareness", "Packet balancing awareness", "Recursive traversal awareness", "Heap optimization awareness"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — zero day and vulnerabilities
+
+  { prompt: "What fundamentally distinguishes zero-day vulnerabilities?", options: ["Unknown unpatched flaws", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly threatens software security?", options: ["Undiscovered application weaknesses", "Recursive balancing weaknesses", "Graph traversal weaknesses", "Central routing weaknesses"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes vulnerability exploits?", options: ["Abuse software weaknesses", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly fixes software flaws?", options: ["Security patch deployment", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes exploit kits?", options: ["Automated attack toolsets", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly reduces vulnerability risks?", options: ["Regular security updates", "Recursive balancing updates", "Graph traversal updates", "Central routing updates"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes attack surfaces?", options: ["Potential entry points", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects outdated systems?", options: ["Unpatched security weaknesses", "Packet balancing weaknesses", "Recursive traversal weaknesses", "Heap optimization weaknesses"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes penetration testing?", options: ["Authorized security assessment", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects vulnerability management?", options: ["Prioritizing security patches", "Packet balancing patches", "Recursive traversal patches", "Heap optimization patches"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — digital signatures
+
+  { prompt: "What fundamentally distinguishes digital signatures?", options: ["Verify sender authenticity", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which method mainly ensures non-repudiation?", options: ["Cryptographic digital signatures", "Recursive balancing signatures", "Graph traversal signatures", "Central routing signatures"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes asymmetric cryptography?", options: ["Public-private key pairs", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly validates signed messages?", options: ["Signature verification procedures", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes public keys?", options: ["Shared verification credentials", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly strengthens authentication trust?", options: ["Reliable certificate authorities", "Recursive balancing authorities", "Graph traversal authorities", "Central routing authorities"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes certificate systems?", options: ["Verify digital identities", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects insecure signatures?", options: ["Forgery authentication risks", "Packet balancing risks", "Recursive traversal risks", "Heap optimization risks"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes hashing algorithms?", options: ["Generate fixed digests", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects digital trust?", options: ["Protecting private signing keys", "Packet balancing signing keys", "Recursive traversal signing keys", "Heap optimization signing keys"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — RBAC and access control
+
+  { prompt: "What fundamentally distinguishes role-based access control?", options: ["Permissions assigned through roles", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which model mainly simplifies permission management?", options: ["Role-based authorization systems", "Recursive balancing authorization", "Graph traversal authorization", "Central routing authorization"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes least privilege?", options: ["Minimum required permissions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly restricts sensitive resources?", options: ["Access control enforcement", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes authorization policies?", options: ["Define access permissions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly improves enterprise security?", options: ["Granular permission management", "Recursive balancing management", "Graph traversal management", "Central routing management"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes privileged accounts?", options: ["Elevated system permissions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects access systems?", options: ["Excessive user privileges", "Packet balancing privileges", "Recursive traversal privileges", "Heap optimization privileges"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes access auditing?", options: ["Track authorization activities", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects identity governance?", options: ["Managing role assignments", "Packet balancing assignments", "Recursive traversal assignments", "Heap optimization assignments"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — IDS and monitoring
+
+  { prompt: "What fundamentally distinguishes intrusion detection systems?", options: ["Monitor suspicious activities", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which system mainly detects network threats?", options: ["Intrusion detection platforms", "Recursive balancing platforms", "Graph traversal platforms", "Central routing platforms"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes anomaly detection?", options: ["Identify abnormal behavior", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly analyzes security events?", options: ["Continuous threat monitoring", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes signature-based detection?", options: ["Recognize known attack patterns", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves intrusion visibility?", options: ["Comprehensive log analysis", "Recursive balancing analysis", "Graph traversal analysis", "Central routing analysis"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes SIEM platforms?", options: ["Centralized security monitoring", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects detection systems?", options: ["False positive alerts", "Packet balancing alerts", "Recursive traversal alerts", "Heap optimization alerts"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes incident response?", options: ["Contain security breaches", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects security monitoring?", options: ["Detecting sophisticated attacks", "Packet balancing attacks", "Recursive traversal attacks", "Heap optimization attacks"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Introduction to Artificial Intelligence": [
-    { prompt: "What is Artificial Intelligence?", options: ["Smart robot", "Human simulation", "Programming language", "Fast processor"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What was the 'Turing Test' designed to evaluate?", options: ["CPU Speed", "Human-like Intellect", "AI Memory", "Graphics"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "Which search algorithm guarantees finding the shortest path in an unweighted graph?", options: ["Depth First Search (DFS)", "Breadth First Search (BFS)", "Random Walk", "Hill Climbing"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is an 'Expert System'?", options: ["Human Expert", "AI Decision Maker", "Fast Computer", "Database"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What does the 'A* Search' algorithm use to find the most promising path?", options: ["Cost Only", "Heuristic Cost", "Random Guess", "Depth First"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is 'Machine Learning'?", options: ["Robot Cars", "AI from Data", "New Language", "If-Else"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "In game theory and AI, what algorithm is commonly used for two-player adversarial games like Chess or Tic-Tac-Toe?", options: ["A* Search", "Minimax Algorithm", "K-Means", "Dijkstra's"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What does 'Alpha-Beta Pruning' do in a game tree?", options: ["Add Nodes", "Prune Branches", "Change Rules", "Increase Depth"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'Natural Language Processing' (NLP)?", options: ["English Coding", "Understand Language", "Type Fast", "Code Translate"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is a 'Markov Decision Process' (MDP) used for?", options: ["Sort Lists", "Model Decisions", "Encrypt Data", "Compress Images"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic AI concepts
+
+  { prompt: "What fundamentally distinguishes artificial intelligence?", options: ["Simulate intelligent behavior", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which field mainly develops intelligent machines?", options: ["Artificial intelligence research", "Recursive balancing research", "Graph traversal research", "Central routing research"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes AI systems?", options: ["Perform human-like tasks", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly enables machine reasoning?", options: ["Computational decision making", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes intelligent agents?", options: ["Act toward goals", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which application mainly uses AI systems?", options: ["Virtual assistant software", "Recursive balancing software", "Graph traversal software", "Central routing software"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes automated reasoning?", options: ["Computer-based logical decisions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates AI research?", options: ["Solving complex problems", "Packet balancing problems", "Recursive traversal problems", "Heap optimization problems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes machine intelligence?", options: ["Mimic cognitive abilities", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects AI development?", options: ["Replicating human reasoning", "Packet balancing reasoning", "Recursive traversal reasoning", "Heap optimization reasoning"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — Turing test and intelligent behavior
+
+  { prompt: "What fundamentally distinguishes the Turing Test?", options: ["Measure conversational intelligence", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which goal mainly motivates conversational AI?", options: ["Human-like communication ability", "Recursive balancing ability", "Graph traversal ability", "Central routing ability"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes human-like AI?", options: ["Natural intelligent responses", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates intelligent behavior?", options: ["Interactive response testing", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes conversational agents?", options: ["Interact using language", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which factor mainly improves chatbot realism?", options: ["Natural language understanding", "Recursive balancing understanding", "Graph traversal understanding", "Central routing understanding"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes intelligent dialogue?", options: ["Context-aware communication", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects conversational systems?", options: ["Understanding ambiguous language", "Packet balancing language", "Recursive traversal language", "Heap optimization language"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes AI interaction tests?", options: ["Evaluate intelligent communication", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects language AI?", options: ["Producing meaningful conversations", "Packet balancing conversations", "Recursive traversal conversations", "Heap optimization conversations"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — search algorithms
+
+  { prompt: "What fundamentally distinguishes breadth-first search?", options: ["Explore level by level", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which algorithm mainly guarantees shortest unweighted paths?", options: ["Breadth-first search traversal", "Recursive balancing traversal", "Graph compression traversal", "Central routing traversal"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes depth-first search?", options: ["Explore deeply first", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly explores state spaces?", options: ["Graph search techniques", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes uninformed search?", options: ["No heuristic knowledge", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly improves search efficiency?", options: ["Better traversal strategies", "Recursive balancing strategies", "Graph traversal strategies", "Central routing strategies"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes search trees?", options: ["Represent possible actions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects exhaustive search?", options: ["Large branching factors", "Packet balancing factors", "Recursive traversal factors", "Heap optimization factors"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes graph traversal?", options: ["Systematic node exploration", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects search problems?", options: ["Managing exponential growth", "Packet balancing growth", "Recursive traversal growth", "Heap optimization growth"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — expert systems
+
+  { prompt: "What fundamentally distinguishes expert systems?", options: ["Emulate specialist decisions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which component mainly stores expert knowledge?", options: ["Knowledge base repository", "Recursive balancing repository", "Graph traversal repository", "Central routing repository"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes inference engines?", options: ["Apply logical reasoning", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly derives expert conclusions?", options: ["Rule-based reasoning systems", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes rule-based AI?", options: ["Use explicit rules", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly improves expert systems?", options: ["Accurate domain knowledge", "Recursive balancing knowledge", "Graph traversal knowledge", "Central routing knowledge"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes symbolic AI?", options: ["Represent knowledge explicitly", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects expert systems?", options: ["Capturing human expertise", "Packet balancing expertise", "Recursive traversal expertise", "Heap optimization expertise"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes decision-support systems?", options: ["Assist human reasoning", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects knowledge systems?", options: ["Maintaining accurate rules", "Packet balancing rules", "Recursive traversal rules", "Heap optimization rules"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — A* and heuristics
+
+  { prompt: "What fundamentally distinguishes A* search?", options: ["Uses heuristic guidance", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly improves pathfinding efficiency?", options: ["Heuristic cost estimates", "Recursive balancing estimates", "Graph traversal estimates", "Central routing estimates"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes heuristic functions?", options: ["Estimate remaining costs", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly guides intelligent search?", options: ["Heuristic evaluation methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes informed search?", options: ["Uses domain knowledge", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly improves route selection?", options: ["Accurate heuristic predictions", "Recursive balancing predictions", "Graph traversal predictions", "Central routing predictions"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes optimal pathfinding?", options: ["Find lowest-cost routes", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects heuristic searches?", options: ["Poor estimation accuracy", "Packet balancing accuracy", "Recursive traversal accuracy", "Heap optimization accuracy"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes admissible heuristics?", options: ["Never overestimate costs", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects pathfinding systems?", options: ["Balancing speed and accuracy", "Packet balancing accuracy", "Recursive traversal accuracy", "Heap optimization accuracy"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — machine learning
+
+  { prompt: "What fundamentally distinguishes machine learning?", options: ["Learn patterns automatically", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which approach mainly improves predictive systems?", options: ["Training from datasets", "Recursive balancing datasets", "Graph traversal datasets", "Central routing datasets"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes supervised learning?", options: ["Learn using labels", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly trains AI models?", options: ["Data-driven optimization", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes unsupervised learning?", options: ["Discover hidden structure", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly improves model accuracy?", options: ["High-quality training data", "Recursive balancing data", "Graph traversal data", "Central routing data"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes classification models?", options: ["Predict categorical outputs", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects machine learning?", options: ["Overfitting training data", "Packet balancing data", "Recursive traversal data", "Heap optimization data"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes neural learning?", options: ["Adjust weighted connections", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects predictive AI?", options: ["Generalizing beyond examples", "Packet balancing examples", "Recursive traversal examples", "Heap optimization examples"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — minimax
+
+  { prompt: "What fundamentally distinguishes minimax algorithms?", options: ["Optimize adversarial decisions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which strategy mainly improves game AI?", options: ["Opponent-aware planning methods", "Recursive balancing methods", "Graph traversal methods", "Central routing methods"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes adversarial search?", options: ["Competing decision strategies", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates game moves?", options: ["Game tree exploration", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes turn-based AI?", options: ["Predict opponent actions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves strategic play?", options: ["Better evaluation functions", "Recursive balancing functions", "Graph traversal functions", "Central routing functions"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes game trees?", options: ["Represent possible moves", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects adversarial search?", options: ["Huge branching complexity", "Packet balancing complexity", "Recursive traversal complexity", "Heap optimization complexity"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes utility functions?", options: ["Measure game outcomes", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects game AI?", options: ["Searching enormous possibilities", "Packet balancing possibilities", "Recursive traversal possibilities", "Heap optimization possibilities"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — alpha beta pruning
+
+  { prompt: "What fundamentally distinguishes alpha-beta pruning?", options: ["Skip unnecessary branches", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which technique mainly speeds minimax search?", options: ["Branch pruning optimization", "Recursive balancing optimization", "Graph traversal optimization", "Central routing optimization"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes pruning algorithms?", options: ["Reduce explored states", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly eliminates useless evaluations?", options: ["Search branch pruning", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes efficient game search?", options: ["Avoid redundant exploration", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves pruning performance?", options: ["Better move ordering", "Recursive balancing ordering", "Graph traversal ordering", "Central routing ordering"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes alpha-beta bounds?", options: ["Limit possible outcomes", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects deep game searches?", options: ["Exponential state explosion", "Packet balancing explosion", "Recursive traversal explosion", "Heap optimization explosion"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes pruning efficiency?", options: ["Search fewer nodes", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects strategic AI?", options: ["Managing computational complexity", "Packet balancing complexity", "Recursive traversal complexity", "Heap optimization complexity"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — NLP
+
+  { prompt: "What fundamentally distinguishes natural language processing?", options: ["Understand human language", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which field mainly enables language understanding?", options: ["Computational linguistics systems", "Recursive balancing systems", "Graph traversal systems", "Central routing systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes text classification?", options: ["Categorize language content", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly analyzes language meaning?", options: ["Semantic interpretation methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes speech recognition?", options: ["Convert spoken language", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly improves translation quality?", options: ["Context-aware language models", "Recursive balancing models", "Graph traversal models", "Central routing models"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes language models?", options: ["Predict textual patterns", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects NLP systems?", options: ["Ambiguous human language", "Packet balancing language", "Recursive traversal language", "Heap optimization language"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes sentiment analysis?", options: ["Detect emotional tone", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects language AI?", options: ["Understanding contextual meaning", "Packet balancing meaning", "Recursive traversal meaning", "Heap optimization meaning"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — MDPs
+
+  { prompt: "What fundamentally distinguishes Markov decision processes?", options: ["Model sequential decisions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which framework mainly supports reinforcement learning?", options: ["Markov decision modeling", "Recursive balancing modeling", "Graph traversal modeling", "Central routing modeling"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes probabilistic transitions?", options: ["Future states uncertain", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly optimizes long-term rewards?", options: ["Sequential policy evaluation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes reinforcement learning?", options: ["Learn through rewards", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves policy decisions?", options: ["Accurate reward estimation", "Recursive balancing estimation", "Graph traversal estimation", "Central routing estimation"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes optimal policies?", options: ["Maximize expected rewards", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects reinforcement systems?", options: ["Balancing exploration exploitation", "Packet balancing exploitation", "Recursive traversal exploitation", "Heap optimization exploitation"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes state-action values?", options: ["Estimate future rewards", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects decision models?", options: ["Handling uncertain environments", "Packet balancing environments", "Recursive traversal environments", "Heap optimization environments"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Introduction to Banking, Payments and Capital Markets": [
-    { prompt: "What is the primary function of a commercial bank?", options: ["To sell groceries", "To accept deposits and make loans", "To manufacture money", "To sell stocks"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What does 'ATM' stand for?", options: ["Automated Teller Machine", "Any Time Money", "Auto Transfer Mechanism", "Automated Trading Market"], answer: 0, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is an 'Interest Rate'?", options: ["Tax Fee", "Loan Charge", "Bank Fee", "Vault Money"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is a 'Credit Score'?", options: ["Game Score", "Creditworthiness", "Account Number", "Card Money"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is 'Clearing' in payments?", options: ["Bank Clean", "Update Accounts", "Write Check", "Withdraw Cash"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is the purpose of an 'Investment Bank'?", options: ["Savings Account", "Raise Capital", "Issue Cards", "Print Money"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is a 'Stock Exchange'?", options: ["Animal Market", "Trade Securities", "Central Bank", "Retail Store"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What does SWIFT stand for in international banking?", options: ["Society for Worldwide Interbank Financial Telecommunication", "Swift Wire International Funds Transfer", "System for Wide Inter-bank Financial Transactions", "Secure Worldwide Internet Financial Transfer"], answer: 0, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is an 'IPO'?", options: ["Public Offering", "Payment Order", "Pricing Option", "Obligation"], answer: 0, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Liquidity' in financial markets?", options: ["Water Content", "Asset Trade", "Total Debt", "Inflation Rate"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic banking concepts
+
+  { prompt: "What mainly distinguishes commercial banks?", options: ["Accept deposits safely", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which institution mainly provides customer loans?", options: ["Commercial banking system", "Recursive balancing system", "Graph traversal system", "Central routing system"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes savings accounts?", options: ["Store personal funds", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly supports personal banking?", options: ["Deposits and withdrawals", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes checking accounts?", options: ["Enable daily transactions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which service mainly handles customer money?", options: ["Retail banking operations", "Recursive balancing operations", "Graph traversal operations", "Central routing operations"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes banking systems?", options: ["Manage financial activities", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates banking regulation?", options: ["Protect customer funds", "Packet balancing funds", "Recursive traversal funds", "Heap optimization funds"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes financial institutions?", options: ["Provide money services", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects retail banks?", options: ["Managing customer accounts", "Packet balancing accounts", "Recursive traversal accounts", "Heap optimization accounts"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — ATMs and transactions
+
+  { prompt: "What fundamentally distinguishes ATMs?", options: ["Automated cash access", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which system mainly enables card withdrawals?", options: ["Automated teller networks", "Recursive balancing networks", "Graph traversal networks", "Central routing networks"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes debit cards?", options: ["Direct bank deduction", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly verifies ATM requests?", options: ["Electronic authentication checks", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes PIN authentication?", options: ["Secure identity verification", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which feature mainly improves ATM security?", options: ["Encrypted transaction processing", "Recursive balancing processing", "Graph traversal processing", "Central routing processing"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes electronic banking?", options: ["Digital financial access", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects ATM systems?", options: ["Preventing fraudulent access", "Packet balancing access", "Recursive traversal access", "Heap optimization access"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bank cards?", options: ["Enable digital payments", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects banking networks?", options: ["Handling secure transactions", "Packet balancing transactions", "Recursive traversal transactions", "Heap optimization transactions"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — interest and lending
+
+  { prompt: "What fundamentally distinguishes interest rates?", options: ["Cost of borrowing", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly affects loan repayments?", options: ["Applied borrowing interest", "Recursive balancing interest", "Graph traversal interest", "Central routing interest"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes fixed-rate loans?", options: ["Constant repayment interest", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly supports consumer lending?", options: ["Loan approval evaluation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes borrowing costs?", options: ["Interest-based repayment charges", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which feature mainly improves loan affordability?", options: ["Lower borrowing interest", "Recursive balancing interest", "Graph traversal interest", "Central routing interest"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes compound interest?", options: ["Interest on accumulated amounts", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects borrowers?", options: ["Managing repayment obligations", "Packet balancing obligations", "Recursive traversal obligations", "Heap optimization obligations"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes lending markets?", options: ["Exchange money for interest", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects loan systems?", options: ["Assessing repayment ability", "Packet balancing ability", "Recursive traversal ability", "Heap optimization ability"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — credit scores
+
+  { prompt: "What fundamentally distinguishes credit scores?", options: ["Measure borrowing reliability", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly improves creditworthiness?", options: ["Consistent repayment history", "Recursive balancing history", "Graph traversal history", "Central routing history"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes strong credit profiles?", options: ["Lower lending risk", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates borrowers?", options: ["Credit risk assessment", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes credit reports?", options: ["Track financial behavior", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which feature mainly improves lending approval?", options: ["Higher credit ratings", "Recursive balancing ratings", "Graph traversal ratings", "Central routing ratings"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes credit bureaus?", options: ["Maintain borrower records", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects lending institutions?", options: ["Predicting default probability", "Packet balancing probability", "Recursive traversal probability", "Heap optimization probability"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes credit evaluation?", options: ["Estimate repayment trustworthiness", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects consumer lending?", options: ["Reducing financial risk", "Packet balancing risk", "Recursive traversal risk", "Heap optimization risk"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — payments and clearing
+
+  { prompt: "What fundamentally distinguishes payment clearing?", options: ["Reconcile transaction obligations", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which system mainly supports fund transfers?", options: ["Electronic payment networks", "Recursive balancing networks", "Graph traversal networks", "Central routing networks"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes settlement systems?", options: ["Finalize money transfers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly verifies digital payments?", options: ["Transaction authorization methods", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes payment gateways?", options: ["Process online transactions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which feature mainly improves payment security?", options: ["Encrypted transaction routing", "Recursive balancing routing", "Graph traversal routing", "Central routing routing"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes clearing houses?", options: ["Coordinate payment exchanges", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects payment networks?", options: ["Preventing transaction fraud", "Packet balancing fraud", "Recursive traversal fraud", "Heap optimization fraud"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes digital transactions?", options: ["Electronic value movement", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects payment systems?", options: ["Ensuring transaction reliability", "Packet balancing reliability", "Recursive traversal reliability", "Heap optimization reliability"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — investment banking
+
+  { prompt: "What fundamentally distinguishes investment banks?", options: ["Raise corporate capital", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which activity mainly supports company financing?", options: ["Underwriting security offerings", "Recursive balancing offerings", "Graph traversal offerings", "Central routing offerings"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes underwriting services?", options: ["Manage securities issuance", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly assists corporate expansion?", options: ["Capital raising operations", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes mergers advisory?", options: ["Guide corporate acquisitions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which feature mainly improves fundraising success?", options: ["Strong investor demand", "Recursive balancing demand", "Graph traversal demand", "Central routing demand"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes capital markets?", options: ["Trade financial securities", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects investment banks?", options: ["Managing financial risk", "Packet balancing risk", "Recursive traversal risk", "Heap optimization risk"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes securities offerings?", options: ["Sell ownership instruments", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects capital raising?", options: ["Attracting institutional investors", "Packet balancing investors", "Recursive traversal investors", "Heap optimization investors"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — stock exchanges
+
+  { prompt: "What fundamentally distinguishes stock exchanges?", options: ["Enable securities trading", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which institution mainly matches buyers and sellers?", options: ["Organized trading exchanges", "Recursive balancing exchanges", "Graph traversal exchanges", "Central routing exchanges"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes equity markets?", options: ["Trade ownership shares", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly determines stock prices?", options: ["Supply demand interaction", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes public markets?", options: ["Open investor participation", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which feature mainly improves market efficiency?", options: ["High trading liquidity", "Recursive balancing liquidity", "Graph traversal liquidity", "Central routing liquidity"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes stock brokers?", options: ["Execute market trades", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects securities exchanges?", options: ["Maintaining market fairness", "Packet balancing fairness", "Recursive traversal fairness", "Heap optimization fairness"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes listed companies?", options: ["Trade shares publicly", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects equity markets?", options: ["Managing price volatility", "Packet balancing volatility", "Recursive traversal volatility", "Heap optimization volatility"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — SWIFT and international banking
+
+  { prompt: "What fundamentally distinguishes SWIFT networks?", options: ["Enable global banking communication", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which system mainly supports international transfers?", options: ["Interbank messaging networks", "Recursive balancing networks", "Graph traversal networks", "Central routing networks"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes correspondent banking?", options: ["Cross-border banking partnerships", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly facilitates foreign transfers?", options: ["International payment messaging", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes foreign exchange markets?", options: ["Trade currency values", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which feature mainly improves international payments?", options: ["Standardized banking communication", "Recursive balancing communication", "Graph traversal communication", "Central routing communication"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes global settlements?", options: ["Finalize cross-border transfers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects global banking?", options: ["Managing currency risk", "Packet balancing risk", "Recursive traversal risk", "Heap optimization risk"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes international finance?", options: ["Move capital globally", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects international payments?", options: ["Meeting regulatory standards", "Packet balancing standards", "Recursive traversal standards", "Heap optimization standards"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — IPOs
+
+  { prompt: "What fundamentally distinguishes initial public offerings?", options: ["First public share sale", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly converts private companies?", options: ["Public market listing", "Recursive balancing listing", "Graph traversal listing", "Central routing listing"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes IPO underwriting?", options: ["Manage public issuance", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly determines IPO pricing?", options: ["Investor demand evaluation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes public offerings?", options: ["Raise investor capital", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which feature mainly improves IPO success?", options: ["Strong market confidence", "Recursive balancing confidence", "Graph traversal confidence", "Central routing confidence"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes prospectus documents?", options: ["Disclose investment details", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects public offerings?", options: ["Meeting disclosure requirements", "Packet balancing requirements", "Recursive traversal requirements", "Heap optimization requirements"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes listed securities?", options: ["Trade on exchanges", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects IPO markets?", options: ["Handling investor volatility", "Packet balancing volatility", "Recursive traversal volatility", "Heap optimization volatility"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — liquidity and market structure
+
+  { prompt: "What fundamentally distinguishes market liquidity?", options: ["Trade assets quickly", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves trading liquidity?", options: ["High market participation", "Recursive balancing participation", "Graph traversal participation", "Central routing participation"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes liquid markets?", options: ["Minimal price disruption", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly supports efficient trading?", options: ["Continuous order matching", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bid-ask spreads?", options: ["Difference between prices", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which feature mainly improves market depth?", options: ["Large available orders", "Recursive balancing orders", "Graph traversal orders", "Central routing orders"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes efficient capital markets?", options: ["Rapid information pricing", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects market stability?", options: ["Sudden liquidity shortages", "Packet balancing shortages", "Recursive traversal shortages", "Heap optimization shortages"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes financial liquidity?", options: ["Convert assets rapidly", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects capital markets?", options: ["Maintaining continuous liquidity", "Packet balancing liquidity", "Recursive traversal liquidity", "Heap optimization liquidity"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Introduction to Fintech": [
-    { prompt: "What does 'Fintech' stand for?", options: ["Financial Technology", "Final Technical", "Fine Technology", "Financial Teaching"], answer: 0, difficulty: 1000, timeLimit: 20 },
-    { prompt: "Which of the following is an example of a Fintech application?", options: ["A physical bank vault", "Mobile payment apps like PayPal or Venmo", "A paper ledger", "A cash register"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is 'Cryptocurrency'?", options: ["Hidden money", "A digital or virtual currency that uses cryptography for security", "Foreign physical currency", "A credit card"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What technology underlines most cryptocurrencies?", options: ["Cloud storage", "Blockchain", "SQL Server", "AI"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is a 'Robo-advisor'?", options: ["Talking Robot", "Financial Planner", "ATM Machine", "Bank Teller"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is 'Crowdfunding'?", options: ["Money Sharing", "Project Funding", "Bank Loan", "Money Printing"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What does 'Insurtech' refer to?", options: ["Insurance Tech", "Tech Insurance", "Malware Type", "Bank Insurance"], answer: 0, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is 'Open Banking'?", options: ["No Doors Bank", "Open APIs", "Unlocked Accounts", "24/7 Bank"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What does KYC stand for in Fintech regulations?", options: ["Know Client", "Keep Cash", "Key Yield", "Know Code"], answer: 0, difficulty: 1800, timeLimit: 20 },
-    { prompt: "A smart contract is best described as:", options: ["A discounted legal service", "Self-executing code enforcing agreement terms", "A signed PDF stored online", "A lawyer's document editor"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic fintech concepts
+
+  { prompt: "What fundamentally distinguishes fintech services?", options: ["Technology-driven finance", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which industry mainly combines finance and software?", options: ["Financial technology sector", "Recursive balancing sector", "Graph traversal sector", "Central routing sector"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes digital finance?", options: ["Technology-based banking", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly modernizes financial services?", options: ["Digital payment innovation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes fintech startups?", options: ["Technology-focused financial solutions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which application mainly represents fintech growth?", options: ["Mobile banking platforms", "Recursive balancing platforms", "Graph traversal platforms", "Central routing platforms"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes financial innovation?", options: ["Improved digital services", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates fintech adoption?", options: ["Faster financial access", "Packet balancing access", "Recursive traversal access", "Heap optimization access"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes online finance?", options: ["Internet-based transactions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects fintech firms?", options: ["Building customer trust", "Packet balancing trust", "Recursive traversal trust", "Heap optimization trust"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — payment apps
+
+  { prompt: "What fundamentally distinguishes mobile payment apps?", options: ["Enable digital payments", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which system mainly supports peer payments?", options: ["Digital wallet platforms", "Recursive balancing platforms", "Graph traversal platforms", "Central routing platforms"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cashless transactions?", options: ["Electronic money transfer", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly authorizes mobile payments?", options: ["Secure payment authentication", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes e-wallets?", options: ["Store payment credentials", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which feature mainly improves payment convenience?", options: ["Instant digital transfers", "Recursive balancing transfers", "Graph traversal transfers", "Central routing transfers"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes contactless payments?", options: ["Tap-based transactions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects payment apps?", options: ["Preventing transaction fraud", "Packet balancing fraud", "Recursive traversal fraud", "Heap optimization fraud"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes digital wallets?", options: ["Enable mobile transactions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects payment systems?", options: ["Maintaining transaction security", "Packet balancing security", "Recursive traversal security", "Heap optimization security"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — cryptocurrency basics
+
+  { prompt: "What fundamentally distinguishes cryptocurrencies?", options: ["Digital cryptographic currencies", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which system mainly supports cryptocurrency transfers?", options: ["Decentralized blockchain networks", "Recursive balancing networks", "Graph traversal networks", "Central routing networks"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes digital coins?", options: ["Exist electronically only", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly validates crypto transactions?", options: ["Distributed network consensus", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes decentralized currency?", options: ["No central authority", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which feature mainly improves cryptocurrency security?", options: ["Strong cryptographic verification", "Recursive balancing verification", "Graph traversal verification", "Central routing verification"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes crypto wallets?", options: ["Store digital credentials", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects cryptocurrencies?", options: ["Extreme market volatility", "Packet balancing volatility", "Recursive traversal volatility", "Heap optimization volatility"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes blockchain currencies?", options: ["Operate on distributed ledgers", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects crypto adoption?", options: ["Regulatory uncertainty concerns", "Packet balancing concerns", "Recursive traversal concerns", "Heap optimization concerns"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — blockchain
+
+  { prompt: "What fundamentally distinguishes blockchain technology?", options: ["Distributed immutable ledger", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which feature mainly secures blockchain records?", options: ["Cryptographic block linking", "Recursive balancing linking", "Graph traversal linking", "Central routing linking"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes distributed ledgers?", options: ["Shared synchronized records", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly adds blockchain transactions?", options: ["Consensus-based validation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes immutable records?", options: ["Difficult to alter", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly improves blockchain trust?", options: ["Transparent transaction history", "Recursive balancing history", "Graph traversal history", "Central routing history"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes public blockchains?", options: ["Open network participation", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects blockchain systems?", options: ["High transaction latency", "Packet balancing latency", "Recursive traversal latency", "Heap optimization latency"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes decentralized ledgers?", options: ["No single controller", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects blockchain scalability?", options: ["Handling massive transactions", "Packet balancing transactions", "Recursive traversal transactions", "Heap optimization transactions"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — robo advisors
+
+  { prompt: "What fundamentally distinguishes robo-advisors?", options: ["Automated investment guidance", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which system mainly supports algorithmic investing?", options: ["Automated advisory platforms", "Recursive balancing platforms", "Graph traversal platforms", "Central routing platforms"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes robo-investing?", options: ["Software-driven portfolio management", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly allocates investment portfolios?", options: ["Algorithmic asset management", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes automated finance tools?", options: ["Reduce manual advising", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly improves robo-advisors?", options: ["Data-driven investment analysis", "Recursive balancing analysis", "Graph traversal analysis", "Central routing analysis"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes digital wealth management?", options: ["Automated financial planning", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects robo-advisory systems?", options: ["Managing market volatility", "Packet balancing volatility", "Recursive traversal volatility", "Heap optimization volatility"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes algorithmic portfolios?", options: ["Computer-optimized investments", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects digital advisors?", options: ["Building investor confidence", "Packet balancing confidence", "Recursive traversal confidence", "Heap optimization confidence"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — crowdfunding
+
+  { prompt: "What fundamentally distinguishes crowdfunding platforms?", options: ["Collect public funding", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly supports startup financing?", options: ["Crowd-based fundraising", "Recursive balancing fundraising", "Graph traversal fundraising", "Central routing fundraising"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes peer funding?", options: ["Many small contributors", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which feature mainly improves crowdfunding success?", options: ["Strong campaign visibility", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes equity crowdfunding?", options: ["Investors receive ownership", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly attracts crowdfunding backers?", options: ["Compelling project ideas", "Recursive balancing ideas", "Graph traversal ideas", "Central routing ideas"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes donation crowdfunding?", options: ["Support without returns", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects crowdfunding campaigns?", options: ["Reaching funding targets", "Packet balancing targets", "Recursive traversal targets", "Heap optimization targets"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes online fundraising?", options: ["Internet-based capital collection", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects startup financing?", options: ["Convincing potential investors", "Packet balancing investors", "Recursive traversal investors", "Heap optimization investors"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — insurtech
+
+  { prompt: "What fundamentally distinguishes insurtech solutions?", options: ["Technology-driven insurance services", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which system mainly modernizes insurance operations?", options: ["Digital insurance platforms", "Recursive balancing platforms", "Graph traversal platforms", "Central routing platforms"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes insurtech applications?", options: ["Automated risk management", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly improves claim handling?", options: ["Automated insurance processing", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes digital insurance?", options: ["Technology-enabled policy services", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves insurance efficiency?", options: ["Data-driven risk analysis", "Recursive balancing analysis", "Graph traversal analysis", "Central routing analysis"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes usage-based insurance?", options: ["Pricing from behavior", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects insurance technology?", options: ["Protecting sensitive customer data", "Packet balancing data", "Recursive traversal data", "Heap optimization data"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes automated underwriting?", options: ["Software-based risk evaluation", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects insurtech adoption?", options: ["Meeting strict regulations", "Packet balancing regulations", "Recursive traversal regulations", "Heap optimization regulations"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — open banking
+
+  { prompt: "What fundamentally distinguishes open banking?", options: ["Shared financial data APIs", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which system mainly enables account integration?", options: ["Open banking platforms", "Recursive balancing platforms", "Graph traversal platforms", "Central routing platforms"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes banking APIs?", options: ["Secure data exchange", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly supports fintech connectivity?", options: ["API-driven financial access", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes API banking?", options: ["Third-party service integration", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves financial interoperability?", options: ["Standardized banking interfaces", "Recursive balancing interfaces", "Graph traversal interfaces", "Central routing interfaces"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes financial data sharing?", options: ["Customer-approved information access", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects open banking?", options: ["Maintaining customer privacy", "Packet balancing privacy", "Recursive traversal privacy", "Heap optimization privacy"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes connected banking ecosystems?", options: ["Integrated financial services", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects banking APIs?", options: ["Preventing unauthorized access", "Packet balancing access", "Recursive traversal access", "Heap optimization access"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — KYC and regulation
+
+  { prompt: "What fundamentally distinguishes KYC regulations?", options: ["Verify customer identities", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly prevents financial crime?", options: ["Customer identity verification", "Recursive balancing verification", "Graph traversal verification", "Central routing verification"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes anti-money laundering systems?", options: ["Detect suspicious transactions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly supports fintech compliance?", options: ["Regulatory risk monitoring", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes compliance technology?", options: ["Automate regulatory processes", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly improves fraud prevention?", options: ["Accurate customer screening", "Recursive balancing screening", "Graph traversal screening", "Central routing screening"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes identity verification?", options: ["Confirm customer authenticity", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects financial compliance?", options: ["Meeting regulatory requirements", "Packet balancing requirements", "Recursive traversal requirements", "Heap optimization requirements"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes AML compliance?", options: ["Prevent illegal financial flows", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects fintech regulation?", options: ["Balancing innovation and security", "Packet balancing security", "Recursive traversal security", "Heap optimization security"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — smart contracts
+
+  { prompt: "What fundamentally distinguishes smart contracts?", options: ["Self-executing blockchain agreements", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which technology mainly powers smart contracts?", options: ["Programmable blockchain networks", "Recursive balancing networks", "Graph traversal networks", "Central routing networks"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes decentralized applications?", options: ["Run without intermediaries", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly automates blockchain agreements?", options: ["Code-based contract execution", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes programmable finance?", options: ["Automated digital transactions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves smart contract reliability?", options: ["Secure audited code", "Recursive balancing code", "Graph traversal code", "Central routing code"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes decentralized finance protocols?", options: ["Blockchain-based financial services", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects smart contracts?", options: ["Vulnerabilities in contract code", "Packet balancing code", "Recursive traversal code", "Heap optimization code"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes blockchain automation?", options: ["Execute predefined conditions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects decentralized finance?", options: ["Securing autonomous protocols", "Packet balancing protocols", "Recursive traversal protocols", "Heap optimization protocols"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Machine Learning": [
-    { prompt: "Which of the following is a supervised learning algorithm?", options: ["K-Means", "PCA", "Linear Regression", "Apriori"], answer: 2, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What function is typically used in logistic regression to output probabilities?", options: ["ReLU", "Sigmoid", "Tanh", "Softmax"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What problem does the term 'overfitting' describe?", options: ["Model fails to learn the training data", "Model learns training data too well, failing on unseen data", "Model runs out of memory", "Model trains too slowly"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "Which technique is used to prevent overfitting by adding a penalty to the loss function?", options: ["Cross-validation", "Regularization", "Backpropagation", "Gradient Descent"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What does SVM stand for?", options: ["Simple Vector Machine", "Support Vector Machine", "Standard Virtual Matrix", "Supervised Vector Model"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "In K-Means clustering, what does 'K' represent?", options: ["Number of features", "Number of clusters", "Number of iterations", "Learning rate"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "Which algorithm builds an ensemble of decision trees to improve accuracy?", options: ["Naive Bayes", "K-Nearest Neighbors", "Random Forest", "Logistic Regression"], answer: 2, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What does the gradient represent in Gradient Descent?", options: ["The minimum of the loss function", "The direction of steepest ascent of the loss function", "The learning rate", "The predicted output"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "Which activation function solves the vanishing gradient problem in deep neural networks?", options: ["Sigmoid", "Tanh", "ReLU", "Step Function"], answer: 2, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is the kernel trick in SVM used for?", options: ["Speed Up", "Map Data", "Reduce Vectors", "Reg Model"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — supervised learning basics
+
+  { prompt: "What fundamentally distinguishes supervised learning?", options: ["Learn from labeled data", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which algorithm mainly predicts numeric values?", options: ["Linear regression models", "Recursive balancing models", "Graph traversal models", "Central routing models"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes training datasets?", options: ["Teach predictive patterns", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly improves prediction accuracy?", options: ["Learning from examples", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes classification algorithms?", options: ["Predict category labels", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which model mainly handles continuous outputs?", options: ["Regression-based predictors", "Recursive balancing predictors", "Graph traversal predictors", "Central routing predictors"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes labeled datasets?", options: ["Contain known outputs", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates machine learning?", options: ["Finding hidden patterns", "Packet balancing patterns", "Recursive traversal patterns", "Heap optimization patterns"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes predictive models?", options: ["Estimate future outputs", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects supervised models?", options: ["Generalizing beyond examples", "Packet balancing examples", "Recursive traversal examples", "Heap optimization examples"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — logistic regression and probabilities
+
+  { prompt: "What fundamentally distinguishes logistic regression?", options: ["Predict class probabilities", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which function mainly outputs probabilities?", options: ["Sigmoid activation function", "Recursive balancing function", "Graph traversal function", "Central routing function"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes binary classification?", options: ["Predict two categories", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly converts scores to probabilities?", options: ["Sigmoid transformation method", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes probabilistic models?", options: ["Estimate outcome likelihoods", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which factor mainly improves classification confidence?", options: ["Accurate probability estimation", "Recursive balancing estimation", "Graph traversal estimation", "Central routing estimation"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes logistic classifiers?", options: ["Use probability boundaries", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly affects probabilistic prediction?", options: ["Uncertain class boundaries", "Packet balancing boundaries", "Recursive traversal boundaries", "Heap optimization boundaries"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes sigmoid curves?", options: ["Map values smoothly", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects binary models?", options: ["Separating overlapping classes", "Packet balancing classes", "Recursive traversal classes", "Heap optimization classes"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — overfitting
+
+  { prompt: "What fundamentally distinguishes overfitting problems?", options: ["Poor unseen-data performance", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects complex models?", options: ["Memorizing training examples", "Recursive balancing examples", "Graph traversal examples", "Central routing examples"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes underfitting models?", options: ["Fail to learn patterns", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates model generalization?", options: ["Validation dataset testing", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes generalization ability?", options: ["Perform well broadly", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly increases overfitting risk?", options: ["Excessively complex models", "Recursive balancing models", "Graph traversal models", "Central routing models"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes training accuracy?", options: ["Performance on known data", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects small datasets?", options: ["Higher overfitting tendency", "Packet balancing tendency", "Recursive traversal tendency", "Heap optimization tendency"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes robust models?", options: ["Handle unseen examples", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects predictive systems?", options: ["Balancing bias variance", "Packet balancing variance", "Recursive traversal variance", "Heap optimization variance"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — regularization
+
+  { prompt: "What fundamentally distinguishes regularization methods?", options: ["Reduce model complexity", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which technique mainly prevents overfitting?", options: ["Penalty-based regularization", "Recursive balancing regularization", "Graph traversal regularization", "Central routing regularization"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes L2 regularization?", options: ["Penalize large weights", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly controls model flexibility?", options: ["Adding complexity penalties", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes ridge regression?", options: ["Uses L2 penalties", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly improves model robustness?", options: ["Controlled parameter growth", "Recursive balancing growth", "Graph traversal growth", "Central routing growth"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes sparse models?", options: ["Use fewer features", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects unregularized systems?", options: ["Excessive parameter fitting", "Packet balancing fitting", "Recursive traversal fitting", "Heap optimization fitting"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes penalty functions?", options: ["Constrain model parameters", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects large models?", options: ["Preventing excessive complexity", "Packet balancing complexity", "Recursive traversal complexity", "Heap optimization complexity"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — SVM
+
+  { prompt: "What fundamentally distinguishes support vector machines?", options: ["Maximize classification margins", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which concept mainly improves SVM separation?", options: ["Optimal hyperplane boundaries", "Recursive balancing boundaries", "Graph traversal boundaries", "Central routing boundaries"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes support vectors?", options: ["Boundary-defining training points", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly separates classification groups?", options: ["Maximum-margin optimization", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes hyperplanes?", options: ["Separate feature spaces", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly improves SVM accuracy?", options: ["Well-separated training data", "Recursive balancing data", "Graph traversal data", "Central routing data"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes margin maximization?", options: ["Increase separation distance", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects SVM classifiers?", options: ["Choosing effective kernels", "Packet balancing kernels", "Recursive traversal kernels", "Heap optimization kernels"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes linear separators?", options: ["Split classes directly", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects classification systems?", options: ["Separating overlapping categories", "Packet balancing categories", "Recursive traversal categories", "Heap optimization categories"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — K-Means
+
+  { prompt: "What fundamentally distinguishes K-Means clustering?", options: ["Group similar data", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which value mainly controls cluster count?", options: ["Chosen K parameter", "Recursive balancing parameter", "Graph traversal parameter", "Central routing parameter"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes clustering algorithms?", options: ["Find hidden groups", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly updates cluster centers?", options: ["Centroid recalculation steps", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes unsupervised learning?", options: ["Learn without labels", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly improves clustering quality?", options: ["Well-separated data groups", "Recursive balancing groups", "Graph traversal groups", "Central routing groups"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes centroids?", options: ["Represent cluster centers", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects K-Means systems?", options: ["Choosing optimal clusters", "Packet balancing clusters", "Recursive traversal clusters", "Heap optimization clusters"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes similarity grouping?", options: ["Cluster related patterns", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects unsupervised models?", options: ["Detecting natural structures", "Packet balancing structures", "Recursive traversal structures", "Heap optimization structures"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — Random Forest
+
+  { prompt: "What fundamentally distinguishes random forests?", options: ["Ensemble decision trees", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which technique mainly improves prediction stability?", options: ["Combining multiple trees", "Recursive balancing trees", "Graph traversal trees", "Central routing trees"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes ensemble learning?", options: ["Merge multiple models", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly reduces prediction variance?", options: ["Aggregating tree outputs", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bagging methods?", options: ["Train diverse predictors", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves forest accuracy?", options: ["Diverse independent trees", "Recursive balancing trees", "Graph traversal trees", "Central routing trees"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes tree ensembles?", options: ["Average multiple predictions", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects single decision trees?", options: ["High overfitting tendency", "Packet balancing tendency", "Recursive traversal tendency", "Heap optimization tendency"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bootstrap sampling?", options: ["Randomized training subsets", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects ensemble systems?", options: ["Balancing bias variance", "Packet balancing variance", "Recursive traversal variance", "Heap optimization variance"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — Gradient Descent
+
+  { prompt: "What fundamentally distinguishes gradient descent?", options: ["Optimize loss functions", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which concept mainly guides parameter updates?", options: ["Gradient direction information", "Recursive balancing information", "Graph traversal information", "Central routing information"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes optimization algorithms?", options: ["Minimize prediction error", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly updates model weights?", options: ["Iterative gradient adjustments", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes learning rates?", options: ["Control update sizes", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves convergence speed?", options: ["Appropriate learning parameters", "Recursive balancing parameters", "Graph traversal parameters", "Central routing parameters"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cost functions?", options: ["Measure prediction errors", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects gradient optimization?", options: ["Getting stuck locally", "Packet balancing locally", "Recursive traversal locally", "Heap optimization locally"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes iterative optimization?", options: ["Repeated parameter refinement", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects training systems?", options: ["Finding global minima", "Packet balancing minima", "Recursive traversal minima", "Heap optimization minima"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — ReLU and vanishing gradients
+
+  { prompt: "What fundamentally distinguishes ReLU activation?", options: ["Avoid vanishing gradients", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which function mainly improves deep learning training?", options: ["Rectified linear activation", "Recursive balancing activation", "Graph traversal activation", "Central routing activation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes vanishing gradients?", options: ["Extremely small updates", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly stabilizes neural optimization?", options: ["Efficient gradient propagation", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes deep neural training?", options: ["Adjust layered parameters", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly improves deep network learning?", options: ["Non-saturating activations", "Recursive balancing activations", "Graph traversal activations", "Central routing activations"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes activation functions?", options: ["Introduce neural nonlinearity", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects sigmoid activations?", options: ["Gradient shrinkage problems", "Packet balancing problems", "Recursive traversal problems", "Heap optimization problems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes ReLU networks?", options: ["Train deeper architectures", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects deep learning?", options: ["Maintaining gradient strength", "Packet balancing strength", "Recursive traversal strength", "Heap optimization strength"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — kernel trick
+
+  { prompt: "What fundamentally distinguishes the kernel trick?", options: ["Transform nonlinear data", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which method mainly enables nonlinear SVM classification?", options: ["Kernel-based transformations", "Recursive balancing transformations", "Graph traversal transformations", "Central routing transformations"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes kernel functions?", options: ["Map hidden feature spaces", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly separates complex patterns?", options: ["Higher-dimensional projection", "Packet forwarding", "Heap balancing", "Graph compression"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes nonlinear classification?", options: ["Handle curved boundaries", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves kernel performance?", options: ["Choosing suitable kernels", "Recursive balancing kernels", "Graph traversal kernels", "Central routing kernels"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes feature mappings?", options: ["Transform representation spaces", "Compress recursive packets", "Encrypt routing graphs", "Balance subnet heaps"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects advanced classifiers?", options: ["Separating nonlinear datasets", "Packet balancing datasets", "Recursive traversal datasets", "Heap optimization datasets"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes radial basis kernels?", options: ["Capture nonlinear relations", "Compress routing packets", "Balance recursive heaps", "Optimize rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects kernel systems?", options: ["Balancing flexibility generalization", "Packet balancing generalization", "Recursive traversal generalization", "Heap optimization generalization"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Machine Learning & Deep Learning": [
-    { prompt: "What is the primary difference between Machine Learning and Traditional Programming?", options: ["Use Loops", "Feed Rules", "Use Python", "No Difference"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "In supervised learning, what is necessary that is not needed in unsupervised learning?", options: ["A powerful GPU", "Labeled training data", "A neural network", "More than 1000 data points"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is 'Overfitting'?", options: ["Wear Much", "Learn Noise", "Small Model", "Overheat"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "Which algorithm is a popular ensemble learning method that operates by constructing a multitude of decision trees?", options: ["Linear Regression", "Random Forest", "K-Means", "Naive Bayes"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is a 'Neural Network' loosely inspired by?", options: ["The internet", "The biological neural networks that constitute animal brains", "City traffic grids", "Social networks"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What defines 'Deep Learning' compared to basic Machine Learning?", options: ["Think Deep", "Use Neural", "For Images", "Need Dark"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is the 'Loss Function' (or Cost Function)?", options: ["Delete Data", "Eval Model", "Reduce Mem", "Handle Error"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What algorithm is fundamentally used to train deep neural networks by updating weights?", options: ["Dijkstra's", "Backpropagation", "A* Search", "Apriori"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What type of neural network is typically best suited for image recognition tasks?", options: ["RNN (Recurrent)", "CNN (Convolutional)", "GAN (Generative Adversarial)", "Feedforward"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Transfer Learning'?", options: ["Transfer Files", "Apply Knowledge", "Switch Lang", "Move Cloud"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — ML fundamentals
+
+  { prompt: "What fundamentally distinguishes machine learning systems?", options: ["Learn from data", "Route network packets", "Balance memory heaps", "Compile source files"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which approach mainly replaces fixed programming rules?", options: ["Pattern-based learning", "Recursive routing", "Static balancing", "Manual compilation"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes traditional programming?", options: ["Uses explicit rules", "Uses neural layers", "Uses hidden states", "Uses feature maps"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which system mainly improves through experience?", options: ["Machine learning models", "Recursive routing models", "Static balancing models", "Manual compilation models"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes AI prediction models?", options: ["Find learned patterns", "Route encrypted packets", "Balance recursive heaps", "Compile rendering engines"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly powers machine learning?", options: ["Learning from examples", "Forwarding internet traffic", "Balancing system memory", "Compiling source code"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes adaptive algorithms?", options: ["Improve using data", "Encrypt routing tables", "Balance hardware loads", "Compile binary files"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which field mainly studies predictive systems?", options: ["Machine learning research", "Packet routing research", "Memory balancing research", "Compiler design research"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes learning-based software?", options: ["Adjust from experience", "Route packets faster", "Balance recursive trees", "Compile larger projects"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which capability mainly defines machine learning?", options: ["Automatic pattern discovery", "Recursive packet delivery", "Dynamic memory balancing", "Real-time code compilation"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — supervised vs unsupervised
+
+  { prompt: "What fundamentally distinguishes supervised learning?", options: ["Uses labeled examples", "Uses encrypted packets", "Uses balanced heaps", "Uses recursive stacks"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which requirement mainly separates supervised models?", options: ["Known target outputs", "Advanced GPUs", "Large databases", "Cloud storage"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes unsupervised learning?", options: ["Finds hidden structure", "Routes internet packets", "Balances memory loads", "Compiles binary programs"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which dataset mainly trains supervised systems?", options: ["Labeled training dataset", "Encrypted routing dataset", "Balanced memory dataset", "Compiled binary dataset"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes classification training?", options: ["Predict labeled categories", "Balance recursive heaps", "Encrypt routing paths", "Compile rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly teaches supervised models?", options: ["Comparing predictions labels", "Forwarding internet traffic", "Balancing system memory", "Compiling source code"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes clustering algorithms?", options: ["Group similar samples", "Encrypt recursive packets", "Balance hardware loads", "Compile database engines"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects supervised learning?", options: ["Obtaining labeled datasets", "Routing encrypted traffic", "Balancing server memory", "Compiling massive projects"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes training labels?", options: ["Provide correct outputs", "Balance routing networks", "Compress recursive stacks", "Optimize compiler passes"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which capability mainly defines supervised models?", options: ["Learn input-output mapping", "Manage network routing", "Balance recursive trees", "Compile source instructions"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — overfitting
+
+  { prompt: "What fundamentally distinguishes overfitting problems?", options: ["Memorizes training noise", "Routes duplicate packets", "Balances recursive loops", "Compiles redundant code"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly harms unseen-data accuracy?", options: ["Overfitting training patterns", "Recursive routing patterns", "Balanced memory patterns", "Compiled binary patterns"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes underfitting models?", options: ["Fail learning patterns", "Encrypt routing tables", "Balance server memory", "Compile graphics engines"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates generalization ability?", options: ["Validation dataset testing", "Packet forwarding testing", "Heap balancing testing", "Compiler optimization testing"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes robust predictive models?", options: ["Perform well broadly", "Route traffic efficiently", "Balance recursive heaps", "Compile massive systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly increases overfitting risk?", options: ["Excessive model complexity", "Recursive routing complexity", "Balanced memory complexity", "Compiled binary complexity"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes generalization performance?", options: ["Success on unseen data", "Encrypted routing success", "Recursive balancing success", "Compiler execution success"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly affects small datasets?", options: ["Higher overfitting tendency", "Packet balancing tendency", "Recursive traversal tendency", "Heap optimization tendency"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes training accuracy?", options: ["Performance on learned data", "Performance on routed traffic", "Performance on balanced heaps", "Performance on compiled binaries"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects predictive systems?", options: ["Balancing bias variance", "Balancing routing traffic", "Balancing recursive loads", "Balancing compiler stages"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — Random Forest
+
+  { prompt: "What fundamentally distinguishes random forests?", options: ["Combine many trees", "Combine network routers", "Combine memory heaps", "Combine compiler stages"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which algorithm mainly uses decision tree ensembles?", options: ["Random forest models", "Recursive routing models", "Balanced memory models", "Compiled binary models"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes ensemble learning?", options: ["Merge multiple predictors", "Encrypt routing systems", "Balance recursive heaps", "Compile distributed engines"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly improves prediction stability?", options: ["Aggregating many outputs", "Forwarding internet traffic", "Balancing hardware loads", "Compiling source instructions"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bagging methods?", options: ["Train diverse learners", "Route encrypted packets", "Balance recursive stacks", "Compile graphical engines"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly improves forest accuracy?", options: ["Diverse decision trees", "Recursive balancing trees", "Graph traversal trees", "Central routing trees"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes decision tree ensembles?", options: ["Average multiple predictions", "Encrypt recursive packets", "Balance hardware loads", "Compile binary outputs"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly affects single decision trees?", options: ["High overfitting tendency", "Packet balancing tendency", "Recursive traversal tendency", "Heap optimization tendency"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bootstrap sampling?", options: ["Randomized training subsets", "Encrypted routing subsets", "Balanced recursive subsets", "Compiled binary subsets"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects ensemble systems?", options: ["Balancing accuracy diversity", "Balancing routing traffic", "Balancing recursive heaps", "Balancing compiler stages"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — neural networks
+
+  { prompt: "What fundamentally distinguishes neural networks?", options: ["Layered interconnected neurons", "Recursive routing nodes", "Balanced memory heaps", "Compiled binary engines"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which system mainly inspires neural architectures?", options: ["Biological brain networks", "Internet routing networks", "Recursive file networks", "Distributed storage networks"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes artificial neurons?", options: ["Weighted input processing", "Encrypted packet routing", "Balanced heap sorting", "Compiled graphics rendering"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly powers neural prediction?", options: ["Layered signal propagation", "Internet packet forwarding", "Recursive memory balancing", "Compiler instruction execution"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes neural layers?", options: ["Transform learned features", "Encrypt recursive packets", "Balance routing systems", "Compile distributed engines"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly improves neural learning?", options: ["Adjustable connection weights", "Recursive balancing weights", "Graph traversal weights", "Central routing weights"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes activation functions?", options: ["Introduce nonlinear behavior", "Encrypt recursive packets", "Balance hardware loads", "Compile binary systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly affects shallow networks?", options: ["Limited feature extraction", "Packet balancing extraction", "Recursive routing extraction", "Compiler optimization extraction"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes learned representations?", options: ["Capture abstract features", "Route encrypted traffic", "Balance recursive trees", "Compile graphics pipelines"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects neural systems?", options: ["Learning useful representations", "Routing secure packets", "Balancing recursive stacks", "Compiling efficient binaries"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — deep learning
+
+  { prompt: "What fundamentally distinguishes deep learning?", options: ["Many neural layers", "Many routing paths", "Many recursive heaps", "Many compiler stages"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which architecture mainly defines deep models?", options: ["Multi-layer neural networks", "Recursive routing networks", "Balanced memory networks", "Compiled rendering networks"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes deep architectures?", options: ["Hierarchical feature learning", "Encrypted packet routing", "Balanced heap processing", "Compiled graphics execution"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly improves representation depth?", options: ["Stacking hidden layers", "Forwarding internet packets", "Balancing memory systems", "Compiling source instructions"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes deep neural systems?", options: ["Learn complex abstractions", "Encrypt routing networks", "Balance recursive heaps", "Compile operating kernels"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly enables modern deep learning?", options: ["Large training datasets", "Recursive routing datasets", "Balanced memory datasets", "Compiled binary datasets"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes shallow networks?", options: ["Fewer representation layers", "Compress recursive packets", "Balance hardware loads", "Compile distributed systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly affects deep architectures?", options: ["Higher computational demands", "Packet balancing demands", "Recursive traversal demands", "Heap optimization demands"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes hierarchical learning?", options: ["Build complex features", "Route encrypted packets", "Balance recursive trees", "Compile rendering systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects deep models?", options: ["Training many parameters", "Routing encrypted traffic", "Balancing recursive memory", "Compiling optimized binaries"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — loss functions
+
+  { prompt: "What fundamentally distinguishes loss functions?", options: ["Measure prediction error", "Measure routing speed", "Measure heap balance", "Measure compiler size"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which component mainly guides neural optimization?", options: ["Model error calculation", "Recursive routing calculation", "Balanced memory calculation", "Compiled binary calculation"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cost minimization?", options: ["Reduce prediction mistakes", "Encrypt routing systems", "Balance recursive stacks", "Compile rendering engines"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates model quality?", options: ["Computing loss values", "Forwarding network packets", "Balancing memory systems", "Compiling program instructions"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes optimization objectives?", options: ["Define training targets", "Compress recursive packets", "Balance routing networks", "Compile distributed engines"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves learning accuracy?", options: ["Minimizing objective functions", "Recursive balancing functions", "Graph traversal functions", "Central routing functions"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes regression losses?", options: ["Penalize numeric errors", "Encrypt recursive packets", "Balance hardware loads", "Compile database systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects training optimization?", options: ["Choosing effective losses", "Packet balancing losses", "Recursive traversal losses", "Heap optimization losses"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes objective functions?", options: ["Quantify model performance", "Route encrypted traffic", "Balance recursive trees", "Compile graphical pipelines"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects predictive systems?", options: ["Reducing overall error", "Reducing routing delays", "Reducing recursive depth", "Reducing compile times"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — backpropagation
+
+  { prompt: "What fundamentally distinguishes backpropagation?", options: ["Update neural weights", "Update routing paths", "Update memory heaps", "Update compiler stages"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which algorithm mainly trains deep networks?", options: ["Gradient-based backpropagation", "Recursive routing propagation", "Balanced memory propagation", "Compiled binary propagation"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes gradient calculations?", options: ["Guide parameter updates", "Encrypt recursive packets", "Balance hardware loads", "Compile distributed systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly reduces neural error?", options: ["Iterative weight adjustment", "Forwarding internet traffic", "Balancing memory systems", "Compiling program instructions"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes gradient descent training?", options: ["Optimize network parameters", "Compress recursive packets", "Balance routing networks", "Compile operating engines"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves convergence speed?", options: ["Proper learning rates", "Recursive balancing rates", "Graph traversal rates", "Central routing rates"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes neural optimization?", options: ["Minimize prediction loss", "Encrypt recursive packets", "Balance hardware loads", "Compile rendering systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly affects gradient learning?", options: ["Local optimization traps", "Packet balancing traps", "Recursive traversal traps", "Heap optimization traps"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes iterative learning?", options: ["Repeated parameter refinement", "Route encrypted traffic", "Balance recursive trees", "Compile graphical systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects deep training?", options: ["Efficient gradient propagation", "Efficient packet routing", "Efficient recursive balancing", "Efficient compiler optimization"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — CNNs
+
+  { prompt: "What fundamentally distinguishes convolutional neural networks?", options: ["Learn spatial features", "Route encrypted packets", "Balance recursive heaps", "Compile distributed systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which architecture mainly powers image recognition?", options: ["Convolutional neural networks", "Recursive routing networks", "Balanced memory networks", "Compiled rendering networks"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes convolution operations?", options: ["Extract local patterns", "Encrypt recursive packets", "Balance hardware loads", "Compile binary engines"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly detects visual features?", options: ["Sliding convolution kernels", "Forwarding internet packets", "Balancing memory systems", "Compiling source instructions"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes feature maps?", options: ["Capture visual patterns", "Compress recursive packets", "Balance routing systems", "Compile operating engines"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly improves CNN accuracy?", options: ["Hierarchical feature extraction", "Recursive balancing extraction", "Graph traversal extraction", "Central routing extraction"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes pooling layers?", options: ["Reduce spatial dimensions", "Encrypt recursive packets", "Balance hardware loads", "Compile database systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly affects image classifiers?", options: ["Capturing translation patterns", "Packet balancing patterns", "Recursive traversal patterns", "Heap optimization patterns"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes CNN filters?", options: ["Detect specific features", "Route encrypted traffic", "Balance recursive trees", "Compile rendering pipelines"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects visual learning?", options: ["Recognizing spatial structure", "Recognizing routing delays", "Recognizing recursive depth", "Recognizing compiler states"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — transfer learning
+
+  { prompt: "What fundamentally distinguishes transfer learning?", options: ["Reuse pretrained knowledge", "Reuse routing tables", "Reuse memory heaps", "Reuse compiler stages"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which technique mainly speeds deep learning training?", options: ["Applying pretrained models", "Recursive routing models", "Balanced memory models", "Compiled binary models"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes pretrained networks?", options: ["Already learned features", "Encrypt recursive packets", "Balance hardware loads", "Compile rendering engines"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly adapts existing neural knowledge?", options: ["Fine-tuning trained models", "Forwarding internet traffic", "Balancing memory systems", "Compiling source instructions"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes fine-tuning methods?", options: ["Adjust pretrained parameters", "Compress recursive packets", "Balance routing systems", "Compile distributed engines"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly improves transfer performance?", options: ["Relevant source training", "Recursive balancing training", "Graph traversal training", "Central routing training"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes knowledge transfer?", options: ["Reuse learned representations", "Encrypt recursive packets", "Balance hardware loads", "Compile binary systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates transfer learning?", options: ["Limited labeled datasets", "Packet balancing datasets", "Recursive traversal datasets", "Heap optimization datasets"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes pretrained feature extractors?", options: ["Capture reusable patterns", "Route encrypted traffic", "Balance recursive trees", "Compile graphical systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects transfer systems?", options: ["Matching related domains", "Matching routing delays", "Matching recursive stacks", "Matching compiler targets"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Mathematical Foundations for Data Science-III": [
-    { prompt: "What is a 'Vector Space'?", options: ["Outer Space", "Add Vectors", "3D Coord", "Matrix Math"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What is the dot product of two orthogonal vectors?", options: ["1", "Their magnitudes multiplied", "0", "Infinity"], answer: 2, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What does Singular Value Decomposition (SVD) do?", options: ["Solve ODE", "Factor Matrix", "Integrate Func", "Find Roots"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is a 'Random Variable'?", options: ["A variable in code", "A variable whose values depend on outcomes of a random phenomenon", "A syntax error", "A constant"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is the 'Expected Value' of a discrete random variable?", options: ["The most likely value", "The probability-weighted average of all possible values", "The highest value", "The lowest value"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What does the Central Limit Theorem state?", options: ["All Limits", "Normal Dist", "All Normal", "Limits Zero"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is 'Gradient Descent'?", options: ["Fall Down", "Find Min", "Sort Data", "Matrix Op"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "In optimization, what is a 'Convex Function'?", options: ["Wave Shape", "One Min", "Random Func", "Log Func"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'Bayes' Theorem' used for?", options: ["Calc Int", "Cond Prob", "Matrix Mult", "Find Eigen"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is a 'Markov Chain'?", options: ["Phys Chain", "Stoch Model", "Block Chain", "Sort Alg"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — vector basics
+
+  { prompt: "What fundamentally distinguishes a vector space?", options: ["Supports vector operations", "Stores routing packets", "Balances recursive heaps", "Compiles binary files"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which operation mainly combines vectors?", options: ["Vector addition rules", "Recursive routing rules", "Heap balancing rules", "Compiler optimization rules"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes scalar multiplication?", options: ["Scale vector magnitude", "Encrypt routing packets", "Balance memory systems", "Compile rendering engines"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which concept mainly defines linear spaces?", options: ["Closed vector operations", "Closed routing operations", "Closed balancing operations", "Closed compiler operations"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes basis vectors?", options: ["Generate entire space", "Route encrypted packets", "Balance recursive heaps", "Compile operating systems"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which property mainly defines vector addition?", options: ["Combine directional quantities", "Forward network traffic", "Balance recursive trees", "Compile graphics pipelines"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes linear combinations?", options: ["Weighted vector sums", "Encrypted packet sums", "Balanced memory sums", "Compiled binary sums"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which structure mainly models multidimensional data?", options: ["Mathematical vector spaces", "Recursive routing spaces", "Balanced memory spaces", "Compiler optimization spaces"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes coordinate systems?", options: ["Represent vector positions", "Represent routing paths", "Represent memory heaps", "Represent compiler stages"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which capability mainly defines vectors?", options: ["Magnitude and direction", "Encryption and routing", "Balancing and sorting", "Compiling and linking"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — orthogonality and dot products
+
+  { prompt: "What fundamentally distinguishes orthogonal vectors?", options: ["Perpendicular vector directions", "Recursive routing directions", "Balanced memory directions", "Compiled binary directions"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which value mainly defines orthogonality?", options: ["Zero dot product", "Zero routing packets", "Zero balanced heaps", "Zero compiler stages"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the dot product?", options: ["Measures vector similarity", "Encrypts routing traffic", "Balances recursive stacks", "Compiles rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which operation mainly projects one vector?", options: ["Using dot products", "Using routing tables", "Using memory heaps", "Using compiler passes"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes perpendicular vectors?", options: ["No directional overlap", "No packet overlap", "No heap overlap", "No compiler overlap"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which concept mainly measures angular relation?", options: ["Vector dot products", "Recursive routing products", "Balanced memory products", "Compiled binary products"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cosine similarity?", options: ["Angle-based comparison", "Packet-based comparison", "Heap-based comparison", "Compiler-based comparison"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which property mainly defines orthonormal bases?", options: ["Unit perpendicular vectors", "Encrypted routing vectors", "Balanced recursive vectors", "Compiled binary vectors"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes vector projections?", options: ["Measure directional contribution", "Measure routing efficiency", "Measure balancing speed", "Measure compiler accuracy"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly motivates orthogonality?", options: ["Reducing feature redundancy", "Reducing routing delays", "Reducing heap growth", "Reducing compile times"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — SVD
+
+  { prompt: "What fundamentally distinguishes singular value decomposition?", options: ["Factorize complex matrices", "Route encrypted packets", "Balance recursive heaps", "Compile operating systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which technique mainly reduces matrix dimensions?", options: ["Singular value decomposition", "Recursive routing decomposition", "Balanced memory decomposition", "Compiled binary decomposition"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes matrix factorization?", options: ["Break matrices systematically", "Encrypt recursive packets", "Balance hardware loads", "Compile rendering engines"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly compresses high-dimensional data?", options: ["Low-rank approximation methods", "Internet packet forwarding", "Recursive memory balancing", "Compiler instruction optimization"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes singular values?", options: ["Measure matrix importance", "Measure routing traffic", "Measure balancing loads", "Measure compiler stages"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly improves dimensional reduction?", options: ["Capturing dominant components", "Capturing routing packets", "Capturing recursive heaps", "Capturing compiler outputs"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes reduced representations?", options: ["Preserve useful structure", "Encrypt recursive traffic", "Balance hardware systems", "Compile distributed engines"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates SVD usage?", options: ["Handling large datasets", "Handling routing delays", "Handling recursive stacks", "Handling compiler warnings"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes rank approximation?", options: ["Simplify matrix structure", "Simplify routing structure", "Simplify memory structure", "Simplify compiler structure"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects matrix analysis?", options: ["Extracting hidden patterns", "Extracting routing paths", "Extracting balancing trees", "Extracting compiler stages"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — random variables
+
+  { prompt: "What fundamentally distinguishes random variables?", options: ["Map outcomes numerically", "Route encrypted packets", "Balance recursive heaps", "Compile rendering engines"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which concept mainly models uncertain outcomes?", options: ["Probability random variables", "Recursive routing variables", "Balanced memory variables", "Compiled binary variables"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes discrete variables?", options: ["Countable possible values", "Encrypted routing values", "Balanced memory values", "Compiled rendering values"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly assigns probabilities?", options: ["Probability distribution modeling", "Internet packet forwarding", "Recursive heap balancing", "Compiler instruction execution"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes continuous variables?", options: ["Infinite possible values", "Infinite routing paths", "Infinite recursive trees", "Infinite compiler stages"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly defines probability distributions?", options: ["Outcome likelihood values", "Recursive balancing values", "Graph traversal values", "Central routing values"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes probabilistic models?", options: ["Represent uncertainty mathematically", "Encrypt recursive packets", "Balance hardware systems", "Compile operating kernels"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates random modeling?", options: ["Handling uncertain events", "Handling routing delays", "Handling recursive depth", "Handling compiler failures"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes stochastic variables?", options: ["Depend on randomness", "Depend on routing", "Depend on balancing", "Depend on compilation"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects probability analysis?", options: ["Quantifying uncertain outcomes", "Quantifying routing traffic", "Quantifying recursive stacks", "Quantifying compiler stages"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — expected value
+
+  { prompt: "What fundamentally distinguishes expected value?", options: ["Probability-weighted average", "Routing-weighted average", "Heap-weighted average", "Compiler-weighted average"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which concept mainly measures average outcomes?", options: ["Mathematical expectation values", "Recursive routing values", "Balanced memory values", "Compiled binary values"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes statistical expectation?", options: ["Long-run average behavior", "Encrypted routing behavior", "Balanced heap behavior", "Compiled rendering behavior"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly calculates expected returns?", options: ["Weighting probability outcomes", "Forwarding internet traffic", "Balancing recursive trees", "Compiling distributed engines"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes mean estimation?", options: ["Summarize random behavior", "Summarize routing traffic", "Summarize balancing loads", "Summarize compiler stages"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly influences expected value?", options: ["Probability distribution weights", "Recursive balancing weights", "Graph traversal weights", "Central routing weights"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes weighted averages?", options: ["Combine outcomes probabilistically", "Encrypt recursive packets", "Balance hardware systems", "Compile operating systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates expectation analysis?", options: ["Predicting average behavior", "Predicting routing delays", "Predicting recursive growth", "Predicting compiler times"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes expected outcomes?", options: ["Represent central tendency", "Represent routing capacity", "Represent balancing depth", "Represent compiler performance"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects probabilistic prediction?", options: ["Estimating future averages", "Estimating routing traffic", "Estimating recursive depth", "Estimating compiler states"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — CLT
+
+  { prompt: "What fundamentally distinguishes the central limit theorem?", options: ["Sample means normalize", "Packets normalize automatically", "Heaps normalize recursively", "Compilers normalize binaries"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which concept mainly explains normal distributions?", options: ["Central limit behavior", "Recursive routing behavior", "Balanced memory behavior", "Compiled rendering behavior"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes large sample averages?", options: ["Approach normal distributions", "Encrypt recursive packets", "Balance hardware systems", "Compile operating kernels"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly stabilizes sampling behavior?", options: ["Increasing sample sizes", "Forwarding internet packets", "Balancing recursive trees", "Compiling distributed systems"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes sampling distributions?", options: ["Describe estimator variability", "Describe routing variability", "Describe balancing variability", "Describe compiler variability"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly improves statistical approximation?", options: ["Larger independent samples", "Recursive balancing samples", "Graph traversal samples", "Central routing samples"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Gaussian approximations?", options: ["Model average behavior", "Encrypt recursive packets", "Balance hardware systems", "Compile rendering engines"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates CLT applications?", options: ["Handling unknown distributions", "Handling routing delays", "Handling recursive depth", "Handling compiler failures"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes statistical convergence?", options: ["Stabilize repeated averages", "Stabilize routing traffic", "Stabilize recursive heaps", "Stabilize compiler outputs"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects probability estimation?", options: ["Approximating complex distributions", "Approximating routing systems", "Approximating balancing loads", "Approximating compiler stages"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — gradient descent
+
+  { prompt: "What fundamentally distinguishes gradient descent?", options: ["Minimize objective functions", "Route encrypted packets", "Balance recursive heaps", "Compile distributed systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which algorithm mainly optimizes machine learning models?", options: ["Gradient descent methods", "Recursive routing methods", "Balanced memory methods", "Compiled binary methods"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes optimization gradients?", options: ["Guide parameter updates", "Encrypt recursive packets", "Balance hardware systems", "Compile rendering engines"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly reduces prediction error?", options: ["Iterative parameter adjustment", "Forwarding network traffic", "Balancing recursive trees", "Compiling operating systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes learning rates?", options: ["Control update magnitude", "Control routing capacity", "Control balancing speed", "Control compiler depth"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves optimization convergence?", options: ["Proper step sizes", "Recursive balancing sizes", "Graph traversal sizes", "Central routing sizes"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes iterative optimization?", options: ["Repeated error minimization", "Encrypt recursive packets", "Balance hardware systems", "Compile binary outputs"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly affects gradient methods?", options: ["Local minimum traps", "Packet balancing traps", "Recursive traversal traps", "Heap optimization traps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes optimization landscapes?", options: ["Define objective surfaces", "Define routing surfaces", "Define balancing surfaces", "Define compiler surfaces"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects model training?", options: ["Efficient parameter optimization", "Efficient packet routing", "Efficient recursive balancing", "Efficient compiler execution"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — convex functions
+
+  { prompt: "What fundamentally distinguishes convex functions?", options: ["Single global minimum", "Single routing center", "Single balanced heap", "Single compiler stage"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which property mainly simplifies optimization problems?", options: ["Convex objective surfaces", "Recursive routing surfaces", "Balanced memory surfaces", "Compiled binary surfaces"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes convex optimization?", options: ["Reliable minimum finding", "Encrypt recursive packets", "Balance hardware systems", "Compile rendering engines"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly guarantees optimal solutions?", options: ["Using convex objectives", "Forwarding network packets", "Balancing recursive trees", "Compiling distributed systems"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes local minima in convexity?", options: ["Equal global minima", "Equal routing centers", "Equal balancing heaps", "Equal compiler outputs"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly improves optimization stability?", options: ["Convex mathematical structure", "Recursive balancing structure", "Graph traversal structure", "Central routing structure"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes convex curves?", options: ["Curve upward consistently", "Encrypt recursive packets", "Balance hardware systems", "Compile binary engines"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates convex analysis?", options: ["Avoiding poor solutions", "Avoiding routing delays", "Avoiding recursive depth", "Avoiding compiler errors"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes optimization guarantees?", options: ["Ensure best solutions", "Ensure routing efficiency", "Ensure balancing accuracy", "Ensure compiler stability"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects mathematical optimization?", options: ["Finding global optima", "Finding routing paths", "Finding recursive heaps", "Finding compiler stages"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — Bayes theorem
+
+  { prompt: "What fundamentally distinguishes Bayes' theorem?", options: ["Updates conditional probabilities", "Routes encrypted packets", "Balances recursive heaps", "Compiles operating systems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which concept mainly revises probabilistic beliefs?", options: ["Bayesian probability inference", "Recursive routing inference", "Balanced memory inference", "Compiled binary inference"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes posterior probabilities?", options: ["Updated after evidence", "Encrypted after routing", "Balanced after recursion", "Compiled after execution"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly combines evidence information?", options: ["Conditional probability updating", "Forwarding network traffic", "Balancing recursive trees", "Compiling distributed engines"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes Bayesian inference?", options: ["Reason under uncertainty", "Reason about routing", "Reason about balancing", "Reason about compilation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly influences posterior beliefs?", options: ["Prior evidence probabilities", "Recursive balancing probabilities", "Graph traversal probabilities", "Central routing probabilities"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes conditional probability?", options: ["Depends on evidence", "Encrypt recursive packets", "Balance hardware systems", "Compile binary outputs"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates Bayesian modeling?", options: ["Handling uncertain evidence", "Handling routing delays", "Handling recursive depth", "Handling compiler failures"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes probabilistic inference?", options: ["Estimate hidden causes", "Estimate routing paths", "Estimate balancing loads", "Estimate compiler stages"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects Bayesian systems?", options: ["Updating beliefs correctly", "Updating routing tables", "Updating recursive stacks", "Updating compiler outputs"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — Markov chains
+
+  { prompt: "What fundamentally distinguishes Markov chains?", options: ["Memoryless state transitions", "Encrypted packet transitions", "Balanced heap transitions", "Compiled binary transitions"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which concept mainly models stochastic sequences?", options: ["Markov state processes", "Recursive routing processes", "Balanced memory processes", "Compiled rendering processes"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the Markov property?", options: ["Depends only presently", "Encrypt recursive packets", "Balance hardware systems", "Compile operating kernels"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly governs probabilistic transitions?", options: ["State transition probabilities", "Forwarding network packets", "Balancing recursive trees", "Compiling distributed systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes stochastic chains?", options: ["Random sequential evolution", "Random routing evolution", "Random balancing evolution", "Random compiler evolution"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly determines future states?", options: ["Current system state", "Recursive balancing state", "Graph traversal state", "Central routing state"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes transition matrices?", options: ["Store state probabilities", "Encrypt recursive packets", "Balance hardware systems", "Compile rendering systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates Markov modeling?", options: ["Modeling random evolution", "Modeling routing traffic", "Modeling recursive depth", "Modeling compiler stages"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes steady-state distributions?", options: ["Long-term probability behavior", "Long-term routing behavior", "Long-term balancing behavior", "Long-term compiler behavior"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects stochastic systems?", options: ["Predicting probabilistic transitions", "Predicting routing delays", "Predicting recursive growth", "Predicting compiler failures"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Mathematical Logic": [
-    { prompt: "What is a 'Proposition' in logic?", options: ["A suggestion", "A declarative sentence that is either true or false, but not both", "A question", "An equation"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What logical connective is represented by '∧'?", options: ["OR", "AND", "NOT", "IMPLIES"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is the truth value of 'P AND (NOT P)'?", options: ["Always True (Tautology)", "Always False (Contradiction)", "Depends on P", "Undefined"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What does 'P ∨ Q' represent?", options: ["P implies Q", "P and Q", "P or Q", "Not P"], answer: 2, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is a 'Tautology'?", options: ["A false statement", "A formula which is true in every possible interpretation", "A paradox", "An unknown variable"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "In predicate logic, what does the symbol '∀' represent?", options: ["There exists", "For all (Universal Quantifier)", "Not equal", "Infinity"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What does the symbol '∃' represent?", options: ["Empty set", "For all", "There exists (Existential Quantifier)", "Therefore"], answer: 2, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is 'Modus Ponens'?", options: ["Logic Gate", "If Then", "Math Para", "Set Type"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What are De Morgan's Laws?", options: ["Phys Law", "Logic Rule", "Therm Law", "Motion Law"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What did Gödel's Incompleteness Theorems prove?", options: ["Math Easy", "True Unproven", "Logic Flaw", "Calc Complete"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — propositions and basics
+
+  { prompt: "What fundamentally distinguishes a proposition?", options: ["Has truth value", "Stores binary data", "Routes network packets", "Balances recursion trees"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which statement qualifies as a proposition?", options: ["2 + 3 = 5", "Close the door", "How are you?", "x + 2 = 7"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes logical statements?", options: ["True or false", "Fast or slow", "Large or small", "Input or output"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which symbol usually represents negation?", options: ["∨", "∧", "¬", "→"], answer: 2, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes declarative sentences?", options: ["Express factual claims", "Request user input", "Route data packets", "Compile binary code"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which statement is not a proposition?", options: ["7 is prime", "The sky is blue", "Open the window", "1 < 9"], answer: 2, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes logical reasoning?", options: ["Uses truth relations", "Uses packet routing", "Uses memory balancing", "Uses compiler linking"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which field mainly studies valid arguments?", options: ["Mathematical logic", "Operating systems", "Database systems", "Computer graphics"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes truth values?", options: ["True or false", "Fast or secure", "Encrypted or public", "Large or recursive"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which concept mainly forms the basis of logic?", options: ["Propositional statements", "Network topologies", "Compiler passes", "Memory hierarchies"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — AND / OR / NOT
+
+  { prompt: "Which connective mainly represents conjunction?", options: ["∨", "→", "∧", "¬"], answer: 2, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes conjunction?", options: ["Both statements true", "Either statement true", "One statement false", "No statement defined"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which connective mainly represents disjunction?", options: ["∨", "∧", "↔", "¬"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes logical OR?", options: ["At least one true", "Both always true", "Both always false", "Only one defined"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which operation mainly reverses truth values?", options: ["Negation operator", "Conjunction operator", "Disjunction operator", "Implication operator"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes logical negation?", options: ["Flips truth values", "Stores packet routes", "Balances recursive trees", "Compiles binary programs"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which expression is true when both P and Q are true?", options: ["P ∧ Q", "P ∨ Q", "¬P", "P → Q"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes inclusive OR?", options: ["Allows both true", "Requires both false", "Requires exact equality", "Rejects all inputs"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which symbol mainly means 'NOT P'?", options: ["P ∧ Q", "P → Q", "¬P", "P ↔ Q"], answer: 2, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes basic connectives?", options: ["Combine truth statements", "Encrypt routing traffic", "Balance memory structures", "Compile rendering systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — contradictions and truth tables
+
+  { prompt: "What is the truth value of P ∧ ¬P?", options: ["Always true", "Always false", "Depends on P", "Undefined"], answer: 1, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which structure mainly evaluates logical formulas?", options: ["Truth tables", "Routing tables", "Hash tables", "Lookup caches"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes contradictions?", options: ["Always false formulas", "Always routed packets", "Always balanced heaps", "Always compiled binaries"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly checks logical outcomes?", options: ["Truth table evaluation", "Packet forwarding evaluation", "Heap balancing evaluation", "Compiler optimization evaluation"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes consistent statements?", options: ["Can both be true", "Can both route", "Can both compile", "Can both recurse"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which expression forms a contradiction?", options: ["P ∧ ¬P", "P ∨ Q", "P → Q", "¬(P ∨ Q)"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes truth tables?", options: ["List logical outcomes", "List network routes", "List memory heaps", "List compiler phases"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates truth-table analysis?", options: ["Verify logical validity", "Verify routing latency", "Verify balancing depth", "Verify compiler warnings"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes contradictions in logic?", options: ["Never become true", "Never transmit data", "Never balance heaps", "Never compile programs"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects logical evaluation?", options: ["Checking all truth cases", "Checking all packet routes", "Checking all heap states", "Checking all compiler stages"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — implication and equivalence
+
+  { prompt: "What does the implication P → Q mainly mean?", options: ["P and Q", "If P then Q", "Not P", "P or Q"], answer: 1, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which case makes P → Q false?", options: ["P true, Q false", "P false, Q true", "Both true", "Both false"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes logical implication?", options: ["Conditional relationship", "Routing relationship", "Recursive relationship", "Compiler relationship"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which connective mainly represents biconditional logic?", options: ["↔", "∨", "∧", "¬"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes biconditional statements?", options: ["Both share truth", "Both route packets", "Both balance heaps", "Both compile binaries"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which expression means 'P if and only if Q'?", options: ["P ↔ Q", "P → Q", "P ∧ Q", "¬P"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes equivalence relations in logic?", options: ["Matching truth values", "Matching routing paths", "Matching recursive states", "Matching compiler outputs"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates implication rules?", options: ["Formal reasoning systems", "Packet transmission systems", "Memory balancing systems", "Compiler execution systems"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes conditional logic?", options: ["Depends on assumptions", "Depends on routing", "Depends on balancing", "Depends on compilation"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects implications?", options: ["Tracking logical consequences", "Tracking packet delays", "Tracking recursive growth", "Tracking compiler errors"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — tautologies
+
+  { prompt: "What fundamentally distinguishes tautologies?", options: ["Always logically true", "Always packet routed", "Always heap balanced", "Always compiler optimized"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which expression is a tautology?", options: ["P ∨ ¬P", "P ∧ ¬P", "¬(P ∨ P)", "P → ¬P"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes universally valid formulas?", options: ["True in all cases", "Routed in all cases", "Balanced in all cases", "Compiled in all cases"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly identifies tautologies?", options: ["Truth-table verification", "Packet-route verification", "Heap-state verification", "Compiler-stage verification"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes logical validity?", options: ["Never becomes false", "Never drops packets", "Never loses balance", "Never fails compilation"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which expression remains true regardless of P?", options: ["P ∨ ¬P", "P ∧ ¬P", "¬P ∧ ¬P", "P → false"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes tautological reasoning?", options: ["Independent of inputs", "Independent of routing", "Independent of balancing", "Independent of compilation"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates tautology testing?", options: ["Verify universal truth", "Verify universal routing", "Verify universal balancing", "Verify universal compilation"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes contradictions from tautologies?", options: ["Always false vs true", "Always routed vs blocked", "Always balanced vs recursive", "Always compiled vs linked"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects logical proofs?", options: ["Ensuring universal validity", "Ensuring routing efficiency", "Ensuring heap stability", "Ensuring compiler safety"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — universal quantifier
+
+  { prompt: "What does the symbol ∀ mainly represent?", options: ["There exists", "For all", "Not equal", "Therefore"], answer: 1, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which concept mainly introduces variables into logic?", options: ["Predicate logic", "Compiler logic", "Routing logic", "Memory logic"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes universal quantification?", options: ["Applies to every element", "Routes to every server", "Balances every heap", "Compiles every module"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which statement uses a universal quantifier?", options: ["∀x P(x)", "∃x P(x)", "P ∧ Q", "¬P"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes quantified statements?", options: ["Refer to domains", "Refer to packets", "Refer to recursion", "Refer to binaries"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates universal claims?", options: ["Checking all elements", "Checking all routers", "Checking all heaps", "Checking all compilers"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes predicate logic?", options: ["Uses quantified variables", "Uses routed variables", "Uses balanced variables", "Uses compiled variables"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates universal quantifiers?", options: ["Express general truths", "Express routing policies", "Express balancing rules", "Express compiler stages"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes predicates?", options: ["Depend on variables", "Depend on routing", "Depend on balancing", "Depend on compilation"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects quantified logic?", options: ["Reasoning over domains", "Reasoning over routers", "Reasoning over heaps", "Reasoning over compilers"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — existential quantifier
+
+  { prompt: "What does the symbol ∃ mainly represent?", options: ["For all", "There exists", "Not equal", "Implication"], answer: 1, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes existential quantification?", options: ["At least one satisfies", "At least one routes", "At least one balances", "At least one compiles"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which statement uses an existential quantifier?", options: ["∃x P(x)", "∀x P(x)", "P ↔ Q", "¬Q"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes existential claims?", options: ["Require one example", "Require one router", "Require one heap", "Require one compiler"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly disproves existential statements?", options: ["Check every element", "Check every router", "Check every heap", "Check every binary"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes quantified existence?", options: ["Some element works", "Some packet routes", "Some heap balances", "Some compiler links"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates existential reasoning?", options: ["Finding valid examples", "Finding valid routes", "Finding valid heaps", "Finding valid binaries"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes universal and existential quantifiers?", options: ["All versus some", "Fast versus slow", "Local versus remote", "Heap versus stack"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects existential proofs?", options: ["Constructing examples", "Constructing routes", "Constructing heaps", "Constructing compilers"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes quantified logic systems?", options: ["Extend propositional logic", "Extend routing systems", "Extend balancing systems", "Extend compiler systems"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — modus ponens and inference
+
+  { prompt: "What fundamentally distinguishes Modus Ponens?", options: ["Inference rule structure", "Routing rule structure", "Balancing rule structure", "Compiler rule structure"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which inference pattern defines Modus Ponens?", options: ["P→Q and P imply Q", "P∨Q and Q imply P", "¬P and Q imply P", "P↔Q and ¬Q imply P"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes valid inference rules?", options: ["Preserve truth logically", "Preserve packets physically", "Preserve heaps recursively", "Preserve binaries digitally"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly derives conclusions formally?", options: ["Logical inference methods", "Packet routing methods", "Heap balancing methods", "Compiler optimization methods"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes deductive reasoning?", options: ["Conclusions follow necessarily", "Packets route necessarily", "Heaps balance necessarily", "Programs compile necessarily"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates inference systems?", options: ["Formal proof construction", "Formal packet transmission", "Formal heap balancing", "Formal compiler execution"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes proof systems?", options: ["Derive logical conclusions", "Derive routing paths", "Derive recursive heaps", "Derive binary outputs"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects deduction?", options: ["Maintaining logical validity", "Maintaining routing stability", "Maintaining heap order", "Maintaining compiler safety"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes formal reasoning?", options: ["Uses strict inference rules", "Uses strict routing tables", "Uses strict balancing trees", "Uses strict compiler phases"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which concept mainly powers logical proofs?", options: ["Inference rule application", "Packet forwarding application", "Heap balancing application", "Compiler linking application"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — De Morgan laws
+
+  { prompt: "What fundamentally distinguishes De Morgan's laws?", options: ["Relate negation operators", "Relate routing operators", "Relate balancing operators", "Relate compiler operators"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which equivalence follows De Morgan's law?", options: ["¬(P ∧ Q)=¬P∨¬Q", "P∨Q=P∧Q", "¬P=P", "P→Q=Q→P"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes logical equivalence laws?", options: ["Preserve truth meanings", "Preserve routing paths", "Preserve heap structures", "Preserve compiler outputs"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly simplifies logical expressions?", options: ["Applying equivalence rules", "Applying routing tables", "Applying heap balancing", "Applying compiler linking"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes transformed formulas?", options: ["Same truth conditions", "Same routing conditions", "Same balancing conditions", "Same compiler conditions"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates equivalence transformations?", options: ["Simplify formal reasoning", "Simplify packet routing", "Simplify heap management", "Simplify compiler execution"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes negated conjunctions?", options: ["Become disjunctions", "Become packet routes", "Become heap trees", "Become compiler stages"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects symbolic logic?", options: ["Expression simplification", "Traffic simplification", "Heap simplification", "Binary simplification"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes logical transformations?", options: ["Maintain equivalence exactly", "Maintain routing exactly", "Maintain balancing exactly", "Maintain compilation exactly"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which concept mainly underlies Boolean simplification?", options: ["De Morgan equivalences", "Routing equivalences", "Heap equivalences", "Compiler equivalences"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — Gödel and incompleteness
+
+  { prompt: "What fundamentally distinguishes Gödel's incompleteness theorems?", options: ["Limits formal systems", "Limits routing systems", "Limits balancing systems", "Limits compiler systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly motivated Gödel's work?", options: ["Completeness of mathematics", "Completeness of routing", "Completeness of balancing", "Completeness of compilation"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes incomplete logical systems?", options: ["True unprovable statements", "True unrouted packets", "True unbalanced heaps", "True uncompilable binaries"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly cannot prove every truth?", options: ["Formal axiomatic systems", "Internet routing systems", "Heap balancing systems", "Compiler optimization systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes Gödel numbering?", options: ["Encode statements numerically", "Encode packets numerically", "Encode heaps numerically", "Encode binaries numerically"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects formal mathematics?", options: ["Proving all truths", "Routing all packets", "Balancing all heaps", "Compiling all programs"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes consistency in logic?", options: ["No contradictions derivable", "No packets droppable", "No heaps unstable", "No compilers failing"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates metamathematics?", options: ["Study proof systems", "Study routing systems", "Study balancing systems", "Study compiler systems"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes undecidable statements?", options: ["Cannot always prove", "Cannot always route", "Cannot always balance", "Cannot always compile"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which concept mainly changed modern logic deeply?", options: ["Gödel incompleteness theory", "Recursive routing theory", "Heap balancing theory", "Compiler optimization theory"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Mathematics for Finance": [
-    { prompt: "What is the formula for continuous compounding?", options: ["A = P(1+rt)", "A = P * e^(rt)", "A = P(1+r)^t", "A = P / rt"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "In finance, what does 'NPV' stand for?", options: ["Net Present Value", "New Profit Volume", "Non-Performing Value", "Net Price Variation"], answer: 0, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is an 'Annuity'?", options: ["A single payment", "A series of equal payments made at regular intervals", "A random payment", "A tax deduction"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "If interest rates rise, what generally happens to bond prices?", options: ["They rise", "They fall", "They stay exactly the same", "They double"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What does the Black-Scholes model primarily calculate?", options: ["The theoretical price of European-style options", "The future price of a stock", "Inflation rates", "Credit scores"], answer: 0, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is 'Arbitrage'?", options: ["Lose Money", "Buy Sell", "Guess Stock", "Hold Cash"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is 'Volatility' a measure of?", options: ["The volume of shares traded", "The dispersion of returns for a given security or market index", "The company's debt", "The maturity date of a bond"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is a 'Call Option'?", options: ["Buy right", "Sell only", "Must buy", "Broker call"], answer: 0, difficulty: 1700, timeLimit: 20 },
-    { prompt: "In the CAPM model, what does 'Beta' represent?", options: ["Risk rate", "Stock volatility", "Market return", "Dividend"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Duration' in the context of bonds?", options: ["Maturity date", "Rate sensitivity", "Bond length", "Buy time"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — compounding basics
+
+  { prompt: "Which formula represents continuous compounding?", options: ["A=Pe^(rt)", "A=P(1+rt)", "A=P/rt", "A=P−rt"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes continuous compounding?", options: ["Interest grows constantly", "Interest stops yearly", "Interest grows randomly", "Interest grows quarterly"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which symbol usually represents Euler's number?", options: ["π", "e", "β", "σ"], answer: 1, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly increases future investment value?", options: ["Positive interest rates", "Negative stock volume", "Lower market hours", "Reduced bond coupons"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which concept mainly explains money growth over time?", options: ["Compound interest effects", "Routing table effects", "Compiler linking effects", "Database indexing effects"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes principal amount?", options: ["Initial invested money", "Interest earned yearly", "Tax charged monthly", "Loan penalty fee"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which factor mainly affects compounded returns?", options: ["Interest rate level", "Network latency size", "Compiler recursion depth", "Memory cache length"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes exponential growth?", options: ["Growth on previous gains", "Growth from routing data", "Growth from binary files", "Growth from recursion trees"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly grows savings automatically?", options: ["Interest accumulation", "Packet transmission", "Heap balancing", "Instruction caching"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes financial compounding?", options: ["Interest earns interest", "Packets route packets", "Trees balance trees", "Programs compile programs"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — NPV basics
+
+  { prompt: "What does NPV mainly stand for?", options: ["Net Present Value", "Normal Price Variation", "New Profit Volume", "Negative Portfolio Value"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes present value?", options: ["Future cash discounted", "Future packets routed", "Future heaps balanced", "Future binaries compiled"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly calculates investment worth today?", options: ["Discounting future cashflows", "Forwarding internet traffic", "Balancing recursive heaps", "Compiling distributed systems"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes positive NPV projects?", options: ["Expected value creation", "Expected routing efficiency", "Expected balancing stability", "Expected compiler optimization"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which factor mainly reduces present value?", options: ["Higher discount rates", "Higher packet speeds", "Higher heap depth", "Higher compiler speed"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes discounting?", options: ["Time-adjust future money", "Encrypt future packets", "Balance future heaps", "Compile future binaries"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which concept mainly evaluates project profitability?", options: ["Net present value", "Network packet value", "Heap balancing value", "Compiler optimization value"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes discounted cashflow analysis?", options: ["Values future payments", "Routes future packets", "Balances future trees", "Compiles future modules"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which challenge mainly motivates NPV usage?", options: ["Comparing investments fairly", "Comparing routers fairly", "Comparing heaps fairly", "Comparing compilers fairly"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes investment evaluation?", options: ["Considers time value", "Considers routing delay", "Considers recursion depth", "Considers binary size"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — annuities
+
+  { prompt: "What fundamentally distinguishes an annuity?", options: ["Regular equal payments", "Regular equal packets", "Regular equal heaps", "Regular equal binaries"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which financial product mainly uses annuities?", options: ["Retirement pension plans", "Compiler optimization plans", "Routing maintenance plans", "Heap balancing plans"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes ordinary annuities?", options: ["Payments at period end", "Packets at routing end", "Heaps at recursion end", "Binaries at compile end"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly values recurring payments?", options: ["Annuity discounting methods", "Packet forwarding methods", "Heap balancing methods", "Compiler optimization methods"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes cashflow streams?", options: ["Multiple timed payments", "Multiple routed packets", "Multiple balanced heaps", "Multiple compiled binaries"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which factor mainly affects annuity value?", options: ["Interest rate level", "Network routing level", "Heap recursion level", "Compiler optimization level"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes annuity formulas?", options: ["Value repeated payments", "Value routed packets", "Value recursive trees", "Value compiled outputs"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates annuity calculations?", options: ["Planning long-term finances", "Planning routing systems", "Planning recursion systems", "Planning compiler systems"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes installment payments?", options: ["Fixed recurring schedule", "Fixed routing schedule", "Fixed balancing schedule", "Fixed compiler schedule"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects pension modeling?", options: ["Estimating recurring payouts", "Estimating packet delays", "Estimating recursion growth", "Estimating compiler failures"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — bonds and rates
+
+  { prompt: "What generally happens to bond prices when rates rise?", options: ["Prices usually fall", "Prices always double", "Prices never change", "Prices disappear instantly"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes bond pricing?", options: ["Inverse rate relationship", "Inverse routing relationship", "Inverse balancing relationship", "Inverse compiler relationship"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which factor mainly affects bond valuation?", options: ["Market interest rates", "Network packet speeds", "Heap balancing speeds", "Compiler execution speeds"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes fixed-income securities?", options: ["Provide scheduled payments", "Provide scheduled routing", "Provide scheduled balancing", "Provide scheduled compilation"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly discounts bond cashflows?", options: ["Present value analysis", "Packet forwarding analysis", "Heap recursion analysis", "Compiler optimization analysis"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes coupon payments?", options: ["Periodic bond interest", "Periodic routing traffic", "Periodic recursion depth", "Periodic binary updates"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates bond mathematics?", options: ["Interest-rate sensitivity", "Packet-delay sensitivity", "Heap-size sensitivity", "Compiler-error sensitivity"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes bond yields?", options: ["Expected investment return", "Expected routing return", "Expected balancing return", "Expected compiler return"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects bond investors?", options: ["Changing interest rates", "Changing routing protocols", "Changing heap structures", "Changing compiler versions"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes rate-sensitive assets?", options: ["Values shift with rates", "Packets shift with rates", "Heaps shift with rates", "Binaries shift with rates"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — Black-Scholes
+
+  { prompt: "What does the Black-Scholes model mainly price?", options: ["European stock options", "Government tax systems", "Network packet systems", "Compiler optimization systems"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes option pricing models?", options: ["Estimate derivative values", "Estimate routing values", "Estimate balancing values", "Estimate compiler values"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly affects option prices?", options: ["Underlying asset volatility", "Underlying routing latency", "Underlying heap recursion", "Underlying compiler size"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes financial derivatives?", options: ["Depend on assets", "Depend on packets", "Depend on heaps", "Depend on binaries"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly estimates fair option value?", options: ["Mathematical pricing models", "Packet transmission models", "Heap balancing models", "Compiler execution models"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes European options?", options: ["Exercise only expiry", "Exercise only routing", "Exercise only recursion", "Exercise only compilation"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates Black-Scholes usage?", options: ["Pricing uncertainty accurately", "Routing uncertainty accurately", "Balancing uncertainty accurately", "Compiling uncertainty accurately"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes derivative contracts?", options: ["Value from underlying", "Value from routing", "Value from balancing", "Value from compiling"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects option traders?", options: ["Estimating future volatility", "Estimating future latency", "Estimating future recursion", "Estimating future compilation"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes quantitative finance models?", options: ["Use advanced mathematics", "Use advanced routing", "Use advanced balancing", "Use advanced compiling"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — arbitrage
+
+  { prompt: "What fundamentally distinguishes arbitrage?", options: ["Risk-free profit opportunity", "Risk-free routing opportunity", "Risk-free balancing opportunity", "Risk-free compiler opportunity"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly exploits price differences?", options: ["Simultaneous market trades", "Simultaneous packet transfers", "Simultaneous heap balancing", "Simultaneous binary linking"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes arbitrage-free markets?", options: ["No guaranteed profits", "No guaranteed routing", "No guaranteed balancing", "No guaranteed compiling"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which factor mainly creates arbitrage chances?", options: ["Temporary price mismatch", "Temporary packet mismatch", "Temporary heap mismatch", "Temporary compiler mismatch"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes efficient markets?", options: ["Prices adjust rapidly", "Packets adjust rapidly", "Heaps adjust rapidly", "Binaries adjust rapidly"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates arbitrage trading?", options: ["Exploit mispricing quickly", "Exploit routing quickly", "Exploit recursion quickly", "Exploit compiling quickly"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes risk-neutral pricing?", options: ["Assumes arbitrage absence", "Assumes routing absence", "Assumes recursion absence", "Assumes compiler absence"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects arbitrageurs?", options: ["Finding price inefficiencies", "Finding routing inefficiencies", "Finding heap inefficiencies", "Finding compiler inefficiencies"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes market equilibrium?", options: ["Removes free-profit gaps", "Removes free-routing gaps", "Removes free-balancing gaps", "Removes free-compiler gaps"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which concept mainly underlies derivative pricing theory?", options: ["No-arbitrage principle", "No-routing principle", "No-balancing principle", "No-compiling principle"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — volatility
+
+  { prompt: "What fundamentally distinguishes volatility?", options: ["Measures return dispersion", "Measures packet dispersion", "Measures heap dispersion", "Measures compiler dispersion"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly increases investment uncertainty?", options: ["Higher market volatility", "Higher routing traffic", "Higher heap recursion", "Higher binary compilation"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes volatile assets?", options: ["Large price swings", "Large routing swings", "Large balancing swings", "Large compiling swings"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly estimates investment risk?", options: ["Statistical return analysis", "Packet transmission analysis", "Heap recursion analysis", "Compiler optimization analysis"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes standard deviation in finance?", options: ["Measures variability size", "Measures routing size", "Measures recursion size", "Measures compilation size"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates volatility modeling?", options: ["Quantifying financial uncertainty", "Quantifying routing uncertainty", "Quantifying recursion uncertainty", "Quantifying compiler uncertainty"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes stable investments?", options: ["Lower return fluctuations", "Lower routing fluctuations", "Lower heap fluctuations", "Lower compiler fluctuations"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects portfolio managers?", options: ["Managing market risk", "Managing routing risk", "Managing balancing risk", "Managing compiler risk"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes risk measurement?", options: ["Uses statistical variation", "Uses routing variation", "Uses balancing variation", "Uses compiler variation"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which concept mainly explains unpredictable returns?", options: ["Financial market volatility", "Internet network volatility", "Recursive algorithm volatility", "Compiler execution volatility"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — call options
+
+  { prompt: "What fundamentally distinguishes a call option?", options: ["Right to buy", "Right to route", "Right to balance", "Right to compile"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly increases call-option value?", options: ["Higher stock prices", "Higher routing latency", "Higher heap depth", "Higher compiler load"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes option contracts?", options: ["Provide contractual rights", "Provide routing rights", "Provide balancing rights", "Provide compiler rights"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly profits call-option buyers?", options: ["Asset price increases", "Packet speed increases", "Heap recursion increases", "Compiler optimization increases"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes strike prices?", options: ["Fixed exercise prices", "Fixed routing prices", "Fixed balancing prices", "Fixed compiler prices"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates options trading?", options: ["Managing financial exposure", "Managing routing exposure", "Managing heap exposure", "Managing compiler exposure"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes derivative leverage?", options: ["Large exposure cheaply", "Large routing cheaply", "Large balancing cheaply", "Large compiling cheaply"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects option valuation?", options: ["Predicting future movements", "Predicting packet movement", "Predicting heap movement", "Predicting compiler movement"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes option premiums?", options: ["Price of contract", "Price of routing", "Price of balancing", "Price of compiling"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which concept mainly underlies options markets?", options: ["Asymmetric payoff structures", "Asymmetric routing structures", "Asymmetric balancing structures", "Asymmetric compiler structures"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — CAPM and beta
+
+  { prompt: "What fundamentally distinguishes beta in CAPM?", options: ["Measures market sensitivity", "Measures routing sensitivity", "Measures balancing sensitivity", "Measures compiler sensitivity"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly affects systematic risk?", options: ["Overall market movements", "Overall routing movements", "Overall recursion movements", "Overall compiler movements"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes CAPM theory?", options: ["Links risk and return", "Links routing and return", "Links balancing and return", "Links compiling and return"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly estimates required return?", options: ["Risk-return modeling", "Packet-return modeling", "Heap-return modeling", "Compiler-return modeling"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes systematic risk?", options: ["Cannot diversify away", "Cannot route away", "Cannot balance away", "Cannot compile away"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates portfolio theory?", options: ["Balancing return and risk", "Balancing routing and risk", "Balancing heaps and risk", "Balancing compilers and risk"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes high-beta stocks?", options: ["Move strongly with markets", "Move strongly with routing", "Move strongly with recursion", "Move strongly with compiling"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects asset pricing?", options: ["Estimating expected returns", "Estimating routing returns", "Estimating balancing returns", "Estimating compiler returns"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes diversified portfolios?", options: ["Reduce unsystematic risk", "Reduce routing risk", "Reduce recursion risk", "Reduce compiler risk"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which concept mainly underlies modern portfolio theory?", options: ["Risk-return tradeoff", "Routing-return tradeoff", "Balancing-return tradeoff", "Compiler-return tradeoff"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — duration
+
+  { prompt: "What fundamentally distinguishes bond duration?", options: ["Measures rate sensitivity", "Measures routing sensitivity", "Measures recursion sensitivity", "Measures compiler sensitivity"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly increases bond duration?", options: ["Longer cashflow timing", "Longer packet timing", "Longer recursion timing", "Longer compiler timing"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes duration analysis?", options: ["Quantifies price risk", "Quantifies routing risk", "Quantifies balancing risk", "Quantifies compiler risk"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly estimates bond-price movement?", options: ["Duration-based approximation", "Routing-based approximation", "Heap-based approximation", "Compiler-based approximation"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes interest-rate exposure?", options: ["Sensitivity to rate shifts", "Sensitivity to packet shifts", "Sensitivity to recursion shifts", "Sensitivity to compiler shifts"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates duration hedging?", options: ["Reduce bond-price volatility", "Reduce packet volatility", "Reduce recursion volatility", "Reduce compiler volatility"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes long-duration bonds?", options: ["Greater price sensitivity", "Greater routing sensitivity", "Greater balancing sensitivity", "Greater compiler sensitivity"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects fixed-income portfolios?", options: ["Managing rate exposure", "Managing routing exposure", "Managing recursion exposure", "Managing compiler exposure"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes Macaulay duration?", options: ["Weighted cashflow timing", "Weighted packet timing", "Weighted recursion timing", "Weighted compiler timing"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which concept mainly supports bond immunization?", options: ["Matching portfolio duration", "Matching routing duration", "Matching recursion duration", "Matching compiler duration"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Multivariate Analysis": [
-    { prompt: "What is Multivariate Analysis?", options: ["One variable", "Multiple stats", "Calculus", "String"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What is a 'Covariance Matrix'?", options: ["Ones matrix", "Covariance pair", "Identity", "Means"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What does PCA (Principal Component Analysis) primarily aim to do?", options: ["Increase dim", "Reduce dim", "Delete data", "Sort data"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "In PCA, what are 'Principal Components'?", options: ["Data rows", "Var combos", "Labels", "Missing"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is 'Factor Analysis' used for?", options: ["Factor poly", "Find latent", "Prime num", "Sort array"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What does 'MANOVA' stand for?", options: ["Multiple Analysis of Variance", "Multivariate Analysis of Variance", "Matrix Analysis of Vectors", "Mean Analysis of Variance"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is the purpose of Discriminant Analysis?", options: ["Merge cats", "Predict cat", "Plot pie", "Calc mean"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is 'Cluster Analysis'?", options: ["Spread data", "Group sim", "Calc sum", "Find out"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is the Mahalanobis distance?", options: ["Dist point", "Server dist", "City dist", "Euclid"], answer: 0, difficulty: 1800, timeLimit: 20 },
-    { prompt: "In Canonical Correlation Analysis (CCA), what is being investigated?", options: ["Var corr", "Set rel", "Var var", "Eigen val"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic concepts
+
+  { prompt: "What fundamentally distinguishes multivariate analysis?", options: ["Studies one variable", "Studies multiple variables simultaneously", "Studies only calculus", "Studies only matrices"], answer: 1, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which situation mainly requires multivariate analysis?", options: ["Analyzing many related measurements", "Sorting one number", "Compiling one file", "Routing one packet"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes univariate and multivariate methods?", options: ["Number of variables analyzed", "Programming language used", "Database size used", "Internet speed used"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which field heavily uses multivariate analysis?", options: ["Statistics and data science", "Circuit soldering", "Operating system booting", "Computer graphics rendering"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes multivariate datasets?", options: ["Contain several features", "Contain one pixel", "Contain one row", "Contain one loop"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which challenge mainly motivates multivariate techniques?", options: ["Understanding relationships among variables", "Increasing CPU temperature", "Compiling faster binaries", "Reducing monitor brightness"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes multivariable statistical modeling?", options: ["Analyzes interactions jointly", "Analyzes hardware physically", "Analyzes routing manually", "Analyzes memory electrically"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which process mainly studies patterns across variables?", options: ["Multivariate statistical analysis", "Disk fragmentation", "Network packet switching", "Compiler optimization"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes high-dimensional data?", options: ["Contains many variables", "Contains many routers", "Contains many batteries", "Contains many processors"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which task mainly benefits from multivariate methods?", options: ["Finding hidden data structure", "Formatting hard drives", "Installing operating systems", "Building motherboards"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — covariance matrix
+
+  { prompt: "What is a covariance matrix primarily used for?", options: ["Measuring relationships between variables", "Storing passwords securely", "Compressing image files", "Routing internet traffic"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly appears on the diagonal of a covariance matrix?", options: ["Variances of variables", "Network addresses", "Compiler outputs", "Prime numbers"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "If covariance between two variables is positive, what does it suggest?", options: ["They tend to increase together", "They are identical", "They are unrelated", "They always decrease"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes covariance from variance?", options: ["Covariance compares two variables", "Covariance compares routers", "Covariance compares matrices only", "Covariance compares algorithms"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which matrix summarizes pairwise covariances?", options: ["Covariance matrix", "Identity matrix", "Adjacency matrix", "Sparse matrix"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes strongly correlated variables?", options: ["Large covariance magnitude", "Large battery voltage", "Large routing delay", "Large clock speed"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly estimates covariance values?", options: ["Analyzing variable co-movement", "Analyzing packet delivery", "Analyzing memory allocation", "Analyzing CPU instructions"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes independent variables?", options: ["Covariance near zero", "Voltage near zero", "Storage near zero", "Clock rate near zero"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which concept mainly supports PCA mathematically?", options: ["Covariance structure", "Network structure", "Compiler structure", "Hardware structure"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes covariance analysis?", options: ["Studies joint variation", "Studies packet timing", "Studies file permissions", "Studies monitor resolution"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — PCA basics
+
+  { prompt: "What does PCA primarily attempt to do?", options: ["Reduce dimensionality", "Increase storage", "Encrypt databases", "Speed networking"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates PCA usage?", options: ["Too many variables", "Too many routers", "Too many processors", "Too many keyboards"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes dimensionality reduction?", options: ["Keeps important information compactly", "Deletes operating systems", "Compresses CPUs physically", "Removes internet access"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which quantity does PCA try to maximize?", options: ["Variance captured", "Battery capacity", "Packet speed", "Disk usage"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes lower-dimensional representations?", options: ["Fewer transformed variables", "Fewer hard drives", "Fewer routers", "Fewer programs"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process mainly simplifies high-dimensional datasets?", options: ["Principal Component Analysis", "Dynamic routing analysis", "Compiler optimization analysis", "Memory scheduling analysis"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes PCA output variables?", options: ["They are uncorrelated", "They are encrypted", "They are recursive", "They are duplicated"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects visualization of many variables?", options: ["High dimensionality", "High voltage", "High bandwidth", "High temperature"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes PCA transformation?", options: ["Rotates data axes", "Rotates processors physically", "Rotates network packets", "Rotates memory sectors"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which technique mainly helps compress numerical datasets?", options: ["PCA", "Bubble sort", "RSA encryption", "TCP routing"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — principal components
+
+  { prompt: "What are principal components in PCA?", options: ["Orthogonal directions of maximum variance", "Rows of a database", "Encrypted vectors", "Network protocols"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes the first principal component?", options: ["Captures maximum variance", "Captures minimum storage", "Captures network traffic", "Captures compiler output"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which property mainly defines principal components?", options: ["Mutual orthogonality", "Mutual recursion", "Mutual encryption", "Mutual duplication"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes later principal components?", options: ["Capture remaining variance", "Capture remaining bandwidth", "Capture remaining memory", "Capture remaining voltage"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which vectors mainly define principal directions?", options: ["Eigenvectors of covariance matrix", "Compiler vectors", "Routing vectors", "Instruction vectors"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes PCA coordinate systems?", options: ["Aligned with data variance", "Aligned with internet cables", "Aligned with processors", "Aligned with databases"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which challenge mainly motivates orthogonal transformations?", options: ["Reducing redundancy", "Reducing electricity", "Reducing hardware", "Reducing passwords"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes transformed PCA variables?", options: ["Linear combinations of originals", "Copies of processors", "Copies of routers", "Copies of servers"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which process mainly constructs principal components?", options: ["Eigen decomposition", "Packet decomposition", "Voltage decomposition", "Loop decomposition"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes variance-maximizing directions?", options: ["Principal components", "Routing paths", "Compiler passes", "Encryption keys"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — factor analysis
+
+  { prompt: "What is factor analysis mainly used for?", options: ["Identifying latent variables", "Sorting arrays quickly", "Encrypting databases", "Compressing videos"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes latent factors?", options: ["Hidden explanatory variables", "Hidden network routers", "Hidden operating systems", "Hidden memory chips"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates factor analysis?", options: ["Finding hidden structure", "Finding hidden malware", "Finding hidden servers", "Finding hidden printers"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes observed variables from factors?", options: ["Factors are underlying constructs", "Factors are hardware devices", "Factors are internet cables", "Factors are compilers"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which field commonly applies factor analysis?", options: ["Psychology and social sciences", "CPU manufacturing", "Wireless routing", "Kernel development"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes factor loadings?", options: ["Measure variable-factor relationships", "Measure network latency", "Measure compiler efficiency", "Measure memory voltage"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly reduces observed complexity?", options: ["Modeling with latent factors", "Modeling with routers", "Modeling with batteries", "Modeling with servers"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes common factors?", options: ["Explain shared variance", "Explain internet traffic", "Explain processor heat", "Explain compiler errors"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects questionnaire analysis?", options: ["Detecting hidden traits", "Detecting broken hardware", "Detecting corrupted files", "Detecting packet loss"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes exploratory factor analysis?", options: ["Discovers possible structures", "Discovers possible routers", "Discovers possible circuits", "Discovers possible binaries"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — MANOVA
+
+  { prompt: "What does MANOVA stand for?", options: ["Multivariate Analysis of Variance", "Matrix Analysis of Variables", "Multiple Average Normalized Output Variables", "Mean Analytical Numerical Operations"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes MANOVA from ANOVA?", options: ["MANOVA handles multiple dependent variables", "MANOVA uses GPUs only", "MANOVA encrypts outputs", "MANOVA sorts matrices"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which situation mainly requires MANOVA?", options: ["Several dependent outcomes", "Several CPUs", "Several routers", "Several databases"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes multivariate variance testing?", options: ["Compares group mean vectors", "Compares internet speeds", "Compares memory chips", "Compares processor clocks"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates MANOVA usage?", options: ["Correlated response variables", "Correlated hard drives", "Correlated compilers", "Correlated routers"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes dependent variables in MANOVA?", options: ["Analyzed simultaneously", "Analyzed recursively", "Analyzed physically", "Analyzed electrically"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which process mainly evaluates multivariate group differences?", options: ["MANOVA testing", "Packet switching", "Heap balancing", "Compiler optimization"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes multivariate hypothesis testing?", options: ["Tests vectors of means", "Tests packet routes", "Tests binary executables", "Tests monitor displays"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects multiple-response experiments?", options: ["Joint outcome analysis", "Joint hardware analysis", "Joint routing analysis", "Joint memory analysis"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes MANOVA assumptions?", options: ["Multivariate normality", "Multivariate encryption", "Multivariate recursion", "Multivariate routing"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — discriminant analysis
+
+  { prompt: "What is discriminant analysis mainly used for?", options: ["Classifying observations into groups", "Sorting arrays", "Encrypting passwords", "Scheduling processes"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes discriminant functions?", options: ["Separate predefined classes", "Separate internet packets", "Separate machine instructions", "Separate storage sectors"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates discriminant analysis?", options: ["Predicting group membership", "Predicting battery life", "Predicting routing tables", "Predicting CPU temperature"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes supervised classification methods?", options: ["Use labeled categories", "Use encrypted files", "Use recursive functions", "Use hardware sensors"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which process mainly separates classes statistically?", options: ["Discriminant analysis", "Disk partitioning", "Compiler linking", "Packet routing"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes classification boundaries?", options: ["Divide groups mathematically", "Divide memory physically", "Divide routers logically", "Divide compilers structurally"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects predictive categorization?", options: ["Overlapping group distributions", "Overlapping circuits", "Overlapping databases", "Overlapping processors"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes linear discriminant analysis?", options: ["Uses linear decision boundaries", "Uses circular processors", "Uses recursive loops", "Uses encrypted storage"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly improves classification accuracy?", options: ["Well-separated classes", "Well-separated routers", "Well-separated CPUs", "Well-separated monitors"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes prediction-based multivariate methods?", options: ["Assign new observations to classes", "Assign packets to switches", "Assign memory to CPUs", "Assign programs to disks"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — cluster analysis
+
+  { prompt: "What is cluster analysis mainly used for?", options: ["Grouping similar observations", "Grouping network packets", "Grouping machine instructions", "Grouping memory sectors"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes clustering from classification?", options: ["Clustering uses no labels", "Clustering uses more CPUs", "Clustering uses routers only", "Clustering uses encryption"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates cluster analysis?", options: ["Discovering hidden groupings", "Discovering hidden malware", "Discovering hidden servers", "Discovering hidden printers"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hierarchical clustering?", options: ["Builds nested clusters", "Builds nested routers", "Builds nested compilers", "Builds nested processors"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly groups nearby observations?", options: ["Similarity-based clustering", "Packet switching", "Compiler parsing", "Heap balancing"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes unsupervised learning?", options: ["No predefined outputs", "No predefined hardware", "No predefined memory", "No predefined routing"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects clustering quality?", options: ["Choosing similarity measures", "Choosing monitor sizes", "Choosing cable lengths", "Choosing battery types"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes K-means clustering?", options: ["Uses centroid-based grouping", "Uses recursive grouping", "Uses encrypted grouping", "Uses compiler grouping"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which factor mainly determines cluster membership?", options: ["Distance or similarity", "Voltage or current", "Frequency or bandwidth", "Pixels or frames"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes cluster structures?", options: ["Observations within groups resemble each other", "Routers within groups resemble each other", "Processors within groups resemble each other", "Disks within groups resemble each other"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — Mahalanobis distance
+
+  { prompt: "What mainly distinguishes Mahalanobis distance from Euclidean distance?", options: ["Accounts for covariance structure", "Accounts for internet bandwidth", "Accounts for processor speed", "Accounts for storage size"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates Mahalanobis distance?", options: ["Correlated variables", "Correlated routers", "Correlated processors", "Correlated monitors"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes covariance-adjusted distance?", options: ["Scales by variable relationships", "Scales by network traffic", "Scales by CPU heat", "Scales by disk sectors"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which process mainly detects multivariate outliers?", options: ["Mahalanobis distance analysis", "Packet inspection analysis", "Compiler debugging analysis", "Memory caching analysis"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Euclidean distance limitations?", options: ["Ignores variable correlation", "Ignores internet routing", "Ignores processor pipelines", "Ignores disk fragmentation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly affects Mahalanobis calculations?", options: ["Covariance matrix inverse", "Network routing table", "Compiler optimization table", "GPU shader table"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes multivariate distance metrics?", options: ["Measure separation in feature space", "Measure separation in hardware", "Measure separation in networks", "Measure separation in filesystems"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects anomaly detection?", options: ["Accounting for correlations", "Accounting for battery usage", "Accounting for cable length", "Accounting for monitor brightness"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes scale-invariant distances?", options: ["Normalize variable influence", "Normalize internet traffic", "Normalize hardware voltage", "Normalize memory allocation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which concept mainly underlies Mahalanobis geometry?", options: ["Covariance-weighted space", "Packet-weighted space", "Processor-weighted space", "Storage-weighted space"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — CCA
+
+  { prompt: "What does Canonical Correlation Analysis mainly investigate?", options: ["Relationships between two variable sets", "Relationships between two CPUs", "Relationships between two routers", "Relationships between two disks"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes CCA from simple correlation?", options: ["CCA compares variable groups", "CCA compares processors", "CCA compares switches", "CCA compares compilers"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates canonical correlation analysis?", options: ["Studying multiset relationships", "Studying motherboard relationships", "Studying routing relationships", "Studying filesystem relationships"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes canonical variables?", options: ["Optimal linear combinations", "Optimal routing combinations", "Optimal processor combinations", "Optimal compiler combinations"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which process mainly maximizes canonical correlation?", options: ["Constructing correlated variable combinations", "Constructing correlated networks", "Constructing correlated CPUs", "Constructing correlated databases"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes multiset association analysis?", options: ["Links multiple feature groups", "Links multiple routers", "Links multiple GPUs", "Links multiple kernels"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects high-dimensional relationship analysis?", options: ["Complex cross-variable interactions", "Complex hardware interactions", "Complex packet interactions", "Complex filesystem interactions"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes canonical correlations?", options: ["Maximum achievable relationships", "Maximum achievable bandwidth", "Maximum achievable storage", "Maximum achievable clock speed"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which factor mainly determines canonical pairs?", options: ["Joint covariance structure", "Joint routing structure", "Joint compiler structure", "Joint processor structure"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What fundamentally distinguishes advanced multivariate dependence modeling?", options: ["Analyzes relationships among variable sets", "Analyzes relationships among servers", "Analyzes relationships among routers", "Analyzes relationships among compilers"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Network Programming and Advanced Communication Networks": [
-    { prompt: "What is a 'Socket' in network programming?", options: ["Wall plug", "Comm link", "Router", "Switch"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "Which function is used by a server to wait for an incoming client connection?", options: ["bind()", "connect()", "listen() / accept()", "send()"], answer: 2, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is the difference between TCP and UDP?", options: ["TCP fast", "TCP rel", "TCP local", "UDP enc"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What does the 'bind()' function do?", options: ["Connects to a server", "Associates a socket with a specific IP address and port number", "Sends data", "Closes the connection"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is an 'IP packet'?", options: ["Cable box", "Data unit", "Soft prog", "Router set"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is 'Multiplexing' in communication networks?", options: ["Build cinema", "Signal combo", "Del dup", "Split sig"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is BGP (Border Gateway Protocol) used for?", options: ["Local route", "Net routing", "Email trans", "File share"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What does 'QoS' (Quality of Service) manage?", options: ["Code qual", "Net traffic", "Support call", "Cable phys"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'Anycast' routing?", options: ["Send to all", "Send to nearest", "Send to farthest", "Drop packet"], answer: 2, difficulty: 1800, timeLimit: 20 },
-    { prompt: "In Software-Defined Networking (SDN), what is separated?", options: ["Control from data", "User from device", "Internet from intranet", "Hardware from software"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
-  "Object-Oriented Software Development": [
-    { prompt: "What is an 'Object' in OOP?", options: ["A physical item", "An instance of a class that encapsulates data and behavior", "A syntax error", "A loop"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What are the four pillars of Object-Oriented Programming?", options: ["Read, Write, Execute, Delete", "Encapsulation, Abstraction, Inheritance, Polymorphism", "Variables, Functions, Loops, Conditionals", "Input, Output, Process, Storage"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is 'Encapsulation'?", options: ["Hide details", "Write in code", "Combine languages", "Copy code"], answer: 0, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is 'Inheritance'?", options: ["Get money", "Derive class", "Delete class", "Loop type"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What does 'Polymorphism' mean in OOP?", options: ["Many bugs", "Respond differently", "Change types", "Shape shift"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What is a 'Constructor'?", options: ["Build house", "Init object", "Destroy object", "Compile code"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is 'Method Overloading'?", options: ["Call many", "Same name", "Override method", "Delete method"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is 'Method Overriding'?", options: ["Ignore method", "Subclass method", "Same params", "Rename method"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is an 'Abstract Class'?", options: ["Hard class", "No instance", "No code", "Final class"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What does the 'SOLID' principle 'S' stand for?", options: ["Static type", "Single reason", "Software object", "Secure state"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — basic socket concepts
+
+  { prompt: "What is a socket in network programming?", options: ["Wall connector", "Communication endpoint", "Routing protocol", "Signal repeater"], answer: 1, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which protocol mainly powers the web?", options: ["TCP/IP", "Bluetooth", "NFC", "Zigbee"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly identifies a process on a networked device?", options: ["Port number", "MAC table", "Subnet mask", "Gateway path"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which side usually starts a socket connection?", options: ["Client application", "Network switch", "DNS server", "Router interface"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes client-server communication?", options: ["Request and response", "Signal reflection", "Packet duplication", "Voltage conversion"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which protocol mainly guarantees reliable delivery?", options: ["TCP protocol", "UDP protocol", "ARP protocol", "ICMP protocol"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly identifies a machine on the internet?", options: ["IP address", "File descriptor", "Process thread", "CPU register"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which operation mainly sends information through a socket?", options: ["Data transmission", "Memory allocation", "Signal amplification", "Thread creation"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes network programming?", options: ["Programs communicate remotely", "Programs render graphics", "Programs compress files", "Programs edit videos"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which device mainly forwards packets between networks?", options: ["Router device", "Printer driver", "Audio codec", "Power supply"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — server functions
+
+  { prompt: "Which function prepares a socket to receive connections?", options: ["listen()", "send()", "close()", "recv()"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which function accepts an incoming client connection?", options: ["accept()", "bind()", "write()", "fork()"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a server socket?", options: ["Waits for clients", "Stores passwords", "Compresses packets", "Encrypts monitors"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which socket call usually follows listen()?", options: ["accept()", "send()", "recv()", "close()"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes passive sockets?", options: ["Receive connection requests", "Transmit radio waves", "Render webpages", "Compile programs"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which process mainly handles client requests repeatedly?", options: ["Server loop", "Disk formatter", "Compiler pass", "Signal booster"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a listening port?", options: ["Awaits incoming traffic", "Stores routing tables", "Boosts wireless signals", "Controls hardware voltage"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which protocol mainly uses ports 80 and 443?", options: ["HTTP services", "SMTP services", "FTP services", "SNMP services"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a connected socket?", options: ["Bound to peer", "Bound to compiler", "Bound to monitor", "Bound to processor"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which operation mainly ends socket communication?", options: ["Connection closure", "Thread scheduling", "Route advertisement", "Packet encryption"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — TCP vs UDP
+
+  { prompt: "What mainly distinguishes TCP from UDP?", options: ["TCP is reliable", "TCP is wireless", "UDP is encrypted", "UDP is slower"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which protocol mainly supports video streaming efficiently?", options: ["UDP protocol", "TCP protocol", "ARP protocol", "SMTP protocol"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes UDP communication?", options: ["Connectionless transmission", "Guaranteed ordering", "Automatic recovery", "Flow regulation"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which feature mainly belongs to TCP?", options: ["Ordered delivery", "Broadcast routing", "Static switching", "Signal modulation"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes unreliable protocols?", options: ["No delivery guarantee", "No internet support", "No packet headers", "No addressing scheme"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which application mainly prefers TCP?", options: ["File transfer", "Live gaming", "Voice streaming", "Sensor broadcast"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes datagram protocols?", options: ["Packets independent", "Packets encrypted", "Packets compressed", "Packets mirrored"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which feature mainly reduces TCP packet loss?", options: ["Retransmission mechanism", "Signal amplification", "Static routing", "Frequency hopping"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes TCP handshakes?", options: ["Establish reliable sessions", "Compress network packets", "Authenticate printers", "Allocate GPU memory"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which protocol mainly minimizes communication overhead?", options: ["UDP protocol", "TCP protocol", "HTTPS protocol", "SSH protocol"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — bind and addressing
+
+  { prompt: "What does bind() mainly associate with a socket?", options: ["IP and port", "Username and password", "CPU and RAM", "Signal and antenna"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which operation mainly reserves a network port?", options: ["Socket binding", "Packet routing", "DNS resolution", "ARP discovery"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes server-side binding?", options: ["Assigns local address", "Encrypts remote traffic", "Compresses data streams", "Allocates cache memory"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which structure mainly stores socket address details?", options: ["sockaddr structure", "inode structure", "kernel stack", "cache table"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes port conflicts?", options: ["Same port reused", "Same CPU overheated", "Same router failed", "Same cable unplugged"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which operation mainly links sockets to interfaces?", options: ["bind() call", "accept() call", "fork() call", "close() call"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes ephemeral ports?", options: ["Temporary client ports", "Permanent router ports", "Encrypted transport ports", "Hardware debug ports"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly causes bind() failures?", options: ["Port already occupied", "GPU memory shortage", "Printer unavailable", "Low monitor refresh"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes wildcard addresses?", options: ["Bind all interfaces", "Bind encrypted packets", "Bind wireless channels", "Bind routing paths"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which protocol family mainly supports IPv4 sockets?", options: ["AF_INET", "AF_FILE", "AF_CACHE", "AF_PRINT"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — packets
+
+  { prompt: "What is an IP packet primarily composed of?", options: ["Header and payload", "Voltage and current", "Thread and process", "Cache and register"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which field mainly controls packet lifetime?", options: ["TTL field", "MAC field", "CRC field", "ARP field"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes fragmented packets?", options: ["Split for transmission", "Encrypted for privacy", "Compressed for storage", "Duplicated for backup"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which layer mainly handles IP packets?", options: ["Network layer", "Physical layer", "Session layer", "Presentation layer"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes packet switching?", options: ["Data split into packets", "Signals converted analog", "Messages broadcast physically", "Programs executed remotely"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly causes packet loss?", options: ["Network congestion", "Disk formatting", "Compiler optimization", "Memory paging"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes packet headers?", options: ["Contain routing metadata", "Contain executable code", "Contain battery levels", "Contain graphics buffers"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which process mainly forwards packets hop-by-hop?", options: ["Routing process", "Caching process", "Scheduling process", "Rendering process"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes MTU limitations?", options: ["Maximum packet size", "Maximum processor speed", "Maximum RAM size", "Maximum display rate"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which protocol mainly transports IP packets across links?", options: ["Ethernet protocol", "HTML protocol", "JSON protocol", "XML protocol"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — multiplexing
+
+  { prompt: "What is multiplexing in communication networks?", options: ["Combining multiple signals", "Deleting duplicate packets", "Compressing video streams", "Encrypting socket traffic"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which method mainly separates users by frequency ranges?", options: ["Frequency multiplexing", "Packet routing", "Error correction", "Cache partitioning"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes time-division multiplexing?", options: ["Uses time slots", "Uses encryption keys", "Uses packet cloning", "Uses file caching"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which technology mainly allows many conversations over one channel?", options: ["Multiplexing methods", "Signal reflection", "Static switching", "Disk mirroring"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes statistical multiplexing?", options: ["Bandwidth shared dynamically", "Bandwidth shared equally", "Bandwidth permanently reserved", "Bandwidth physically isolated"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which challenge mainly motivates multiplexing?", options: ["Efficient channel usage", "Efficient disk cooling", "Efficient GPU rendering", "Efficient battery charging"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes demultiplexing?", options: ["Separates combined streams", "Separates encrypted files", "Separates compiler stages", "Separates cache blocks"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which protocol field mainly supports transport demultiplexing?", options: ["Port numbers", "Pixel values", "Voltage levels", "Disk sectors"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes channel-sharing systems?", options: ["Use multiplexing techniques", "Use GPU acceleration", "Use file indexing", "Use compiler optimization"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which communication type mainly benefits from multiplexing?", options: ["High traffic networks", "Battery management systems", "Standalone processors", "Offline databases"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — BGP
+
+  { prompt: "What is BGP mainly responsible for?", options: ["Interdomain routing", "Disk partitioning", "Video encoding", "Database indexing"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which networks mainly exchange routes using BGP?", options: ["Autonomous systems", "Bluetooth devices", "Local printers", "USB controllers"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes BGP from OSPF?", options: ["BGP routes globally", "BGP encrypts traffic", "BGP compresses packets", "BGP manages switches"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which challenge mainly motivates BGP design?", options: ["Internet-scale routing", "GPU-scale rendering", "Memory-scale caching", "Database-scale indexing"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes path-vector routing?", options: ["Carries route paths", "Carries video frames", "Carries encryption keys", "Carries cache blocks"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly causes BGP convergence delays?", options: ["Large routing updates", "Slow monitor refresh", "Low disk speed", "Weak GPU cooling"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes autonomous systems?", options: ["Independently managed networks", "Independent operating systems", "Independent GPUs", "Independent databases"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which protocol mainly selects routes using policies?", options: ["BGP protocol", "ARP protocol", "DNS protocol", "FTP protocol"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes internet backbone routing?", options: ["Uses BGP extensively", "Uses USB extensively", "Uses Bluetooth extensively", "Uses HDMI extensively"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly affects BGP route selection?", options: ["Path attributes", "Monitor resolution", "Battery voltage", "CPU frequency"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — QoS
+
+  { prompt: "What does QoS mainly manage in networks?", options: ["Traffic prioritization", "Printer installation", "Disk cleanup", "Compiler optimization"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which application mainly requires strong QoS guarantees?", options: ["Real-time voice calls", "Offline spreadsheets", "Static HTML pages", "Text compression"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes latency-sensitive traffic?", options: ["Needs low delay", "Needs more storage", "Needs more cooling", "Needs more encryption"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates QoS mechanisms?", options: ["Network congestion handling", "GPU overheating handling", "Disk fragmentation handling", "Compiler error handling"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes traffic shaping?", options: ["Controls packet flow", "Controls processor heat", "Controls screen brightness", "Controls disk sectors"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which metric mainly measures communication delay?", options: ["Latency metric", "Bandwidth metric", "Checksum metric", "Voltage metric"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes bandwidth reservation?", options: ["Resources allocated ahead", "Processors allocated ahead", "Files allocated ahead", "Caches allocated ahead"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects multimedia networking?", options: ["Maintaining service quality", "Maintaining battery quality", "Maintaining monitor quality", "Maintaining compiler quality"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes packet prioritization?", options: ["Important traffic first", "Important files first", "Important CPUs first", "Important sensors first"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which process mainly reduces jitter effects?", options: ["QoS buffering", "Disk formatting", "Compiler parsing", "GPU rendering"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — Anycast
+
+  { prompt: "What mainly distinguishes anycast routing?", options: ["Packets go nearest", "Packets go broadcast", "Packets go random", "Packets go encrypted"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which addressing mode mainly sends data to all hosts?", options: ["Broadcast routing", "Anycast routing", "Unicast routing", "Multicast routing"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes unicast communication?", options: ["One sender one receiver", "One sender all receivers", "Many senders one receiver", "All senders all receivers"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which service mainly benefits from anycast deployment?", options: ["Global DNS systems", "Printer drivers", "GPU schedulers", "Local compilers"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes multicast routing?", options: ["Targets selected group", "Targets nearest host", "Targets random host", "Targets offline host"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly motivates anycast usage?", options: ["Reducing latency globally", "Reducing monitor brightness", "Reducing CPU heat", "Reducing disk fragmentation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes nearest-node delivery?", options: ["Anycast routing behavior", "Broadcast routing behavior", "ARP routing behavior", "Static routing behavior"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly determines anycast selection?", options: ["Routing distance metrics", "Battery charge metrics", "Monitor refresh metrics", "Disk usage metrics"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes broadcast traffic?", options: ["Delivered to everyone", "Delivered to nearest", "Delivered to selected", "Delivered to random"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects large-scale distributed services?", options: ["Efficient request routing", "Efficient battery routing", "Efficient cache routing", "Efficient monitor routing"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — SDN
+
+  { prompt: "What mainly distinguishes Software-Defined Networking?", options: ["Control separated from forwarding", "Storage separated from memory", "Compiler separated from linker", "Monitor separated from GPU"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which SDN layer mainly decides routing policies?", options: ["Control plane", "Data plane", "Physical plane", "Transport plane"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the SDN data plane?", options: ["Forwards packets only", "Stores databases only", "Compiles programs only", "Encrypts files only"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly motivates SDN adoption?", options: ["Centralized network control", "Centralized GPU cooling", "Centralized disk storage", "Centralized code parsing"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes programmable networking?", options: ["Behavior controlled by software", "Behavior controlled by batteries", "Behavior controlled by monitors", "Behavior controlled by cables"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which protocol mainly enables SDN controller-switch communication?", options: ["OpenFlow protocol", "Bluetooth protocol", "SMTP protocol", "HTML protocol"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes centralized controllers?", options: ["Global network visibility", "Global hardware cooling", "Global memory access", "Global monitor rendering"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly affects traditional networking?", options: ["Rigid hardware control", "Rigid monitor design", "Rigid processor clocks", "Rigid disk sectors"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes flow-based forwarding?", options: ["Rules match traffic", "Rules match batteries", "Rules match compilers", "Rules match displays"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which concept mainly defines advanced SDN architecture?", options: ["Programmable centralized networking", "Programmable disk rendering", "Programmable GPU cooling", "Programmable monitor scaling"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
+ "Object-Oriented Software Development": [
+  // 1000 ELO — basic OOP concepts
+
+  { prompt: "What is an object in Object-Oriented Programming?", options: ["A physical device", "An instance of a class", "A programming loop", "A compiler error"], answer: 1, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a class in OOP?", options: ["Blueprint for objects", "CPU instruction", "Database table", "Network packet"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which concept mainly combines data and methods together?", options: ["Encapsulation", "Compilation", "Serialization", "Iteration"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes methods from variables?", options: ["Methods define behavior", "Methods store memory", "Methods hold constants", "Methods route packets"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which keyword mainly creates an object in many OOP languages?", options: ["new keyword", "class keyword", "this keyword", "void keyword"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes attributes in objects?", options: ["Represent object state", "Represent network routes", "Represent machine code", "Represent database indexes"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which paradigm mainly organizes programs around objects?", options: ["Object-Oriented Programming", "Procedural Programming", "Functional Programming", "Assembly Programming"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes instance variables?", options: ["Belong to objects", "Belong to processors", "Belong to compilers", "Belong to routers"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which concept mainly improves code reusability in OOP?", options: ["Classes and objects", "Manual memory edits", "Packet switching", "Signal modulation"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes object interactions?", options: ["Objects communicate using methods", "Objects communicate using voltages", "Objects communicate using compilers", "Objects communicate using registers"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — pillars of OOP
+
+  { prompt: "Which concept hides internal implementation details?", options: ["Abstraction", "Iteration", "Compilation", "Linking"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes inheritance?", options: ["Child class derives features", "Objects share processors", "Classes encrypt memory", "Programs compress data"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which OOP pillar mainly allows one interface with many forms?", options: ["Polymorphism", "Encapsulation", "Compilation", "Serialization"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes abstraction in software design?", options: ["Shows essential features only", "Shows assembly instructions only", "Shows memory addresses only", "Shows database records only"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which feature mainly prevents direct access to private data?", options: ["Encapsulation mechanisms", "Packet routing", "Loop execution", "Compiler optimization"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hierarchical inheritance?", options: ["One parent many children", "Many parents one child", "No parent classes", "Circular inheritance only"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which principle mainly simplifies complex systems?", options: ["Abstraction principle", "Signal reflection", "Memory paging", "Disk caching"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes runtime polymorphism?", options: ["Method resolved during execution", "Method resolved during typing", "Method resolved during routing", "Method resolved during caching"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which access modifier mainly restricts visibility to a class itself?", options: ["private modifier", "public modifier", "protected modifier", "global modifier"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes reusable software modules?", options: ["Inheritance and abstraction", "Voltage regulation", "Packet fragmentation", "Disk scheduling"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — encapsulation
+
+  { prompt: "What is encapsulation mainly concerned with?", options: ["Data hiding", "Packet routing", "Signal encoding", "Thread synchronization"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which members are mainly hidden from outside access?", options: ["Private members", "Public members", "Static members", "Constant members"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes getter methods?", options: ["Retrieve object data", "Delete object memory", "Compile object code", "Encrypt object traffic"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which methods mainly modify encapsulated data safely?", options: ["Setter methods", "Destructor methods", "Linker methods", "Debugger methods"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes tightly coupled code?", options: ["Highly dependent modules", "Highly encrypted modules", "Highly compressed modules", "Highly parallel modules"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which feature mainly improves maintainability in OOP?", options: ["Encapsulation principle", "Signal amplification", "Packet duplication", "Memory fragmentation"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes information hiding?", options: ["Internal details concealed", "Internal voltages amplified", "Internal packets routed", "Internal registers duplicated"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which modifier mainly exposes methods globally?", options: ["public modifier", "private modifier", "sealed modifier", "final modifier"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes secure object design?", options: ["Controlled data access", "Controlled CPU cooling", "Controlled disk caching", "Controlled packet timing"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which concept mainly protects object integrity?", options: ["Encapsulation rules", "Packet switching", "Signal routing", "Loop unrolling"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — inheritance
+
+  { prompt: "What mainly distinguishes a superclass?", options: ["Parent class", "Network class", "Database class", "Compiler class"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which class mainly inherits features from another?", options: ["Subclass", "Interface", "Compiler", "Namespace"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes code inheritance?", options: ["Reuse parent behavior", "Reuse network routes", "Reuse hardware clocks", "Reuse disk sectors"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which relationship mainly represents inheritance?", options: ["IS-A relationship", "HAS-A relationship", "USES-A relationship", "CALLS-A relationship"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes multilevel inheritance?", options: ["Inheritance chain exists", "Multiple CPUs connected", "Multiple packets routed", "Multiple caches shared"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which keyword mainly accesses parent class constructors in Java?", options: ["super keyword", "this keyword", "extends keyword", "implements keyword"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes inherited methods?", options: ["Available in child class", "Available only in compiler", "Available only in kernel", "Available only in router"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which advantage mainly comes from inheritance?", options: ["Reduced code duplication", "Reduced monitor brightness", "Reduced CPU voltage", "Reduced disk latency"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes single inheritance?", options: ["One direct parent", "One network interface", "One compiler stage", "One routing path"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which concept mainly extends existing functionality?", options: ["Inheritance mechanism", "Signal modulation", "Disk partitioning", "Cache flushing"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — polymorphism
+
+  { prompt: "What is polymorphism mainly associated with?", options: ["Different behavior same interface", "Different voltages same wire", "Different packets same router", "Different files same disk"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which concept mainly enables method overriding?", options: ["Runtime polymorphism", "Disk caching", "Packet fragmentation", "Compiler linking"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes compile-time polymorphism?", options: ["Resolved during compilation", "Resolved during networking", "Resolved during encryption", "Resolved during caching"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which mechanism mainly achieves polymorphism in Java?", options: ["Method overriding", "Packet routing", "Signal reflection", "Disk scheduling"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes dynamic binding?", options: ["Method decided at runtime", "Method decided at routing", "Method decided at encryption", "Method decided at caching"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which feature mainly improves flexibility in OOP?", options: ["Polymorphism feature", "Voltage scaling", "Packet buffering", "Disk mirroring"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes overloaded methods?", options: ["Same name different parameters", "Different name same parameters", "Same name same return only", "Different classes only"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which mechanism mainly supports interface-based programming?", options: ["Polymorphism mechanism", "Thread scheduling", "Cache optimization", "Signal encoding"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes overriding methods?", options: ["Redefine parent behavior", "Redefine network routes", "Redefine cache memory", "Redefine monitor refresh"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which principle mainly supports extensible software design?", options: ["Polymorphism principle", "Voltage regulation", "Disk formatting", "Packet duplication"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — constructors
+
+  { prompt: "What is a constructor mainly used for?", options: ["Object initialization", "Packet forwarding", "Signal compression", "Cache invalidation"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which constructor mainly takes no parameters?", options: ["Default constructor", "Copy constructor", "Parameterized constructor", "Virtual constructor"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes parameterized constructors?", options: ["Accept initialization values", "Accept routing values", "Accept encryption keys", "Accept cache blocks"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which constructor mainly copies another object?", options: ["Copy constructor", "Static constructor", "Virtual constructor", "Null constructor"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes constructor overloading?", options: ["Multiple constructors different parameters", "Multiple routers different paths", "Multiple disks different sectors", "Multiple CPUs different clocks"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which keyword mainly refers to current object instance?", options: ["this keyword", "super keyword", "extends keyword", "class keyword"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes object lifecycle initialization?", options: ["Handled by constructors", "Handled by routers", "Handled by compilers", "Handled by printers"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which concept mainly ensures objects start valid?", options: ["Constructor initialization", "Packet filtering", "Signal modulation", "Cache partitioning"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes automatic constructor invocation?", options: ["Runs during object creation", "Runs during packet routing", "Runs during disk formatting", "Runs during thread scheduling"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which method mainly resembles constructors in cleanup role?", options: ["Destructor method", "Getter method", "Setter method", "Static method"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — overloading
+
+  { prompt: "What mainly distinguishes method overloading?", options: ["Same method different signatures", "Same packet different routes", "Same file different disks", "Same CPU different voltages"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which feature mainly supports compile-time polymorphism?", options: ["Method overloading", "Method overriding", "Thread scheduling", "Packet routing"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes overloaded constructors?", options: ["Different initialization options", "Different network protocols", "Different monitor drivers", "Different compiler passes"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which factor mainly differentiates overloaded methods?", options: ["Parameter list", "Return type only", "Variable names only", "Access modifiers only"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes static polymorphism?", options: ["Resolved at compile time", "Resolved at runtime only", "Resolved by routers", "Resolved by databases"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which advantage mainly comes from overloading?", options: ["Improved readability", "Improved monitor refresh", "Improved signal voltage", "Improved disk rotation"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes overloaded operators in C++?", options: ["Custom operator behavior", "Custom network routing", "Custom disk caching", "Custom GPU rendering"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which mechanism mainly selects overloaded methods?", options: ["Compiler resolution", "Router resolution", "Kernel voltage", "Signal timing"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes ambiguous overloads?", options: ["Compiler cannot decide", "Router cannot decide", "Disk cannot decide", "Cache cannot decide"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which concept mainly simplifies API usage?", options: ["Method overloading", "Packet encapsulation", "Signal reflection", "Disk partitioning"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — overriding
+
+  { prompt: "What is method overriding mainly used for?", options: ["Redefining inherited behavior", "Redefining network topology", "Redefining hardware voltage", "Redefining cache structure"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which polymorphism type mainly uses overriding?", options: ["Runtime polymorphism", "Compile-time polymorphism", "Static linking", "Packet switching"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes overridden methods?", options: ["Same signature inherited", "Different signatures inherited", "No inheritance involved", "No parameters involved"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which keyword mainly prevents overriding in Java?", options: ["final keyword", "static keyword", "void keyword", "const keyword"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes dynamic dispatch?", options: ["Runtime method selection", "Runtime packet selection", "Runtime signal selection", "Runtime cache selection"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which feature mainly supports extensibility in frameworks?", options: ["Method overriding", "Voltage scaling", "Disk partitioning", "Packet buffering"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes virtual methods?", options: ["Can be overridden", "Can encrypt packets", "Can compress disks", "Can control voltages"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly occurs without proper overriding?", options: ["Incorrect inherited behavior", "Incorrect GPU cooling", "Incorrect packet timing", "Incorrect disk rotation"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes superclass references to subclass objects?", options: ["Enable polymorphism", "Enable caching", "Enable routing", "Enable encryption"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which mechanism mainly supports late binding?", options: ["Method overriding", "Static compilation", "Packet fragmentation", "Signal routing"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — abstract classes
+
+  { prompt: "What mainly distinguishes an abstract class?", options: ["Cannot instantiate directly", "Cannot inherit classes", "Cannot define methods", "Cannot hold variables"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which method mainly lacks implementation in abstract classes?", options: ["Abstract method", "Static method", "Getter method", "Setter method"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes interfaces from abstract classes?", options: ["Interfaces define contracts", "Interfaces manage memory", "Interfaces route packets", "Interfaces compile code"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which concept mainly enforces subclass behavior?", options: ["Abstract methods", "Disk scheduling", "Packet duplication", "Signal modulation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes partially implemented templates?", options: ["Abstract classes", "Static libraries", "Kernel modules", "Network sockets"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which keyword mainly declares abstract methods in Java?", options: ["abstract keyword", "virtual keyword", "sealed keyword", "const keyword"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes implementation inheritance?", options: ["Uses abstract classes", "Uses packet routing", "Uses cache partitioning", "Uses voltage control"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which principle mainly benefits framework design?", options: ["Abstract contracts", "Disk mirroring", "Signal boosting", "Packet filtering"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes abstract class hierarchies?", options: ["Common behavior shared", "Common voltages shared", "Common packets shared", "Common sectors shared"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which feature mainly increases software extensibility?", options: ["Abstract design patterns", "Monitor calibration", "Processor scaling", "Disk formatting"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — SOLID principles
+
+  { prompt: "What does the S in SOLID mainly represent?", options: ["Single Responsibility Principle", "Secure Routing Principle", "Signal Reflection Principle", "Static Runtime Principle"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the Open/Closed Principle?", options: ["Extend without modifying", "Encrypt without routing", "Compile without linking", "Store without caching"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which SOLID principle mainly concerns substitutability?", options: ["Liskov Substitution Principle", "Single Responsibility Principle", "Dependency Inversion Principle", "Interface Segregation Principle"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the Interface Segregation Principle?", options: ["Small focused interfaces", "Small focused routers", "Small focused caches", "Small focused disks"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which principle mainly discourages tight coupling?", options: ["Dependency Inversion Principle", "Packet Duplication Principle", "Signal Reflection Principle", "Disk Rotation Principle"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes high-quality OOP architecture?", options: ["Follows SOLID principles", "Follows voltage regulations", "Follows packet timing", "Follows monitor scaling"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which design principle mainly improves maintainability?", options: ["Single Responsibility Principle", "Disk Fragmentation Principle", "Signal Amplification Principle", "Packet Mirroring Principle"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes dependency inversion?", options: ["Depend on abstractions", "Depend on processors", "Depend on cables", "Depend on voltages"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly results from violating SOLID principles?", options: ["Rigid hard-to-maintain code", "Rigid network cables", "Rigid disk sectors", "Rigid voltage supplies"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes scalable software systems?", options: ["Loose coupling and abstraction", "Loose packet routing", "Loose voltage regulation", "Loose monitor mounting"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Operating Systems": [
-    { prompt: "What is the core component of an Operating System?", options: ["Shell", "Kernel", "GUI", "Compiler"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "Which of these is a non-preemptive CPU scheduling algorithm?", options: ["Round Robin", "FCFS (First Come First Serve)", "SRTF", "Multilevel Feedback Queue"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is the term for a program in execution?", options: ["Thread", "Process", "Task", "Instruction"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What synchronization tool is used to solve the critical section problem using an integer variable?", options: ["Mutex", "Monitor", "Semaphore", "Lock"], answer: 2, difficulty: 1300, timeLimit: 20 },
-    { prompt: "Which is NOT a necessary Coffman condition for deadlock?", options: ["Mutual exclusion", "Hold and wait", "No preemption", "Starvation"], answer: 3, difficulty: 1400, timeLimit: 20 },
-    { prompt: "What memory management scheme eliminates external fragmentation?", options: ["Paging", "Segmentation", "Contiguous Allocation", "Swapping"], answer: 0, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What page replacement algorithm suffers from Belady's Anomaly?", options: ["LRU", "Optimal", "FIFO", "LFU"], answer: 2, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is a Translation Lookaside Buffer (TLB) used for?", options: ["Storing recent page table entries", "Caching disk blocks", "Storing CPU registers", "Managing network packets"], answer: 0, difficulty: 1700, timeLimit: 20 },
-    { prompt: "Which algorithm is also known as the Banker's Algorithm?", options: ["Deadlock Avoidance", "Deadlock Detection", "CPU Scheduling", "Page Replacement"], answer: 0, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is thrashing in the context of virtual memory?", options: ["CPU spending more time paging than executing", "Disk head crashing", "Memory leak in user process", "Deadlock between two processes"], answer: 0, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — fundamentals
+
+  { prompt: "What is the main role of an Operating System?", options: ["Design websites", "Manage hardware and software", "Create databases", "Compile programs"], answer: 1, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which component is considered the heart of an OS?", options: ["Kernel", "Shell", "Driver", "Browser"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes system software?", options: ["Runs hardware resources", "Edits images only", "Builds websites only", "Stores videos only"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which OS feature mainly allows multiple programs to run?", options: ["Multitasking", "Formatting", "Compilation", "Encryption"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What is the shell mainly responsible for?", options: ["User interaction", "CPU cooling", "Memory wiring", "Disk rotation"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which resource is mainly managed by the scheduler?", options: ["CPU time", "Monitor size", "Mouse speed", "Speaker volume"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a process?", options: ["Program in execution", "Stored file only", "Network cable", "Printed document"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which type of OS mainly guarantees response timing?", options: ["Real-time OS", "Batch OS", "Distributed OS", "Network OS"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes device drivers?", options: ["Control hardware devices", "Design user interfaces", "Encrypt internet traffic", "Compile applications"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which operation mainly loads a program into memory?", options: ["Process creation", "Disk formatting", "Signal routing", "Packet switching"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — scheduling basics
+
+  { prompt: "Which scheduling algorithm mainly serves jobs in arrival order?", options: ["FCFS scheduling", "Round Robin", "Priority scheduling", "Shortest Job First"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes preemptive scheduling?", options: ["Process interruption allowed", "No interrupts allowed", "No CPU sharing", "No queues used"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which scheduling algorithm mainly uses time slices?", options: ["Round Robin", "FCFS", "Shortest Job First", "FIFO"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes turnaround time?", options: ["Arrival to completion", "CPU execution only", "Disk waiting only", "Memory allocation only"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which metric mainly measures waiting in ready queue?", options: ["Waiting time", "Burst time", "Seek time", "Swap time"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes burst time?", options: ["CPU execution duration", "Disk transfer duration", "Memory access duration", "Network delay duration"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which scheduler mainly selects jobs from disk into memory?", options: ["Long-term scheduler", "Short-term scheduler", "Medium scheduler", "Priority scheduler"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes context switching?", options: ["Switching CPU state", "Switching monitor cables", "Switching disk sectors", "Switching network packets"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which scheduling algorithm mainly favors short jobs?", options: ["Shortest Job First", "FCFS", "Round Robin", "FIFO"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes starvation in scheduling?", options: ["Indefinite waiting", "Memory corruption", "Disk overheating", "Network congestion"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — processes and threads
+
+  { prompt: "What mainly distinguishes a thread from a process?", options: ["Threads share memory", "Threads own disks", "Threads control routers", "Threads compile code"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which state mainly indicates a process waiting for CPU?", options: ["Ready state", "Blocked state", "Exit state", "Suspend state"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a blocked process?", options: ["Waiting for event", "Using full CPU", "Running compiler", "Formatting disks"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which structure mainly stores process information?", options: ["Process Control Block", "Page directory", "Disk table", "Packet header"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes multithreading?", options: ["Concurrent execution paths", "Multiple hard drives", "Multiple networks", "Multiple monitors"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which process state mainly means currently executing?", options: ["Running state", "Ready state", "Waiting state", "New state"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes parent and child processes?", options: ["Created through fork/spawn", "Connected by routers", "Stored in caches", "Controlled by drivers"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which mechanism mainly allows process communication?", options: ["IPC mechanisms", "Disk partitions", "Voltage regulators", "Display adapters"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes concurrency?", options: ["Tasks overlap execution", "Tasks use one monitor", "Tasks avoid memory", "Tasks avoid CPU"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which issue mainly occurs with uncontrolled shared access?", options: ["Race condition", "Page fault", "Disk crash", "Signal loss"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — synchronization
+
+  { prompt: "What mainly distinguishes a semaphore?", options: ["Synchronization variable", "Memory register", "Disk partition", "Network cable"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which synchronization tool mainly provides mutual exclusion?", options: ["Mutex lock", "Compiler pass", "Disk cache", "Packet filter"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the critical section problem?", options: ["Shared resource access", "Disk scheduling", "Monitor rendering", "Packet switching"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which operation mainly decreases semaphore value?", options: ["wait operation", "signal operation", "fork operation", "yield operation"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes busy waiting?", options: ["Continuous CPU checking", "Continuous disk formatting", "Continuous packet routing", "Continuous monitor refresh"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which mechanism mainly avoids simultaneous resource use?", options: ["Mutual exclusion", "Round Robin", "Paging", "Spooling"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes monitors in synchronization?", options: ["High-level synchronization construct", "Display hardware only", "Audio hardware only", "Network hardware only"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which issue mainly results from unsynchronized threads?", options: ["Race conditions", "File compression", "Monitor flickering", "Voltage drops"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes producer-consumer problems?", options: ["Shared buffer coordination", "Shared monitor usage", "Shared disk repair", "Shared printer color"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which synchronization primitive mainly coordinates thread access?", options: ["Semaphore primitive", "Compiler primitive", "Display primitive", "Voltage primitive"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — deadlocks
+
+  { prompt: "What mainly distinguishes a deadlock?", options: ["Processes wait forever", "Processors overheat", "Disks lose sectors", "Networks lose packets"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which Coffman condition mainly requires exclusive access?", options: ["Mutual exclusion", "Hold and wait", "No preemption", "Circular wait"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes circular wait?", options: ["Processes form dependency cycle", "Processes share disks", "Processes share compilers", "Processes share printers"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which approach mainly prevents deadlocks proactively?", options: ["Deadlock prevention", "Deadlock recovery", "Deadlock detection", "Deadlock ignoring"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes deadlock avoidance?", options: ["Avoid unsafe states", "Avoid monitor usage", "Avoid cache memory", "Avoid disk scheduling"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which algorithm mainly handles safe resource allocation?", options: ["Banker's Algorithm", "Round Robin", "FIFO", "LRU"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes starvation from deadlock?", options: ["One process waits indefinitely", "All processes terminate", "All memory erased", "All packets lost"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which condition mainly allows resource retention while waiting?", options: ["Hold and wait", "Circular wait", "Mutual exclusion", "No preemption"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes unsafe system states?", options: ["Deadlock may occur", "CPU may cool", "Disk may compress", "Packets may encrypt"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which technique mainly recovers from deadlock?", options: ["Terminate processes", "Increase monitor size", "Expand hard drives", "Upgrade routers"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — memory management
+
+  { prompt: "What mainly distinguishes paging?", options: ["Fixed-size memory blocks", "Variable-size memory blocks", "Disk-only allocation", "Thread-only allocation"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which memory issue mainly disappears with paging?", options: ["External fragmentation", "Internal fragmentation", "CPU starvation", "Disk corruption"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes segmentation?", options: ["Variable-sized segments", "Fixed disk sectors", "Static network routes", "Constant cache blocks"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which structure mainly maps virtual to physical memory?", options: ["Page table", "Disk queue", "Packet table", "Monitor table"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes virtual memory?", options: ["Uses disk as extension", "Uses monitor as extension", "Uses router as extension", "Uses printer as extension"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which event mainly occurs when page absent in RAM?", options: ["Page fault", "Cache hit", "Thread yield", "Disk seek"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes contiguous allocation?", options: ["Single continuous block", "Multiple page frames", "Distributed segments", "Thread partitions"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which fragmentation mainly wastes space inside blocks?", options: ["Internal fragmentation", "External fragmentation", "Virtual fragmentation", "Logical fragmentation"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes swapping?", options: ["Move processes between RAM and disk", "Move packets between routers", "Move signals between wires", "Move files between monitors"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which technique mainly enables larger logical memory?", options: ["Virtual memory", "Disk mirroring", "Packet routing", "Thread pooling"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — page replacement
+
+  { prompt: "What mainly distinguishes FIFO page replacement?", options: ["Oldest page removed", "Least used page removed", "Random page removed", "Newest page removed"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which algorithm mainly replaces least recently used page?", options: ["LRU algorithm", "FIFO algorithm", "Optimal algorithm", "FCFS algorithm"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Belady's anomaly?", options: ["More frames more faults", "More CPU more speed", "More disks more corruption", "More packets more encryption"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which page replacement algorithm mainly gives ideal results?", options: ["Optimal algorithm", "FIFO algorithm", "LRU algorithm", "Clock algorithm"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes page hit ratio?", options: ["Successful page accesses", "Successful disk formats", "Successful packet routes", "Successful thread swaps"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which structure mainly speeds page translation?", options: ["TLB cache", "Disk queue", "Monitor buffer", "Printer spool"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the clock algorithm?", options: ["Approximate LRU replacement", "Approximate CPU cooling", "Approximate disk repair", "Approximate packet switching"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which metric mainly measures paging efficiency?", options: ["Page fault rate", "Disk RPM", "CPU voltage", "Monitor brightness"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes demand paging?", options: ["Pages loaded when needed", "Pages loaded at shutdown", "Pages loaded during routing", "Pages loaded during printing"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which issue mainly causes excessive paging activity?", options: ["Thrashing problem", "Deadlock problem", "Signal reflection", "Packet collision"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — file systems and TLB
+
+  { prompt: "What mainly distinguishes a file system?", options: ["Organizes stored files", "Organizes monitor pixels", "Organizes network routes", "Organizes compiler passes"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which structure mainly stores file metadata?", options: ["Inode structure", "Semaphore queue", "Packet frame", "Thread block"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the TLB?", options: ["Caches page mappings", "Caches disk sectors", "Caches monitor frames", "Caches packet routes"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which allocation method mainly uses linked disk blocks?", options: ["Linked allocation", "Contiguous allocation", "Indexed allocation", "Segment allocation"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes indexed allocation?", options: ["Uses index block", "Uses CPU registers", "Uses GPU memory", "Uses printer queues"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly occurs from repeated file deletion?", options: ["Disk fragmentation", "CPU starvation", "Signal attenuation", "Packet duplication"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes journaling file systems?", options: ["Log updates before write", "Compress updates before write", "Encrypt updates before write", "Mirror updates before write"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which operation mainly moves file pointer position?", options: ["Seek operation", "Wait operation", "Yield operation", "Fork operation"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes hierarchical directories?", options: ["Tree-like organization", "Circular organization", "Linear organization", "Random organization"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which cache mainly reduces page table access time?", options: ["Translation Lookaside Buffer", "Disk scheduler", "Packet buffer", "Print spooler"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — advanced scheduling/deadlock
+
+  { prompt: "What mainly distinguishes multilevel feedback queues?", options: ["Processes change queues", "Processes change monitors", "Processes change disks", "Processes change routers"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which scheduling algorithm mainly minimizes average waiting time?", options: ["Shortest Job First", "Round Robin", "FCFS", "Priority FIFO"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes priority inversion?", options: ["Low priority blocks high", "High priority blocks low", "All priorities equal", "No priorities exist"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which protocol mainly solves priority inversion?", options: ["Priority inheritance", "Packet switching", "Disk mirroring", "Signal routing"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes deadlock detection?", options: ["Find existing deadlocks", "Prevent all deadlocks", "Avoid all scheduling", "Avoid all paging"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which graph mainly models resource allocation?", options: ["Resource allocation graph", "Binary tree", "Routing graph", "Flowchart graph"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes safe states in Banker’s Algorithm?", options: ["Completion sequence exists", "No memory exists", "No CPU exists", "No scheduler exists"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which scheduling approach mainly prevents starvation?", options: ["Aging technique", "Disk formatting", "Page replacement", "Signal modulation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes medium-term schedulers?", options: ["Manage swapping processes", "Manage network packets", "Manage GPU rendering", "Manage disk cooling"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which condition mainly breaks deadlock cycles?", options: ["Resource preemption", "Signal duplication", "Packet mirroring", "Disk replication"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — advanced virtual memory/concepts
+
+  { prompt: "What mainly distinguishes thrashing?", options: ["Excessive paging activity", "Excessive CPU cooling", "Excessive disk spinning", "Excessive packet routing"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which metric mainly evaluates TLB effectiveness?", options: ["TLB hit ratio", "Disk seek ratio", "CPU voltage ratio", "Packet loss ratio"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes working set models?", options: ["Estimate active pages", "Estimate active CPUs", "Estimate active routers", "Estimate active monitors"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which memory strategy mainly reduces thrashing?", options: ["Working set allocation", "Disk fragmentation", "Packet buffering", "Signal amplification"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes copy-on-write optimization?", options: ["Delay copying until modification", "Copy during boot", "Copy during routing", "Copy during shutdown"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which technique mainly allows process isolation in virtualization?", options: ["Virtual machines", "Disk partitions", "Signal repeaters", "Packet analyzers"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes monolithic kernels?", options: ["Services inside kernel space", "Services outside processor", "Services outside memory", "Services outside storage"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which architecture mainly minimizes kernel functionality?", options: ["Microkernel architecture", "Monolithic architecture", "Batch architecture", "Pipeline architecture"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes distributed operating systems?", options: ["Multiple machines appear unified", "Multiple disks appear unified", "Multiple monitors appear unified", "Multiple compilers appear unified"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which mechanism mainly isolates user and kernel execution?", options: ["Dual mode operation", "Packet encapsulation", "Disk buffering", "Signal modulation"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Operations Research": [
-    { prompt: "What is Operations Research (OR)?", options: ["Do surgery", "Optimize systems", "Research machines", "Accounting type"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What is 'Linear Programming' (LP)?", options: ["Code line", "Optimize model", "TV schedule", "Geometry concept"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "In a Linear Programming model, what is the 'Objective Function'?", options: ["Company goal", "Optimize equation", "Resource limit", "Software used"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "In a Linear Programming model, what are 'Constraints'?", options: ["Tie down", "Linear limits", "Solve variables", "Final answer"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What is the 'Simplex Method'?", options: ["Easy way", "Optimize polygon", "Code type", "Draw chart"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "In operations research, the transportation problem finds:", options: ["The fastest route for one vehicle", "Minimum-cost shipments from sources to destinations", "Traffic signal timings for a city", "Road geometry for highway design"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is 'Queuing Theory'?", options: ["Pool cue", "Study queues", "Alphabet study", "Traffic light"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is a 'Network Flow Model'?", options: ["Plumbing diagram", "Optimize flow", "Social graph", "Weather map"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What does PERT stand for in project management?", options: ["Error report", "Project review", "Estimate tool", "Energy rating"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Dynamic Programming' in OR?", options: ["Fast coding", "Breaking down problems", "Quick updates", "Simpler steps"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+  // 1000 ELO — OR fundamentals
+
+  { prompt: "What is the primary goal of Operations Research?", options: ["Write programs", "Optimize decision-making", "Design hardware", "Store data"], answer: 1, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which mathematical technique is central to Operations Research?", options: ["Optimization", "Encryption", "Compilation", "Rendering"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a decision variable?", options: ["Unknown controllable quantity", "Fixed hardware value", "Programming keyword", "Network packet"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which component mainly defines the goal in an OR model?", options: ["Objective function", "Constraint matrix", "Feasible region", "Slack variable"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes constraints in optimization?", options: ["Restrictions on solutions", "Profit calculations", "Programming errors", "Database indexes"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which OR field mainly studies waiting lines?", options: ["Queuing theory", "Graph theory", "Game theory", "Inventory theory"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a feasible solution?", options: ["Satisfies all constraints", "Maximizes all profits", "Uses minimum variables", "Contains no equations"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which OR model mainly handles shipment allocation?", options: ["Transportation model", "Assignment model", "Game model", "Inventory model"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes optimization problems?", options: ["Best possible solution", "Fastest hardware", "Largest memory", "Smallest code"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which type of programming mainly uses linear equations?", options: ["Linear programming", "Dynamic programming", "Integer programming", "Nonlinear programming"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — linear programming basics
+
+  { prompt: "What mainly distinguishes Linear Programming?", options: ["Linear objective and constraints", "Binary variables only", "Random equations", "Infinite solutions only"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which graphical feature mainly represents all feasible solutions?", options: ["Feasible region", "Objective plane", "Constraint tree", "Profit graph"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes an optimal solution?", options: ["Best objective value", "Most variables", "Least constraints", "Largest graph"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which method mainly solves LP problems systematically?", options: ["Simplex Method", "Binary Search", "Depth First Search", "Backtracking"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes slack variables?", options: ["Convert inequalities to equalities", "Increase profits", "Reduce constraints", "Eliminate variables"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which type of constraint mainly uses ≤ inequality?", options: ["Resource limitation", "Assignment restriction", "Binary restriction", "Integer restriction"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes infeasible solutions?", options: ["Violate constraints", "Maximize profit", "Contain too many variables", "Contain no equations"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which graph point mainly contains the LP optimum?", options: ["Corner point", "Center point", "Random point", "Boundary midpoint"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes bounded solutions?", options: ["Finite optimal value", "Infinite variables", "No constraints", "Unlimited profits only"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which LP characteristic mainly requires proportionality?", options: ["Linearity assumption", "Feasibility assumption", "Integrality assumption", "Probability assumption"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — simplex and duality
+
+  { prompt: "What mainly distinguishes a basic feasible solution?", options: ["Feasible corner solution", "Largest variable value", "Infinite solution", "Random feasible point"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which variable mainly enters the basis in Simplex?", options: ["Improves objective most", "Has largest coefficient only", "Has smallest value", "Violates constraints"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes degeneracy in LP?", options: ["Basic variable equals zero", "No feasible region", "Infinite constraints", "Negative profits"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which concept mainly relates primal and dual LP problems?", options: ["Duality theory", "Probability theory", "Graph theory", "Queuing theory"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes an unbounded LP solution?", options: ["Objective grows indefinitely", "No feasible solution", "No variables exist", "All constraints equal zero"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which method mainly handles artificial variables?", options: ["Big M Method", "Kruskal Method", "Hungarian Method", "Northwest Method"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the dual problem?", options: ["Alternative LP formulation", "Graphical solution only", "Integer-only model", "Randomized model"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which simplex condition mainly indicates optimality?", options: ["No improving coefficients", "All variables equal", "No slack variables", "Maximum constraints"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes shadow price?", options: ["Constraint value sensitivity", "Transportation cost", "Inventory level", "Machine depreciation"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which LP property mainly guarantees convex feasible regions?", options: ["Linear constraints", "Binary variables", "Random objectives", "Infinite dimensions"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — transportation and assignment
+
+  { prompt: "What mainly distinguishes the transportation problem?", options: ["Minimize shipping cost", "Maximize game payoff", "Schedule CPU tasks", "Compress data"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which method mainly provides an initial transportation solution?", options: ["Northwest Corner Method", "Simplex Method", "Hungarian Method", "Bellman-Ford"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a balanced transportation problem?", options: ["Supply equals demand", "Costs are zero", "All routes active", "Profits are equal"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which transportation method mainly uses penalties?", options: ["Vogel's Approximation Method", "Simplex Method", "Branch and Bound", "FIFO"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes the assignment problem?", options: ["One-to-one allocation", "Multiple product shipping", "Random variable analysis", "Machine learning"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which algorithm mainly solves assignment problems?", options: ["Hungarian Algorithm", "Dijkstra Algorithm", "Prim Algorithm", "Simplex Algorithm"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes degeneracy in transportation models?", options: ["Too few allocations", "Too many constraints", "Negative costs", "Infinite demand"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which transportation concept mainly represents unused routes?", options: ["Empty cells", "Slack variables", "Artificial variables", "Decision trees"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes dummy rows or columns?", options: ["Balance supply and demand", "Reduce computation", "Increase profit", "Add variables"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which method mainly tests transportation optimality?", options: ["MODI Method", "Kruskal Method", "Simplex Method", "FIFO Method"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — network models
+
+  { prompt: "What mainly distinguishes network flow models?", options: ["Flow through connected nodes", "Storage optimization only", "Statistical testing only", "Sorting operations"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which algorithm mainly finds shortest paths?", options: ["Dijkstra's Algorithm", "Hungarian Algorithm", "Simplex Method", "Northwest Method"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a spanning tree?", options: ["Connects all nodes without cycles", "Contains every edge", "Contains weighted loops", "Contains directed edges only"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which algorithm mainly builds minimum spanning trees?", options: ["Prim's Algorithm", "Simplex Method", "Bellman Equation", "Johnson Rule"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes project scheduling networks?", options: ["Activity dependencies", "Transportation routes", "Inventory flows", "Profit equations"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which technique mainly estimates project duration probabilistically?", options: ["PERT", "EOQ", "Simplex", "MODI"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes CPM?", options: ["Critical activity scheduling", "Transportation balancing", "Assignment optimization", "Demand forecasting"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which project path mainly determines total duration?", options: ["Critical path", "Shortest path", "Slack path", "Random path"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes slack time?", options: ["Allowable activity delay", "Machine breakdown", "Inventory shortage", "Demand fluctuation"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which network concept mainly represents precedence relationships?", options: ["Directed edges", "Matrix inversion", "Histogram plots", "Regression lines"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — inventory and queuing
+
+  { prompt: "What mainly distinguishes inventory models?", options: ["Control stock levels", "Optimize network flow", "Schedule processors", "Balance equations"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which inventory model mainly minimizes ordering and holding costs?", options: ["EOQ model", "PERT model", "Simplex model", "Assignment model"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes reorder level?", options: ["Inventory replenishment trigger", "Profit threshold", "Queue limit", "Demand forecast"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which inventory cost mainly depends on stored items?", options: ["Holding cost", "Ordering cost", "Shortage cost", "Transportation cost"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes queuing systems?", options: ["Customers waiting for service", "Products waiting shipment", "Machines waiting repair", "Graphs waiting traversal"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which parameter mainly represents arrival frequency?", options: ["Arrival rate", "Service rate", "Holding cost", "Slack time"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes service rate in queues?", options: ["Customers served per unit time", "Orders placed per day", "Projects completed yearly", "Machines produced hourly"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which queue discipline mainly serves first arrivals first?", options: ["FIFO discipline", "LIFO discipline", "Priority discipline", "Random discipline"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes utilization factor in queuing?", options: ["Fraction of busy time", "Inventory turnover", "Profit margin", "Transportation balance"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which queue model mainly assumes Poisson arrivals?", options: ["M/M/1 model", "EOQ model", "PERT model", "CPM model"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — game theory and decision theory
+
+  { prompt: "What mainly distinguishes game theory?", options: ["Strategic decision interactions", "Inventory balancing", "Shortest routes", "Network flow"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which game characteristic mainly defines zero-sum games?", options: ["One player's gain equals other's loss", "All players gain equally", "No competition exists", "Strategies are random"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a saddle point?", options: ["Stable game solution", "Queue bottleneck", "Inventory shortage", "Critical activity"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which strategy mainly uses probability distributions?", options: ["Mixed strategy", "Pure strategy", "Dominant strategy", "Greedy strategy"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes decision theory under uncertainty?", options: ["Unknown probabilities", "Known deterministic outcomes", "Fixed network paths", "Balanced transportation"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which criterion mainly chooses maximum of minimum payoffs?", options: ["Maximin criterion", "Minimax regret", "Expected value", "Hurwicz criterion"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes regret in decision theory?", options: ["Opportunity loss", "Inventory shortage", "Queue delay", "Network congestion"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which approach mainly assumes rational players?", options: ["Game theory", "Queue theory", "Inventory theory", "Markov analysis"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes dominant strategies?", options: ["Best regardless of opponent", "Randomized probabilities", "Balanced payoffs", "Shortest path choice"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which decision rule mainly minimizes worst regret?", options: ["Minimax regret", "Maximax", "Expected value", "FIFO"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — dynamic programming and simulation
+
+  { prompt: "What mainly distinguishes dynamic programming?", options: ["Break problems into stages", "Random search approach", "Linear-only equations", "Infinite variables"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which principle mainly underlies dynamic programming?", options: ["Optimality principle", "Randomness principle", "Priority principle", "Greedy principle"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes state variables?", options: ["Describe system condition", "Store inventory cost", "Represent constraints", "Represent routes"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which method mainly imitates real-world systems experimentally?", options: ["Simulation", "Simplex", "Hungarian", "MODI"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Monte Carlo simulation?", options: ["Uses random sampling", "Uses deterministic equations", "Uses shortest paths", "Uses queue balancing"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which DP property mainly avoids repeated computation?", options: ["Overlapping subproblems", "Linear constraints", "Random variables", "Integer restrictions"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes recursive optimization?", options: ["Stage-by-stage decisions", "One-step balancing", "Pure probability", "Single equation solving"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which simulation output mainly estimates system performance?", options: ["Statistical measures", "Constraint matrices", "Basis vectors", "Corner points"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes stochastic models?", options: ["Contain randomness", "Use fixed constants only", "Contain no variables", "Use no probabilities"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which DP application mainly solves shortest path recursively?", options: ["Multistage decision process", "Transportation balancing", "Queue optimization", "Inventory holding"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800–1900 ELO — advanced OR
+
+  { prompt: "What mainly distinguishes integer programming?", options: ["Variables restricted to integers", "Constraints restricted to integers", "Objectives restricted to integers", "Graphs restricted to integers"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which method mainly solves integer programming exactly?", options: ["Branch and Bound", "Simplex only", "Hungarian only", "Northwest Corner"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes nonlinear programming?", options: ["Nonlinear objective or constraints", "Integer-only variables", "Randomized variables", "Binary-only constraints"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which optimization property mainly guarantees local equals global optimum?", options: ["Convexity", "Randomness", "Integrality", "Duality"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes sensitivity analysis?", options: ["Effect of parameter changes", "Shortest route calculation", "Assignment balancing", "Demand forecasting"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which OR concept mainly studies competitive equilibrium?", options: ["Nash equilibrium", "EOQ equilibrium", "PERT equilibrium", "Slack equilibrium"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Markov decision processes?", options: ["Probabilistic state transitions", "Deterministic shortest paths", "Linear objective functions", "Fixed transportation routes"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which optimization technique mainly uses Lagrange multipliers?", options: ["Constrained nonlinear optimization", "Transportation optimization", "Queue balancing", "Assignment optimization"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Pareto optimality?", options: ["No one improves without hurting another", "Maximum single profit", "Minimum transportation cost", "Shortest project duration"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which advanced OR approach mainly handles multiple conflicting objectives?", options: ["Multi-objective optimization", "Simplex optimization", "FIFO scheduling", "Single-stage optimization"], answer: 0, difficulty: 1900, timeLimit: 20 }
+],
   "Parallel Computer Architecture and Programming": [
-    { prompt: "What is a 'Thread'?", options: ["String piece", "Independent code", "CPU unit", "Network line"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What does SMP stand for?", options: ["Single core", "Shared memory", "System power", "Symmetric processors"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is a 'Race Condition'?", options: ["Running fast", "Shared data clash", "CPU heat", "Fast code"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is used to prevent race conditions by ensuring only one thread accesses a resource at a time?", options: ["A faster CPU", "A Mutex (Mutual Exclusion) or Lock", "A network switch", "A compiler"], answer: 1, difficulty: 1300, timeLimit: 20 },
-    { prompt: "Deadlock occurs when processes:", options: ["Use a broken physical lock", "Wait forever on resources held by each other", "Crash due to syntax errors", "Run an infinite loop without resources"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "In Flynn's taxonomy, what does SIMD stand for?", options: ["Single Instruction, Multiple Data", "Simple Instruction, Main Data", "System Input, Multiple Devices", "Single Integer, Math Data"], answer: 0, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is 'Cache Coherence'?", options: ["Cache read", "Uniform data", "Cache delete", "Cache boost"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What does Amdahl's Law calculate?", options: ["Memory use", "Max speedup", "Network speed", "Disk time"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What is 'Message Passing' in parallel computing?", options: ["Email send", "Process talk", "Debug mode", "Code notes"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is the 'False Sharing' performance issue?", options: ["Fake data", "Cache clash", "Software pirate", "Memory use"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+
+  // 1000 ELO — fundamentals
+
+  { prompt: "What is the main goal of parallel computing?", options: ["Faster execution", "Larger monitors", "More storage", "Better graphics"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What is a 'Thread'?", options: ["Execution unit", "Hard drive", "Network cable", "CPU socket"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which hardware feature enables parallel execution on CPUs?", options: ["Multiple cores", "Larger screens", "SSD storage", "USB ports"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What does 'Parallel Processing' mean?", options: ["Tasks simultaneously", "Tasks sequentially", "Offline execution", "Manual execution"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a multicore processor?", options: ["Many CPU cores", "Many hard disks", "Many monitors", "Many printers"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which system mainly shares memory among processors?", options: ["Shared-memory system", "Standalone system", "Offline system", "Tape-storage system"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What is concurrency mainly about?", options: ["Overlapping tasks", "Single execution", "Disk storage", "Data encryption"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which component mainly executes instructions?", options: ["Processor core", "Network card", "Sound card", "Cooling fan"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a process?", options: ["Own memory space", "Shared keyboard", "Shared monitor", "Shared printer"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which computing style mainly splits work across processors?", options: ["Parallel computing", "Sequential computing", "Analog computing", "Offline computing"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO — synchronization basics
+
+  { prompt: "What is a 'Race Condition'?", options: ["Shared-data conflict", "Fast processor", "Disk failure", "Syntax error"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which tool mainly protects shared data?", options: ["Mutex lock", "Audio driver", "Network cable", "Compiler flag"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What is a 'Critical Section'?", options: ["Shared-code region", "Broken processor", "Disk partition", "CPU register"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly causes a deadlock?", options: ["Circular waiting", "Fast execution", "Extra memory", "Large cache"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which primitive mainly counts available resources?", options: ["Semaphore", "Compiler", "Debugger", "Pipeline"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes thread-safe code?", options: ["Safe concurrency", "Fast graphics", "Small memory", "Large storage"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which issue mainly occurs without synchronization?", options: ["Data inconsistency", "Better caching", "Lower latency", "Code reuse"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes busy waiting?", options: ["Continuous checking", "Sleeping thread", "Disk buffering", "Memory paging"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which mechanism mainly orders thread execution?", options: ["Synchronization", "Compilation", "Compression", "Encryption"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes starvation?", options: ["No CPU access", "No memory", "No cache", "No storage"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO — architectures and taxonomy
+
+  { prompt: "Which Flynn category uses one instruction on many data items?", options: ["SIMD", "MISD", "SISD", "MIMD"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes MIMD systems?", options: ["Multiple instructions", "Single instruction", "No processors", "No memory"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which architecture mainly powers GPUs?", options: ["SIMD execution", "Sequential execution", "Scalar execution", "Offline execution"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes distributed memory systems?", options: ["Private memories", "Shared cache", "Single processor", "Single thread"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which communication style mainly suits distributed systems?", options: ["Message passing", "Global variables", "Shared registers", "Disk sharing"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes SIMD processing?", options: ["Same operation", "Random operation", "Sequential operation", "Independent cache"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which device mainly accelerates vector operations?", options: ["GPU", "SSD", "Printer", "Router"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cluster computing?", options: ["Connected computers", "Single computer", "Single core", "No network"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which architecture mainly uses explicit communication?", options: ["Distributed memory", "Shared memory", "Single-core", "Embedded-only"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly measures parallel scalability?", options: ["Performance growth", "Screen size", "Disk usage", "Power button"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO — OpenMP and MPI
+
+  { prompt: "Which API mainly supports shared-memory parallelism?", options: ["OpenMP", "HTML", "CSS", "SQL"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes MPI programming?", options: ["Message passing", "Shared variables", "Sequential execution", "Single thread"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which OpenMP directive mainly creates threads?", options: ["parallel", "typedef", "switch", "include"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What does MPI_Send mainly do?", options: ["Transmit data", "Allocate memory", "Compile code", "Lock cache"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which MPI function mainly receives messages?", options: ["MPI_Recv", "MPI_Print", "MPI_File", "MPI_Close"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes master-worker models?", options: ["Central scheduling", "Shared cache", "Single process", "No communication"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which OpenMP clause mainly parallelizes loops?", options: ["for", "malloc", "return", "extern"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes MPI ranks?", options: ["Process IDs", "Cache levels", "CPU speeds", "Disk sectors"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which communication type mainly waits for completion?", options: ["Blocking communication", "Asynchronous communication", "Buffered communication", "Virtual communication"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes collective operations?", options: ["Group communication", "Single-thread locks", "Disk synchronization", "Code optimization"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO — performance concepts
+
+  { prompt: "What is parallel speedup?", options: ["Sequential/par time", "Processor frequency", "Memory ratio", "Disk throughput"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which law mainly limits ideal speedup?", options: ["Amdahl's Law", "Moore's Law", "Ohm's Law", "Newton's Law"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly measures parallel efficiency?", options: ["Speedup/processors", "Threads/cache", "Memory/CPU", "Latency/bandwidth"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which factor mainly reduces scalability?", options: ["Serial bottleneck", "Larger cache", "Extra RAM", "Fast monitor"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes load balancing?", options: ["Even workloads", "Shared disks", "Fast CPUs", "Large registers"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which overhead mainly comes from synchronization?", options: ["Waiting time", "Disk formatting", "Code comments", "Mouse input"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly measures floating-point performance?", options: ["FLOPS", "FPS", "RPM", "BPS"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which issue mainly creates idle processors?", options: ["Poor balancing", "High cache", "Large SSD", "Strong cooling"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes communication overhead?", options: ["Data-transfer time", "Disk capacity", "CPU size", "Compiler version"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which concept mainly measures scaling quality?", options: ["Scalability", "Compilation", "Fragmentation", "Scheduling"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO — cache and memory
+
+  { prompt: "What mainly distinguishes cache coherence?", options: ["Consistent cache data", "Faster keyboards", "Larger SSDs", "Shared printers"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which protocol mainly maintains cache coherence?", options: ["MESI protocol", "HTTP protocol", "SMTP protocol", "FTP protocol"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes false sharing?", options: ["Shared cache line", "Duplicate processes", "Broken memory", "Disk corruption"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which memory mainly offers fastest access?", options: ["Cache memory", "Hard disk", "Optical disk", "Tape storage"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What does NUMA stand for?", options: ["Non-uniform memory access", "New unified memory architecture", "Network unified memory allocation", "Node user memory access"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which issue mainly occurs in remote NUMA access?", options: ["Higher latency", "Better locality", "Lower power", "Faster cache"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes temporal locality?", options: ["Recent-data reuse", "Nearby-address access", "Remote-memory access", "Sequential storage"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes spatial locality?", options: ["Nearby-address reuse", "Repeated instructions", "Shared threads", "Network routing"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which structure mainly reduces memory latency?", options: ["Cache hierarchy", "Audio driver", "Disk scheduler", "Power supply"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes cache-friendly code?", options: ["High locality", "High graphics", "Large files", "Slow memory"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+  // 1600 ELO — GPU and accelerators
+
+  { prompt: "What mainly distinguishes GPU computing?", options: ["Massive parallelism", "Single execution", "Offline processing", "Sequential caching"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which framework mainly programs NVIDIA GPUs?", options: ["CUDA", "OpenGL", "MPI", "HTML"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes CUDA kernels?", options: ["GPU-executed functions", "CPU schedulers", "Disk drivers", "Cache controllers"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which GPU structure mainly groups threads?", options: ["Thread block", "Semaphore", "Socket", "Pipeline"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What does SIMT mainly mean?", options: ["Single instruction threads", "Shared instruction memory", "Sequential instruction tasks", "Single integrated thread"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which GPU memory mainly offers low latency?", options: ["Shared memory", "Global memory", "Virtual memory", "Disk memory"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes warp divergence?", options: ["Different thread branches", "Overheated GPU", "Cache failure", "Broken pipeline"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which hardware mainly accelerates AI workloads?", options: ["GPU", "Hard drive", "Router", "Monitor"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes heterogeneous computing?", options: ["Mixed processors", "Single processor", "No accelerators", "Offline execution"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which bottleneck mainly slows GPU programs?", options: ["CPU-GPU transfers", "Keyboard latency", "Audio buffering", "Monitor refresh"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO — advanced synchronization
+
+  { prompt: "What mainly distinguishes lock-free programming?", options: ["Non-blocking synchronization", "No memory use", "No threads", "No caches"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly occurs from heavy lock usage?", options: ["Lock contention", "Cache locality", "Disk overflow", "Branch prediction"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes weak memory models?", options: ["Relaxed ordering", "Shared registers", "Large caches", "Sequential-only execution"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which OpenMP clause mainly skips barriers?", options: ["nowait", "parallel", "master", "shared"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes pipeline parallelism?", options: ["Concurrent stages", "Shared caches", "Single-core loops", "Static threads"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly causes nondeterministic outputs?", options: ["Race conditions", "Disk scheduling", "Cache hierarchy", "Thread locality"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes fine-grained locking?", options: ["Smaller protected regions", "Single global lock", "No synchronization", "No shared memory"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which synchronization approach mainly avoids spinning?", options: ["Blocking locks", "Busy waiting", "Polling loops", "Thread pinning"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes memory fences?", options: ["Order enforcement", "Cache resizing", "Processor cooling", "Disk partitioning"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which issue mainly appears in highly parallel critical sections?", options: ["Scalability collapse", "Faster execution", "Cache elimination", "Lower latency"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO — distributed and scaling theory
+
+  { prompt: "Which MPI operation mainly synchronizes all processes?", options: ["MPI_Barrier", "MPI_Send", "MPI_Open", "MPI_File"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes task granularity?", options: ["Work per task", "Monitor size", "CPU voltage", "Disk speed"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which factor mainly limits scaling on clusters?", options: ["Communication overhead", "Keyboard latency", "SSD size", "Printer speed"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes strong scaling?", options: ["Fixed workload scaling", "Growing workload scaling", "Sequential scaling", "Cache scaling"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes weak scaling?", options: ["Growing workload scaling", "Fixed workload scaling", "Single-thread scaling", "GPU-only scaling"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which issue mainly reduces cluster efficiency?", options: ["Network latency", "Large monitors", "Audio drivers", "SSD cooling"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes embarrassingly parallel problems?", options: ["Minimal communication", "Heavy synchronization", "Shared caches", "Single processor"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which topology mainly connects supercomputer nodes?", options: ["High-speed interconnect", "USB network", "Printer chain", "Audio bus"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes asynchronous communication?", options: ["No immediate waiting", "Immediate blocking", "Sequential execution", "Single-thread execution"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which bottleneck mainly dominates exascale systems?", options: ["Energy consumption", "Keyboard input", "Screen refresh", "Mouse polling"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO — expert concepts
+
+  { prompt: "What mainly distinguishes data parallelism?", options: ["Same operation partitions", "Different sequential tasks", "Single-thread execution", "Shared disk access"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which consistency model mainly guarantees sequential ordering?", options: ["Sequential consistency", "Weak consistency", "Release consistency", "Eventual consistency"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes work stealing schedulers?", options: ["Idle-thread task theft", "Static assignment", "Sequential execution", "No balancing"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly affects exascale reliability?", options: ["Frequent hardware faults", "Low screen resolution", "Small SSDs", "Slow keyboards"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes speculative parallelism?", options: ["Predictive execution", "Static scheduling", "Manual synchronization", "Sequential branching"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which issue mainly appears from excessive synchronization barriers?", options: ["Processor idle time", "Cache expansion", "GPU overheating", "Disk corruption"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes distributed shared memory?", options: ["Remote shared abstraction", "Single local cache", "Sequential RAM", "Offline storage"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which scheduling type mainly adapts during runtime?", options: ["Dynamic scheduling", "Static scheduling", "Manual scheduling", "Offline scheduling"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes vectorization?", options: ["Single instruction vectors", "Single-thread execution", "Cache synchronization", "Disk acceleration"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which challenge mainly limits future HPC systems?", options: ["Power efficiency", "Monitor brightness", "Keyboard durability", "USB bandwidth"], answer: 0, difficulty: 1900, timeLimit: 20 }
+
+],
   "Principles of Artificial Intelligence": [
-    { prompt: "In AI, an agent is a system that:", options: ["Stores facts without taking actions", "Perceives an environment and acts in it", "Only classifies labeled training data", "Optimizes databases without feedback"], answer: 1, difficulty: 1000, timeLimit: 20 },
-    { prompt: "What defines a 'Rational Agent'?", options: ["Emotional act", "Right action", "No mistakes", "Human talk"], answer: 1, difficulty: 1100, timeLimit: 20 },
-    { prompt: "What is 'State Space Search'?", options: ["Alien hunt", "Goal find", "Array sort", "File delete"], answer: 1, difficulty: 1200, timeLimit: 20 },
-    { prompt: "What is a 'Heuristic'?", options: ["Guess rule", "Exact math", "Hardware part", "Code error"], answer: 0, difficulty: 1300, timeLimit: 20 },
-    { prompt: "What distinguishes 'Uninformed Search' from 'Informed Search'?", options: ["Goal cost", "No extra info", "Slow search", "Same search"], answer: 1, difficulty: 1400, timeLimit: 20 },
-    { prompt: "In propositional logic, what is a 'Knowledge Base'?", options: ["Wiki page", "Fact set", "Hard drive", "Dictionary"], answer: 1, difficulty: 1500, timeLimit: 20 },
-    { prompt: "What is 'Forward Chaining'?", options: ["Necklace type", "Data drive", "Maze back", "Data delete"], answer: 1, difficulty: 1600, timeLimit: 20 },
-    { prompt: "What is an 'Ontology' in AI?", options: ["Cancer study", "Entity define", "Code language", "Search algo"], answer: 1, difficulty: 1700, timeLimit: 20 },
-    { prompt: "What are 'Bayesian Networks' used for?", options: ["Web host", "Uncertain reason", "Image edit", "Code compile"], answer: 1, difficulty: 1800, timeLimit: 20 },
-    { prompt: "What is 'Reinforcement Learning'?", options: ["Punish PC", "Reward action", "Data memory", "Unsupervised cluster"], answer: 1, difficulty: 1900, timeLimit: 20 }
-  ],
+
+  // 1000 ELO
+
+  { prompt: "What mainly defines an AI agent?", options: ["Acts in environment", "Stores only data", "Runs databases", "Builds hardware"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which component mainly receives environmental input?", options: ["Sensors", "Actuators", "Compiler", "Cache"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes a rational agent?", options: ["Chooses best action", "Acts randomly", "Copies humans", "Never learns"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which AI field mainly studies intelligent behavior?", options: ["Artificial Intelligence", "Computer Graphics", "Database Systems", "Networking"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes environment perception?", options: ["Gathering external information", "Deleting memory", "Compiling code", "Balancing equations"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which component mainly performs actions for agents?", options: ["Actuators", "Registers", "Caches", "Sensors"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes autonomous agents?", options: ["Operate independently", "Require human control", "Avoid environments", "Use no sensors"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which type of environment mainly changes during execution?", options: ["Dynamic environment", "Static environment", "Discrete environment", "Deterministic environment"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "What mainly distinguishes deterministic environments?", options: ["Predictable outcomes", "Random outcomes", "No actions possible", "Continuous inputs only"], answer: 0, difficulty: 1000, timeLimit: 20 },
+  { prompt: "Which AI concept mainly measures success?", options: ["Performance measure", "Clock speed", "Memory usage", "Thread count"], answer: 0, difficulty: 1000, timeLimit: 20 },
+
+  // 1100 ELO
+
+  { prompt: "What mainly distinguishes state-space search?", options: ["Explore possible states", "Store database rows", "Compress files", "Encrypt messages"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which search method mainly expands deepest nodes first?", options: ["Depth-First Search", "Breadth-First Search", "Uniform Cost Search", "A* Search"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Breadth-First Search?", options: ["Expands shallowest nodes", "Uses heuristics", "Ignores goals", "Uses recursion only"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which search strategy mainly guarantees shortest paths in unweighted graphs?", options: ["Breadth-First Search", "Depth-First Search", "Hill Climbing", "Backtracking"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes uninformed search?", options: ["No heuristic knowledge", "Uses probability", "Uses neural networks", "Requires labels"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which search structure mainly stores nodes to visit next?", options: ["Frontier queue", "Truth table", "Symbol table", "Stack frame"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes goal states?", options: ["Desired final states", "Random states", "Repeated nodes", "Unreachable nodes"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which search method mainly risks infinite depth traversal?", options: ["Depth-First Search", "Breadth-First Search", "Uniform Cost Search", "Greedy Search"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "What mainly distinguishes tree search?", options: ["Ignores repeated states", "Uses no nodes", "Requires probabilities", "Uses no memory"], answer: 0, difficulty: 1100, timeLimit: 20 },
+  { prompt: "Which AI problem mainly uses search trees?", options: ["Path finding", "Image rendering", "Disk partitioning", "File compression"], answer: 0, difficulty: 1100, timeLimit: 20 },
+
+  // 1200 ELO
+
+  { prompt: "What mainly distinguishes heuristics?", options: ["Guide search efficiently", "Guarantee optimality always", "Store datasets", "Compile programs"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which search mainly uses estimated goal distance?", options: ["Greedy Best-First Search", "Depth-First Search", "Breadth-First Search", "Random Search"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes informed search?", options: ["Uses extra knowledge", "Uses no memory", "Avoids goals", "Uses recursion only"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which algorithm mainly combines path cost and heuristic?", options: ["A* Search", "Depth-First Search", "Hill Climbing", "Breadth-First Search"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes admissible heuristics?", options: ["Never overestimate cost", "Always exact", "Always random", "Ignore path costs"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which search method mainly chooses locally best moves?", options: ["Hill Climbing", "Breadth-First Search", "Uniform Cost Search", "DFS"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes local maxima problems?", options: ["Trap hill climbing", "Guarantee optimality", "Reduce memory", "Expand all states"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which heuristic property mainly ensures A* optimality?", options: ["Admissibility", "Randomness", "Recursion", "Linearity"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Uniform Cost Search?", options: ["Expands lowest path cost", "Uses heuristics only", "Ignores weights", "Uses depth ordering"], answer: 0, difficulty: 1200, timeLimit: 20 },
+  { prompt: "Which search issue mainly increases memory usage heavily?", options: ["Breadth-first expansion", "Depth recursion", "Hill climbing", "Backtracking"], answer: 0, difficulty: 1200, timeLimit: 20 },
+
+  // 1300 ELO
+
+  { prompt: "What mainly distinguishes a knowledge base?", options: ["Stores facts and rules", "Stores images only", "Controls hardware", "Compiles programs"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which logic mainly uses true or false propositions?", options: ["Propositional logic", "Fuzzy logic", "Modal logic", "Temporal logic"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes inference?", options: ["Deriving new facts", "Deleting rules", "Optimizing memory", "Sorting data"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which AI method mainly reasons from facts to conclusions?", options: ["Logical inference", "Clustering", "Compression", "Compilation"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes forward chaining?", options: ["Data-driven reasoning", "Goal-driven reasoning", "Random exploration", "Sequential execution"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which reasoning approach mainly starts from goals?", options: ["Backward chaining", "Forward chaining", "Hill climbing", "DFS"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes production rules?", options: ["IF-THEN structures", "Database rows", "Search trees", "Matrix equations"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which logic symbol mainly means implication?", options: ["→", "∧", "∨", "¬"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "What mainly distinguishes semantic networks?", options: ["Entity relationship graphs", "Binary search trees", "Sorting networks", "Neural layers"], answer: 0, difficulty: 1300, timeLimit: 20 },
+  { prompt: "Which AI structure mainly represents objects and attributes?", options: ["Frames", "Queues", "Stacks", "Registers"], answer: 0, difficulty: 1300, timeLimit: 20 },
+
+  // 1400 ELO
+
+  { prompt: "What mainly distinguishes AI planning?", options: ["Sequence of actions", "Data compression", "Memory allocation", "Image enhancement"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which concept mainly represents possible world configurations?", options: ["States", "Tokens", "Registers", "Threads"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes STRIPS planning?", options: ["Action-based planning", "Image classification", "Neural learning", "Database querying"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which AI approach mainly handles uncertainty mathematically?", options: ["Probabilistic reasoning", "Deterministic parsing", "Linear optimization", "Rule deletion"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes belief states?", options: ["Possible world sets", "Single exact state", "Network topology", "Thread groups"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which planning component mainly specifies desired outcomes?", options: ["Goal state", "Initial state", "Transition model", "Heuristic table"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes action preconditions?", options: ["Requirements before actions", "Effects after actions", "Goal priorities", "Search depth"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which planning element mainly changes environments?", options: ["Actions", "States", "Heuristics", "Queues"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "What mainly distinguishes nondeterministic environments?", options: ["Actions have uncertain outcomes", "States never change", "Agents have no goals", "All actions identical"], answer: 0, difficulty: 1400, timeLimit: 20 },
+  { prompt: "Which AI field mainly studies automated decision sequences?", options: ["Planning", "Compilation", "Rendering", "Indexing"], answer: 0, difficulty: 1400, timeLimit: 20 },
+
+  // 1500 ELO
+
+  { prompt: "What mainly distinguishes Bayesian reasoning?", options: ["Probability-based inference", "Pure symbolic logic", "Sequential sorting", "Compiler optimization"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which theorem mainly updates probabilities with evidence?", options: ["Bayes' Theorem", "Pythagorean Theorem", "Amdahl's Law", "Moore's Law"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Bayesian networks?", options: ["Probabilistic dependency graphs", "Sorting trees", "Neural pipelines", "Compiler graphs"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which variable type mainly depends on parent probabilities?", options: ["Conditional variable", "Independent variable", "Static variable", "Loop variable"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes conditional probability?", options: ["Probability given evidence", "Absolute certainty", "Impossible event", "Uniform randomness"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which AI concept mainly handles hidden uncertainty?", options: ["Belief distribution", "Sorting algorithm", "Hash table", "Memory paging"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes probabilistic inference?", options: ["Estimate uncertain outcomes", "Guarantee exact truth", "Avoid probabilities", "Ignore evidence"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which network mainly assumes directed dependencies?", options: ["Bayesian network", "Semantic network", "Decision tree", "Heap tree"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "What mainly distinguishes prior probability?", options: ["Probability before evidence", "Probability after evidence", "Impossible probability", "Maximum probability"], answer: 0, difficulty: 1500, timeLimit: 20 },
+  { prompt: "Which AI task mainly benefits from uncertainty modeling?", options: ["Medical diagnosis", "Disk formatting", "Screen rendering", "Code compiling"], answer: 0, difficulty: 1500, timeLimit: 20 },
+
+    // 1600 ELO
+
+  { prompt: "What mainly distinguishes utility-based agents?", options: ["Maximize usefulness", "Follow fixed rules", "Avoid environments", "Store only facts"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which AI concept mainly measures desirability of outcomes?", options: ["Utility function", "Lossless compression", "Syntax parser", "State register"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes decision theory?", options: ["Choose under uncertainty", "Compile programs", "Sort arrays", "Reduce memory"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which AI approach mainly balances exploration and exploitation?", options: ["Reinforcement learning", "Breadth-first search", "Boolean logic", "Backtracking"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Markov Decision Processes?", options: ["Sequential probabilistic decisions", "Static database relations", "Sorting procedures", "Compiler phases"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which component mainly defines rewards in reinforcement learning?", options: ["Reward function", "Truth table", "Heap memory", "Token stream"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes policy functions?", options: ["Map states to actions", "Store network packets", "Reduce dimensions", "Compile instructions"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which AI concept mainly estimates long-term rewards?", options: ["Value function", "Routing table", "Hash function", "Stack pointer"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Q-learning?", options: ["Learn action values", "Build logic trees", "Optimize compilers", "Generate databases"], answer: 0, difficulty: 1600, timeLimit: 20 },
+  { prompt: "Which AI technique mainly improves behavior through feedback?", options: ["Reinforcement learning", "Static planning", "Syntax analysis", "Data indexing"], answer: 0, difficulty: 1600, timeLimit: 20 },
+
+  // 1700 ELO
+
+  { prompt: "What mainly distinguishes minimax search?", options: ["Adversarial decision making", "Probability estimation", "Data compression", "Shortest path routing"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which AI algorithm mainly assumes optimal opponents?", options: ["Minimax", "Breadth-first search", "K-means", "Forward chaining"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes alpha-beta pruning?", options: ["Eliminates unnecessary branches", "Adds extra nodes", "Randomizes choices", "Stores probabilities"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which game property mainly suits minimax search?", options: ["Zero-sum competition", "Independent actions", "Static databases", "Continuous optimization"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes adversarial search trees?", options: ["Opponent-based branching", "Linear execution", "Single outcomes", "Static memory"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which AI concept mainly evaluates board positions?", options: ["Evaluation function", "Routing metric", "Hash collision", "Context switch"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes game-tree depth limits?", options: ["Reduce computation cost", "Increase randomness", "Guarantee victory", "Store all states"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which pruning method mainly preserves minimax optimality?", options: ["Alpha-beta pruning", "Hill climbing", "DFS pruning", "Random restart"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "What mainly distinguishes stochastic games?", options: ["Contain randomness", "Use no agents", "Ignore rewards", "Avoid decisions"], answer: 0, difficulty: 1700, timeLimit: 20 },
+  { prompt: "Which AI area mainly studies competitive strategies?", options: ["Game theory", "Compiler design", "Database indexing", "Image segmentation"], answer: 0, difficulty: 1700, timeLimit: 20 },
+
+  // 1800 ELO
+
+  { prompt: "What mainly distinguishes machine learning from symbolic AI?", options: ["Learns from data", "Uses no computation", "Avoids probabilities", "Requires logic only"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which learning type mainly uses labeled examples?", options: ["Supervised learning", "Unsupervised learning", "Reinforcement learning", "Self-play"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes unsupervised learning?", options: ["Find hidden structure", "Require labels", "Guarantee rewards", "Use minimax trees"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which AI model mainly classifies probabilities between classes?", options: ["Logistic regression", "K-means clustering", "A* search", "DFS"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes neural networks?", options: ["Layered weighted nodes", "Boolean-only reasoning", "Fixed rule systems", "Shortest path graphs"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which learning problem mainly describes memorizing noise?", options: ["Overfitting", "Underflow", "Deadlock", "Starvation"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes backpropagation?", options: ["Gradient-based weight updates", "Random guessing", "Search tree pruning", "Symbolic proofing"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which AI architecture mainly handles sequential data?", options: ["Recurrent Neural Network", "Decision tree", "Heap structure", "Trie"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "What mainly distinguishes convolutional networks?", options: ["Spatial feature extraction", "Logical inference only", "Database querying", "Path optimization"], answer: 0, difficulty: 1800, timeLimit: 20 },
+  { prompt: "Which AI issue mainly reduces generalization ability?", options: ["Overfitting", "Normalization", "Inference", "Pruning"], answer: 0, difficulty: 1800, timeLimit: 20 },
+
+  // 1900 ELO
+
+  { prompt: "What mainly distinguishes partially observable Markov decision processes?", options: ["Hidden environment states", "Perfect information", "Deterministic rewards", "Single-step actions"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which AI concept mainly models sequential hidden variables?", options: ["Hidden Markov Model", "Decision tree", "Heap structure", "Trie graph"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes Monte Carlo Tree Search?", options: ["Simulation-based exploration", "Pure brute force", "Deterministic parsing", "Static evaluation only"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which AI architecture mainly relies on self-attention mechanisms?", options: ["Transformer", "Decision tree", "Bayesian network", "Finite automaton"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes temporal-difference learning?", options: ["Bootstrap reward estimates", "Use exact planning", "Avoid rewards", "Ignore future states"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which AI issue mainly occurs when agents exploit training flaws unexpectedly?", options: ["Reward hacking", "Deadlock", "Fragmentation", "Thrashing"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes exploration strategies like epsilon-greedy?", options: ["Balance exploration-exploitation", "Guarantee shortest paths", "Remove uncertainty", "Avoid rewards"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which AI concept mainly represents probability distributions over states?", options: ["Belief state", "Decision boundary", "Syntax tree", "Kernel cache"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "What mainly distinguishes policy gradient methods?", options: ["Direct policy optimization", "Exact symbolic inference", "Boolean simplification", "Static graph traversal"], answer: 0, difficulty: 1900, timeLimit: 20 },
+  { prompt: "Which AI approach mainly combines deep learning with reinforcement learning?", options: ["Deep Reinforcement Learning", "Constraint propagation", "Backward chaining", "Greedy BFS"], answer: 0, difficulty: 1900, timeLimit: 20 }
+
+   ],
   "Principles of Cryptography": [
     { prompt: "What is the process of converting plaintext into ciphertext called?", options: ["Decryption", "Encryption", "Hashing", "Steganography"], answer: 1, difficulty: 1000, timeLimit: 20 },
     { prompt: "Which type of cryptography uses the same key for encryption and decryption?", options: ["Asymmetric", "Symmetric", "Public-key", "Hash-based"], answer: 1, difficulty: 1100, timeLimit: 20 },
