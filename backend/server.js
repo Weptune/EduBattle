@@ -113,6 +113,9 @@ function publicUser(user) {
     wins: user.wins || 0,
     losses: user.losses || 0,
     gamesPlayed: user.gamesPlayed || 0,
+    botWins: user.botWins || 0,
+    botLosses: user.botLosses || 0,
+    botGamesPlayed: user.botGamesPlayed || 0,
     bestElo: user.bestElo || user.elo,
     fieldElos: user.fieldElos || {},
     fieldStats: user.fieldStats || {},
@@ -1335,19 +1338,23 @@ async function endMatch(match) {
         const nextLevel = Math.floor(nextXp / 500) + 1;
         const nextUser = {
           ...user,
-          wins: (user.wins || 0) + 1,
-          gamesPlayed: (user.gamesPlayed || 0) + 1,
+          // Ranked-only stats
+          wins: isBotMatch ? (user.wins || 0) : (user.wins || 0) + 1,
+          gamesPlayed: isBotMatch ? (user.gamesPlayed || 0) : (user.gamesPlayed || 0) + 1,
+          // Bot-only stats
+          botWins: isBotMatch ? (user.botWins || 0) + 1 : (user.botWins || 0),
+          botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
           xp: nextXp,
           level: nextLevel
         };
         if (!isBotMatch) {
           const domain = match.domain;
           if (domain && domain !== 'all') {
-            const elos = user.fieldElos || {};
+            const elos = { ...(user.fieldElos || {}) };
             elos[domain] = winner.elo;
             nextUser.fieldElos = elos;
 
-            const stats = user.fieldStats || {};
+            const stats = { ...(user.fieldStats || {}) };
             if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
             stats[domain].wins = (stats[domain].wins || 0) + 1;
             nextUser.fieldStats = stats;
@@ -1367,19 +1374,23 @@ async function endMatch(match) {
         const nextLevel = Math.floor(nextXp / 500) + 1;
         const nextUser = {
           ...user,
-          losses: (user.losses || 0) + 1,
-          gamesPlayed: (user.gamesPlayed || 0) + 1,
+          // Ranked-only stats
+          losses: isBotMatch ? (user.losses || 0) : (user.losses || 0) + 1,
+          gamesPlayed: isBotMatch ? (user.gamesPlayed || 0) : (user.gamesPlayed || 0) + 1,
+          // Bot-only stats
+          botLosses: isBotMatch ? (user.botLosses || 0) + 1 : (user.botLosses || 0),
+          botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
           xp: nextXp,
           level: nextLevel
         };
         if (!isBotMatch) {
           const domain = match.domain;
           if (domain && domain !== 'all') {
-            const elos = user.fieldElos || {};
+            const elos = { ...(user.fieldElos || {}) };
             elos[domain] = loser.elo;
             nextUser.fieldElos = elos;
 
-            const stats = user.fieldStats || {};
+            const stats = { ...(user.fieldStats || {}) };
             if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
             stats[domain].losses = (stats[domain].losses || 0) + 1;
             nextUser.fieldStats = stats;
@@ -1411,8 +1422,18 @@ async function endMatch(match) {
     });
   }
 
-  emitToPlayer(match.p1, 'match_end', { winner: winner ? winner.id : 'draw', elo: match.p1.elo, eloDelta: match.p1.eloDelta || 0 });
-  emitToPlayer(match.p2, 'match_end', { winner: winner ? winner.id : 'draw', elo: match.p2.elo, eloDelta: match.p2.eloDelta || 0 });
+  emitToPlayer(match.p1, 'match_end', {
+    winner: winner ? winner.id : 'draw',
+    elo: match.p1.elo,
+    eloDelta: match.p1.eloDelta || 0,
+    domain: match.domain || 'all'
+  });
+  emitToPlayer(match.p2, 'match_end', {
+    winner: winner ? winner.id : 'draw',
+    elo: match.p2.elo,
+    eloDelta: match.p2.eloDelta || 0,
+    domain: match.domain || 'all'
+  });
 
   delete matches[match.id];
 }
@@ -1472,6 +1493,9 @@ storage.init()
     if (migrated > 0) {
       console.log(`Migrated ${migrated} local upload(s) into database-backed assets.`);
     }
+    return storage.recalculateAllUsersStats();
+  })
+  .then(() => {
     server.listen(PORT, HOST, () => {
       console.log(`Server listening on ${HOST}:${PORT}`);
     });

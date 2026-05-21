@@ -107,6 +107,10 @@ async function init() {
     ALTER TABLE users ADD COLUMN IF NOT EXISTS level INTEGER DEFAULT 1;
     ALTER TABLE match_history ADD COLUMN IF NOT EXISTS domain TEXT DEFAULT 'all';
 
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS bot_wins INTEGER NOT NULL DEFAULT 0;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS bot_losses INTEGER NOT NULL DEFAULT 0;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS bot_games_played INTEGER NOT NULL DEFAULT 0;
+
     CREATE TABLE IF NOT EXISTS user_assets (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -144,6 +148,9 @@ function rowToUser(row) {
     wins: row.wins,
     losses: row.losses,
     gamesPlayed: row.games_played,
+    botWins: row.bot_wins || 0,
+    botLosses: row.bot_losses || 0,
+    botGamesPlayed: row.bot_games_played || 0,
     avatarUrl: row.avatar_url,
     bannerUrl: row.banner_url,
     bio: row.bio === 'New challenger in the MIT arena.' ? 'hi' : (row.bio || 'hi'),
@@ -167,6 +174,9 @@ function userToRow(user) {
     wins: user.wins,
     losses: user.losses,
     games_played: user.gamesPlayed,
+    bot_wins: user.botWins || 0,
+    bot_losses: user.botLosses || 0,
+    bot_games_played: user.botGamesPlayed || 0,
     avatar_url: user.avatarUrl,
     banner_url: user.bannerUrl,
     bio: user.bio === 'New challenger in the MIT arena.' ? 'hi' : (user.bio || 'hi'),
@@ -194,18 +204,20 @@ async function getUserById(id) {
 async function createUser(user) {
   await init();
   const now = new Date().toISOString();
-  const stored = { ...user, createdAt: now, updatedAt: now, xp: 0, level: 1 };
+  const stored = { ...user, createdAt: now, updatedAt: now, xp: 0, level: 1, botWins: 0, botLosses: 0, botGamesPlayed: 0 };
 
   const row = userToRow(stored);
   await pool.query(
     `INSERT INTO users (
       id, username, password_salt, password_hash, elo, best_elo, wins, losses,
-      games_played, avatar_url, banner_url, bio, field_elos, field_stats, xp, level, created_at, updated_at
-    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)`,
+      games_played, avatar_url, banner_url, bio, field_elos, field_stats, xp, level,
+      bot_wins, bot_losses, bot_games_played, created_at, updated_at
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21)`,
     [
       row.id, row.username, row.password_salt, row.password_hash, row.elo, row.best_elo,
       row.wins, row.losses, row.games_played, row.avatar_url, row.banner_url, row.bio,
-      row.field_elos, row.field_stats, row.xp, row.level, row.created_at, row.updated_at
+      row.field_elos, row.field_stats, row.xp, row.level,
+      row.bot_wins, row.bot_losses, row.bot_games_played, row.created_at, row.updated_at
     ]
   );
   return stored;
@@ -251,6 +263,9 @@ async function updateUser(userId, patch) {
       field_stats = $12,
       xp = $13,
       level = $14,
+      bot_wins = $15,
+      bot_losses = $16,
+      bot_games_played = $17,
       updated_at = now()
     WHERE id = $1
     RETURNING *`,
@@ -260,7 +275,10 @@ async function updateUser(userId, patch) {
       patch.fieldElos ? JSON.stringify(patch.fieldElos) : '{}',
       patch.fieldStats ? JSON.stringify(patch.fieldStats) : '{}',
       patch.xp || 0,
-      patch.level || 1
+      patch.level || 1,
+      patch.botWins || 0,
+      patch.botLosses || 0,
+      patch.botGamesPlayed || 0
     ]
   );
   return rowToUser(result.rows[0]);
@@ -587,5 +605,88 @@ module.exports = {
   markDMsAsRead,
   saveUserAsset,
   getUserAsset,
-  migrateLocalUploadUrlsToAssets
+  migrateLocalUploadUrlsToAssets,
+  recalculateAllUsersStats
 };
+
+async function recalculateAllUsersStats() {
+  await init();
+  console.log("🔄 Starting automatic user stats recalculation...");
+  try {
+    const usersResult = await pool.query('SELECT id, username FROM users');
+    const users = usersResult.rows;
+
+    for (const u of users) {
+      console.log(`Processing stats for ${u.username} (${u.id})...`);
+      
+      // Fetch all match records where this user was player_one or player_two
+      const matchesResult = await pool.query(
+        `SELECT * FROM match_history WHERE player_one_id = $1 OR player_two_id = $1`,
+        [u.id]
+      );
+      const matches = matchesResult.rows;
+
+      let wins = 0;
+      let losses = 0;
+      let gamesPlayed = 0;
+      let botWins = 0;
+      let botLosses = 0;
+      let botGamesPlayed = 0;
+      const fieldStats = {};
+
+      for (const m of matches) {
+        const isBotMatch = !m.player_one_id || !m.player_two_id;
+        const isWinner = m.winner_id === u.id;
+        
+        if (isBotMatch) {
+          botGamesPlayed++;
+          if (isWinner) {
+            botWins++;
+          } else {
+            botLosses++;
+          }
+        } else {
+          gamesPlayed++;
+          if (isWinner) {
+            wins++;
+          } else {
+            losses++;
+          }
+
+          // Domain stats (only for ranked matches)
+          const domain = m.domain;
+          if (domain && domain !== 'all') {
+            if (!fieldStats[domain]) {
+              fieldStats[domain] = { wins: 0, losses: 0 };
+            }
+            if (isWinner) {
+              fieldStats[domain].wins++;
+            } else {
+              fieldStats[domain].losses++;
+            }
+          }
+        }
+      }
+
+      // Update user in DB
+      await pool.query(
+        `UPDATE users SET
+          wins = $2,
+          losses = $3,
+          games_played = $4,
+          bot_wins = $5,
+          bot_losses = $6,
+          bot_games_played = $7,
+          field_stats = $8,
+          updated_at = now()
+         WHERE id = $1`,
+        [u.id, wins, losses, gamesPlayed, botWins, botLosses, botGamesPlayed, JSON.stringify(fieldStats)]
+      );
+
+      console.log(`✅ Recalculated stats for ${u.username}: wins=${wins}, losses=${losses}, gp=${gamesPlayed}, botWins=${botWins}, botLosses=${botLosses}, botGp=${botGamesPlayed}`);
+    }
+    console.log("✨ Automatic user stats recalculation finished successfully!");
+  } catch (error) {
+    console.error("❌ Failed to recalculate user stats:", error);
+  }
+}

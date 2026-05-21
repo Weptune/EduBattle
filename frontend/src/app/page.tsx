@@ -42,6 +42,9 @@ type Account = {
   wins: number;
   losses: number;
   gamesPlayed: number;
+  botWins?: number;
+  botLosses?: number;
+  botGamesPlayed?: number;
   bestElo: number;
   fieldElos?: Record<string, number>;
   fieldStats?: Record<string, { wins: number; losses: number }>;
@@ -143,6 +146,7 @@ type WinnerInfo = {
   winner: string;
   elo: number;
   eloDelta: number;
+  domain?: string;
 };
 
 type FighterProfile = {
@@ -345,6 +349,47 @@ const FIELDS = [
   { id: "Civil / Chemical / Biotech / Biomedical", name: "Civil & Chemical & Biotech" },
 ];
 
+function formatRelativeTime(value?: string) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  const diffMs = Date.now() - date.getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return "Just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+  return date.toLocaleDateString();
+}
+
+function getFieldLabel(fieldId: string) {
+  return FIELDS.find(field => field.id === fieldId)?.name ?? fieldId;
+}
+
+function VsEmblem({ size = "lg" }: { size?: "sm" | "lg" }) {
+  const isLarge = size === "lg";
+  return (
+    <div
+      className={`vs-badge-glow relative flex items-center justify-center ${isLarge ? "h-24 w-24 md:h-28 md:w-28" : "h-11 w-11"}`}
+      aria-hidden
+    >
+      <div
+        className={`absolute inset-0 rotate-45 rounded-xl border border-teal-400/45 bg-gradient-to-br from-teal-400/30 via-slate-950/85 to-emerald-500/25 backdrop-blur-sm ${isLarge ? "" : "rounded-lg"}`}
+      />
+      <div className={`absolute inset-[3px] rotate-45 rounded-lg border border-white/10 bg-slate-950/75 ${isLarge ? "inset-[4px] rounded-[10px]" : ""}`} />
+      <div className="absolute h-[85%] w-px bg-teal-400/25" />
+      <div className="absolute w-[85%] h-px bg-teal-400/25" />
+      <span
+        className={`relative z-10 font-display font-black uppercase tracking-[0.18em] text-teal-100 text-glow-teal ${isLarge ? "text-3xl md:text-4xl" : "text-[10px]"}`}
+      >
+        VS
+      </span>
+    </div>
+  );
+}
+
 export default function Home() {
   const socketRef = useRef<Socket | null>(null);
   const chatBottomRef = useRef<HTMLDivElement>(null);
@@ -408,19 +453,31 @@ export default function Home() {
   const refreshFriendsListRef = useRef<(token?: string | null) => Promise<void>>(async () => { });
 
   const winRate = useMemo(() => {
-    if (!account?.gamesPlayed) return 0;
-    return Math.round((account.wins / account.gamesPlayed) * 100);
+    const total = (account?.wins || 0) + (account?.losses || 0);
+    if (!total) return 0;
+    return Math.round(((account?.wins || 0) / total) * 100);
   }, [account]);
 
   const displayLeaderboard = useMemo(() => {
-    let filtered = leaderboardField === "all"
-      ? leaderboard.map(entry => ({ ...entry, displayElo: entry.user.elo }))
-      : leaderboard.map(entry => {
-        const elo = entry.user.fieldElos?.[leaderboardField] ?? 1200;
-        return { ...entry, displayElo: elo };
-      });
+    let filtered = leaderboard.map(entry => {
+      const isGlobal = leaderboardField === "all";
+      const fieldStats = entry.user.fieldStats?.[leaderboardField];
+      const displayWins = isGlobal ? (entry.user.wins || 0) : (fieldStats?.wins || 0);
+      const displayLosses = isGlobal ? (entry.user.losses || 0) : (fieldStats?.losses || 0);
+      const displayGames = displayWins + displayLosses;
+      const displayElo = isGlobal
+        ? entry.user.elo
+        : (entry.user.fieldElos?.[leaderboardField] ?? 1200);
 
-    // Filter by search
+      return {
+        ...entry,
+        displayElo,
+        displayWins,
+        displayLosses,
+        displayWinRate: displayGames > 0 ? displayWins / displayGames : 0,
+      };
+    });
+
     if (leaderboardSearch.trim()) {
       const searchLower = leaderboardSearch.toLowerCase();
       filtered = filtered.filter(entry =>
@@ -428,7 +485,6 @@ export default function Home() {
       );
     }
 
-    // Sort
     filtered.sort((a, b) => {
       switch (leaderboardSort) {
         case "elo":
@@ -436,22 +492,54 @@ export default function Home() {
         case "level":
           return (b.user.level || 1) - (a.user.level || 1);
         case "wins":
-          return b.user.wins - a.user.wins;
+          if (b.displayWins !== a.displayWins) return b.displayWins - a.displayWins;
+          return b.displayElo - a.displayElo;
         case "winRate":
-          const aWR = a.user.gamesPlayed > 0 ? a.user.wins / a.user.gamesPlayed : 0;
-          const bWR = b.user.gamesPlayed > 0 ? b.user.wins / b.user.gamesPlayed : 0;
-          return bWR - aWR;
+          if (b.displayWinRate !== a.displayWinRate) return b.displayWinRate - a.displayWinRate;
+          return b.displayWins - a.displayWins;
         default:
           return b.displayElo - a.displayElo;
       }
     });
 
-    // Assign ranks
     return filtered.map((entry, idx) => ({
       ...entry,
-      rank: idx + 1
+      rank: idx + 1,
     }));
   }, [leaderboard, leaderboardField, leaderboardSearch, leaderboardSort]);
+
+  const myLeaderboardSnapshot = useMemo(() => {
+    if (!account) return null;
+
+    const isGlobal = leaderboardField === "all";
+    const fieldStats = account.fieldStats?.[leaderboardField];
+    const displayWins = isGlobal ? (account.wins || 0) : (fieldStats?.wins || 0);
+    const displayLosses = isGlobal ? (account.losses || 0) : (fieldStats?.losses || 0);
+    const displayElo = isGlobal ? account.elo : (account.fieldElos?.[leaderboardField] ?? 1200);
+    const displayWinRate = displayWins + displayLosses > 0
+      ? Math.round((displayWins / (displayWins + displayLosses)) * 100)
+      : 0;
+    const entry = displayLeaderboard.find(row => row.user.id === account.id);
+
+    const primaryLabel =
+      leaderboardSort === "wins" ? "Wins"
+        : leaderboardSort === "winRate" ? "Win %"
+          : leaderboardSort === "level" ? "Level"
+            : isGlobal ? "Global Elo" : "Field Elo";
+    const primaryValue =
+      leaderboardSort === "wins" ? displayWins
+        : leaderboardSort === "winRate" ? `${displayWinRate}%`
+          : leaderboardSort === "level" ? (account.level || 1)
+            : displayElo;
+
+    return {
+      rank: entry?.rank ?? null,
+      ladderLabel: isGlobal ? "Global" : getFieldLabel(leaderboardField),
+      primaryLabel,
+      primaryValue,
+      record: `${displayWins}W / ${displayLosses}L`,
+    };
+  }, [account, displayLeaderboard, leaderboardField, leaderboardSort]);
 
   const refreshFriendsList = useCallback(async (activeToken = token) => {
     if (!activeToken) return;
@@ -773,7 +861,17 @@ export default function Home() {
     activeSocket.on("match_end", data => {
       setWinnerInfo(data);
       setGameState("results");
-      setAccount(current => current ? { ...current, elo: data.elo, bestElo: Math.max(current.bestElo, data.elo) } : current);
+      setAccount(current => {
+        if (!current) return current;
+        const isFieldMatch = data.domain && data.domain !== "all";
+        if (isFieldMatch) {
+          return {
+            ...current,
+            fieldElos: { ...(current.fieldElos || {}), [data.domain]: data.elo },
+          };
+        }
+        return { ...current, elo: data.elo, bestElo: Math.max(current.bestElo, data.elo) };
+      });
       refreshPlayerMetaRef.current();
       if (data.winner === activeSocket.id) playSound("victory");
       else playSound("damage");
@@ -1427,8 +1525,9 @@ export default function Home() {
                     {/* Bio text */}
                     <p className="text-slate-300 text-sm mb-6 leading-relaxed bg-black/20 p-3 rounded-lg border border-white/5">{viewingUser.bio || "hi"}</p>
 
-                    {/* Grid stats */}
-                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-6">
+                    {/* Grid stats — Ranked only */}
+                    <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-teal-400/80">Ranked</p>
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-3">
                       <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
                         <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Overall Elo</p>
                         <p className="mt-1 font-mono text-xl font-black text-teal-300">{viewingUser.elo}</p>
@@ -1448,6 +1547,15 @@ export default function Home() {
                             ? `${Math.round((viewingUser.wins / (viewingUser.wins + viewingUser.losses)) * 100)}%`
                             : "0%"}
                         </p>
+                      </div>
+                    </div>
+                    {/* Bot match stats */}
+                    <div className="mb-6 rounded-xl border border-slate-700/40 bg-black/20 px-4 py-3">
+                      <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-1.5"><span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600"></span>Practice vs AI Bot</p>
+                      <div className="flex gap-6">
+                        <div><p className="font-mono text-sm font-black text-emerald-400">{viewingUser.botWins || 0}</p><p className="text-[8px] uppercase tracking-wider text-slate-500">Won</p></div>
+                        <div><p className="font-mono text-sm font-black text-red-400">{viewingUser.botLosses || 0}</p><p className="text-[8px] uppercase tracking-wider text-slate-500">Lost</p></div>
+                        <div><p className="font-mono text-sm font-black text-slate-300">{viewingUser.botGamesPlayed || 0}</p><p className="text-[8px] uppercase tracking-wider text-slate-500">Total</p></div>
                       </div>
                     </div>
 
@@ -2227,11 +2335,29 @@ export default function Home() {
         <div className="grid min-w-0 gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:gap-6">
           <div className="glass-panel rounded-2xl p-3 sm:p-5">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-black uppercase"><Medal className="text-amber-300" /> Battle Record</h2>
+            <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-teal-400/80">Ranked</p>
             <div className="grid grid-cols-2 gap-3">
               <Stat icon={<Trophy size={18} />} label="Wins" value={String(account.wins)} />
               <Stat icon={<Skull size={18} />} label="Losses" value={String(account.losses)} />
             </div>
-            <div className="mt-5 rounded-lg bg-black/30 p-4">
+            <div className="mt-4 rounded-xl border border-slate-700/40 bg-black/25 p-3">
+              <p className="mb-2.5 text-[9px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-1.5"><span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600"></span>Practice vs AI Bot</p>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div>
+                  <p className="font-mono text-base font-black text-emerald-400">{account.botWins || 0}</p>
+                  <p className="text-[8px] uppercase tracking-wider text-slate-500">Won</p>
+                </div>
+                <div>
+                  <p className="font-mono text-base font-black text-red-400">{account.botLosses || 0}</p>
+                  <p className="text-[8px] uppercase tracking-wider text-slate-500">Lost</p>
+                </div>
+                <div>
+                  <p className="font-mono text-base font-black text-slate-300">{account.botGamesPlayed || 0}</p>
+                  <p className="text-[8px] uppercase tracking-wider text-slate-500">Total</p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 rounded-lg bg-black/30 p-4">
               <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Joined</p>
               <p className="mt-1 font-mono text-sm text-slate-200">{new Date(account.createdAt).toLocaleDateString()}</p>
             </div>
@@ -2272,8 +2398,10 @@ export default function Home() {
         <div className="glass-panel min-w-0 rounded-2xl p-3 sm:p-5">
           <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-widest text-teal-300">Global Ladder</p>
-              <h1 className="font-display text-2xl font-black uppercase tracking-normal text-glow-teal sm:text-3xl">Leaderboard</h1>
+              <p className="text-xs font-black uppercase tracking-widest text-teal-300">Leaderboard</p>
+              <h1 className="font-display text-2xl font-black uppercase tracking-normal text-glow-teal sm:text-3xl">
+                {leaderboardField === "all" ? "Global" : getFieldLabel(leaderboardField)}
+              </h1>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button
@@ -2288,8 +2416,25 @@ export default function Home() {
             </div>
           </div>
 
-          {/* New Field-wise Leaderboard Selector */}
-          <div className="mb-5 space-y-4">
+          {myLeaderboardSnapshot && (
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-teal-400/25 bg-teal-400/[0.06] px-4 py-3">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-teal-300/90">
+                  Your standing · {myLeaderboardSnapshot.ladderLabel}
+                </p>
+                <p className="mt-0.5 font-mono text-2xl font-black text-white">
+                  {myLeaderboardSnapshot.rank ? `#${myLeaderboardSnapshot.rank}` : "—"}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="font-mono text-xl font-black text-teal-300">{myLeaderboardSnapshot.primaryValue}</p>
+                <p className="text-[9px] uppercase tracking-widest text-slate-500">{myLeaderboardSnapshot.primaryLabel}</p>
+              </div>
+              <p className="w-full font-mono text-[10px] text-slate-400 sm:w-auto">{myLeaderboardSnapshot.record}</p>
+            </div>
+          )}
+
+          <div className="mb-5 space-y-3">
             {/* Search Input */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -2342,10 +2487,7 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Field-wise Leaderboard Selector */}
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Rank by Academic Field:</p>
-              <div className="-mx-1 flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin sm:flex-wrap sm:overflow-visible">
+            <div className="-mx-1 flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin sm:flex-wrap sm:overflow-visible">
                 {FIELDS.map(f => (
                   <button
                     key={f.id}
@@ -2358,7 +2500,6 @@ export default function Home() {
                     {f.name}
                   </button>
                 ))}
-              </div>
             </div>
           </div>
 
@@ -2388,10 +2529,17 @@ export default function Home() {
               const rank = entry.rank;
               const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
               const rankColor = rank === 1 ? "text-amber-400" : rank === 2 ? "text-slate-300" : rank === 3 ? "text-amber-600" : "text-slate-400";
-              const wins = leaderboardField === "all" ? entry.user.wins : (entry.user.fieldStats?.[leaderboardField]?.wins || 0);
-              const losses = leaderboardField === "all" ? entry.user.losses : (entry.user.fieldStats?.[leaderboardField]?.losses || 0);
-              const totalGames = wins + losses;
-              const wrPercent = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
+              const wrPercent = Math.round(entry.displayWinRate * 100);
+              const statLabel =
+                leaderboardSort === "wins" ? "Wins"
+                  : leaderboardSort === "winRate" ? "Win %"
+                    : leaderboardSort === "level" ? "Level"
+                      : leaderboardField === "all" ? "Global Elo" : "Field Elo";
+              const statValue =
+                leaderboardSort === "wins" ? entry.displayWins
+                  : leaderboardSort === "winRate" ? `${wrPercent}%`
+                    : leaderboardSort === "level" ? (entry.user.level || 1)
+                      : entry.displayElo;
               return (
                 <motion.div
                   key={entry.user.id}
@@ -2409,13 +2557,15 @@ export default function Home() {
                         <p className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{entry.user.username}</p>
                         <span className="shrink-0 rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[9px] font-mono font-black text-amber-300">Lvl {entry.user.level || 1}</span>
                       </div>
-                      <p className="font-mono text-[9px] uppercase tracking-wider text-slate-400 sm:text-[10px]">{wins}W / {losses}L · {wrPercent}% WR</p>
+                      <p className="font-mono text-[9px] uppercase tracking-wider text-slate-400 sm:text-[10px]">
+                        {entry.displayWins}W / {entry.displayLosses}L · {wrPercent}% WR
+                      </p>
                     </div>
                   </div>
                   <div className="mt-2 flex items-center justify-between border-t border-white/5 pt-2 sm:mt-0 sm:block sm:border-0 sm:pt-0 sm:text-right">
-                    <p className="text-[9px] uppercase tracking-widest text-slate-500 sm:hidden">{leaderboardField === "all" ? "Global Elo" : "Field Elo"}</p>
-                    <p className="font-mono text-lg font-black text-teal-300">{entry.displayElo}</p>
-                    <p className="hidden text-[9px] uppercase tracking-widest text-slate-500 sm:block">{leaderboardField === "all" ? "Global Elo" : "Field Elo"}</p>
+                    <p className="text-[9px] uppercase tracking-widest text-slate-500 sm:hidden">{statLabel}</p>
+                    <p className="font-mono text-lg font-black text-teal-300">{statValue}</p>
+                    <p className="hidden text-[9px] uppercase tracking-widest text-slate-500 sm:block">{statLabel}</p>
                   </div>
                 </motion.div>
               );
@@ -2446,6 +2596,7 @@ export default function Home() {
               const oppName = iAmP1 ? p2Name : p1Name;
               const finished = match.finished_at || match.finishedAt;
               const isBotMatch = !winnerId || !loserId || p1Name.toLowerCase().includes("bot") || p2Name.toLowerCase().includes("bot");
+              const isFieldMatch = Boolean(match.domain && match.domain !== "all");
 
               return (
                 <div
@@ -2466,15 +2617,15 @@ export default function Home() {
                         vs <span className="text-teal-200">{oppName}</span>
                       </p>
                       <p className="text-[10px] font-bold text-teal-300/80 mt-1 uppercase tracking-widest">
-                        🏟️ {match.domain && match.domain !== "all" ? match.domain : "All Subjects"}
+                        {match.domain && match.domain !== "all" ? getFieldLabel(match.domain) : "All Subjects"}
                       </p>
                     </div>
-                    <p className="shrink-0 font-mono text-xs text-slate-500">{finished ? new Date(finished).toLocaleDateString() : ""}</p>
+                    <p className="shrink-0 font-mono text-xs text-slate-500">{formatRelativeTime(finished)}</p>
                   </div>
                   <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
                     <p className="rounded bg-white/5 p-2 text-center font-mono text-slate-300">{match.rounds} rounds</p>
                     <p className={`rounded p-2 text-center font-mono font-bold ${myDelta >= 0 ? "bg-emerald-500/10 text-emerald-300" : "bg-red-500/10 text-red-300"}`}>
-                      {isBotMatch ? "No Elo change" : `${myDelta >= 0 ? "+" : ""}${myDelta} Elo`}
+                      {isBotMatch ? "No Elo change" : `${myDelta >= 0 ? "+" : ""}${myDelta} ${isFieldMatch ? "field" : "global"} elo`}
                     </p>
                   </div>
                 </div>
@@ -2627,12 +2778,12 @@ export default function Home() {
               </div>
 
               <motion.div
-                initial={{ scale: 0.5, opacity: 0, rotate: -8 }}
-                animate={{ scale: [1, 1.06, 1], opacity: 1, rotate: 0 }}
-                transition={{ delay: 0.45, scale: { duration: 1.8, repeat: Infinity, ease: "easeInOut" }, type: "spring", stiffness: 180, damping: 12 }}
-                className="vs-badge-glow relative z-20 flex h-24 w-24 items-center justify-center rounded-full border-4 border-slate-950 bg-gradient-to-br from-amber-400 to-orange-500 font-display text-4xl font-black italic text-slate-950 md:h-28 md:w-28 md:text-5xl"
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.45, type: "spring", stiffness: 200, damping: 14 }}
+                className="relative z-20"
               >
-                VS
+                <VsEmblem size="lg" />
               </motion.div>
             </motion.div>
           )}
@@ -2811,9 +2962,13 @@ export default function Home() {
                   {winnerInfo?.winner === socketId ? "Victory" : "Defeat"}
                 </motion.h2>
                 <div className="mx-auto my-8 w-80 rounded-2xl border border-white/[0.08] bg-slate-900/40 p-6 shadow-xl backdrop-blur-md">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">New Rating</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    {winnerInfo?.domain && winnerInfo.domain !== "all" ? "Field Elo" : "Global Elo"}
+                  </p>
                   <p className="mt-2 font-mono text-5xl font-black text-teal-300">{winnerInfo?.elo}</p>
-                  <p className={`mt-2 font-bold ${(winnerInfo?.eloDelta ?? 0) >= 0 ? "text-emerald-300" : "text-rose-300"}`}>{(winnerInfo?.eloDelta ?? 0) >= 0 ? "+" : ""}{winnerInfo?.eloDelta ?? 0} Elo</p>
+                  <p className={`mt-2 font-bold ${(winnerInfo?.eloDelta ?? 0) >= 0 ? "text-emerald-300" : "text-rose-300"}`}>
+                    {(winnerInfo?.eloDelta ?? 0) >= 0 ? "+" : ""}{winnerInfo?.eloDelta ?? 0}
+                  </p>
                 </div>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => { playSound("select"); setGameState("menu"); }} className="btn-arena-primary mt-2 px-8 py-4">
                   <span className="relative z-10">Return to Menu</span>
@@ -2844,8 +2999,8 @@ export default function Home() {
         </div>
         <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-center">
           <Fighter profile={playerProfile} tone="teal" />
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-slate-900 text-xs font-black italic text-slate-400 mx-auto shadow-md">
-            VS
+          <div className="mx-auto">
+            <VsEmblem size="sm" />
           </div>
           <Fighter profile={opponentProfile} tone="red" alignRight />
         </div>
