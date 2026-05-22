@@ -29,6 +29,12 @@ import {
   Smile
 } from "lucide-react";
 
+const getFontSize = (text: string) => {
+  if (text.length > 25) return "text-xl sm:text-2xl";
+  if (text.length > 15) return "text-2xl sm:text-3xl";
+  return "text-3xl sm:text-4xl";
+};
+
 type GameState = "menu" | "queue" | "versus_intro" | "initial_discard" | "drafting" | "battle" | "results";
 type Screen = "auth" | "play" | "profile" | "leaderboard" | "social";
 
@@ -368,6 +374,18 @@ function getFieldLabel(fieldId: string) {
   return FIELDS.find(field => field.id === fieldId)?.name ?? fieldId;
 }
 
+function formatMessageTimestamp(value?: string) {
+  if (!value) return "";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "";
+  const now = new Date();
+  const options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
+  if (d.getFullYear() !== now.getFullYear()) {
+    options.year = '2-digit';
+  }
+  return d.toLocaleDateString([], options) + ", " + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
 function VsEmblem({ size = "lg" }: { size?: "sm" | "lg" }) {
   const isLarge = size === "lg";
   return (
@@ -398,10 +416,12 @@ export default function Home() {
   const [queueMode, setQueueMode] = useState<"global" | "field">("global");
   const [screen, setScreen] = useState<Screen>("auth");
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
-  const [token, setToken] = useState<string | null>(() => {
-    if (typeof window === "undefined") return null;
-    return localStorage.getItem("synapse_token");
-  });
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const t = localStorage.getItem("synapse_token");
+    if (t) setToken(t);
+  }, []);
   const [account, setAccount] = useState<Account | null>(null);
   const accountRef = useRef<Account | null>(null);
   const [authForm, setAuthForm] = useState({ username: "", password: "" });
@@ -416,6 +436,12 @@ export default function Home() {
   const [showFieldElosModal, setShowFieldElosModal] = useState(false);
   const [leaderboardSearch, setLeaderboardSearch] = useState("");
   const [leaderboardSort, setLeaderboardSort] = useState<"elo" | "level" | "wins" | "winRate">("elo");
+  const [leaderboardPage, setLeaderboardPage] = useState(1);
+  const [matchesPage, setMatchesPage] = useState(1);
+
+  useEffect(() => {
+    setLeaderboardPage(1);
+  }, [leaderboardField, leaderboardSearch, leaderboardSort]);
 
   // Social & Friends System States
   const [friends, setFriends] = useState<Friendship[]>([]);
@@ -447,6 +473,30 @@ export default function Home() {
   const [myAnswer, setMyAnswer] = useState<number | null>(null);
   const [isShaking, setIsShaking] = useState(false);
   const [lockedSubject, setLockedSubject] = useState<string | null>(null);
+  const [draftPopup, setDraftPopup] = useState<{ subject: string; isOwn: boolean } | null>(null);
+
+  const [discardTimeLeft, setDiscardTimeLeft] = useState(10);
+  const [draftTimeLeft, setDraftTimeLeft] = useState(15);
+
+  // Discard Phase Timer
+  useEffect(() => {
+    if (gameState !== "initial_discard") return;
+    setDiscardTimeLeft(10);
+    const interval = setInterval(() => {
+      setDiscardTimeLeft(prev => (prev <= 1 ? 0 : prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [gameState]);
+
+  // Drafting Phase Timer (resets on turn changes)
+  useEffect(() => {
+    if (gameState !== "drafting") return;
+    setDraftTimeLeft(15);
+    const interval = setInterval(() => {
+      setDraftTimeLeft(prev => (prev <= 1 ? 0 : prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [gameState, matchData?.draftTurn]);
   const versusTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const answerLockedRef = useRef(false);
   const refreshPlayerMetaRef = useRef<(token?: string | null) => Promise<void>>(async () => { });
@@ -462,8 +512,8 @@ export default function Home() {
     let filtered = leaderboard.map(entry => {
       const isGlobal = leaderboardField === "all";
       const fieldStats = entry.user.fieldStats?.[leaderboardField];
-      const displayWins = isGlobal ? (entry.user.wins || 0) : (fieldStats?.wins || 0);
-      const displayLosses = isGlobal ? (entry.user.losses || 0) : (fieldStats?.losses || 0);
+      const displayWins = fieldStats?.wins || 0;
+      const displayLosses = fieldStats?.losses || 0;
       const displayGames = displayWins + displayLosses;
       const displayElo = isGlobal
         ? entry.user.elo
@@ -508,13 +558,27 @@ export default function Home() {
     }));
   }, [leaderboard, leaderboardField, leaderboardSearch, leaderboardSort]);
 
+  const paginatedLeaderboard = useMemo(() => {
+    const totalPages = Math.ceil(displayLeaderboard.length / 10) || 1;
+    const clampedPage = Math.min(Math.max(leaderboardPage, 1), totalPages);
+    const start = (clampedPage - 1) * 10;
+    return displayLeaderboard.slice(start, start + 10);
+  }, [displayLeaderboard, leaderboardPage]);
+
+  const paginatedMatches = useMemo(() => {
+    const totalPages = Math.ceil(recentMatches.length / 10) || 1;
+    const clampedPage = Math.min(Math.max(matchesPage, 1), totalPages);
+    const start = (clampedPage - 1) * 10;
+    return recentMatches.slice(start, start + 10);
+  }, [recentMatches, matchesPage]);
+
   const myLeaderboardSnapshot = useMemo(() => {
     if (!account) return null;
 
     const isGlobal = leaderboardField === "all";
     const fieldStats = account.fieldStats?.[leaderboardField];
-    const displayWins = isGlobal ? (account.wins || 0) : (fieldStats?.wins || 0);
-    const displayLosses = isGlobal ? (account.losses || 0) : (fieldStats?.losses || 0);
+    const displayWins = fieldStats?.wins || 0;
+    const displayLosses = fieldStats?.losses || 0;
     const displayElo = isGlobal ? account.elo : (account.fieldElos?.[leaderboardField] ?? 1200);
     const displayWinRate = displayWins + displayLosses > 0
       ? Math.round((displayWins / (displayWins + displayLosses)) * 100)
@@ -809,6 +873,7 @@ export default function Home() {
       setLockedSubject(null);
       setRoundResult(null);
       setMyAnswer(null);
+      setDraftPopup(null);
       setGameState("versus_intro");
       playSound("intro");
       setScreen("play");
@@ -827,7 +892,15 @@ export default function Home() {
       setGameState("drafting");
     });
 
-    activeSocket.on("draft_complete", data => setSelectedSubject(data.subject));
+    activeSocket.on("draft_complete", data => {
+      setSelectedSubject(data.subject);
+      const isOwn = data.pickerId === activeSocket.id;
+      setDraftPopup({ subject: data.subject, isOwn });
+      playSound("confirm");
+      setTimeout(() => {
+        setDraftPopup(null);
+      }, 1800);
+    });
 
     activeSocket.on("round_start", data => {
       answerLockedRef.current = false;
@@ -885,6 +958,7 @@ export default function Home() {
       }));
       setSelectedSubject(null);
       setLockedSubject(null);
+      setDraftPopup(null);
       setGameState("drafting");
     });
 
@@ -1565,7 +1639,7 @@ export default function Home() {
                         <h4 className="text-xs font-black uppercase tracking-widest text-slate-300 mb-3">Field Ratings</h4>
                         <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
                           {FIELDS.map(f => {
-                            const elo = viewingUser.fieldElos?.[f.id] || 1200;
+                            const elo = f.id === "all" ? (viewingUser.elo || 1200) : (viewingUser.fieldElos?.[f.id] || 1200);
                             const stats = viewingUser.fieldStats?.[f.id];
                             const w = stats?.wins || 0;
                             const l = stats?.losses || 0;
@@ -1596,15 +1670,41 @@ export default function Home() {
                                 ? (m.playerOneDelta ?? m.player_one_delta)
                                 : (m.playerTwoDelta ?? m.player_two_delta);
                               const formattedDelta = delta && delta >= 0 ? `+${delta}` : delta;
+
+                              const badge = (() => {
+                                const dom = m.domain || "all";
+                                switch (dom) {
+                                  case "Computer Science / AI / IT / Data":
+                                    return { label: "CS & AI", style: "bg-teal-500/10 text-teal-300 border-teal-500/20" };
+                                  case "Electronics / Electrical / Embedded":
+                                    return { label: "Electrical", style: "bg-amber-500/10 text-amber-300 border-amber-500/20" };
+                                  case "Mechanical / Automobile / Aerospace":
+                                    return { label: "Mechanical", style: "bg-blue-500/10 text-blue-300 border-blue-500/20" };
+                                  case "Civil / Chemical / Biotech / Biomedical":
+                                    return { label: "Civil & Bio", style: "bg-pink-500/10 text-pink-300 border-pink-500/20" };
+                                  case "Common / First Year":
+                                    return { label: "Common", style: "bg-indigo-500/10 text-indigo-300 border-indigo-500/20" };
+                                  default:
+                                    return { label: "All Subjects", style: "bg-slate-500/10 text-slate-300 border-slate-500/20" };
+                                }
+                              })();
+
                               return (
                                 <div key={m.id} className="flex items-center justify-between text-[10px] border-b border-white/5 pb-1.5 last:border-b-0 last:pb-0">
-                                  <div className="min-w-0">
-                                    <span className={`font-black uppercase ${isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                  <div className="min-w-0 flex-1 pr-2">
+                                    <span className={`font-black uppercase tracking-wider block text-[9px] ${isWin ? "text-emerald-400" : "text-red-400"}`}>
                                       {isWin ? "Victory" : "Defeat"}
                                     </span>
-                                    <span className="text-slate-500 font-bold block truncate">vs {oppName || "AI Bot"}</span>
+                                    <div className="flex items-center gap-1.5 mt-0.5 min-w-0">
+                                      <span className="text-slate-300 font-bold truncate max-w-[80px] sm:max-w-[120px]">
+                                        vs {oppName || "AI Bot"}
+                                      </span>
+                                      <span className={`shrink-0 rounded px-1.5 py-0.2 text-[8px] font-mono font-bold border leading-none ${badge.style}`}>
+                                        {badge.label}
+                                      </span>
+                                    </div>
                                   </div>
-                                  <span className={`font-mono font-bold ${isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                  <span className={`shrink-0 font-mono font-bold ${isWin ? "text-emerald-400" : "text-red-400"}`}>
                                     {formattedDelta || ""} Elo
                                   </span>
                                 </div>
@@ -1860,7 +1960,7 @@ export default function Home() {
                           </span>
                         </div>
                         <span className="font-mono text-[9px] text-slate-500">
-                          {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          {formatMessageTimestamp(msg.timestamp)}
                         </span>
                       </div>
                       <p className="text-slate-200 text-sm break-words selection:bg-teal-400/20">{msg.message}</p>
@@ -2152,7 +2252,7 @@ export default function Home() {
                             </div>
                             <p className="text-xs break-words">{msg.message}</p>
                             <p className="text-[9px] text-slate-500 mt-1">
-                              {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              {formatMessageTimestamp(msg.timestamp)}
                             </p>
                           </div>
                         </div>
@@ -2334,7 +2434,7 @@ export default function Home() {
 
         <div className="grid min-w-0 gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:gap-6">
           <div className="glass-panel rounded-2xl p-3 sm:p-5">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-black uppercase"><Medal className="text-amber-300" /> Battle Record</h2>
+            <h2 className="mb-4 flex items-center gap-2 text-xl font-black uppercase"> Battle Record</h2>
             <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-teal-400/80">Ranked</p>
             <div className="grid grid-cols-2 gap-3">
               <Stat icon={<Trophy size={18} />} label="Wins" value={String(account.wins)} />
@@ -2364,7 +2464,7 @@ export default function Home() {
           </div>
 
           <div className="glass-panel rounded-2xl p-3 sm:p-5">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-black uppercase sm:text-xl"><Camera className="text-teal-300" /> Edit Profile</h2>
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-black uppercase sm:text-xl"> Edit Profile</h2>
             <div className="grid gap-4">
               <input value={profileForm.username} onChange={event => setProfileForm({ ...profileForm, username: event.target.value })} placeholder="Username" className="rounded-lg border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-teal-300" />
               <input value={profileForm.bio} onChange={event => setProfileForm({ ...profileForm, bio: event.target.value })} placeholder="Bio" className="rounded-lg border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-teal-300" />
@@ -2524,7 +2624,7 @@ export default function Home() {
                   </div>
                 </div>
               ))
-            ) : displayLeaderboard.length ? displayLeaderboard.map(entry => {
+            ) : paginatedLeaderboard.length ? paginatedLeaderboard.map(entry => {
               const isSelf = entry.user.id === account?.id;
               const rank = entry.rank;
               const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
@@ -2573,13 +2673,34 @@ export default function Home() {
               <div className="rounded-xl border border-white/[0.06] bg-slate-950/20 p-8 text-center text-slate-400">No ranked players yet.</div>
             )}
           </div>
+          {displayLeaderboard.length > 10 && (
+            <div className="flex items-center justify-between border-t border-white/5 pt-4 mt-4 font-mono text-xs text-slate-400">
+              <button
+                disabled={leaderboardPage === 1}
+                onClick={() => setLeaderboardPage(prev => Math.max(prev - 1, 1))}
+                className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+              >
+                ◀ Prev
+              </button>
+              <span className="font-bold text-slate-300">
+                Page {leaderboardPage} of {Math.ceil(displayLeaderboard.length / 10)}
+              </span>
+              <button
+                disabled={leaderboardPage >= Math.ceil(displayLeaderboard.length / 10)}
+                onClick={() => setLeaderboardPage(prev => Math.min(prev + 1, Math.ceil(displayLeaderboard.length / 10)))}
+                className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+              >
+                Next ▶
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="glass-panel min-w-0 rounded-2xl p-3 sm:p-5">
           <p className="text-xs font-black uppercase tracking-widest text-amber-300">Your Timeline</p>
           <h2 className="font-display mb-4 text-xl font-black uppercase tracking-normal sm:mb-5 sm:text-2xl">Recent Matches</h2>
           <div className="space-y-3">
-            {recentMatches.length ? recentMatches.map(match => {
+            {paginatedMatches.length ? paginatedMatches.map(match => {
               const p1Name = match.player_one_name || match.playerOneName || "Player 1";
               const p2Name = match.player_two_name || match.playerTwoName || "Player 2";
               const p1Id = match.player_one_id ?? match.playerOneId;
@@ -2634,6 +2755,27 @@ export default function Home() {
               <div className="rounded-lg border border-white/10 bg-black/25 p-8 text-center text-slate-400">Your matches will appear here after ranked games.</div>
             )}
           </div>
+          {recentMatches.length > 10 && (
+            <div className="flex items-center justify-between border-t border-white/5 pt-4 mt-4 font-mono text-xs text-slate-400">
+              <button
+                disabled={matchesPage === 1}
+                onClick={() => setMatchesPage(prev => Math.max(prev - 1, 1))}
+                className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+              >
+                ◀ Prev
+              </button>
+              <span className="font-bold text-slate-300">
+                Page {matchesPage} of {Math.ceil(recentMatches.length / 10)}
+              </span>
+              <button
+                disabled={matchesPage >= Math.ceil(recentMatches.length / 10)}
+                onClick={() => setMatchesPage(prev => Math.min(prev + 1, Math.ceil(recentMatches.length / 10)))}
+                className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+              >
+                Next ▶
+              </button>
+            </div>
+          )}
         </div>
       </motion.section>
     );
@@ -2792,6 +2934,29 @@ export default function Home() {
             <motion.div key="discard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mx-auto flex min-h-[calc(100vh-120px)] max-w-5xl flex-col items-center justify-center gap-8">
               <h2 className="text-center text-4xl font-black uppercase md:text-5xl">Initial Discard Phase</h2>
               <p className="text-center text-slate-300">{lockedSubject === "WAITING" ? "Waiting for opponent to decide..." : "Select up to 1 card to discard from your hand"}</p>
+              
+              {/* Discard Phase Timer Slider */}
+              <div className="w-full max-w-md mx-auto">
+                <div className="flex justify-between items-center mb-1 text-[10px] font-mono font-bold tracking-widest text-slate-400">
+                  <span>TIME REMAINING</span>
+                  <span className={discardTimeLeft <= 3 ? "text-red-400 animate-pulse font-black" : "text-teal-300"}>
+                    {discardTimeLeft}s
+                  </span>
+                </div>
+                <div className="relative h-2 w-full overflow-hidden rounded-full bg-white/[0.05] border border-white/5 shadow-inner">
+                  <motion.div
+                    className={`h-full rounded-full bg-gradient-to-r ${
+                      discardTimeLeft <= 3
+                        ? "from-red-500 to-rose-600 shadow-[0_0_12px_rgba(239,68,68,0.6)]"
+                        : "from-teal-400 to-emerald-500 shadow-[0_0_12px_rgba(45,212,191,0.4)]"
+                    }`}
+                    initial={{ width: "100%" }}
+                    animate={{ width: `${(discardTimeLeft / 10) * 100}%` }}
+                    transition={{ duration: 0.1, ease: "linear" }}
+                  />
+                </div>
+              </div>
+
               <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-5">
                 {hand.map((sub, i) => (
                   <motion.button
@@ -2821,36 +2986,257 @@ export default function Home() {
             <motion.div key="drafting" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mx-auto flex min-h-[calc(100vh-120px)] max-w-5xl flex-col justify-center gap-7">
               <DuelHeader player={player} opponent={opponent} matchData={matchData} />
               <div className="flex items-end justify-between gap-4">
-                <div>
+                <div className="w-full">
                   <h2 className="text-4xl font-black uppercase">Play a Card</h2>
                   <p className="mt-2 font-mono text-teal-200">{matchData?.draftTurn === socketId ? "YOUR TURN" : "OPPONENT IS PLAYING"}</p>
+                  
+                  {/* Drafting Timer Slider */}
+                  <div className="w-full mt-4">
+                    <div className="flex justify-between items-center mb-1 text-[10px] font-mono font-bold tracking-widest text-slate-400">
+                      <span>DRAFTING PHASE TIME</span>
+                      <span className={draftTimeLeft <= 3 ? "text-red-400 animate-pulse font-black" : "text-teal-300"}>
+                        {draftTimeLeft}s
+                      </span>
+                    </div>
+                    <div className="relative h-2 w-full overflow-hidden rounded-full bg-white/[0.05] border border-white/5 shadow-inner">
+                      <motion.div
+                        className={`h-full rounded-full bg-gradient-to-r ${
+                          draftTimeLeft <= 3
+                            ? "from-red-500 to-rose-600 shadow-[0_0_12px_rgba(239,68,68,0.6)]"
+                            : "from-teal-400 to-emerald-500 shadow-[0_0_12px_rgba(45,212,191,0.4)]"
+                        }`}
+                        initial={{ width: "100%" }}
+                        animate={{ width: `${(draftTimeLeft / 15) * 100}%` }}
+                        transition={{ duration: 0.1, ease: "linear" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="grid max-h-[54vh] grid-cols-2 gap-4 overflow-y-auto p-1 md:grid-cols-5">
-                {matchData?.draftTurn === socketId ? hand.map((sub, index) => (
-                  <motion.button
-                    key={index + sub}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.04 }}
-                    whileHover={lockedSubject === null ? { scale: 1.04, y: -3 } : undefined}
-                    onClick={() => pickSubject(sub)}
-                    disabled={lockedSubject !== null}
-                    className={`flex min-h-36 flex-col justify-center rounded-lg border p-4 text-center font-bold transition ${lockedSubject === sub ? "border-teal-200 bg-teal-300 text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.25)]" : "border-white/15 bg-white/[0.06] hover:border-teal-300/60 hover:bg-teal-300/10"}`}
-                  >
-                    {sub}
-                  </motion.button>
-                )) : [1, 2, 3, 4, 5].map(i => (
-                  <motion.div
-                    key={i}
-                    animate={{ opacity: [0.3, 0.7, 0.3] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
-                    className="grid min-h-36 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-4xl font-black text-slate-600"
-                  >
-                    ?
-                  </motion.div>
-                ))}
+                <AnimatePresence mode="popLayout">
+                  {matchData?.draftTurn === socketId ? hand.map((sub, index) => (
+                    <motion.button
+                      layout
+                      key={sub}
+                      initial={{ opacity: 0, scale: 0.85, y: 15 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.8, y: -20, transition: { duration: 0.2 } }}
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                      whileHover={lockedSubject === null ? { scale: 1.04, y: -3 } : undefined}
+                      onClick={() => pickSubject(sub)}
+                      disabled={lockedSubject !== null}
+                      className={`flex min-h-36 flex-col justify-center rounded-lg border p-4 text-center font-bold transition ${lockedSubject === sub ? "border-teal-200 bg-teal-300 text-slate-950 shadow-[0_0_24px_rgba(45,212,191,0.25)]" : "border-white/15 bg-white/[0.06] hover:border-teal-300/60 hover:bg-teal-300/10"}`}
+                    >
+                      {sub}
+                    </motion.button>
+                  )) : [1, 2, 3, 4, 5].map(i => (
+                    <motion.div
+                      key={`placeholder-${i}`}
+                      animate={{ opacity: [0.3, 0.7, 0.3] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
+                      className="grid min-h-36 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-4xl font-black text-slate-600"
+                    >
+                      ?
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
+
+              {/* Premium Card Selection Announcement Popup */}
+              <AnimatePresence>
+                {draftPopup && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-xl"
+                    style={{ perspective: 1200 }}
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, rotateY: 85, rotateX: 10, scale: 0.6, z: -150 }}
+                      animate={{ 
+                        opacity: 1, 
+                        rotateY: 0, 
+                        rotateX: 0,
+                        scale: 1, 
+                        z: 0 
+                      }}
+                      exit={{ opacity: 0, rotateY: -85, scale: 0.6, z: -150, transition: { duration: 0.35, ease: "easeInOut" } }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 240, 
+                        damping: 22 
+                      }}
+                      className="relative w-80 sm:w-[340px] h-[500px] rounded-3xl border-2 p-1 text-center shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden"
+                      style={{
+                        borderColor: draftPopup.isOwn ? "rgba(45, 212, 191, 0.55)" : "rgba(245, 158, 11, 0.55)",
+                        boxShadow: draftPopup.isOwn 
+                          ? "0 0 60px rgba(45, 212, 191, 0.25), inset 0 0 30px rgba(45, 212, 191, 0.1)" 
+                          : "0 0 60px rgba(245, 158, 11, 0.25), inset 0 0 30px rgba(245, 158, 11, 0.1)",
+                        background: draftPopup.isOwn 
+                          ? "linear-gradient(145deg, rgba(10, 25, 41, 0.98), rgba(3, 18, 17, 0.98))" 
+                          : "linear-gradient(145deg, rgba(10, 25, 41, 0.98), rgba(28, 15, 3, 0.98))"
+                      }}
+                    >
+                      {/* Ambient Neon Backlight Glow */}
+                      <div 
+                        className={`absolute -inset-20 opacity-40 blur-3xl pointer-events-none rounded-full transition-all duration-500 ${
+                          draftPopup.isOwn 
+                            ? "bg-gradient-to-r from-teal-500/50 to-emerald-500/50" 
+                            : "bg-gradient-to-r from-amber-500/50 to-rose-500/50"
+                        }`}
+                      />
+
+                      {/* Sci-fi corner brackets inside card border */}
+                      <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 opacity-40" style={{ borderColor: draftPopup.isOwn ? "#2dd4bf" : "#f59e0b" }} />
+                      <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 opacity-40" style={{ borderColor: draftPopup.isOwn ? "#2dd4bf" : "#f59e0b" }} />
+                      <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 opacity-40" style={{ borderColor: draftPopup.isOwn ? "#2dd4bf" : "#f59e0b" }} />
+                      <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 opacity-40" style={{ borderColor: draftPopup.isOwn ? "#2dd4bf" : "#f59e0b" }} />
+
+                      {/* Card internal frame with floating micro-animation */}
+                      <motion.div
+                        animate={{ y: [0, -8, 0] }}
+                        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                        className="w-full h-full flex flex-col justify-between p-5 rounded-2xl border border-white/[0.04] bg-slate-950/40 backdrop-blur-xl relative z-10"
+                      >
+                        {/* 1. HEADER ROW */}
+                        <div className="flex justify-between items-center w-full pb-3 border-b border-white/[0.06]">
+                          <div className="flex items-center gap-1.5">
+                            <div className={`w-2 h-2 rounded-full animate-pulse ${
+                              draftPopup.isOwn ? "bg-teal-400 shadow-[0_0_8px_#2dd4bf]" : "bg-amber-400 shadow-[0_0_8px_#f59e0b]"
+                            }`} />
+                            <span className="text-[9px] font-mono font-black text-slate-400 tracking-wider">
+                              {draftPopup.isOwn ? "SYS // SEC-A" : "SYS // SEC-B"}
+                            </span>
+                          </div>
+                          
+                          <span className={`text-[10px] font-mono font-black tracking-[0.2em] uppercase px-2 py-0.5 rounded ${
+                            draftPopup.isOwn 
+                              ? "border border-teal-500/20 bg-teal-500/10 text-teal-300" 
+                              : "border border-amber-500/20 bg-amber-500/10 text-amber-300"
+                          }`}>
+                            {draftPopup.isOwn ? "PLAYER UNIT" : "OPPONENT UNIT"}
+                          </span>
+                        </div>
+
+                        {/* 2. CARD ART FRAME (Holographic center) */}
+                        <div 
+                          className="w-full aspect-[4/3] rounded-xl relative overflow-hidden border flex items-center justify-center bg-slate-950/60 shadow-[inset_0_0_20px_rgba(0,0,0,0.6)]"
+                          style={{
+                            borderColor: draftPopup.isOwn ? "rgba(45, 212, 191, 0.15)" : "rgba(245, 158, 11, 0.15)"
+                          }}
+                        >
+                          {/* Grid backdrop */}
+                          <div className="absolute inset-0 arena-grid opacity-15 pointer-events-none" />
+
+                          {/* Concentric Rotating Hologram Rings */}
+                          <div className="absolute flex items-center justify-center w-full h-full pointer-events-none">
+                            {/* Outer Dash Ring */}
+                            <div 
+                              className="absolute w-36 h-36 rounded-full border border-dashed animate-[spin_24s_linear_infinite]"
+                              style={{ 
+                                borderColor: draftPopup.isOwn ? "rgba(45, 212, 191, 0.15)" : "rgba(245, 158, 11, 0.15)"
+                              }}
+                            />
+                            {/* Mid Dash Ring - Reverse */}
+                            <div 
+                              className="absolute w-28 h-28 rounded-full border border-dashed animate-[spin_12s_linear_infinite_reverse]"
+                              style={{ 
+                                borderColor: draftPopup.isOwn ? "rgba(45, 212, 191, 0.25)" : "rgba(245, 158, 11, 0.25)"
+                              }}
+                            />
+                            {/* Inner solid glowing circle */}
+                            <div 
+                              className="absolute w-20 h-20 rounded-full border flex items-center justify-center"
+                              style={{ 
+                                borderColor: draftPopup.isOwn ? "rgba(45, 212, 191, 0.35)" : "rgba(245, 158, 11, 0.35)",
+                                boxShadow: draftPopup.isOwn ? "inset 0 0 15px rgba(45, 212, 191, 0.15)" : "inset 0 0 15px rgba(245, 158, 11, 0.15)"
+                              }}
+                            />
+                            {/* Core Glowing Orb */}
+                            <div 
+                              className="absolute w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
+                              style={{
+                                background: draftPopup.isOwn ? "rgba(45, 212, 191, 0.12)" : "rgba(245, 158, 11, 0.12)",
+                                boxShadow: draftPopup.isOwn 
+                                  ? "0 0 25px rgba(45, 212, 191, 0.4), inset 0 0 10px rgba(45, 212, 191, 0.3)" 
+                                  : "0 0 25px rgba(245, 158, 11, 0.4), inset 0 0 10px rgba(245, 158, 11, 0.3)"
+                              }}
+                            >
+                              {/* Inner breathing pulse */}
+                              <div className={`absolute inset-0 rounded-full animate-ping opacity-20 ${
+                                draftPopup.isOwn ? "bg-teal-400" : "bg-amber-400"
+                              }`} />
+                              
+                              <span className="font-mono text-sm font-black text-slate-100 uppercase tracking-widest">
+                                {draftPopup.subject.substring(0, 2).toUpperCase()}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Tech target corner tags */}
+                          <div className="absolute top-2 left-2 text-[6px] font-mono opacity-30 text-slate-400">TRG: 99.4</div>
+                          <div className="absolute bottom-2 right-2 text-[6px] font-mono opacity-30 text-slate-400">RAD: OK</div>
+                        </div>
+
+                        {/* 3. CLASSIFICATION & TITLE BLOCK */}
+                        <div className="flex flex-col gap-1 w-full text-center">
+                          <span className={`text-[8px] font-mono font-bold tracking-[0.3em] uppercase ${
+                            draftPopup.isOwn ? "text-teal-400/70" : "text-amber-400/70"
+                          }`}>
+                            // CARD FIELD DRAFT //
+                          </span>
+                          
+                          <h3 
+                            className={`font-sans font-black tracking-wide uppercase leading-tight px-1 transition-all ${getFontSize(draftPopup.subject)}`}
+                            style={{
+                              color: "#ffffff",
+                              textShadow: draftPopup.isOwn 
+                                ? "0 0 24px rgba(45, 212, 191, 0.7), 0 2px 4px rgba(0,0,0,0.5)" 
+                                : "0 0 24px rgba(245, 158, 11, 0.7), 0 2px 4px rgba(0,0,0,0.5)"
+                            }}
+                          >
+                            {draftPopup.subject}
+                          </h3>
+                          
+                          <span className="block text-[8px] font-mono font-semibold tracking-wider text-slate-400/60 mt-1">
+                            {draftPopup.isOwn ? "INITIATING PLAY DECK LOCK" : "AWAITING TURN TRANSITION"}
+                          </span>
+                        </div>
+
+                        {/* 4. FOOTER DETAILS & BARCODE */}
+                        <div className="w-full flex flex-col gap-3 pt-3 border-t border-white/[0.06]">
+                          {/* Barcode & Spec details */}
+                          <div className="flex justify-between items-center text-[8px] font-mono text-slate-500 tracking-wider">
+                            <span>DECK-REF // {draftPopup.subject.length * 12 + 104}</span>
+                            <span className="opacity-50">|||| || | |||| ||</span>
+                            <span>{draftPopup.isOwn ? "ATK: 92" : "ATK: 88"}</span>
+                          </div>
+
+                          {/* Shrinking visual timeline bar */}
+                          <div className="w-full">
+                            <div className="h-1 w-full rounded-full bg-white/[0.04] overflow-hidden border border-white/5 shadow-inner">
+                              <motion.div 
+                                className={`h-full rounded-full bg-gradient-to-r ${
+                                  draftPopup.isOwn ? "from-teal-400 to-emerald-400" : "from-amber-400 to-orange-500"
+                                }`}
+                                initial={{ width: "100%" }}
+                                animate={{ width: "0%" }}
+                                transition={{ duration: 1.8, ease: "linear" }}
+                              />
+                            </div>
+                            <span className="block mt-1.5 text-[8px] font-mono font-bold text-slate-400 tracking-widest uppercase">
+                              {draftPopup.isOwn ? "PREPARING NEURAL STAGE..." : "SYNCHRONIZING OPPONENT STAGE..."}
+                            </span>
+                          </div>
+                        </div>
+
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
 

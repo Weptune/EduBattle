@@ -31,6 +31,11 @@ async function init() {
   if (initialized) return;
 
   await pool.query(`
+    CREATE TABLE IF NOT EXISTS system_settings (
+      key TEXT PRIMARY KEY,
+      value TEXT
+    );
+
     CREATE TABLE IF NOT EXISTS users (
       id TEXT PRIMARY KEY,
       username TEXT UNIQUE NOT NULL,
@@ -611,6 +616,16 @@ module.exports = {
 
 async function recalculateAllUsersStats() {
   await init();
+  try {
+    const flagResult = await pool.query("SELECT value FROM system_settings WHERE key = $1", ["stats_recalculated_all_v2"]);
+    if (flagResult.rows.length > 0 && flagResult.rows[0].value === 'true') {
+      console.log("⚡ Skipping automatic user stats recalculation (already executed).");
+      return;
+    }
+  } catch (err) {
+    console.error("⚠️ Failed to check system settings for stats recalculation flag:", err);
+  }
+
   console.log("🔄 Starting automatic user stats recalculation...");
   try {
     const usersResult = await pool.query('SELECT id, username FROM users');
@@ -654,16 +669,14 @@ async function recalculateAllUsersStats() {
           }
 
           // Domain stats (only for ranked matches)
-          const domain = m.domain;
-          if (domain && domain !== 'all') {
-            if (!fieldStats[domain]) {
-              fieldStats[domain] = { wins: 0, losses: 0 };
-            }
-            if (isWinner) {
-              fieldStats[domain].wins++;
-            } else {
-              fieldStats[domain].losses++;
-            }
+          const domain = m.domain || 'all';
+          if (!fieldStats[domain]) {
+            fieldStats[domain] = { wins: 0, losses: 0 };
+          }
+          if (isWinner) {
+            fieldStats[domain].wins++;
+          } else {
+            fieldStats[domain].losses++;
           }
         }
       }
@@ -685,6 +698,10 @@ async function recalculateAllUsersStats() {
 
       console.log(`✅ Recalculated stats for ${u.username}: wins=${wins}, losses=${losses}, gp=${gamesPlayed}, botWins=${botWins}, botLosses=${botLosses}, botGp=${botGamesPlayed}`);
     }
+    await pool.query(
+      "INSERT INTO system_settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value",
+      ["stats_recalculated_all_v2", "true"]
+    );
     console.log("✨ Automatic user stats recalculation finished successfully!");
   } catch (error) {
     console.error("❌ Failed to recalculate user stats:", error);

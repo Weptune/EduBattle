@@ -69,7 +69,7 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 3001;
 const HOST = process.env.HOST || '0.0.0.0';
 const INITIAL_HAND_SIZE = 5;
-const INITIAL_DISCARD_MS = 10000;
+const INITIAL_DISCARD_MS = 13000; // 10s discard phase + 3s versus intro buffer to prevent early timing skips
 const DRAFT_PICK_MS = 15000;
 const BASE_MATCHMAKING_GAP = 250;
 const MATCHMAKING_EXPANSION_PER_5S = 75;
@@ -361,7 +361,7 @@ app.get('/leaderboard', async (req, res) => {
 });
 
 app.get('/me/matches', requireAuth, async (req, res) => {
-  const matches = await storage.listRecentMatches(req.user.id, 20);
+  const matches = await storage.listRecentMatches(req.user.id, 100);
   res.json({ matches });
 });
 
@@ -1127,8 +1127,8 @@ function processDraft(match, playerId, subject) {
 
   match.questions[match.currentRound] = pickQuestionForMatch(match, match.selectedSubject);
 
-  emitToPlayer(match.p1, 'draft_complete', { subject: match.selectedSubject });
-  emitToPlayer(match.p2, 'draft_complete', { subject: match.selectedSubject });
+  emitToPlayer(match.p1, 'draft_complete', { subject: match.selectedSubject, pickerId: playerId });
+  emitToPlayer(match.p2, 'draft_complete', { subject: match.selectedSubject, pickerId: playerId });
 
   setTimeout(() => startNextRound(match), 2000);
 }
@@ -1348,20 +1348,20 @@ async function endMatch(match) {
           level: nextLevel
         };
         if (!isBotMatch) {
-          const domain = match.domain;
-          if (domain && domain !== 'all') {
+          const domain = match.domain || 'all';
+          if (domain !== 'all') {
             const elos = { ...(user.fieldElos || {}) };
             elos[domain] = winner.elo;
             nextUser.fieldElos = elos;
-
-            const stats = { ...(user.fieldStats || {}) };
-            if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
-            stats[domain].wins = (stats[domain].wins || 0) + 1;
-            nextUser.fieldStats = stats;
           } else {
             nextUser.elo = winner.elo;
             nextUser.bestElo = Math.max(user.bestElo || user.elo || 1200, winner.elo);
           }
+
+          const stats = { ...(user.fieldStats || {}) };
+          if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
+          stats[domain].wins = (stats[domain].wins || 0) + 1;
+          nextUser.fieldStats = stats;
         }
         return nextUser;
       });
@@ -1384,19 +1384,19 @@ async function endMatch(match) {
           level: nextLevel
         };
         if (!isBotMatch) {
-          const domain = match.domain;
-          if (domain && domain !== 'all') {
+          const domain = match.domain || 'all';
+          if (domain !== 'all') {
             const elos = { ...(user.fieldElos || {}) };
             elos[domain] = loser.elo;
             nextUser.fieldElos = elos;
-
-            const stats = { ...(user.fieldStats || {}) };
-            if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
-            stats[domain].losses = (stats[domain].losses || 0) + 1;
-            nextUser.fieldStats = stats;
           } else {
             nextUser.elo = loser.elo;
           }
+
+          const stats = { ...(user.fieldStats || {}) };
+          if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
+          stats[domain].losses = (stats[domain].losses || 0) + 1;
+          nextUser.fieldStats = stats;
         }
         return nextUser;
       });
