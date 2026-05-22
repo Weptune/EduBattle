@@ -2322,7 +2322,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.18 }}
             className="mt-6 max-w-xl text-lg leading-8 text-slate-300"
           >
-            Your Elo, wins, losses, profile banner, and battle record now live on your account. No account, no queue.
+            um sign up it's very fun and addictive i promise
           </motion.p>
 
           <motion.div
