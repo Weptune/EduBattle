@@ -617,7 +617,7 @@ module.exports = {
 async function recalculateAllUsersStats() {
   await init();
   try {
-    const flagResult = await pool.query("SELECT value FROM system_settings WHERE key = $1", ["stats_recalculated_all_v2"]);
+    const flagResult = await pool.query("SELECT value FROM system_settings WHERE key = $1", ["stats_recalculated_all_v3"]);
     if (flagResult.rows.length > 0 && flagResult.rows[0].value === 'true') {
       console.log("⚡ Skipping automatic user stats recalculation (already executed).");
       return;
@@ -700,7 +700,7 @@ async function recalculateAllUsersStats() {
     }
     await pool.query(
       "INSERT INTO system_settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value",
-      ["stats_recalculated_all_v2", "true"]
+      ["stats_recalculated_all_v3", "true"]
     );
     console.log("✨ Automatic user stats recalculation finished successfully!");
   } catch (error) {
