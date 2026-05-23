@@ -77,6 +77,7 @@ type Friendship = {
     bio: string;
     xp: number;
     level: number;
+    isOnline?: boolean;
   };
 };
 
@@ -617,6 +618,19 @@ export default function Home() {
       setFriends(data.friends);
       setIncomingRequests(data.incomingRequests);
       setOutgoingRequests(data.outgoingRequests);
+
+      // Symmetrically sync onlineFriends Set state with active connection statuses
+      setOnlineFriends(prev => {
+        const next = new Set(prev);
+        data.friends.forEach(f => {
+          if (f.friend.isOnline) {
+            next.add(f.friend.id);
+          } else {
+            next.delete(f.friend.id);
+          }
+        });
+        return next;
+      });
     } catch (err) {
       console.error("Failed to load friends:", err);
     }
@@ -1047,7 +1061,7 @@ export default function Home() {
       socketRef.current = null;
       if (versusTimerRef.current) clearTimeout(versusTimerRef.current);
     };
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     accountRef.current = account;

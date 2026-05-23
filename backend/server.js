@@ -368,7 +368,13 @@ app.get('/me/matches', requireAuth, async (req, res) => {
 app.get('/friends', requireAuth, async (req, res) => {
   try {
     const list = await storage.getFriendships(req.user.id);
-    const friends = list.filter(f => f.status === 'accepted');
+    const friends = list.filter(f => f.status === 'accepted').map(f => ({
+      ...f,
+      friend: {
+        ...f.friend,
+        isOnline: userSockets.has(f.friend.id)
+      }
+    }));
     const incomingRequests = list.filter(f => f.status === 'pending' && f.isIncomingRequest);
     const outgoingRequests = list.filter(f => f.status === 'pending' && f.isOutgoingRequest);
     res.json({ friends, incomingRequests, outgoingRequests });
