@@ -1382,6 +1382,7 @@ function resolveRound(match) {
 }
 
 async function endMatch(match) {
+  if (match.state === 'finished') return;
   match.state = 'finished';
   let winner = null;
   let loser = null;
