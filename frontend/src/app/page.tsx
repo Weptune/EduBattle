@@ -678,6 +678,7 @@ export default function Home() {
   const [myAnswer, setMyAnswer] = useState<number | null>(null);
   const [isShaking, setIsShaking] = useState(false);
   const [lockedSubject, setLockedSubject] = useState<string | null>(null);
+  const [discardedSubjects, setDiscardedSubjects] = useState<string[]>([]);
   const [draftPopup, setDraftPopup] = useState<{ subject: string; isOwn: boolean } | null>(null);
 
   const [discardTimeLeft, setDiscardTimeLeft] = useState(10);
@@ -1089,6 +1090,7 @@ export default function Home() {
       setHand(data.hand || []);
       setPlayer(p => ({ ...p, hp: 100 }));
       setLockedSubject(null);
+      setDiscardedSubjects([]);
       setRoundResult(null);
       setMyAnswer(null);
       setDraftPopup(null);
@@ -1107,6 +1109,7 @@ export default function Home() {
     activeSocket.on("discard_phase_end", data => {
       setMatchData(data.match);
       setLockedSubject(null);
+      setDiscardedSubjects([]);
       setGameState("drafting");
     });
 
@@ -1176,6 +1179,7 @@ export default function Home() {
       }));
       setSelectedSubject(null);
       setLockedSubject(null);
+      setDiscardedSubjects([]);
       setDraftPopup(null);
       setGameState("drafting");
     });
@@ -3409,7 +3413,7 @@ export default function Home() {
           {gameState === "initial_discard" && (
             <motion.div key="discard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mx-auto flex min-h-[calc(100vh-120px)] max-w-5xl flex-col items-center justify-center gap-8">
               <h2 className="text-center text-4xl font-black uppercase md:text-5xl">Initial Discard Phase</h2>
-              <p className="text-center text-slate-300">{lockedSubject === "WAITING" ? "Waiting for opponent to decide..." : "Select up to 1 card to discard from your hand"}</p>
+              <p className="text-center text-slate-300">{lockedSubject === "WAITING" ? "Waiting for opponent to decide..." : "Select up to 2 cards to discard from your hand"}</p>
               
               {/* Discard Phase Timer Slider */}
               <div className="w-full max-w-md mx-auto">
@@ -3433,7 +3437,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-5">
+              <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-4">
                 {hand.map((sub, i) => (
                   <motion.button
                     key={sub}
@@ -3441,9 +3445,27 @@ export default function Home() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.05 }}
                     whileHover={lockedSubject !== "WAITING" ? { scale: 1.03, y: -2 } : undefined}
-                    onClick={() => { if (lockedSubject !== "WAITING") { playSound("select"); setLockedSubject(lockedSubject === sub ? null : sub); } }}
+                    onClick={() => {
+                      if (lockedSubject !== "WAITING") {
+                        playSound("select");
+                        setDiscardedSubjects(prev => {
+                          if (prev.includes(sub)) {
+                            return prev.filter(s => s !== sub);
+                          } else {
+                            if (prev.length >= 2) {
+                              return [...prev.slice(1), sub];
+                            }
+                            return [...prev, sub];
+                          }
+                        });
+                      }
+                    }}
                     disabled={lockedSubject === "WAITING"}
-                    className={`flex min-h-36 items-center justify-center rounded-lg border p-4 text-center font-bold transition ${lockedSubject === sub ? "border-red-300 bg-red-500/30 text-white shadow-[0_0_20px_rgba(239,68,68,0.2)]" : "border-white/15 bg-white/[0.06] hover:bg-white/10 hover:border-red-300/40"}`}
+                    className={`flex min-h-36 items-center justify-center rounded-lg border p-4 text-center font-bold transition ${
+                      discardedSubjects.includes(sub)
+                        ? "border-red-400 bg-red-500/25 text-white shadow-[0_0_20px_rgba(239,68,68,0.2)]"
+                        : "border-white/15 bg-white/[0.06] hover:bg-white/10 hover:border-red-300/40"
+                    }`}
                   >
                     {sub}
                   </motion.button>
@@ -3451,8 +3473,27 @@ export default function Home() {
               </div>
               {lockedSubject !== "WAITING" ? (
                 <div className="flex gap-3">
-                  <button onClick={() => { playSound("confirm"); socketRef.current?.emit("discard_action", { subject: lockedSubject }); setLockedSubject("WAITING"); }} disabled={!lockedSubject || !hand.includes(lockedSubject)} className="rounded-lg bg-red-500 px-6 py-3 font-black uppercase tracking-widest disabled:opacity-40">Discard</button>
-                  <button onClick={() => { playSound("confirm"); socketRef.current?.emit("skip_discard"); setLockedSubject("WAITING"); }} className="rounded-lg border border-white/15 bg-white/10 px-6 py-3 font-black uppercase tracking-widest">Keep All</button>
+                  <button
+                    onClick={() => {
+                      playSound("confirm");
+                      socketRef.current?.emit("discard_action", { subjects: discardedSubjects });
+                      setLockedSubject("WAITING");
+                    }}
+                    disabled={discardedSubjects.length === 0}
+                    className="rounded-lg bg-red-500 px-6 py-3 font-black uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed transition"
+                  >
+                    Discard {discardedSubjects.length > 0 ? `(${discardedSubjects.length})` : ""}
+                  </button>
+                  <button
+                    onClick={() => {
+                      playSound("confirm");
+                      socketRef.current?.emit("skip_discard");
+                      setLockedSubject("WAITING");
+                    }}
+                    className="rounded-lg border border-white/15 bg-white/10 px-6 py-3 font-black uppercase tracking-widest hover:bg-white/20 transition"
+                  >
+                    Keep All
+                  </button>
                 </div>
               ) : null}
             </motion.div>

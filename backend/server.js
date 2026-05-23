@@ -1120,10 +1120,20 @@ io.on('connection', (socket) => {
     if (player && player.matchId && matches[player.matchId]) {
       const match = matches[player.matchId];
       if (match.state === 'initial_discard' && !player.hasDiscarded) {
-        if (data.subject && player.hand.includes(data.subject)) {
-          player.hand = player.hand.filter(s => s !== data.subject);
-          player.hand.push(getRandomSubjects(1, match.subjectPool, player.hand)[0]);
+        let subjectsToDiscard = [];
+        if (data && Array.isArray(data.subjects)) {
+          // Filter to valid subjects that are in player's hand, up to 2 maximum
+          subjectsToDiscard = data.subjects.filter(s => player.hand.includes(s)).slice(0, 2);
+        } else if (data && data.subject && player.hand.includes(data.subject)) {
+          subjectsToDiscard = [data.subject];
         }
+
+        if (subjectsToDiscard.length > 0) {
+          player.hand = player.hand.filter(s => !subjectsToDiscard.includes(s));
+          const newCards = getRandomSubjects(subjectsToDiscard.length, match.subjectPool, player.hand);
+          player.hand.push(...newCards);
+        }
+
         player.hasDiscarded = true;
         socket.emit('hand_updated', { hand: player.hand });
         checkDiscardPhase(match);
