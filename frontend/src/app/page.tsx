@@ -460,6 +460,7 @@ export default function Home() {
   const [dmFriendId, setDmFriendId] = useState<string | null>(null);
   const [dmMessages, setDmMessages] = useState<Record<string, ChatMessage[]>>({});
   const [incomingDm, setIncomingDm] = useState<DirectMessagePayload | null>(null);
+  const [friendToast, setFriendToast] = useState<{ message: string } | null>(null);
 
   const [gameState, setGameState] = useState<GameState>("menu");
   const [player, setPlayer] = useState<FighterProfile>({ name: "Player", elo: 1200, hp: 100 });
@@ -1024,12 +1025,20 @@ export default function Home() {
       setTimeout(() => setChallengeStatus(null), 4000);
     });
 
-    activeSocket.on("friend_request_received", () => {
+    activeSocket.on("friend_request_received", (data?: { requester?: { username: string } }) => {
       refreshFriendsListRef.current();
+      const username = data?.requester?.username || "Someone";
+      setFriendToast({ message: `${username} sent you a friend request!` });
+      playSound("confirm");
+      setTimeout(() => setFriendToast(null), 5000);
     });
 
-    activeSocket.on("friend_request_accepted", () => {
+    activeSocket.on("friend_request_accepted", (data?: { friendUsername?: string }) => {
       refreshFriendsListRef.current();
+      const username = data?.friendUsername || "Someone";
+      setFriendToast({ message: `${username} accepted your friend request!` });
+      playSound("confirm");
+      setTimeout(() => setFriendToast(null), 5000);
     });
 
     return () => {
@@ -1662,7 +1671,10 @@ export default function Home() {
                         <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
                           {viewingUserMatches.length ? (
                             viewingUserMatches.map(m => {
-                              const isWin = m.winnerId === viewingUser.id || m.winner_id === viewingUser.id;
+                              const winnerId = m.winnerId ?? m.winner_id;
+                              const loserId = m.loserId ?? m.loser_id;
+                              const isDraw = !winnerId && !loserId;
+                              const isWin = !isDraw && winnerId === viewingUser.id;
                               const oppName = (m.playerOneName || m.player_one_name) === viewingUser.username
                                 ? (m.playerTwoName || m.player_two_name)
                                 : (m.playerOneName || m.player_one_name);
@@ -1692,8 +1704,8 @@ export default function Home() {
                               return (
                                 <div key={m.id} className="flex items-center justify-between text-[10px] border-b border-white/5 pb-1.5 last:border-b-0 last:pb-0">
                                   <div className="min-w-0 flex-1 pr-2">
-                                    <span className={`font-black uppercase tracking-wider block text-[9px] ${isWin ? "text-emerald-400" : "text-red-400"}`}>
-                                      {isWin ? "Victory" : "Defeat"}
+                                    <span className={`font-black uppercase tracking-wider block text-[9px] ${isDraw ? "text-slate-400" : isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                      {isDraw ? "Draw" : isWin ? "Victory" : "Defeat"}
                                     </span>
                                     <div className="flex items-center gap-1.5 mt-0.5 min-w-0">
                                       <span className="text-slate-300 font-bold truncate max-w-[80px] sm:max-w-[120px]">
@@ -1704,7 +1716,7 @@ export default function Home() {
                                       </span>
                                     </div>
                                   </div>
-                                  <span className={`shrink-0 font-mono font-bold ${isWin ? "text-emerald-400" : "text-red-400"}`}>
+                                  <span className={`shrink-0 font-mono font-bold ${!delta ? "text-slate-400" : delta >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                                     {formattedDelta || ""} Elo
                                   </span>
                                 </div>
@@ -1872,6 +1884,28 @@ export default function Home() {
                 <Sparkles size={16} />
               </div>
               <p className="font-mono text-xs font-black uppercase tracking-wide text-teal-200">{challengeStatus}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {friendToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -24, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -24, scale: 0.9 }}
+            onClick={() => { playSound("select"); setScreen("social"); setFriendToast(null); }}
+            className="fixed left-3 right-3 top-4 z-50 cursor-pointer rounded-xl border border-purple-400/40 bg-slate-900/90 px-4 py-3 shadow-2xl backdrop-blur-md sm:left-auto sm:right-6 sm:top-6 sm:px-5 sm:py-4 hover:border-purple-400 transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <div className="rounded-full bg-purple-500/10 p-1.5 text-purple-400">
+                <UserPlus size={16} />
+              </div>
+              <div>
+                <p className="font-mono text-xs font-black uppercase tracking-wide text-purple-200">{friendToast.message}</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">Click to view Social hub</p>
+              </div>
             </div>
           </motion.div>
         )}
@@ -2436,13 +2470,14 @@ export default function Home() {
           <div className="glass-panel rounded-2xl p-3 sm:p-5">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-black uppercase"> Battle Record</h2>
             <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-teal-400/80">Ranked</p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <Stat icon={<Trophy size={18} />} label="Wins" value={String(account.wins)} />
               <Stat icon={<Skull size={18} />} label="Losses" value={String(account.losses)} />
+              <Stat icon={<Award size={18} />} label="Draws" value={String(Math.max(0, (account.gamesPlayed || 0) - (account.wins || 0) - (account.losses || 0)))} />
             </div>
             <div className="mt-4 rounded-xl border border-slate-700/40 bg-black/25 p-3">
               <p className="mb-2.5 text-[9px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-1.5"><span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600"></span>Practice vs AI Bot</p>
-              <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="grid grid-cols-4 gap-2 text-center">
                 <div>
                   <p className="font-mono text-base font-black text-emerald-400">{account.botWins || 0}</p>
                   <p className="text-[8px] uppercase tracking-wider text-slate-500">Won</p>
@@ -2450,6 +2485,10 @@ export default function Home() {
                 <div>
                   <p className="font-mono text-base font-black text-red-400">{account.botLosses || 0}</p>
                   <p className="text-[8px] uppercase tracking-wider text-slate-500">Lost</p>
+                </div>
+                <div>
+                  <p className="font-mono text-base font-black text-purple-400">{Math.max(0, (account.botGamesPlayed || 0) - (account.botWins || 0) - (account.botLosses || 0))}</p>
+                  <p className="text-[8px] uppercase tracking-wider text-slate-500">Drew</p>
                 </div>
                 <div>
                   <p className="font-mono text-base font-black text-slate-300">{account.botGamesPlayed || 0}</p>
@@ -2716,7 +2755,7 @@ export default function Home() {
               const isLoss = Boolean(myId && loserId === myId);
               const oppName = iAmP1 ? p2Name : p1Name;
               const finished = match.finished_at || match.finishedAt;
-              const isBotMatch = !winnerId || !loserId || p1Name.toLowerCase().includes("bot") || p2Name.toLowerCase().includes("bot");
+              const isBotMatch = !p1Id || !p2Id || p1Name.toLowerCase().includes("bot") || p2Name.toLowerCase().includes("bot");
               const isFieldMatch = Boolean(match.domain && match.domain !== "all");
 
               return (
@@ -2727,8 +2766,8 @@ export default function Home() {
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <span className={`rounded px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${isWin ? "bg-emerald-500/20 text-emerald-300" : isLoss ? "bg-red-500/20 text-red-300" : "bg-slate-700 text-slate-300"}`}>
-                          {isWin ? "Victory" : isLoss ? "Defeat" : "Match"}
+                        <span className={`rounded px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${isWin ? "bg-emerald-500/20 text-emerald-300" : isLoss ? "bg-red-500/20 text-red-300" : "bg-slate-800 text-slate-400 border border-slate-700"}`}>
+                          {isWin ? "Victory" : isLoss ? "Defeat" : "Draw"}
                         </span>
                         {isBotMatch && (
                           <span className="rounded bg-slate-800 px-2 py-0.5 text-[9px] font-mono text-slate-400">Practice</span>
@@ -3331,7 +3370,11 @@ export default function Home() {
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ type: "spring", stiffness: 200, damping: 14 }}
                 >
-                  {winnerInfo?.winner === socketId ? (
+                  {winnerInfo?.winner === "draw" ? (
+                    <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
+                      <Award size={96} className="mx-auto mb-6 text-purple-300 drop-shadow-[0_0_24px_rgba(168,85,247,0.4)]" />
+                    </motion.div>
+                  ) : winnerInfo?.winner === socketId ? (
                     <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
                       <Trophy size={96} className="mx-auto mb-6 text-amber-300 drop-shadow-[0_0_24px_rgba(251,191,36,0.4)]" />
                     </motion.div>
@@ -3343,9 +3386,9 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className={`font-display text-6xl font-black uppercase ${winnerInfo?.winner === socketId ? "text-glow-teal text-teal-200" : "text-red-300"}`}
+                  className={`font-display text-6xl font-black uppercase ${winnerInfo?.winner === "draw" ? "text-purple-300 drop-shadow-[0_0_12px_rgba(168,85,247,0.25)]" : winnerInfo?.winner === socketId ? "text-glow-teal text-teal-200" : "text-red-300"}`}
                 >
-                  {winnerInfo?.winner === socketId ? "Victory" : "Defeat"}
+                  {winnerInfo?.winner === "draw" ? "Draw" : winnerInfo?.winner === socketId ? "Victory" : "Defeat"}
                 </motion.h2>
                 <div className="mx-auto my-8 w-80 rounded-2xl border border-white/[0.08] bg-slate-900/40 p-6 shadow-xl backdrop-blur-md">
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">

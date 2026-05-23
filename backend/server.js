@@ -1101,8 +1101,10 @@ io.on('connection', (socket) => {
       delete players[socket.id];
     }
     if (socket.userId) {
-      userSockets.delete(socket.userId);
-      notifyFriendsStatusChange(socket.userId, false);
+      if (userSockets.get(socket.userId) === socket.id) {
+        userSockets.delete(socket.userId);
+        notifyFriendsStatusChange(socket.userId, false);
+      }
     }
   });
 });
