@@ -130,6 +130,16 @@ async function init() {
   `);
 
   initialized = true;
+
+  // Keep-alive query every 2 minutes to prevent connection timeouts/spin-downs
+  setInterval(async () => {
+    try {
+      await pool.query('SELECT 1');
+      console.log('Database keep-alive ping successful');
+    } catch (err) {
+      console.error('Database keep-alive ping failed:', err);
+    }
+  }, 120000); // 2 minutes
 }
 
 function rowToUser(row) {

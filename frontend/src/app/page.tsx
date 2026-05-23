@@ -301,6 +301,7 @@ type WinnerInfo = {
   elo: number;
   eloDelta: number;
   domain?: string;
+  reason?: string;
 };
 
 type FighterProfile = {
@@ -3779,7 +3780,7 @@ export default function Home() {
                     <Skull size={96} className="mx-auto mb-6 text-red-400 drop-shadow-[0_0_24px_rgba(248,113,113,0.35)]" />
                   )}
                 </motion.div>
-                <motion.h2
+                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -3787,6 +3788,16 @@ export default function Home() {
                 >
                   {winnerInfo?.winner === "draw" ? "Draw" : winnerInfo?.winner === socketId ? "Victory" : "Defeat"}
                 </motion.h2>
+                {winnerInfo?.reason === "opponent_disconnected" && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-3 mx-auto max-w-xs rounded-xl border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.08)] animate-pulse"
+                  >
+                    Opponent Disconnected &bull; Forfeit Victory
+                  </motion.div>
+                )}
                 <div className="mx-auto my-8 w-80 rounded-2xl border border-white/[0.08] bg-slate-900/40 p-6 shadow-xl backdrop-blur-md">
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                     {winnerInfo?.domain && winnerInfo.domain !== "all" ? "Field Elo" : "Global Elo"}

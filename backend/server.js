@@ -1160,9 +1160,30 @@ io.on('connection', (socket) => {
       queue = queue.filter(p => p.id !== socket.id);
       if (player.matchId && matches[player.matchId]) {
         const match = matches[player.matchId];
-        const oppId = match.p1.id === socket.id ? match.p2.socketId : match.p1.socketId;
-        io.to(oppId).emit('opponent_disconnected');
-        delete matches[player.matchId];
+        if (match.state !== 'finished') {
+          // If it's a practice bot match, we can just delete it immediately
+          if (match.p1.isBot || match.p2.isBot) {
+            delete matches[player.matchId];
+          } else {
+            // It's a ranked match! Handle forfeit to prevent disconnect exploit.
+            const disconnectedPlayer = match.p1.id === socket.id ? match.p1 : match.p2;
+            const remainingPlayer = match.p1.id === socket.id ? match.p2 : match.p1;
+            
+            console.log(`Ranked Match Forfeit: ${disconnectedPlayer.name} disconnected. ${remainingPlayer.name} wins by default.`);
+            
+            // Set HP values to reflect default victory: loser gets 0, winner gets 100
+            disconnectedPlayer.hp = 0;
+            remainingPlayer.hp = 100;
+            
+            // Track forfeit reason
+            match.endReason = 'opponent_disconnected';
+            
+            // Execute match ending asynchronously
+            endMatch(match).catch(err => console.error("Error ending match on disconnect forfeit:", err));
+          }
+        } else {
+          delete matches[player.matchId];
+        }
       }
       delete players[socket.id];
     }
@@ -1555,13 +1576,15 @@ async function endMatch(match) {
     winner: winner ? winner.id : 'draw',
     elo: match.p1.elo,
     eloDelta: match.p1.eloDelta || 0,
-    domain: match.domain || 'all'
+    domain: match.domain || 'all',
+    reason: match.endReason
   });
   emitToPlayer(match.p2, 'match_end', {
     winner: winner ? winner.id : 'draw',
     elo: match.p2.elo,
     eloDelta: match.p2.eloDelta || 0,
-    domain: match.domain || 'all'
+    domain: match.domain || 'all',
+    reason: match.endReason
   });
 
   delete matches[match.id];
