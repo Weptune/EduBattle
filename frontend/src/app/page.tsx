@@ -26,7 +26,11 @@ import {
   Volume2,
   VolumeX,
   Award,
-  Smile
+  Smile,
+  Calendar,
+  Bot,
+  Scale,
+  GraduationCap
 } from "lucide-react";
 
 const getFontSize = (text: string) => {
@@ -51,6 +55,9 @@ type Account = {
   botWins?: number;
   botLosses?: number;
   botGamesPlayed?: number;
+  winStreak?: number;
+  flawlessWins?: number;
+  loggedDays?: string[];
   bestElo: number;
   fieldElos?: Record<string, number>;
   fieldStats?: Record<string, { wins: number; losses: number }>;
@@ -119,6 +126,146 @@ function dmToChatMessage(msg: DirectMessagePayload, account: Account | null): Ch
     message: msg.message,
     timestamp: msg.createdAt || new Date().toISOString(),
   };
+}
+
+type Achievement = {
+  id: string;
+  title: string;
+  desc: string;
+  icon: string;
+  unlocked: boolean;
+  progress: number;
+  progressText: string;
+  color: string;
+};
+
+function getAchievementsForUser(user: Account | null, friendsCount: number): Achievement[] {
+  if (!user) return [];
+  
+  const subjectWins = user.fieldStats ? Object.values(user.fieldStats).some((s: any) => (s.wins || 0) >= 25) : false;
+  
+  const totalDraws = Math.max(0, (user.gamesPlayed || 0) - (user.wins || 0) - (user.losses || 0)) + 
+                     Math.max(0, (user.botGamesPlayed || 0) - (user.botWins || 0) - (user.botLosses || 0));
+
+  return [
+    {
+      id: "ranked_pioneer",
+      title: "Ranked Veteran",
+      desc: "Win 50 ranked duels in the global arena",
+      icon: "Trophy",
+      unlocked: (user.wins || 0) >= 50,
+      progress: Math.min(100, Math.floor(((user.wins || 0) / 50) * 100)),
+      progressText: `${user.wins || 0} / 50 Wins`,
+      color: "from-amber-400 to-orange-500",
+    },
+    {
+      id: "bot_buster",
+      title: "Bot Decimator",
+      desc: "Defeat the AI practice bot 100 times",
+      icon: "Bot",
+      unlocked: (user.botWins || 0) >= 100,
+      progress: Math.min(100, Math.floor(((user.botWins || 0) / 100) * 100)),
+      progressText: `${user.botWins || 0} / 100 Wins`,
+      color: "from-blue-400 to-indigo-500",
+    },
+    {
+      id: "equilibrium",
+      title: "Equilibrium Master",
+      desc: "Achieve 10 draw matches in duels",
+      icon: "Scale",
+      unlocked: totalDraws >= 10,
+      progress: Math.min(100, Math.floor((totalDraws / 10) * 100)),
+      progressText: `${totalDraws} / 10 Draws`,
+      color: "from-purple-400 to-pink-500",
+    },
+    {
+      id: "subject_expert",
+      title: "Discipline Master",
+      desc: "Win 25 ranked duels in a single discipline",
+      icon: "GraduationCap",
+      unlocked: subjectWins,
+      progress: subjectWins ? 100 : 0,
+      progressText: subjectWins ? "Unlocked" : "0 / 25 Wins in any discipline",
+      color: "from-teal-400 to-emerald-500",
+    },
+    {
+      id: "socialite",
+      title: "Socialite Empire",
+      desc: "Add 20 friends to your circle",
+      icon: "Users",
+      unlocked: friendsCount >= 20,
+      progress: Math.min(100, Math.floor((friendsCount / 20) * 100)),
+      progressText: `${friendsCount} / 20 Friends`,
+      color: "from-fuchsia-400 to-purple-600",
+    },
+    {
+      id: "grandmaster",
+      title: "Genius Tier",
+      desc: "Reach an elite peak rating of 1500 ELO",
+      icon: "Crown",
+      unlocked: (user.bestElo || 0) >= 1500,
+      progress: Math.min(100, Math.floor(((user.bestElo || 1200) / 1500) * 100)),
+      progressText: `${user.bestElo || 1200} / 1500 ELO`,
+      color: "from-rose-400 to-red-600",
+    },
+    {
+      id: "unstoppable",
+      title: "Unstoppable",
+      desc: "Achieve 10 ranked wins in a row",
+      icon: "Flame",
+      unlocked: (user.winStreak || 0) >= 10,
+      progress: Math.min(100, Math.floor(((user.winStreak || 0) / 10) * 100)),
+      progressText: `${user.winStreak || 0} / 10 Wins in a Row`,
+      color: "from-orange-500 to-red-600 animate-pulse",
+    },
+    {
+      id: "flawless",
+      title: "Flawless Victory",
+      desc: "Win 10 matches with a perfect 100-0 HP score",
+      icon: "Shield",
+      unlocked: (user.flawlessWins || 0) >= 10,
+      progress: Math.min(100, Math.floor(((user.flawlessWins || 0) / 10) * 100)),
+      progressText: `${user.flawlessWins || 0} / 10 Flawless Wins`,
+      color: "from-cyan-400 to-teal-500",
+    },
+    {
+      id: "chronos",
+      title: "Chronos Scholar",
+      desc: "Log on and battle for 30 different days",
+      icon: "Calendar",
+      unlocked: (user.loggedDays?.length || 0) >= 30,
+      progress: Math.min(100, Math.floor(((user.loggedDays?.length || 0) / 30) * 100)),
+      progressText: `${user.loggedDays?.length || 0} / 30 Days`,
+      color: "from-emerald-400 to-yellow-500",
+    }
+  ];
+}
+
+function renderAchievementIcon(iconName: string, className?: string) {
+  const isSmall = className?.includes("h-4") || className?.includes("w-4");
+  const size = isSmall ? 10 : 22;
+  switch (iconName) {
+    case "Trophy":
+      return <Trophy className={className} size={size} />;
+    case "Bot":
+      return <Bot className={className} size={size} />;
+    case "Scale":
+      return <Scale className={className} size={size} />;
+    case "GraduationCap":
+      return <GraduationCap className={className} size={size} />;
+    case "Users":
+      return <Users className={className} size={size} />;
+    case "Crown":
+      return <Crown className={className} size={size} />;
+    case "Flame":
+      return <Flame className={className} size={size} />;
+    case "Shield":
+      return <Shield className={className} size={size} />;
+    case "Calendar":
+      return <Calendar className={className} size={size} />;
+    default:
+      return <Award className={className} size={size} />;
+  }
 }
 
 type IncomingChallenge = {
@@ -436,6 +583,7 @@ export default function Home() {
   const [leaderboardField, setLeaderboardField] = useState<string>("all");
   const [showFieldElosModal, setShowFieldElosModal] = useState(false);
   const [leaderboardSearch, setLeaderboardSearch] = useState("");
+  const [previewAchievements, setPreviewAchievements] = useState(false);
   const [leaderboardSort, setLeaderboardSort] = useState<"elo" | "level" | "wins" | "winRate">("elo");
   const [leaderboardPage, setLeaderboardPage] = useState(1);
   const [matchesPage, setMatchesPage] = useState(1);
@@ -462,8 +610,23 @@ export default function Home() {
   const [dmMessages, setDmMessages] = useState<Record<string, ChatMessage[]>>({});
   const [incomingDm, setIncomingDm] = useState<DirectMessagePayload | null>(null);
   const [friendToast, setFriendToast] = useState<{ message: string } | null>(null);
+  const [onlineCount, setOnlineCount] = useState<number>(0);
+  const [chatTypingUsers, setChatTypingUsers] = useState<Record<string, string>>({});
+  const [dmTyping, setDmTyping] = useState<boolean>(false);
 
   const [gameState, setGameState] = useState<GameState>("menu");
+
+  const [queueElapsed, setQueueElapsed] = useState<number>(0);
+  useEffect(() => {
+    if (gameState !== "queue") {
+      setQueueElapsed(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setQueueElapsed(prev => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [gameState]);
   const [player, setPlayer] = useState<FighterProfile>({ name: "Player", elo: 1200, hp: 100 });
   const [opponent, setOpponent] = useState<FighterProfile>({ id: "", name: "?", username: "", elo: 1200, hp: 100 });
   const [hand, setHand] = useState<string[]>([]);
@@ -1055,6 +1218,28 @@ export default function Home() {
       setTimeout(() => setFriendToast(null), 5000);
     });
 
+    activeSocket.on("online_count", (count: number) => {
+      setOnlineCount(count);
+    });
+
+    activeSocket.on("chat_typing", (data: { userId: string; username: string; isTyping: boolean }) => {
+      setChatTypingUsers(prev => {
+        const next = { ...prev };
+        if (data.isTyping) {
+          next[data.userId] = data.username;
+        } else {
+          delete next[data.userId];
+        }
+        return next;
+      });
+    });
+
+    activeSocket.on("dm_typing", (data: { senderId: string; isTyping: boolean }) => {
+      if (data.senderId === dmFriendIdRef.current) {
+        setDmTyping(data.isTyping);
+      }
+    });
+
     return () => {
       activeSocket.removeAllListeners();
       activeSocket.disconnect();
@@ -1063,9 +1248,40 @@ export default function Home() {
     };
   }, []);
 
+  const dmFriendIdRef = useRef<string | null>(null);
+  useEffect(() => {
+    dmFriendIdRef.current = dmFriendId;
+    if (!dmFriendId) setDmTyping(false);
+  }, [dmFriendId]);
+
   useEffect(() => {
     accountRef.current = account;
   }, [account]);
+
+  // Typing Indicator Debounce Lifecycle
+  useEffect(() => {
+    if (!socketRef.current || !token) return;
+    
+    // We are active in DM
+    if (dmFriendId) {
+      socketRef.current.emit("dm_typing", { recipientId: dmFriendId, isTyping: chatMessageInput.trim().length > 0 });
+      
+      const timer = setTimeout(() => {
+        socketRef.current?.emit("dm_typing", { recipientId: dmFriendId, isTyping: false });
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+    
+    // We are active in Global Chat
+    if (screen === "social") {
+      socketRef.current.emit("chat_typing", { username: account?.username, isTyping: chatMessageInput.trim().length > 0 });
+      
+      const timer = setTimeout(() => {
+        socketRef.current?.emit("chat_typing", { username: account?.username, isTyping: false });
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [chatMessageInput, screen, dmFriendId, token, account?.username]);
 
   useEffect(() => {
     if (token) {
@@ -1627,12 +1843,35 @@ export default function Home() {
                       </motion.div>
                     )}
 
-                    {/* Bio text */}
+                     {/* Bio text */}
                     <p className="text-slate-300 text-sm mb-6 leading-relaxed bg-black/20 p-3 rounded-lg border border-white/5">{viewingUser.bio || "hi"}</p>
+
+                    {/* Unlocked Badges collection overlay */}
+                    {(() => {
+                      const viewingUserBadges = getAchievementsForUser(viewingUser, 0).filter(ach => ach.unlocked);
+                      if (viewingUserBadges.length > 0) {
+                        return (
+                          <div className="mb-4">
+                            <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-teal-400/80">Unlocked Badges</p>
+                            <div className="flex flex-wrap gap-2">
+                              {viewingUserBadges.map(ach => (
+                                <div key={ach.id} className="flex items-center gap-1.5 rounded-lg border border-teal-500/20 bg-teal-500/5 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-slate-100 shadow-[0_0_10px_rgba(20,184,166,0.05)]" title={ach.desc}>
+                                  <span className={`flex h-5 w-5 items-center justify-center rounded bg-gradient-to-br ${ach.color}`}>
+                                    {renderAchievementIcon(ach.icon, "text-white")}
+                                  </span>
+                                  {ach.title}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      }
+                      return null;
+                    })()}
 
                     {/* Grid stats — Ranked only */}
                     <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-teal-400/80">Ranked</p>
-                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-3">
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 mb-3">
                       <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
                         <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Overall Elo</p>
                         <p className="mt-1 font-mono text-xl font-black text-teal-300">{viewingUser.elo}</p>
@@ -1646,6 +1885,10 @@ export default function Home() {
                         <p className="mt-1 font-mono text-xl font-black text-white">{viewingUser.losses}</p>
                       </div>
                       <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Draws</p>
+                        <p className="mt-1 font-mono text-xl font-black text-purple-300">{Math.max(0, (viewingUser.gamesPlayed || 0) - (viewingUser.wins || 0) - (viewingUser.losses || 0))}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-slate-950/45 p-3.5 text-center col-span-2 sm:col-span-1">
                         <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Win Rate</p>
                         <p className="mt-1 font-mono text-xl font-black text-teal-300">
                           {viewingUser.wins + viewingUser.losses > 0
@@ -1657,9 +1900,10 @@ export default function Home() {
                     {/* Bot match stats */}
                     <div className="mb-6 rounded-xl border border-slate-700/40 bg-black/20 px-4 py-3">
                       <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-1.5"><span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600"></span>Practice vs AI Bot</p>
-                      <div className="flex gap-6">
+                      <div className="grid grid-cols-4 gap-2 text-center sm:flex sm:gap-6 sm:text-left">
                         <div><p className="font-mono text-sm font-black text-emerald-400">{viewingUser.botWins || 0}</p><p className="text-[8px] uppercase tracking-wider text-slate-500">Won</p></div>
                         <div><p className="font-mono text-sm font-black text-red-400">{viewingUser.botLosses || 0}</p><p className="text-[8px] uppercase tracking-wider text-slate-500">Lost</p></div>
+                        <div><p className="font-mono text-sm font-black text-purple-400">{Math.max(0, (viewingUser.botGamesPlayed || 0) - (viewingUser.botWins || 0) - (viewingUser.botLosses || 0))}</p><p className="text-[8px] uppercase tracking-wider text-slate-500">Drew</p></div>
                         <div><p className="font-mono text-sm font-black text-slate-300">{viewingUser.botGamesPlayed || 0}</p><p className="text-[8px] uppercase tracking-wider text-slate-500">Total</p></div>
                       </div>
                     </div>
@@ -1703,7 +1947,8 @@ export default function Home() {
                               const delta = (m.playerOneName || m.player_one_name) === viewingUser.username
                                 ? (m.playerOneDelta ?? m.player_one_delta)
                                 : (m.playerTwoDelta ?? m.player_two_delta);
-                              const formattedDelta = delta && delta >= 0 ? `+${delta}` : delta;
+                              const deltaVal = delta !== undefined && delta !== null ? Number(delta) : 0;
+                              const formattedDelta = deltaVal > 0 ? `+${deltaVal}` : `${deltaVal}`;
 
                               const badge = (() => {
                                 const dom = m.domain || "all";
@@ -1738,8 +1983,8 @@ export default function Home() {
                                       </span>
                                     </div>
                                   </div>
-                                  <span className={`shrink-0 font-mono font-bold ${!delta ? "text-slate-400" : delta >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                                    {formattedDelta || ""} Elo
+                                  <span className={`shrink-0 font-mono font-bold ${deltaVal === 0 ? "text-slate-400" : deltaVal > 0 ? "text-emerald-400" : "text-red-400"}`}>
+                                    {formattedDelta} Elo
                                   </span>
                                 </div>
                               );
@@ -2046,6 +2291,26 @@ export default function Home() {
             <div ref={chatBottomRef} />
           </div>
 
+          {/* Typing Indicator */}
+          {(() => {
+            const typers = Object.values(chatTypingUsers);
+            if (typers.length === 0) return null;
+            let text = "";
+            if (typers.length === 1) text = `${typers[0]} is typing...`;
+            else if (typers.length === 2) text = `${typers[0]} and ${typers[1]} are typing...`;
+            else text = "Multiple scholars are typing...";
+            return (
+              <div className="px-3 py-1 font-mono text-[9px] text-teal-300/80 bg-slate-950/40 border-t border-white/[0.04] flex items-center gap-1.5 animate-pulse">
+                <span className="flex items-center gap-0.5">
+                  <span className="h-1 w-1 rounded-full bg-teal-400 animate-bounce" />
+                  <span className="h-1 w-1 rounded-full bg-teal-400 animate-bounce" style={{ animationDelay: '0.2s' }} />
+                  <span className="h-1 w-1 rounded-full bg-teal-400 animate-bounce" style={{ animationDelay: '0.4s' }} />
+                </span>
+                {text}
+              </div>
+            );
+          })()}
+
           {/* Chat Input Form */}
           <form onSubmit={sendChatMessage} className="flex shrink-0 gap-2 border-t border-white/[0.08] bg-slate-950/25 p-3 sm:p-4">
             <input
@@ -2323,7 +2588,19 @@ export default function Home() {
                   )}
                 </div>
 
-                <form onSubmit={(e) => sendDmMessage(e, dmFriendId)} className="flex shrink-0 gap-2">
+                {/* DM Typing Indicator */}
+                {dmTyping && (
+                  <div className="px-3 py-1 font-mono text-[9px] text-teal-300/80 bg-slate-950/40 border-t border-white/[0.04] flex items-center gap-1.5 animate-pulse w-full">
+                    <span className="flex items-center gap-0.5">
+                      <span className="h-1 w-1 rounded-full bg-teal-400 animate-bounce" />
+                      <span className="h-1 w-1 rounded-full bg-teal-400 animate-bounce" style={{ animationDelay: '0.2s' }} />
+                      <span className="h-1 w-1 rounded-full bg-teal-400 animate-bounce" style={{ animationDelay: '0.4s' }} />
+                    </span>
+                    Friend is typing...
+                  </div>
+                )}
+
+                <form onSubmit={(e) => sendDmMessage(e, dmFriendId)} className="flex shrink-0 gap-2 w-full">
                   <input
                     value={chatMessageInput}
                     onChange={e => setChatMessageInput(e.target.value)}
@@ -2547,6 +2824,51 @@ export default function Home() {
               {status ? <p className="text-sm text-teal-200">{status}</p> : null}
               <button onClick={saveProfile} disabled={isProfileBusy} className="rounded-lg bg-teal-300 px-5 py-3 font-black uppercase tracking-widest text-slate-950 hover:bg-teal-200 disabled:cursor-not-allowed disabled:opacity-60">{isProfileBusy ? "Saving..." : "Save Profile"}</button>
             </div>
+          </div>
+        </div>
+
+        {/* Achievements Grid Section */}
+        <div className="glass-panel col-span-full rounded-2xl p-4 sm:p-6 mt-4">
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-white/[0.06] pb-4">
+            <h2 className="flex items-center gap-2 text-xl font-black uppercase">
+              <Award className="text-teal-300" size={20} /> Battle Achievements
+            </h2>
+            <button 
+              onClick={() => { playSound("select"); setPreviewAchievements(!previewAchievements); }}
+              className={`rounded-lg border px-3 py-1.5 text-[9px] font-black uppercase tracking-widest transition duration-300 flex items-center gap-1.5 ${previewAchievements ? "border-teal-400 bg-teal-400/10 text-teal-300 shadow-[0_0_10px_rgba(20,184,166,0.1)]" : "border-white/10 hover:border-teal-400/50 hover:bg-teal-400/[0.02] text-slate-400"}`}
+            >
+              <Sparkles size={11} className={previewAchievements ? "animate-spin" : ""} />
+              {previewAchievements ? "Viewing Unlocked Preview" : "Preview Unlocked Badges"}
+            </button>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {getAchievementsForUser(account, friends.length).map(realAch => {
+              const ach = previewAchievements ? { ...realAch, unlocked: true, progress: 100, progressText: "Unlocked (Preview)" } : realAch;
+              return (
+                <div key={ach.id} className={`relative rounded-xl border p-4 transition-all duration-300 ${ach.unlocked ? "border-teal-400/20 bg-teal-400/[0.02] hover:border-teal-400/30" : "border-white/[0.04] bg-white/[0.01] opacity-60"}`}>
+                  <div className="flex items-start gap-3">
+                    <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl shadow-lg bg-gradient-to-br ${ach.unlocked ? ach.color + " shadow-[0_0_15px_rgba(20,184,166,0.15)]" : "from-slate-800 to-slate-900 border border-white/5"}`}>
+                      {renderAchievementIcon(ach.icon, ach.unlocked ? "text-white animate-pulse" : "text-slate-600")}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <h4 className={`text-xs font-black uppercase tracking-wider ${ach.unlocked ? "text-slate-100" : "text-slate-500"}`}>{ach.title}</h4>
+                      <p className="mt-0.5 text-[9px] text-slate-400 leading-snug">{ach.desc}</p>
+                      
+                      {/* Achievement Progress Bar */}
+                      <div className="mt-2.5">
+                        <div className="flex justify-between text-[8px] font-mono font-bold text-slate-500 uppercase">
+                          <span>{ach.unlocked ? "Completed" : "Progress"}</span>
+                          <span>{ach.progressText}</span>
+                        </div>
+                        <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-slate-950/60 border border-white/5">
+                          <div className={`h-full bg-gradient-to-r ${ach.unlocked ? "from-teal-400 to-emerald-400" : "from-slate-700 to-slate-600"} transition-all duration-500`} style={{ width: `${ach.progress}%` }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </motion.section>
@@ -2939,28 +3261,81 @@ export default function Home() {
             </motion.div>
           )}
 
-          {gameState === "queue" && (
-            <motion.div key="queue" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] place-items-center text-center">
-              <div>
-                <div className="relative mx-auto mb-8 h-32 w-32">
-                  <span className="queue-ring" />
-                  <span className="queue-ring queue-ring-delay" />
-                  <div className="absolute inset-2 animate-spin rounded-full border-4 border-teal-300/15 border-t-teal-300 border-r-emerald-400/60" />
-                  <div className="absolute inset-0 grid place-items-center">
-                    <Swords size={36} className="text-teal-300" />
+          {gameState === "queue" && (() => {
+            const formatTime = (sec: number) => {
+              const m = Math.floor(sec / 60);
+              const s = sec % 60;
+              return `${m}:${s < 10 ? "0" : ""}${s}`;
+            };
+            
+            const playerElo = account?.elo ?? 1200;
+            const eloRange = 250 + Math.floor(queueElapsed / 5) * 75;
+            const minElo = Math.max(100, playerElo - eloRange);
+            const maxElo = playerElo + eloRange;
+
+            return (
+              <motion.div key="queue" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] place-items-center text-center">
+                <div className="glass-panel border-white/10 w-full max-w-sm rounded-2xl p-8 relative overflow-hidden flex flex-col items-center">
+                  {/* Holographic grid scanner overlay */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.02)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                  
+                  {/* Circular sweep radar */}
+                  <div className="relative mx-auto mb-8 h-40 w-40 flex items-center justify-center border border-teal-500/20 rounded-full bg-black/45 shadow-[0_0_20px_rgba(20,184,166,0.05)]">
+                    <span className="absolute inset-0 rounded-full border border-teal-500/10 animate-ping opacity-25" />
+                    <span className="absolute inset-4 rounded-full border border-teal-500/5" />
+                    <span className="absolute inset-8 rounded-full border border-teal-500/5" />
+                    
+                    {/* Glowing radar sweep arm */}
+                    <div className="absolute inset-0 origin-center animate-[spin_4s_linear_infinite] rounded-full"
+                         style={{ background: "conic-gradient(from 0deg, transparent 70%, rgba(20,184,166,0.3) 100%)" }} />
+                         
+                    <div className="absolute inset-2 animate-spin rounded-full border border-dashed border-teal-300/20" style={{ animationDuration: '8s' }} />
+                    
+                    <div className="absolute z-10 flex flex-col items-center">
+                      <Swords size={32} className="text-teal-300 animate-pulse" />
+                    </div>
                   </div>
+
+                  <motion.h2
+                    animate={{ opacity: [0.7, 1, 0.7] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="font-display text-2xl font-black uppercase tracking-widest text-teal-200 text-glow-teal"
+                  >
+                    Matchmaking
+                  </motion.h2>
+                  
+                  {/* Stats Counter & Dynamic Details */}
+                  <div className="mt-6 w-full space-y-4 font-mono text-xs">
+                    <div className="flex justify-between border-b border-white/5 pb-2">
+                      <span className="text-slate-500 uppercase font-black">Search Time</span>
+                      <span className="text-teal-300 font-bold">{formatTime(queueElapsed)}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-white/5 pb-2">
+                      <span className="text-slate-500 uppercase font-black">Elo Target Range</span>
+                      <span className="text-white font-bold">{minElo} - {maxElo} <span className="text-teal-400">(&plusmn;{eloRange})</span></span>
+                    </div>
+                    <div className="flex justify-between pb-2">
+                      <span className="text-slate-500 uppercase font-black">Scholars Active</span>
+                      <span className="text-emerald-400 font-bold flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                        {Math.max(1, onlineCount)} Online
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <button onClick={() => {
+                    if (socketRef.current) {
+                      socketRef.current.emit("leave_queue");
+                    }
+                    playSound("select");
+                    setGameState("menu");
+                  }} className="mt-6 w-full rounded-lg border border-red-500/20 bg-red-500/10 px-6 py-3 font-mono text-[10px] font-black uppercase tracking-widest text-red-300 hover:bg-red-500/20 hover:border-red-500/40 active:scale-95 transition-all">
+                    Cancel Search
+                  </button>
                 </div>
-                <motion.h2
-                  animate={{ opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="font-display text-4xl font-black uppercase tracking-widest text-teal-200 text-glow-teal"
-                >
-                  Searching
-                </motion.h2>
-                <p className="mt-2 font-mono text-slate-400">Scanning the global arena for opponents...</p>
-              </div>
-            </motion.div>
-          )}
+              </motion.div>
+            );
+          })()}
 
           {gameState === "versus_intro" && (
             <motion.div key="versus" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative -mx-4 grid min-h-[calc(100vh-96px)] place-items-center overflow-hidden rounded-lg border border-white/10 bg-black">

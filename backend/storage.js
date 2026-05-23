@@ -116,6 +116,10 @@ async function init() {
     ALTER TABLE users ADD COLUMN IF NOT EXISTS bot_losses INTEGER NOT NULL DEFAULT 0;
     ALTER TABLE users ADD COLUMN IF NOT EXISTS bot_games_played INTEGER NOT NULL DEFAULT 0;
 
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS win_streak INTEGER DEFAULT 0;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS flawless_wins INTEGER DEFAULT 0;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS logged_days TEXT DEFAULT '[]';
+
     CREATE TABLE IF NOT EXISTS user_assets (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -156,6 +160,15 @@ function rowToUser(row) {
     botWins: row.bot_wins || 0,
     botLosses: row.bot_losses || 0,
     botGamesPlayed: row.bot_games_played || 0,
+    winStreak: row.win_streak || 0,
+    flawlessWins: row.flawless_wins || 0,
+    loggedDays: (() => {
+      try {
+        return row.logged_days ? JSON.parse(row.logged_days) : [];
+      } catch (e) {
+        return [];
+      }
+    })(),
     avatarUrl: row.avatar_url,
     bannerUrl: row.banner_url,
     bio: row.bio === 'New challenger in the MIT arena.' ? 'hi' : (row.bio || 'hi'),
@@ -182,6 +195,9 @@ function userToRow(user) {
     bot_wins: user.botWins || 0,
     bot_losses: user.botLosses || 0,
     bot_games_played: user.botGamesPlayed || 0,
+    win_streak: user.winStreak || 0,
+    flawless_wins: user.flawlessWins || 0,
+    logged_days: user.loggedDays ? JSON.stringify(user.loggedDays) : '[]',
     avatar_url: user.avatarUrl,
     banner_url: user.bannerUrl,
     bio: user.bio === 'New challenger in the MIT arena.' ? 'hi' : (user.bio || 'hi'),
@@ -209,20 +225,35 @@ async function getUserById(id) {
 async function createUser(user) {
   await init();
   const now = new Date().toISOString();
-  const stored = { ...user, createdAt: now, updatedAt: now, xp: 0, level: 1, botWins: 0, botLosses: 0, botGamesPlayed: 0 };
+  const stored = {
+    ...user,
+    createdAt: now,
+    updatedAt: now,
+    xp: 0,
+    level: 1,
+    botWins: 0,
+    botLosses: 0,
+    botGamesPlayed: 0,
+    winStreak: 0,
+    flawlessWins: 0,
+    loggedDays: []
+  };
 
   const row = userToRow(stored);
   await pool.query(
     `INSERT INTO users (
       id, username, password_salt, password_hash, elo, best_elo, wins, losses,
       games_played, avatar_url, banner_url, bio, field_elos, field_stats, xp, level,
-      bot_wins, bot_losses, bot_games_played, created_at, updated_at
-    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21)`,
+      bot_wins, bot_losses, bot_games_played, win_streak, flawless_wins, logged_days,
+      created_at, updated_at
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24)`,
     [
       row.id, row.username, row.password_salt, row.password_hash, row.elo, row.best_elo,
       row.wins, row.losses, row.games_played, row.avatar_url, row.banner_url, row.bio,
       row.field_elos, row.field_stats, row.xp, row.level,
-      row.bot_wins, row.bot_losses, row.bot_games_played, row.created_at, row.updated_at
+      row.bot_wins, row.bot_losses, row.bot_games_played,
+      row.win_streak, row.flawless_wins, row.logged_days,
+      row.created_at, row.updated_at
     ]
   );
   return stored;
@@ -271,6 +302,9 @@ async function updateUser(userId, patch) {
       bot_wins = $15,
       bot_losses = $16,
       bot_games_played = $17,
+      win_streak = $18,
+      flawless_wins = $19,
+      logged_days = $20,
       updated_at = now()
     WHERE id = $1
     RETURNING *`,
@@ -283,7 +317,10 @@ async function updateUser(userId, patch) {
       patch.level || 1,
       patch.botWins || 0,
       patch.botLosses || 0,
-      patch.botGamesPlayed || 0
+      patch.botGamesPlayed || 0,
+      patch.winStreak || 0,
+      patch.flawlessWins || 0,
+      patch.loggedDays ? JSON.stringify(patch.loggedDays) : '[]'
     ]
   );
   return rowToUser(result.rows[0]);

@@ -151,7 +151,25 @@ async function requireAuth(req, res, next) {
     return;
   }
 
-  req.user = user;
+  // Symmetrically record unique calendar days logged in on HTTP load
+  try {
+    const todayStr = new Date().toISOString().split('T')[0];
+    const loggedDays = [...(user.loggedDays || [])];
+    if (!loggedDays.includes(todayStr)) {
+      loggedDays.push(todayStr);
+      const updatedUser = await storage.updateUser(user.id, {
+        ...user,
+        loggedDays
+      });
+      req.user = updatedUser;
+    } else {
+      req.user = user;
+    }
+  } catch (e) {
+    console.error('Failed to update loggedDays in requireAuth:', e);
+    req.user = user;
+  }
+
   req.authToken = token;
   next();
 }
@@ -658,6 +676,7 @@ function findRankedOpponent(player) {
   const now = Date.now();
 
   queue.forEach((candidate, index) => {
+    if (candidate.userId === player.userId) return;
     if (candidate.domain !== player.domain) return;
 
     const waitSeconds = Math.max(
@@ -733,7 +752,23 @@ io.on('connection', (socket) => {
       userSockets.set(user.id, socket.id);
       socket.userId = user.id;
       console.log(`Registered socket ${socket.id} to user ${user.username}`);
+      io.emit('online_count', userSockets.size);
       await notifyFriendsStatusChange(user.id, true);
+
+      // Track unique days logged in
+      try {
+        const todayStr = new Date().toISOString().split('T')[0];
+        const loggedDays = [...(user.loggedDays || [])];
+        if (!loggedDays.includes(todayStr)) {
+          loggedDays.push(todayStr);
+          await storage.updateUser(user.id, {
+            ...user,
+            loggedDays
+          });
+        }
+      } catch (e) {
+        console.error('Failed to update loggedDays for user:', e);
+      }
 
       const friendships = await storage.getFriendships(user.id);
       const friends = friendships.filter(f => f.status === 'accepted');
@@ -807,6 +842,26 @@ io.on('connection', (socket) => {
     } catch (err) {
       console.error('Failed to save/send direct message:', err);
       socket.emit('chat_error', { error: 'Direct message could not be sent.' });
+    }
+  });
+
+  socket.on('chat_typing', (data) => {
+    if (!socket.userId || !data) return;
+    socket.broadcast.emit('chat_typing', {
+      userId: socket.userId,
+      username: data.username,
+      isTyping: !!data.isTyping
+    });
+  });
+
+  socket.on('dm_typing', (data) => {
+    if (!socket.userId || !data || !data.recipientId) return;
+    const recipientSocketId = userSockets.get(data.recipientId);
+    if (recipientSocketId) {
+      io.to(recipientSocketId).emit('dm_typing', {
+        senderId: socket.userId,
+        isTyping: !!data.isTyping
+      });
     }
   });
 
@@ -989,6 +1044,8 @@ io.on('connection', (socket) => {
       socket.emit('auth_required');
       return;
     }
+    // Symmetrically clear any other sockets with the exact same userId from the queue
+    queue = queue.filter(p => p.userId !== player.userId);
     players[socket.id] = player;
 
     const opponentIndex = findRankedOpponent(player);
@@ -1109,6 +1166,7 @@ io.on('connection', (socket) => {
     if (socket.userId) {
       if (userSockets.get(socket.userId) === socket.id) {
         userSockets.delete(socket.userId);
+        io.emit('online_count', userSockets.size);
         notifyFriendsStatusChange(socket.userId, false);
       }
     }
@@ -1360,6 +1418,20 @@ async function endMatch(match) {
       const xpDelta = isBotMatch ? 0 : (winner ? (winner.id === match.p1.id ? 100 : 50) : 75);
       const nextXp = (user.xp || 0) + xpDelta;
       const nextLevel = Math.floor(nextXp / 500) + 1;
+      
+      let winStreak = user.winStreak || 0;
+      let flawlessWins = user.flawlessWins || 0;
+      if (!isBotMatch) {
+        if (winner && winner.id === match.p1.id) {
+          winStreak += 1;
+        } else {
+          winStreak = 0;
+        }
+      }
+      if (winner && winner.id === match.p1.id && match.p1.hp === 100) {
+        flawlessWins += 1;
+      }
+
       const nextUser = {
         ...user,
         wins: isBotMatch ? (user.wins || 0) : (winner && winner.id === match.p1.id ? (user.wins || 0) + 1 : (user.wins || 0)),
@@ -1369,7 +1441,9 @@ async function endMatch(match) {
         botLosses: isBotMatch ? (loser && loser.id === match.p1.id ? (user.botLosses || 0) + 1 : (user.botLosses || 0)) : (user.botLosses || 0),
         botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
         xp: nextXp,
-        level: nextLevel
+        level: nextLevel,
+        winStreak: winStreak,
+        flawlessWins: flawlessWins
       };
       if (!isBotMatch) {
         const domain = match.domain || 'all';
@@ -1402,6 +1476,20 @@ async function endMatch(match) {
       const xpDelta = isBotMatch ? 0 : (winner ? (winner.id === match.p2.id ? 100 : 50) : 75);
       const nextXp = (user.xp || 0) + xpDelta;
       const nextLevel = Math.floor(nextXp / 500) + 1;
+
+      let winStreak = user.winStreak || 0;
+      let flawlessWins = user.flawlessWins || 0;
+      if (!isBotMatch) {
+        if (winner && winner.id === match.p2.id) {
+          winStreak += 1;
+        } else {
+          winStreak = 0;
+        }
+      }
+      if (winner && winner.id === match.p2.id && match.p2.hp === 100) {
+        flawlessWins += 1;
+      }
+
       const nextUser = {
         ...user,
         wins: isBotMatch ? (user.wins || 0) : (winner && winner.id === match.p2.id ? (user.wins || 0) + 1 : (user.wins || 0)),
@@ -1411,7 +1499,9 @@ async function endMatch(match) {
         botLosses: isBotMatch ? (loser && loser.id === match.p2.id ? (user.botLosses || 0) + 1 : (user.botLosses || 0)) : (user.botLosses || 0),
         botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
         xp: nextXp,
-        level: nextLevel
+        level: nextLevel,
+        winStreak: winStreak,
+        flawlessWins: flawlessWins
       };
       if (!isBotMatch) {
         const domain = match.domain || 'all';
