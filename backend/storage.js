@@ -617,7 +617,7 @@ module.exports = {
 async function recalculateAllUsersStats() {
   await init();
   try {
-    const flagResult = await pool.query("SELECT value FROM system_settings WHERE key = $1", ["stats_recalculated_all_v3"]);
+    const flagResult = await pool.query("SELECT value FROM system_settings WHERE key = $1", ["stats_recalculated_all_v4"]);
     if (flagResult.rows.length > 0 && flagResult.rows[0].value === 'true') {
       console.log("⚡ Skipping automatic user stats recalculation (already executed).");
       return;
@@ -652,31 +652,34 @@ async function recalculateAllUsersStats() {
       for (const m of matches) {
         const isBotMatch = !m.player_one_id || !m.player_two_id;
         const isWinner = m.winner_id === u.id;
+        const isLoser = m.loser_id === u.id;
         
         if (isBotMatch) {
           botGamesPlayed++;
           if (isWinner) {
             botWins++;
-          } else {
+          } else if (isLoser) {
             botLosses++;
           }
         } else {
           gamesPlayed++;
           if (isWinner) {
             wins++;
-          } else {
+          } else if (isLoser) {
             losses++;
           }
 
           // Domain stats (only for ranked matches)
           const domain = m.domain || 'all';
           if (!fieldStats[domain]) {
-            fieldStats[domain] = { wins: 0, losses: 0 };
+            fieldStats[domain] = { wins: 0, losses: 0, draws: 0 };
           }
           if (isWinner) {
             fieldStats[domain].wins++;
-          } else {
+          } else if (isLoser) {
             fieldStats[domain].losses++;
+          } else {
+            fieldStats[domain].draws++;
           }
         }
       }
@@ -700,7 +703,7 @@ async function recalculateAllUsersStats() {
     }
     await pool.query(
       "INSERT INTO system_settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value",
-      ["stats_recalculated_all_v3", "true"]
+      ["stats_recalculated_all_v4", "true"]
     );
     console.log("✨ Automatic user stats recalculation finished successfully!");
   } catch (error) {

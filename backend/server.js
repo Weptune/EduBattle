@@ -427,7 +427,7 @@ app.post('/friends/accept', requireAuth, async (req, res) => {
 
     const friendSocketId = userSockets.get(friendId);
     if (friendSocketId) {
-      io.to(friendSocketId).emit('friend_request_accepted', { friendId: req.user.id });
+      io.to(friendSocketId).emit('friend_request_accepted', { friendId: req.user.id, friendUsername: req.user.username });
     }
 
     res.json({ ok: true });
@@ -1304,123 +1304,151 @@ async function endMatch(match) {
   }
 
   const isBotMatch = Boolean(match.p1.isBot || match.p2.isBot);
+  let p1Delta = 0;
+  let p2Delta = 0;
 
-  // Robust ELO calculation
-  if (winner && loser) {
-    let winnerDelta = 0;
-    let loserDelta = 0;
+  if (!isBotMatch) {
+    let K_p1 = match.p1.elo < 1300 ? 50 : (match.p1.elo > 1800 ? 16 : 32);
+    let K_p2 = match.p2.elo < 1300 ? 50 : (match.p2.elo > 1800 ? 16 : 32);
 
-    if (!isBotMatch) {
-      // Dynamic K-Factor: new/lower-ranked players swing faster
-      let K_winner = winner.elo < 1300 ? 50 : (winner.elo > 1800 ? 16 : 32);
-      let K_loser = loser.elo < 1300 ? 50 : (loser.elo > 1800 ? 16 : 32);
+    const expectedP1 = 1 / (1 + Math.pow(10, (match.p2.elo - match.p1.elo) / 400));
+    const expectedP2 = 1 / (1 + Math.pow(10, (match.p1.elo - match.p2.elo) / 400));
 
-      const expectedWinner = 1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
-      const expectedLoser = 1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
-
-      // Margin of Victory Multiplier (up to 1.5x for a flawless 100HP win)
+    if (winner && loser) {
+      const K_winner = winner.elo < 1300 ? 50 : (winner.elo > 1800 ? 16 : 32);
+      const K_loser = loser.elo < 1300 ? 50 : (loser.elo > 1800 ? 16 : 32);
+      const expectedWinner = winner.id === match.p1.id ? expectedP1 : expectedP2;
+      const expectedLoser = loser.id === match.p1.id ? expectedP1 : expectedP2;
       const marginMultiplier = 1 + (winner.hp / 100) * 0.5;
 
-      winnerDelta = Math.round(K_winner * marginMultiplier * (1 - expectedWinner));
-      loserDelta = Math.round(K_loser * marginMultiplier * (0 - expectedLoser));
+      const winnerDelta = Math.round(K_winner * marginMultiplier * (1 - expectedWinner));
+      const loserDelta = Math.round(K_loser * marginMultiplier * (0 - expectedLoser));
 
       winner.elo = winner.elo + winnerDelta;
       loser.elo = Math.max(0, loser.elo + loserDelta);
+
+      if (winner.id === match.p1.id) {
+        p1Delta = winnerDelta;
+        p2Delta = loserDelta;
+      } else {
+        p1Delta = loserDelta;
+        p2Delta = winnerDelta;
+      }
+    } else {
+      // Draw ELO calculation
+      p1Delta = Math.round(K_p1 * (0.5 - expectedP1));
+      p2Delta = Math.round(K_p2 * (0.5 - expectedP2));
+
+      match.p1.elo = Math.max(0, match.p1.elo + p1Delta);
+      match.p2.elo = Math.max(0, match.p2.elo + p2Delta);
     }
+  }
 
-    winner.eloDelta = winnerDelta;
-    loser.eloDelta = loserDelta;
+  match.p1.eloDelta = p1Delta;
+  match.p2.eloDelta = p2Delta;
 
-    if (!winner.isBot && winner.userId) {
-      await storage.updateUserWith(winner.userId, user => {
-        const xpDelta = isBotMatch ? 0 : 100;
-        const nextXp = (user.xp || 0) + xpDelta;
-        const nextLevel = Math.floor(nextXp / 500) + 1;
-        const nextUser = {
-          ...user,
-          // Ranked-only stats
-          wins: isBotMatch ? (user.wins || 0) : (user.wins || 0) + 1,
-          gamesPlayed: isBotMatch ? (user.gamesPlayed || 0) : (user.gamesPlayed || 0) + 1,
-          // Bot-only stats
-          botWins: isBotMatch ? (user.botWins || 0) + 1 : (user.botWins || 0),
-          botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
-          xp: nextXp,
-          level: nextLevel
-        };
-        if (!isBotMatch) {
-          const domain = match.domain || 'all';
-          if (domain !== 'all') {
-            const elos = { ...(user.fieldElos || {}) };
-            elos[domain] = winner.elo;
-            nextUser.fieldElos = elos;
-          } else {
-            nextUser.elo = winner.elo;
-            nextUser.bestElo = Math.max(user.bestElo || user.elo || 1200, winner.elo);
-          }
+  if (!match.p1.isBot && match.p1.userId) {
+    await storage.updateUserWith(match.p1.userId, user => {
+      const xpDelta = isBotMatch ? 0 : (winner ? (winner.id === match.p1.id ? 100 : 50) : 75);
+      const nextXp = (user.xp || 0) + xpDelta;
+      const nextLevel = Math.floor(nextXp / 500) + 1;
+      const nextUser = {
+        ...user,
+        wins: isBotMatch ? (user.wins || 0) : (winner && winner.id === match.p1.id ? (user.wins || 0) + 1 : (user.wins || 0)),
+        losses: isBotMatch ? (user.losses || 0) : (loser && loser.id === match.p1.id ? (user.losses || 0) + 1 : (user.losses || 0)),
+        gamesPlayed: isBotMatch ? (user.gamesPlayed || 0) : (user.gamesPlayed || 0) + 1,
+        botWins: isBotMatch ? (winner && winner.id === match.p1.id ? (user.botWins || 0) + 1 : (user.botWins || 0)) : (user.botWins || 0),
+        botLosses: isBotMatch ? (loser && loser.id === match.p1.id ? (user.botLosses || 0) + 1 : (user.botLosses || 0)) : (user.botLosses || 0),
+        botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
+        xp: nextXp,
+        level: nextLevel
+      };
+      if (!isBotMatch) {
+        const domain = match.domain || 'all';
+        if (domain !== 'all') {
+          const elos = { ...(user.fieldElos || {}) };
+          elos[domain] = match.p1.elo;
+          nextUser.fieldElos = elos;
+        } else {
+          nextUser.elo = match.p1.elo;
+          nextUser.bestElo = Math.max(user.bestElo || user.elo || 1200, match.p1.elo);
+        }
 
-          const stats = { ...(user.fieldStats || {}) };
-          if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
+        const stats = { ...(user.fieldStats || {}) };
+        if (!stats[domain]) stats[domain] = { wins: 0, losses: 0, draws: 0 };
+        if (winner && winner.id === match.p1.id) {
           stats[domain].wins = (stats[domain].wins || 0) + 1;
-          nextUser.fieldStats = stats;
-        }
-        return nextUser;
-      });
-    }
-
-    if (!loser.isBot && loser.userId) {
-      await storage.updateUserWith(loser.userId, user => {
-        const xpDelta = isBotMatch ? 0 : 50;
-        const nextXp = (user.xp || 0) + xpDelta;
-        const nextLevel = Math.floor(nextXp / 500) + 1;
-        const nextUser = {
-          ...user,
-          // Ranked-only stats
-          losses: isBotMatch ? (user.losses || 0) : (user.losses || 0) + 1,
-          gamesPlayed: isBotMatch ? (user.gamesPlayed || 0) : (user.gamesPlayed || 0) + 1,
-          // Bot-only stats
-          botLosses: isBotMatch ? (user.botLosses || 0) + 1 : (user.botLosses || 0),
-          botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
-          xp: nextXp,
-          level: nextLevel
-        };
-        if (!isBotMatch) {
-          const domain = match.domain || 'all';
-          if (domain !== 'all') {
-            const elos = { ...(user.fieldElos || {}) };
-            elos[domain] = loser.elo;
-            nextUser.fieldElos = elos;
-          } else {
-            nextUser.elo = loser.elo;
-          }
-
-          const stats = { ...(user.fieldStats || {}) };
-          if (!stats[domain]) stats[domain] = { wins: 0, losses: 0 };
+        } else if (loser && loser.id === match.p1.id) {
           stats[domain].losses = (stats[domain].losses || 0) + 1;
-          nextUser.fieldStats = stats;
+        } else {
+          stats[domain].draws = (stats[domain].draws || 0) + 1;
         }
-        return nextUser;
-      });
-    }
-
-    await storage.recordMatch({
-      id: match.id,
-      winnerId: winner.isBot ? null : winner.userId,
-      loserId: loser.isBot ? null : loser.userId,
-      playerOneId: match.p1.isBot ? null : match.p1.userId,
-      playerTwoId: match.p2.isBot ? null : match.p2.userId,
-      playerOneName: match.p1.name,
-      playerTwoName: match.p2.name,
-      playerOneEloBefore: match.p1.eloBeforeMatch || match.p1.elo,
-      playerTwoEloBefore: match.p2.eloBeforeMatch || match.p2.elo,
-      playerOneEloAfter: match.p1.elo,
-      playerTwoEloAfter: match.p2.elo,
-      playerOneDelta: match.p1.eloDelta || 0,
-      playerTwoDelta: match.p2.eloDelta || 0,
-      rounds: match.currentRound + 1,
-      finishedAt: new Date().toISOString(),
-      domain: match.domain || 'all'
+        nextUser.fieldStats = stats;
+      }
+      return nextUser;
     });
   }
+
+  if (!match.p2.isBot && match.p2.userId) {
+    await storage.updateUserWith(match.p2.userId, user => {
+      const xpDelta = isBotMatch ? 0 : (winner ? (winner.id === match.p2.id ? 100 : 50) : 75);
+      const nextXp = (user.xp || 0) + xpDelta;
+      const nextLevel = Math.floor(nextXp / 500) + 1;
+      const nextUser = {
+        ...user,
+        wins: isBotMatch ? (user.wins || 0) : (winner && winner.id === match.p2.id ? (user.wins || 0) + 1 : (user.wins || 0)),
+        losses: isBotMatch ? (user.losses || 0) : (loser && loser.id === match.p2.id ? (user.losses || 0) + 1 : (user.losses || 0)),
+        gamesPlayed: isBotMatch ? (user.gamesPlayed || 0) : (user.gamesPlayed || 0) + 1,
+        botWins: isBotMatch ? (winner && winner.id === match.p2.id ? (user.botWins || 0) + 1 : (user.botWins || 0)) : (user.botWins || 0),
+        botLosses: isBotMatch ? (loser && loser.id === match.p2.id ? (user.botLosses || 0) + 1 : (user.botLosses || 0)) : (user.botLosses || 0),
+        botGamesPlayed: isBotMatch ? (user.botGamesPlayed || 0) + 1 : (user.botGamesPlayed || 0),
+        xp: nextXp,
+        level: nextLevel
+      };
+      if (!isBotMatch) {
+        const domain = match.domain || 'all';
+        if (domain !== 'all') {
+          const elos = { ...(user.fieldElos || {}) };
+          elos[domain] = match.p2.elo;
+          nextUser.fieldElos = elos;
+        } else {
+          nextUser.elo = match.p2.elo;
+          nextUser.bestElo = Math.max(user.bestElo || user.elo || 1200, match.p2.elo);
+        }
+
+        const stats = { ...(user.fieldStats || {}) };
+        if (!stats[domain]) stats[domain] = { wins: 0, losses: 0, draws: 0 };
+        if (winner && winner.id === match.p2.id) {
+          stats[domain].wins = (stats[domain].wins || 0) + 1;
+        } else if (loser && loser.id === match.p2.id) {
+          stats[domain].losses = (stats[domain].losses || 0) + 1;
+        } else {
+          stats[domain].draws = (stats[domain].draws || 0) + 1;
+        }
+        nextUser.fieldStats = stats;
+      }
+      return nextUser;
+    });
+  }
+
+  await storage.recordMatch({
+    id: match.id,
+    winnerId: winner ? (winner.isBot ? null : winner.userId) : null,
+    loserId: loser ? (loser.isBot ? null : loser.userId) : null,
+    playerOneId: match.p1.isBot ? null : match.p1.userId,
+    playerTwoId: match.p2.isBot ? null : match.p2.userId,
+    playerOneName: match.p1.name,
+    playerTwoName: match.p2.name,
+    playerOneEloBefore: match.p1.eloBeforeMatch || match.p1.elo,
+    playerTwoEloBefore: match.p2.eloBeforeMatch || match.p2.elo,
+    playerOneEloAfter: match.p1.elo,
+    playerTwoEloAfter: match.p2.elo,
+    playerOneDelta: match.p1.eloDelta || 0,
+    playerTwoDelta: match.p2.eloDelta || 0,
+    rounds: match.currentRound + 1,
+    finishedAt: new Date().toISOString(),
+    domain: match.domain || 'all'
+  });
 
   emitToPlayer(match.p1, 'match_end', {
     winner: winner ? winner.id : 'draw',
