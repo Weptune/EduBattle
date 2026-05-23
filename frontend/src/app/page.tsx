@@ -1061,15 +1061,23 @@ export default function Home() {
       socketRef.current = null;
       if (versusTimerRef.current) clearTimeout(versusTimerRef.current);
     };
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     accountRef.current = account;
   }, [account]);
 
   useEffect(() => {
-    if (!token || !socketRef.current?.connected) return;
-    socketRef.current.emit("register_socket", { authToken: token });
+    if (token) {
+      if (socketRef.current?.connected) {
+        socketRef.current.emit("register_socket", { authToken: token });
+      }
+    } else {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+        socketRef.current.connect();
+      }
+    }
   }, [token, socketId]);
 
   useEffect(() => {
