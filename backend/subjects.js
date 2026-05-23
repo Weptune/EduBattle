@@ -57,7 +57,7 @@ const SUBJECT_CATEGORIES = {
   "Mechanical / Automobile / Aerospace": [
     "3D Printing and Design", "Advanced Aircraft Structures", "Aerodynamics & Propulsion",
     "Air-Breathing Propulsion", "Aircraft Design", "Aircraft Performance",
-    "Automobile Engineering / Automotive Mechanics for Electric Vehicles", "Automotive Component Design",
+    "Automobile Engineering", "Automotive Component Design",
     "Autotronics", "Avionics and Navigation System", "Basics of I C Engines", "CAD and Kinematics' Simulation",
     "Design of Machine Elements", "Digital and Analog CMOS Design", "Electric Drives", "Energy and Heat Transfer",
     "Engineering System Design", "Engineering Thermodynamics", "Finite Element Methods",
