@@ -683,14 +683,16 @@ function findRankedOpponent(player) {
     if (candidate.userId === player.userId) return;
     if (candidate.domain !== player.domain) return;
 
-    const waitSeconds = Math.max(
-      (now - candidate.queuedAt) / 1000,
-      (now - player.queuedAt) / 1000
-    );
-    const allowedGap = BASE_MATCHMAKING_GAP + Math.floor(waitSeconds / MATCHMAKING_EXPANSION_INTERVAL) * MATCHMAKING_EXPANSION_RATE;
+    const waitSecondsPlayer = (now - player.queuedAt) / 1000;
+    const allowedGapPlayer = BASE_MATCHMAKING_GAP + Math.floor(waitSecondsPlayer / MATCHMAKING_EXPANSION_INTERVAL) * MATCHMAKING_EXPANSION_RATE;
+
+    const waitSecondsCandidate = (now - candidate.queuedAt) / 1000;
+    const allowedGapCandidate = BASE_MATCHMAKING_GAP + Math.floor(waitSecondsCandidate / MATCHMAKING_EXPANSION_INTERVAL) * MATCHMAKING_EXPANSION_RATE;
+
     const diff = Math.abs(candidate.elo - player.elo);
 
-    if (diff <= allowedGap && diff < bestDiff) {
+    // Mutual fit check: difference must be covered by BOTH search target ranges
+    if (diff <= allowedGapPlayer && diff <= allowedGapCandidate && diff < bestDiff) {
       bestDiff = diff;
       bestIndex = index;
     }
@@ -698,6 +700,71 @@ function findRankedOpponent(player) {
 
   return bestIndex;
 }
+
+// Periodic Matchmaking Queue Scanner (Iterates every 1.5 seconds)
+setInterval(() => {
+  if (queue.length < 2) return;
+
+  const now = Date.now();
+  const matchedIds = new Set();
+  const matchesToCreate = [];
+
+  // Scalability guard: Limit iteration depth to ensure O(M * N) with M <= 300
+  const maxSearch = Math.min(queue.length, 300);
+
+  for (let i = 0; i < maxSearch; i++) {
+    const p1 = queue[i];
+    if (matchedIds.has(p1.id)) continue;
+
+    const wait1 = (now - p1.queuedAt) / 1000;
+    const allowedGap1 = BASE_MATCHMAKING_GAP + Math.floor(wait1 / MATCHMAKING_EXPANSION_INTERVAL) * MATCHMAKING_EXPANSION_RATE;
+
+    let bestOpponent = null;
+    let bestDiff = Infinity;
+
+    for (let j = i + 1; j < queue.length; j++) {
+      const p2 = queue[j];
+      if (matchedIds.has(p2.id)) continue;
+
+      if (p1.userId === p2.userId || p1.domain !== p2.domain) continue;
+
+      const wait2 = (now - p2.queuedAt) / 1000;
+      const allowedGap2 = BASE_MATCHMAKING_GAP + Math.floor(wait2 / MATCHMAKING_EXPANSION_INTERVAL) * MATCHMAKING_EXPANSION_RATE;
+
+      const diff = Math.abs(p1.elo - p2.elo);
+
+      // Mutual fit check: both players must be within each other's allowed ELO gaps
+      if (diff <= allowedGap1 && diff <= allowedGap2) {
+        if (diff < bestDiff) {
+          bestDiff = diff;
+          bestOpponent = p2;
+        }
+      }
+    }
+
+    if (bestOpponent) {
+      matchedIds.add(p1.id);
+      matchedIds.add(bestOpponent.id);
+      matchesToCreate.push({ p1, p2: bestOpponent });
+    }
+  }
+
+  if (matchesToCreate.length > 0) {
+    // Symmetrically filter queue
+    queue = queue.filter(p => !matchedIds.has(p.id));
+
+    // Spin up all matched duels
+    matchesToCreate.forEach(({ p1, p2 }) => {
+      try {
+        const match = createMatch(p1, p2, p1.domain);
+        emitMatchFound(match);
+        startDiscardTimer(match.id);
+      } catch (err) {
+        console.error("Error creating periodic scanned match:", err);
+      }
+    });
+  }
+}, 1500);
 
 function createMatch(p1, p2, domain = 'all') {
   const normalizedDomain = normalizeDomain(domain);
