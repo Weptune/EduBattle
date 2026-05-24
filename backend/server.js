@@ -71,8 +71,9 @@ const HOST = process.env.HOST || '0.0.0.0';
 const INITIAL_HAND_SIZE = 5;
 const INITIAL_DISCARD_MS = 13000; // 10s discard phase + 3s versus intro buffer to prevent early timing skips
 const DRAFT_PICK_MS = 15000;
-const BASE_MATCHMAKING_GAP = 250;
-const MATCHMAKING_EXPANSION_PER_5S = 75;
+const BASE_MATCHMAKING_GAP = 80;
+const MATCHMAKING_EXPANSION_RATE = 30;
+const MATCHMAKING_EXPANSION_INTERVAL = 8;
 const PVP_SPEED_DIVISOR = 250;
 const BOT_SPEED_HUMAN_ADVANTAGE_DIVISOR = 175;
 const BOT_SPEED_BOT_ADVANTAGE_DIVISOR = 400;
@@ -686,7 +687,7 @@ function findRankedOpponent(player) {
       (now - candidate.queuedAt) / 1000,
       (now - player.queuedAt) / 1000
     );
-    const allowedGap = BASE_MATCHMAKING_GAP + Math.floor(waitSeconds / 5) * MATCHMAKING_EXPANSION_PER_5S;
+    const allowedGap = BASE_MATCHMAKING_GAP + Math.floor(waitSeconds / MATCHMAKING_EXPANSION_INTERVAL) * MATCHMAKING_EXPANSION_RATE;
     const diff = Math.abs(candidate.elo - player.elo);
 
     if (diff <= allowedGap && diff < bestDiff) {

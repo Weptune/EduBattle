@@ -3358,7 +3358,7 @@ export default function Home() {
             };
             
             const playerElo = account?.elo ?? 1200;
-            const eloRange = 250 + Math.floor(queueElapsed / 5) * 75;
+            const eloRange = 80 + Math.floor(queueElapsed / 8) * 30;
             const minElo = Math.max(100, playerElo - eloRange);
             const maxElo = playerElo + eloRange;
 
