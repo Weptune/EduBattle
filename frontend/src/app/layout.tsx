@@ -7,7 +7,7 @@ const syne = Syne({ subsets: ["latin"], weight: ["700", "800"], variable: "--fon
 
 export const metadata: Metadata = {
   title: "Synapse.gg | Collegiate Trivia Arena",
-  description: "A competitive multiplayer game for students at Manipal Institute of Technology (MIT).",
+  description: "A competitive multiplayer game for engineering students of all disciplines.",
 };
 
 export const viewport = {
