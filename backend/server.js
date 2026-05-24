@@ -375,7 +375,7 @@ app.post('/auth/logout', requireAuth, async (req, res) => {
 app.get('/leaderboard', async (req, res) => {
   const users = await storage.listUsers();
   res.json({
-    leaderboard: users.slice(0, 50).map((user, index) => ({
+    leaderboard: users.map((user, index) => ({
       rank: index + 1,
       user: publicUser(user)
     }))

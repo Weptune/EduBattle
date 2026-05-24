@@ -626,7 +626,12 @@ export default function Home() {
   const [previewAchievements, setPreviewAchievements] = useState(false);
   const [leaderboardSort, setLeaderboardSort] = useState<"elo" | "level" | "wins" | "winRate">("elo");
   const [leaderboardPage, setLeaderboardPage] = useState(1);
+  const [pageInput, setPageInput] = useState("1");
   const [matchesPage, setMatchesPage] = useState(1);
+
+  useEffect(() => {
+    setPageInput(String(leaderboardPage));
+  }, [leaderboardPage]);
 
   useEffect(() => {
     setLeaderboardPage(1);
@@ -3121,24 +3126,71 @@ export default function Home() {
             )}
           </div>
           {displayLeaderboard.length > 10 && (
-            <div className="flex items-center justify-between border-t border-white/5 pt-4 mt-4 font-mono text-xs text-slate-400">
-              <button
-                disabled={leaderboardPage === 1}
-                onClick={() => setLeaderboardPage(prev => Math.max(prev - 1, 1))}
-                className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
-              >
-                ◀ Prev
-              </button>
-              <span className="font-bold text-slate-300">
-                Page {leaderboardPage} of {Math.ceil(displayLeaderboard.length / 10)}
-              </span>
-              <button
-                disabled={leaderboardPage >= Math.ceil(displayLeaderboard.length / 10)}
-                onClick={() => setLeaderboardPage(prev => Math.min(prev + 1, Math.ceil(displayLeaderboard.length / 10)))}
-                className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
-              >
-                Next ▶
-              </button>
+            <div className="flex flex-col gap-4 items-center justify-between border-t border-white/5 pt-4 mt-4 font-mono text-xs text-slate-400 sm:flex-row">
+              {/* Prev & First Buttons */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  disabled={leaderboardPage === 1}
+                  onClick={() => { playSound("select"); setLeaderboardPage(1); }}
+                  className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-2.5 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+                  title="First Page"
+                >
+                  ◀◀ First
+                </button>
+                <button
+                  disabled={leaderboardPage === 1}
+                  onClick={() => { playSound("select"); setLeaderboardPage(prev => Math.max(prev - 1, 1)); }}
+                  className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+                >
+                  ◀ Prev
+                </button>
+              </div>
+
+              {/* Dynamic Page Input */}
+              <div className="flex items-center gap-2 font-bold text-slate-300">
+                <span>Page</span>
+                <input
+                  type="number"
+                  min="1"
+                  max={Math.ceil(displayLeaderboard.length / 10)}
+                  value={pageInput}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setPageInput(val);
+                    const parsed = parseInt(val, 10);
+                    if (!isNaN(parsed) && parsed >= 1 && parsed <= Math.ceil(displayLeaderboard.length / 10)) {
+                      setLeaderboardPage(parsed);
+                    }
+                  }}
+                  onBlur={() => {
+                    const parsed = parseInt(pageInput, 10);
+                    if (isNaN(parsed) || parsed < 1 || parsed > Math.ceil(displayLeaderboard.length / 10)) {
+                      setPageInput(String(leaderboardPage));
+                    }
+                  }}
+                  className="w-12 text-center rounded-lg border border-white/10 bg-black/45 py-1 font-mono font-bold text-teal-300 outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/30 transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+                <span>of {Math.ceil(displayLeaderboard.length / 10)}</span>
+              </div>
+
+              {/* Next & Last Buttons */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  disabled={leaderboardPage >= Math.ceil(displayLeaderboard.length / 10)}
+                  onClick={() => { playSound("select"); setLeaderboardPage(prev => Math.min(prev + 1, Math.ceil(displayLeaderboard.length / 10))); }}
+                  className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-3 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+                >
+                  Next ▶
+                </button>
+                <button
+                  disabled={leaderboardPage >= Math.ceil(displayLeaderboard.length / 10)}
+                  onClick={() => { playSound("select"); setLeaderboardPage(Math.ceil(displayLeaderboard.length / 10)); }}
+                  className="flex items-center gap-1 rounded-lg border border-white/10 bg-slate-950/40 px-2.5 py-1.5 font-black uppercase text-slate-300 transition-all hover:bg-white/5 hover:border-teal-400/50 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+                  title="Last Page"
+                >
+                  Last ▶▶
+                </button>
+              </div>
             </div>
           )}
         </div>
