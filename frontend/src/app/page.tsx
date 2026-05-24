@@ -1754,6 +1754,11 @@ export default function Home() {
                         <div className="pb-1">
                           <div className="flex flex-wrap items-center gap-2">
                             <h3 className="text-xl font-black uppercase tracking-tight text-white break-all sm:text-2xl">{viewingUser.username}</h3>
+                            {viewingUser.username.toLowerCase() === "weptune" && (
+                              <span className="shrink-0 rounded border border-purple-500/30 bg-purple-950/50 px-1.5 py-0.5 text-[8px] font-mono font-black text-purple-300 shadow-[0_0_8px_rgba(168,85,247,0.4)] animate-pulse">
+                                CREATOR
+                              </span>
+                            )}
                             <span className="rounded bg-gradient-to-r from-teal-400 to-emerald-400 border border-teal-300 px-1.5 py-0.5 text-[10px] font-mono font-black text-slate-950 shadow-[0_0_10px_rgba(45,212,191,0.2)]">
                               Lvl {viewingUser.level || 1}
                             </span>
@@ -2297,6 +2302,11 @@ export default function Home() {
                           >
                             {msg.username}
                           </span>
+                          {msg.username.toLowerCase() === "weptune" && (
+                            <span className="shrink-0 rounded border border-purple-500/30 bg-purple-950/50 px-1.5 py-0.5 text-[8px] font-mono font-black text-purple-300 shadow-[0_0_8px_rgba(168,85,247,0.4)] animate-pulse">
+                              CREATOR
+                            </span>
+                          )}
                           <span className="rounded bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-[8px] font-mono font-black text-amber-300">
                             Lvl {msg.level || 1}
                           </span>
@@ -3082,6 +3092,11 @@ export default function Home() {
                     <div className="min-w-0 flex-1">
                       <div className="flex min-w-0 flex-wrap items-center gap-1.5">
                         <p className="truncate font-black text-sm uppercase tracking-wide text-slate-100">{entry.user.username}</p>
+                        {entry.user.username.toLowerCase() === "weptune" && (
+                          <span className="shrink-0 rounded border border-purple-500/30 bg-purple-950/50 px-1.5 py-0.5 text-[8px] font-mono font-black text-purple-300 shadow-[0_0_8px_rgba(168,85,247,0.4)] animate-pulse">
+                            CREATOR
+                          </span>
+                        )}
                         <span className="shrink-0 rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[9px] font-mono font-black text-amber-300">Lvl {entry.user.level || 1}</span>
                       </div>
                       <p className="font-mono text-[9px] uppercase tracking-wider text-slate-400 sm:text-[10px]">
@@ -3224,7 +3239,14 @@ export default function Home() {
                       <AvatarImage username={account?.username} avatarUrl={account?.avatarUrl} className="h-24 w-24 rounded-2xl border-4 border-slate-900/80 bg-white/10 object-cover shadow-2xl" />
                       <div className="min-w-0 pb-1">
                         <p className="font-mono text-sm text-teal-300">@{account?.username}</p>
-                        <h1 className="text-2xl font-black uppercase tracking-normal text-white break-all sm:text-4xl md:text-5xl">{account?.username}</h1>
+                        <div className="flex flex-wrap items-center gap-2.5">
+                          <h1 className="text-2xl font-black uppercase tracking-normal text-white break-all sm:text-4xl md:text-5xl">{account?.username}</h1>
+                          {account?.username?.toLowerCase() === "weptune" && (
+                            <span className="shrink-0 rounded border border-purple-500/30 bg-purple-950/50 px-2 py-0.8 text-[11px] font-mono font-black text-purple-300 shadow-[0_0_12px_rgba(168,85,247,0.5)] animate-pulse">
+                              CREATOR
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3299,6 +3321,24 @@ export default function Home() {
                     <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => joinQueue(true)} className="btn-arena-ghost px-6 py-5">
                       Play vs AI Bot
                     </motion.button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Creator / Community Promo Footer */}
+              <div className="lg:col-span-2 mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-xl border border-white/[0.04] bg-white/[0.01] px-4 py-3 text-[10px] font-mono tracking-wider text-slate-500">
+                <div className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse" />
+                  <span>CREATED & MAINTAINED BY <span className="text-purple-300 font-bold uppercase tracking-widest text-glow-purple">WEPTUNE</span></span>
+                </div>
+                <div className="flex flex-wrap items-center gap-4">
+                  <a href="https://github.com/Weptune" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors">
+                    <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>github.com/Weptune</span>
+                  </a>
+                  <div className="flex items-center gap-1.5 text-slate-400">
+                    <MessageSquare size={12} className="text-slate-400" />
+                    <span>Discord: @Weptune</span>
                   </div>
                 </div>
               </div>
