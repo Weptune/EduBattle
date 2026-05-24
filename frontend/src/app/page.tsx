@@ -3317,6 +3317,9 @@ export default function Home() {
             const minElo = Math.max(100, playerElo - eloRange);
             const maxElo = playerElo + eloRange;
 
+            const queuedDomain = queueMode === "global" ? "all" : (selectedField === "all" ? "Common / First Year" : selectedField);
+            const queuedDomainLabel = queuedDomain === "all" ? "All Subjects" : getFieldLabel(queuedDomain);
+
             return (
               <motion.div key="queue" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="grid min-h-[calc(100vh-120px)] place-items-center text-center">
                 <div className="glass-panel border-white/10 w-full max-w-sm rounded-2xl p-8 relative overflow-hidden flex flex-col items-center">
@@ -3350,6 +3353,14 @@ export default function Home() {
                   
                   {/* Stats Counter & Dynamic Details */}
                   <div className="mt-6 w-full space-y-4 font-mono text-xs">
+                    <div className="flex justify-between border-b border-white/5 pb-2">
+                      <span className="text-slate-500 uppercase font-black">Queued Mode</span>
+                      <span className="text-teal-300 font-bold uppercase tracking-wider text-glow-teal">Ranked PvP</span>
+                    </div>
+                    <div className="flex justify-between border-b border-white/5 pb-2">
+                      <span className="text-slate-500 uppercase font-black">Subject Area</span>
+                      <span className="text-white font-bold uppercase">{queuedDomainLabel}</span>
+                    </div>
                     <div className="flex justify-between border-b border-white/5 pb-2">
                       <span className="text-slate-500 uppercase font-black">Search Time</span>
                       <span className="text-teal-300 font-bold">{formatTime(queueElapsed)}</span>
